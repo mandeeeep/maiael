@@ -561,16 +561,24 @@
             { date: '2026-03-30', name: 'Spring Semester Begins', type: 'semester', description: 'MBA & EMBA Spring Semester starts' }
         ];
 
-        // Weekend Suitability Data
+        // Weekend & Holiday Suitability Data
         const weekendSuitability = [
+            { dates: 'Dec 4, 2025', days: 'Thu', status: 'good', note: 'Udhauli Parwa - open for events' },
             { dates: 'Dec 5-7, 2025', days: 'Fri-Sun', status: 'good', note: 'Normal weekend - good for events' },
             { dates: 'Dec 12-13, 2025', days: 'Fri-Sat', status: 'good', note: 'After KU Day - suitable' },
             { dates: 'Dec 14-21, 2025', days: 'Sun onwards', status: 'avoid', note: 'Mid-term examination period' },
+            { dates: 'Dec 25, 2025', days: 'Thu', status: 'avoid', note: 'Christmas - avoid scheduling' },
             { dates: 'Dec 26-28, 2025', days: 'Fri-Sun', status: 'good', note: 'Post-Christmas weekend' },
+            { dates: 'Dec 30, 2025', days: 'Tue', status: 'good', note: 'Tamu Losar - open for events' },
+            { dates: 'Jan 1, 2026', days: 'Thu', status: 'avoid', note: 'New Year - avoid scheduling' },
             { dates: 'Jan 2-4, 2026', days: 'Fri-Sun', status: 'good', note: 'Post New Year weekend' },
-            { dates: 'Jan 9-11, 2026', days: 'Fri-Sun', status: 'good', note: 'Prithvi Jayanti weekend' },
-            { dates: 'Jan 16-18, 2026', days: 'Fri-Sun', status: 'good', note: 'Post Maghe Sankranti' },
-            { dates: 'Jan 23-25, 2026', days: 'Fri-Sun', status: 'good', note: 'Saraswati Puja weekend' }
+            { dates: 'Jan 9-11, 2026', days: 'Fri-Sun', status: 'good', note: 'Prithvi Jayanti weekend - open' },
+            { dates: 'Jan 15, 2026', days: 'Thu', status: 'good', note: 'Maghe Shankranti - open for events' },
+            { dates: 'Jan 16-18, 2026', days: 'Fri-Sun', status: 'good', note: 'Post Maghe Sankranti weekend' },
+            { dates: 'Jan 19, 2026', days: 'Mon', status: 'good', note: 'Sonam Loshar - open for events' },
+            { dates: 'Jan 23-25, 2026', days: 'Fri-Sun', status: 'good', note: 'Saraswati Puja weekend - open' },
+            { dates: 'Jan 30, 2026', days: 'Fri', status: 'good', note: 'Sahid Diwas - open for events' },
+            { dates: 'Mar 15-25, 2026', days: 'Multiple', status: 'avoid', note: 'Final examination period' }
         ];
 
         // Months to display
@@ -585,20 +593,41 @@
                            'July', 'August', 'September', 'October', 'November', 'December'];
         const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-        // Good/Bad weekend dates
+        // Good/Bad dates for scheduling
+        // Holidays are generally open for scheduling (except Christmas & New Year)
         const goodWeekends = [
+            // December weekends
+            '2025-12-04',  // Udhauli Parwa - OK for events
             '2025-12-05', '2025-12-06', '2025-12-07',
             '2025-12-12', '2025-12-13',
             '2025-12-26', '2025-12-27', '2025-12-28',
+            '2025-12-30',  // Tamu Losar - OK for events
+            // January
             '2026-01-02', '2026-01-03', '2026-01-04',
-            '2026-01-09', '2026-01-10', '2026-01-11',
+            '2026-01-09', '2026-01-10', '2026-01-11',  // Prithvi Jayanti weekend
+            '2026-01-15',  // Maghe Shankranti - OK for events
             '2026-01-16', '2026-01-17', '2026-01-18',
-            '2026-01-23', '2026-01-24', '2026-01-25'
+            '2026-01-19',  // Sonam Loshar - OK for events
+            '2026-01-23', '2026-01-24', '2026-01-25',  // Saraswati Puja weekend
+            '2026-01-30',  // Sahid Diwas - OK for events
+            // February
+            '2026-02-18',  // Gyalpo Loshar - OK for events
+            '2026-02-19',  // Democracy Day - OK for events
+            // March
+            '2026-03-02'   // Holi Purnima - OK for events
         ];
 
-        const avoidWeekends = [
-            '2025-12-14', '2025-12-15',
-            '2025-12-19', '2025-12-20', '2025-12-21'
+        const avoidDates = [
+            // Mid-term exams
+            '2025-12-14', '2025-12-15', '2025-12-16', '2025-12-17',
+            '2025-12-18', '2025-12-19', '2025-12-20', '2025-12-21',
+            // Christmas & New Year - avoid
+            '2025-12-25',
+            '2026-01-01',
+            // Final exams
+            '2026-03-15', '2026-03-16', '2026-03-17', '2026-03-18',
+            '2026-03-19', '2026-03-20', '2026-03-21', '2026-03-22',
+            '2026-03-23', '2026-03-24', '2026-03-25'
         ];
 
         // Generate Calendar
@@ -654,7 +683,7 @@
                     // Check suitability
                     if (goodWeekends.includes(dateStr)) {
                         classes.push('good-weekend');
-                    } else if (avoidWeekends.includes(dateStr)) {
+                    } else if (avoidDates.includes(dateStr)) {
                         classes.push('avoid-weekend');
                     }
                     
