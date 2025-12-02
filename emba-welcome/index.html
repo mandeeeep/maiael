@@ -237,6 +237,11 @@
             box-shadow: 0 0 0 3px #ff4757;
         }
 
+        .day.filtered-out {
+            opacity: 0.3;
+            transform: scale(0.9);
+        }
+
         .day .event-dot {
             position: absolute;
             bottom: 3px;
@@ -548,13 +553,13 @@
             { date: '2025-12-14', endDate: '2025-12-21', name: 'MBA & EMBA Mid Term', type: 'exam', description: 'Mid-term examination period - avoid scheduling events' },
             { date: '2025-12-25', name: 'Christmas', type: 'holiday', description: 'Christmas holiday' },
             { date: '2025-12-30', name: 'Tamu Losar Holiday', type: 'holiday', description: 'Tamu Losar celebration' },
-            { date: '2026-01-11', name: 'Prithvi Jayanti', type: 'holiday', description: 'Prithvi Jayanti - National Unity Day' },
-            { date: '2026-01-15', name: 'Maghe Shankranti', type: 'holiday', description: 'Maghe Shankranti festival' },
-            { date: '2026-01-19', name: 'Sonam Loshar', type: 'holiday', description: 'Sonam Loshar celebration' },
-            { date: '2026-01-23', name: 'Saraswati Puja', type: 'holiday', description: 'Saraswati Puja - Goddess of Knowledge' },
-            { date: '2026-01-30', name: 'Sahid Diwas', type: 'holiday', description: 'Martyrs Day' },
-            { date: '2026-02-18', name: 'Gyalpo Loshar', type: 'holiday', description: 'Gyalpo Loshar celebration' },
-            { date: '2026-02-19', name: 'Democracy Day', type: 'holiday', description: 'National Democracy Day' },
+            { date: '2026-01-11', name: 'Prithvi Jayanti', type: 'holiday', description: 'Prithvi Jayanti - National Unity Day. Commemorates the birth of King Prithvi Narayan Shah. Good for cultural events!' },
+            { date: '2026-01-15', name: 'Maghe Shankranti', type: 'holiday', description: 'Maghe Shankranti festival - marks the end of the coldest month. Traditional celebrations with Yomari and sweets. Open for events!' },
+            { date: '2026-01-19', name: 'Sonam Loshar', type: 'holiday', description: 'Sonam Loshar - Tamang New Year celebration. Cultural festivities and gatherings. Open for events!' },
+            { date: '2026-01-23', name: 'Saraswati Puja', type: 'holiday', description: 'Saraswati Puja - Worship of the Goddess of Knowledge, Music & Arts. Special significance for educational institutions. Open for events!' },
+            { date: '2026-01-30', name: 'Sahid Diwas', type: 'holiday', description: 'Martyrs Day - Honors the martyrs who sacrificed their lives for democracy. Open for events!' },
+            { date: '2026-02-18', name: 'Gyalpo Loshar', type: 'holiday', description: 'Gyalpo Loshar - Sherpa New Year celebration. Cultural festivities in the Himalayan communities. Open for events!' },
+            { date: '2026-02-19', name: 'Democracy Day', type: 'holiday', description: 'National Democracy Day - Celebrates the establishment of democracy in Nepal. Open for events!' },
             { date: '2026-03-01', name: 'Fall Semester Ends', type: 'semester', description: 'MBA I,II, III, IV & EMBA II & EMBA IV Fall Semester ends' },
             { date: '2026-03-02', name: 'Holi Purnima', type: 'holiday', description: 'Festival of Colors' },
             { date: '2026-03-15', endDate: '2026-03-25', name: 'Final Exams', type: 'exam', description: 'MBA & EMBA Final examination period' },
@@ -563,6 +568,7 @@
 
         // Weekend & Holiday Suitability Data
         const weekendSuitability = [
+            // DECEMBER 2025
             { dates: 'Dec 4, 2025', days: 'Thu', status: 'good', note: 'Udhauli Parwa - open for events' },
             { dates: 'Dec 5-7, 2025', days: 'Fri-Sun', status: 'good', note: 'Normal weekend - good for events' },
             { dates: 'Dec 12-13, 2025', days: 'Fri-Sat', status: 'good', note: 'After KU Day - suitable' },
@@ -570,15 +576,28 @@
             { dates: 'Dec 25, 2025', days: 'Thu', status: 'avoid', note: 'Christmas - avoid scheduling' },
             { dates: 'Dec 26-28, 2025', days: 'Fri-Sun', status: 'good', note: 'Post-Christmas weekend' },
             { dates: 'Dec 30, 2025', days: 'Tue', status: 'good', note: 'Tamu Losar - open for events' },
+            // JANUARY 2026
             { dates: 'Jan 1, 2026', days: 'Thu', status: 'avoid', note: 'New Year - avoid scheduling' },
             { dates: 'Jan 2-4, 2026', days: 'Fri-Sun', status: 'good', note: 'Post New Year weekend' },
-            { dates: 'Jan 9-11, 2026', days: 'Fri-Sun', status: 'good', note: 'Prithvi Jayanti weekend - open' },
+            { dates: 'Jan 9-11, 2026', days: 'Fri-Sun', status: 'good', note: 'Prithvi Jayanti (Sun 11) - open for events' },
             { dates: 'Jan 15, 2026', days: 'Thu', status: 'good', note: 'Maghe Shankranti - open for events' },
             { dates: 'Jan 16-18, 2026', days: 'Fri-Sun', status: 'good', note: 'Post Maghe Sankranti weekend' },
             { dates: 'Jan 19, 2026', days: 'Mon', status: 'good', note: 'Sonam Loshar - open for events' },
-            { dates: 'Jan 23-25, 2026', days: 'Fri-Sun', status: 'good', note: 'Saraswati Puja weekend - open' },
-            { dates: 'Jan 30, 2026', days: 'Fri', status: 'good', note: 'Sahid Diwas - open for events' },
-            { dates: 'Mar 15-25, 2026', days: 'Multiple', status: 'avoid', note: 'Final examination period' }
+            { dates: 'Jan 23-25, 2026', days: 'Fri-Sun', status: 'good', note: 'Saraswati Puja (Fri 23) - open' },
+            { dates: 'Jan 30 - Feb 1, 2026', days: 'Fri-Sun', status: 'good', note: 'Sahid Diwas (Fri 30) - open' },
+            // FEBRUARY 2026
+            { dates: 'Feb 6-8, 2026', days: 'Fri-Sun', status: 'good', note: 'Normal weekend - good for events' },
+            { dates: 'Feb 13-15, 2026', days: 'Fri-Sun', status: 'good', note: 'Normal weekend - good for events' },
+            { dates: 'Feb 18, 2026', days: 'Wed', status: 'good', note: 'Gyalpo Loshar - open for events' },
+            { dates: 'Feb 19, 2026', days: 'Thu', status: 'good', note: 'Democracy Day - open for events' },
+            { dates: 'Feb 20-22, 2026', days: 'Fri-Sun', status: 'good', note: 'Post Democracy Day weekend' },
+            { dates: 'Feb 27 - Mar 1, 2026', days: 'Fri-Sun', status: 'good', note: 'Semester end weekend' },
+            // MARCH 2026
+            { dates: 'Mar 2, 2026', days: 'Mon', status: 'good', note: 'Holi Purnima - open for events' },
+            { dates: 'Mar 6-8, 2026', days: 'Fri-Sun', status: 'good', note: 'Normal weekend - good for events' },
+            { dates: 'Mar 13-14, 2026', days: 'Fri-Sat', status: 'good', note: 'Weekend before exams' },
+            { dates: 'Mar 15-25, 2026', days: 'Multiple', status: 'avoid', note: 'Final examination period' },
+            { dates: 'Mar 27-29, 2026', days: 'Fri-Sun', status: 'good', note: 'Post-exams weekend' }
         ];
 
         // Months to display
@@ -595,26 +614,35 @@
 
         // Good/Bad dates for scheduling
         // Holidays are generally open for scheduling (except Christmas & New Year)
-        const goodWeekends = [
-            // December weekends
-            '2025-12-04',  // Udhauli Parwa - OK for events
+        const goodDates = [
+            // DECEMBER 2025
+            '2025-12-04',  // Udhauli Parwa
             '2025-12-05', '2025-12-06', '2025-12-07',
             '2025-12-12', '2025-12-13',
             '2025-12-26', '2025-12-27', '2025-12-28',
-            '2025-12-30',  // Tamu Losar - OK for events
-            // January
+            '2025-12-30',  // Tamu Losar
+            // JANUARY 2026
             '2026-01-02', '2026-01-03', '2026-01-04',
-            '2026-01-09', '2026-01-10', '2026-01-11',  // Prithvi Jayanti weekend
-            '2026-01-15',  // Maghe Shankranti - OK for events
+            '2026-01-09', '2026-01-10', '2026-01-11',  // Prithvi Jayanti
+            '2026-01-15',  // Maghe Shankranti
             '2026-01-16', '2026-01-17', '2026-01-18',
-            '2026-01-19',  // Sonam Loshar - OK for events
-            '2026-01-23', '2026-01-24', '2026-01-25',  // Saraswati Puja weekend
-            '2026-01-30',  // Sahid Diwas - OK for events
-            // February
-            '2026-02-18',  // Gyalpo Loshar - OK for events
-            '2026-02-19',  // Democracy Day - OK for events
-            // March
-            '2026-03-02'   // Holi Purnima - OK for events
+            '2026-01-19',  // Sonam Loshar
+            '2026-01-23', '2026-01-24', '2026-01-25',  // Saraswati Puja
+            '2026-01-30', '2026-01-31',  // Sahid Diwas weekend
+            // FEBRUARY 2026 - All weekends
+            '2026-02-01',  // Sunday
+            '2026-02-06', '2026-02-07', '2026-02-08',  // Weekend
+            '2026-02-13', '2026-02-14', '2026-02-15',  // Weekend
+            '2026-02-18',  // Gyalpo Loshar (Wed)
+            '2026-02-19',  // Democracy Day (Thu)
+            '2026-02-20', '2026-02-21', '2026-02-22',  // Weekend
+            '2026-02-27', '2026-02-28',  // Weekend
+            // MARCH 2026
+            '2026-03-01',  // Sunday (Semester ends)
+            '2026-03-02',  // Holi Purnima
+            '2026-03-06', '2026-03-07', '2026-03-08',  // Weekend
+            '2026-03-13', '2026-03-14',  // Fri-Sat before exams
+            '2026-03-27', '2026-03-28', '2026-03-29'   // Post-exam weekend
         ];
 
         const avoidDates = [
@@ -681,7 +709,7 @@
                     }
                     
                     // Check suitability
-                    if (goodWeekends.includes(dateStr)) {
+                    if (goodDates.includes(dateStr)) {
                         classes.push('good-weekend');
                     } else if (avoidDates.includes(dateStr)) {
                         classes.push('avoid-weekend');
@@ -802,18 +830,41 @@
             });
         }
 
-        // Filter functionality
+        // Filter functionality - affects both timeline AND calendar
         document.querySelectorAll('.filter-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
                 const filter = btn.dataset.filter;
+                
+                // Filter timeline events
                 document.querySelectorAll('.event-item').forEach(item => {
                     if (filter === 'all' || item.dataset.type === filter) {
                         item.style.display = 'block';
                     } else {
                         item.style.display = 'none';
+                    }
+                });
+                
+                // Filter calendar days
+                document.querySelectorAll('.day[data-event]').forEach(day => {
+                    const eventData = JSON.parse(day.dataset.event);
+                    if (filter === 'all' || eventData.type === filter) {
+                        day.style.opacity = '1';
+                        day.style.transform = 'scale(1)';
+                    } else {
+                        day.style.opacity = '0.3';
+                        day.style.transform = 'scale(0.9)';
+                    }
+                });
+                
+                // Reset non-event days visibility
+                document.querySelectorAll('.day:not([data-event])').forEach(day => {
+                    if (filter === 'all') {
+                        day.style.opacity = '1';
+                    } else {
+                        day.style.opacity = '0.5';
                     }
                 });
             });
