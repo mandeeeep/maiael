@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KU School of Management - Academic Calendar 2025-2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        header p {
+            color: #aaa;
+            font-size: 1.1rem;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .legend-item:hover {
+            transform: translateY(-2px);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .legend-item.active {
+            box-shadow: 0 0 15px rgba(255,255,255,0.3);
+        }
+
+        .legend-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+
+        .dot-holiday { background: #ff6b6b; }
+        .dot-academic { background: #4ecdc4; }
+        .dot-exam { background: #ffe66d; }
+        .dot-semester { background: #a29bfe; }
+        .dot-good { background: #00ff88; }
+        .dot-avoid { background: #ff4757; }
+
+        /* Filter buttons */
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+        }
+
+        .filter-btn:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(90deg, #00d9ff, #00ff88);
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+
+        /* Calendar Grid */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .month-card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .month-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .month-header {
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+            color: #00d9ff;
+        }
+
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        .weekday {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            padding: 5px;
+        }
+
+        .days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            background: rgba(255,255,255,0.03);
+        }
+
+        .day:hover:not(.empty) {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        .day.empty {
+            background: transparent;
+            cursor: default;
+        }
+
+        .day.today {
+            border: 2px solid #00ff88;
+            font-weight: bold;
+        }
+
+        .day.weekend {
+            color: #ff9f43;
+        }
+
+        .day.holiday {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .day.academic {
+            background: linear-gradient(135deg, #4ecdc4, #44bd9e);
+            color: #fff;
+        }
+
+        .day.exam {
+            background: linear-gradient(135deg, #ffe66d, #f9ca24);
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+
+        .day.semester {
+            background: linear-gradient(135deg, #a29bfe, #6c5ce7);
+            color: #fff;
+        }
+
+        .day.good-weekend {
+            box-shadow: 0 0 0 3px #00ff88;
+        }
+
+        .day.avoid-weekend {
+            box-shadow: 0 0 0 3px #ff4757;
+        }
+
+        .day .event-dot {
+            position: absolute;
+            bottom: 3px;
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+
+        /* Tooltip */
+        .tooltip {
+            position: fixed;
+            background: rgba(26, 26, 46, 0.98);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 15px;
+            max-width: 300px;
+            z-index: 1000;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .tooltip h4 {
+            color: #00d9ff;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .tooltip p {
+            color: #ccc;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .tooltip .event-type {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+        }
+
+        /* Events List */
+        .events-section {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+        .events-section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #00d9ff;
+        }
+
+        .events-timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .events-timeline::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #00d9ff, #00ff88, #a29bfe);
+        }
+
+        .event-item {
+            position: relative;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .event-item::before {
+            content: '';
+            position: absolute;
+            left: -25px;
+            top: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #00d9ff;
+            border: 2px solid #1a1a2e;
+        }
+
+        .event-item:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateX(5px);
+        }
+
+        .event-item.holiday { border-left-color: #ff6b6b; }
+        .event-item.holiday::before { background: #ff6b6b; }
+        
+        .event-item.academic { border-left-color: #4ecdc4; }
+        .event-item.academic::before { background: #4ecdc4; }
+        
+        .event-item.exam { border-left-color: #ffe66d; }
+        .event-item.exam::before { background: #ffe66d; }
+        
+        .event-item.semester { border-left-color: #a29bfe; }
+        .event-item.semester::before { background: #a29bfe; }
+
+        .event-date {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .event-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .event-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            margin-top: 8px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Weekend Suitability Section */
+        .suitability-section {
+            margin-top: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .suitability-section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #00ff88;
+        }
+
+        .suitability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .suitability-card {
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .suitability-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .suitability-card.good {
+            background: linear-gradient(135deg, rgba(0,255,136,0.2), rgba(0,217,255,0.1));
+            border: 1px solid rgba(0,255,136,0.3);
+        }
+
+        .suitability-card.avoid {
+            background: linear-gradient(135deg, rgba(255,71,87,0.2), rgba(255,107,107,0.1));
+            border: 1px solid rgba(255,71,87,0.3);
+        }
+
+        .suitability-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .suitability-card.good .suitability-icon {
+            background: rgba(0,255,136,0.2);
+        }
+
+        .suitability-card.avoid .suitability-icon {
+            background: rgba(255,71,87,0.2);
+        }
+
+        .suitability-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        .suitability-info p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .legend {
+                gap: 10px;
+            }
+            
+            .legend-item {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>KU School of Management</h1>
+            <p>Academic Calendar 2025-2026 | Event Scheduling Guide</p>
+        </header>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item" data-filter="holiday">
+                <span class="legend-dot dot-holiday"></span>
+                <span>Public Holidays</span>
+            </div>
+            <div class="legend-item" data-filter="academic">
+                <span class="legend-dot dot-academic"></span>
+                <span>Academic Events</span>
+            </div>
+            <div class="legend-item" data-filter="exam">
+                <span class="legend-dot dot-exam"></span>
+                <span>Exams</span>
+            </div>
+            <div class="legend-item" data-filter="semester">
+                <span class="legend-dot dot-semester"></span>
+                <span>Semester Dates</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot dot-good"></span>
+                <span>Good for Events</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-dot dot-avoid"></span>
+                <span>Avoid Scheduling</span>
+            </div>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="filters">
+            <button class="filter-btn active" data-filter="all">All Events</button>
+            <button class="filter-btn" data-filter="holiday">Holidays</button>
+            <button class="filter-btn" data-filter="academic">Academic</button>
+            <button class="filter-btn" data-filter="exam">Exams</button>
+            <button class="filter-btn" data-filter="semester">Semesters</button>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="calendar-grid" id="calendarGrid">
+            <!-- Calendars will be generated by JavaScript -->
+        </div>
+
+        <!-- Weekend Suitability Section -->
+        <div class="suitability-section">
+            <h2>Weekend Suitability for Event Scheduling</h2>
+            <div class="suitability-grid" id="suitabilityGrid">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Events Timeline -->
+        <div class="events-section">
+            <h2>All Events Timeline</h2>
+            <div class="events-timeline" id="eventsTimeline">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div class="tooltip" id="tooltip">
+        <h4 id="tooltipTitle"></h4>
+        <p id="tooltipDesc"></p>
+        <span class="event-type" id="tooltipType"></span>
+    </div>
+
+    <script>
+        // Event Data
+        const events = [
+            { date: '2025-09-01', endDate: '2025-09-20', name: 'RES MBA IV Semester', type: 'semester', description: 'Residential MBA IV Semester period' },
+            { date: '2025-09-22', endDate: '2025-10-27', name: 'Dashain to Chhat Holiday', type: 'holiday', description: 'Major festival holiday period' },
+            { date: '2025-10-28', name: 'Classes Resume', type: 'academic', description: 'MBA I, II, III & EMBA II, MBA IV & EMBA IV classes resume' },
+            { date: '2025-12-04', name: 'Udhauli Parwa', type: 'holiday', description: 'Udhauli Parwa celebration' },
+            { date: '2025-12-11', name: 'KU Day', type: 'academic', description: 'Kathmandu University Day celebration' },
+            { date: '2025-12-14', endDate: '2025-12-21', name: 'MBA & EMBA Mid Term', type: 'exam', description: 'Mid-term examination period - avoid scheduling events' },
+            { date: '2025-12-25', name: 'Christmas', type: 'holiday', description: 'Christmas holiday' },
+            { date: '2025-12-30', name: 'Tamu Losar Holiday', type: 'holiday', description: 'Tamu Losar celebration' },
+            { date: '2026-01-11', name: 'Prithvi Jayanti', type: 'holiday', description: 'Prithvi Jayanti - National Unity Day' },
+            { date: '2026-01-15', name: 'Maghe Shankranti', type: 'holiday', description: 'Maghe Shankranti festival' },
+            { date: '2026-01-19', name: 'Sonam Loshar', type: 'holiday', description: 'Sonam Loshar celebration' },
+            { date: '2026-01-23', name: 'Saraswati Puja', type: 'holiday', description: 'Saraswati Puja - Goddess of Knowledge' },
+            { date: '2026-01-30', name: 'Sahid Diwas', type: 'holiday', description: 'Martyrs Day' },
+            { date: '2026-02-18', name: 'Gyalpo Loshar', type: 'holiday', description: 'Gyalpo Loshar celebration' },
+            { date: '2026-02-19', name: 'Democracy Day', type: 'holiday', description: 'National Democracy Day' },
+            { date: '2026-03-01', name: 'Fall Semester Ends', type: 'semester', description: 'MBA I,II, III, IV & EMBA II & EMBA IV Fall Semester ends' },
+            { date: '2026-03-02', name: 'Holi Purnima', type: 'holiday', description: 'Festival of Colors' },
+            { date: '2026-03-15', endDate: '2026-03-25', name: 'Final Exams', type: 'exam', description: 'MBA & EMBA Final examination period' },
+            { date: '2026-03-30', name: 'Spring Semester Begins', type: 'semester', description: 'MBA & EMBA Spring Semester starts' }
+        ];
+
+        // Weekend Suitability Data
+        const weekendSuitability = [
+            { dates: 'Dec 5-7, 2025', days: 'Fri-Sun', status: 'good', note: 'Normal weekend - good for events' },
+            { dates: 'Dec 12-13, 2025', days: 'Fri-Sat', status: 'good', note: 'After KU Day - suitable' },
+            { dates: 'Dec 14-21, 2025', days: 'Sun onwards', status: 'avoid', note: 'Mid-term examination period' },
+            { dates: 'Dec 26-28, 2025', days: 'Fri-Sun', status: 'good', note: 'Post-Christmas weekend' },
+            { dates: 'Jan 2-4, 2026', days: 'Fri-Sun', status: 'good', note: 'Post New Year weekend' },
+            { dates: 'Jan 9-11, 2026', days: 'Fri-Sun', status: 'good', note: 'Prithvi Jayanti weekend' },
+            { dates: 'Jan 16-18, 2026', days: 'Fri-Sun', status: 'good', note: 'Post Maghe Sankranti' },
+            { dates: 'Jan 23-25, 2026', days: 'Fri-Sun', status: 'good', note: 'Saraswati Puja weekend' }
+        ];
+
+        // Months to display
+        const months = [
+            { year: 2025, month: 11 }, // December 2025
+            { year: 2026, month: 0 },  // January 2026
+            { year: 2026, month: 1 },  // February 2026
+            { year: 2026, month: 2 }   // March 2026
+        ];
+
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                           'July', 'August', 'September', 'October', 'November', 'December'];
+        const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        // Good/Bad weekend dates
+        const goodWeekends = [
+            '2025-12-05', '2025-12-06', '2025-12-07',
+            '2025-12-12', '2025-12-13',
+            '2025-12-26', '2025-12-27', '2025-12-28',
+            '2026-01-02', '2026-01-03', '2026-01-04',
+            '2026-01-09', '2026-01-10', '2026-01-11',
+            '2026-01-16', '2026-01-17', '2026-01-18',
+            '2026-01-23', '2026-01-24', '2026-01-25'
+        ];
+
+        const avoidWeekends = [
+            '2025-12-14', '2025-12-15',
+            '2025-12-19', '2025-12-20', '2025-12-21'
+        ];
+
+        // Generate Calendar
+        function generateCalendar() {
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+
+            months.forEach(({ year, month }) => {
+                const card = document.createElement('div');
+                card.className = 'month-card';
+                
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                
+                let html = `<div class="month-header">${monthNames[month]} ${year}</div>`;
+                html += '<div class="weekdays">';
+                dayNames.forEach(day => {
+                    html += `<div class="weekday">${day}</div>`;
+                });
+                html += '</div><div class="days">';
+                
+                // Empty cells before first day
+                for (let i = 0; i < firstDay; i++) {
+                    html += '<div class="day empty"></div>';
+                }
+                
+                // Days
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                    const dayOfWeek = new Date(year, month, day).getDay();
+                    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+                    
+                    let classes = ['day'];
+                    let eventData = null;
+                    
+                    // Check for events
+                    const event = events.find(e => {
+                        if (e.endDate) {
+                            return dateStr >= e.date && dateStr <= e.endDate;
+                        }
+                        return e.date === dateStr;
+                    });
+                    
+                    if (event) {
+                        classes.push(event.type);
+                        eventData = event;
+                    }
+                    
+                    if (isWeekend && !event) {
+                        classes.push('weekend');
+                    }
+                    
+                    // Check suitability
+                    if (goodWeekends.includes(dateStr)) {
+                        classes.push('good-weekend');
+                    } else if (avoidWeekends.includes(dateStr)) {
+                        classes.push('avoid-weekend');
+                    }
+                    
+                    // Today check
+                    const today = new Date();
+                    if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
+                        classes.push('today');
+                    }
+                    
+                    html += `<div class="${classes.join(' ')}" data-date="${dateStr}" ${eventData ? `data-event='${JSON.stringify(eventData)}'` : ''}>${day}</div>`;
+                }
+                
+                html += '</div>';
+                card.innerHTML = html;
+                grid.appendChild(card);
+            });
+            
+            // Add hover events
+            document.querySelectorAll('.day[data-event]').forEach(day => {
+                day.addEventListener('mouseenter', showTooltip);
+                day.addEventListener('mouseleave', hideTooltip);
+            });
+        }
+
+        // Tooltip functions
+        function showTooltip(e) {
+            const event = JSON.parse(e.target.dataset.event);
+            const tooltip = document.getElementById('tooltip');
+            
+            document.getElementById('tooltipTitle').textContent = event.name;
+            document.getElementById('tooltipDesc').textContent = event.description;
+            
+            const typeEl = document.getElementById('tooltipType');
+            typeEl.textContent = event.type.charAt(0).toUpperCase() + event.type.slice(1);
+            typeEl.style.background = getTypeColor(event.type);
+            
+            tooltip.style.left = e.pageX + 15 + 'px';
+            tooltip.style.top = e.pageY + 15 + 'px';
+            tooltip.classList.add('visible');
+        }
+
+        function hideTooltip() {
+            document.getElementById('tooltip').classList.remove('visible');
+        }
+
+        function getTypeColor(type) {
+            const colors = {
+                holiday: 'rgba(255,107,107,0.3)',
+                academic: 'rgba(78,205,196,0.3)',
+                exam: 'rgba(255,230,109,0.3)',
+                semester: 'rgba(162,155,254,0.3)'
+            };
+            return colors[type] || 'rgba(255,255,255,0.1)';
+        }
+
+        // Generate Suitability Cards
+        function generateSuitabilityCards() {
+            const grid = document.getElementById('suitabilityGrid');
+            grid.innerHTML = '';
+            
+            weekendSuitability.forEach(item => {
+                const card = document.createElement('div');
+                card.className = `suitability-card ${item.status}`;
+                
+                card.innerHTML = `
+                    <div class="suitability-icon">
+                        ${item.status === 'good' ? 
+                            '<svg width="24" height="24" fill="none" stroke="#00ff88" stroke-width="2" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg>' : 
+                            '<svg width="24" height="24" fill="none" stroke="#ff4757" stroke-width="2" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></svg>'
+                        }
+                    </div>
+                    <div class="suitability-info">
+                        <h4>${item.dates}</h4>
+                        <p>${item.note}</p>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Generate Events Timeline
+        function generateEventsTimeline() {
+            const timeline = document.getElementById('eventsTimeline');
+            timeline.innerHTML = '';
+            
+            const sortedEvents = [...events].sort((a, b) => new Date(a.date) - new Date(b.date));
+            
+            sortedEvents.forEach(event => {
+                const item = document.createElement('div');
+                item.className = `event-item ${event.type}`;
+                item.dataset.type = event.type;
+                
+                const date = new Date(event.date);
+                const dateStr = date.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+                
+                let dateDisplay = dateStr;
+                if (event.endDate) {
+                    const endDate = new Date(event.endDate);
+                    const endStr = endDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
+                    dateDisplay += ` - ${endStr}`;
+                }
+                
+                item.innerHTML = `
+                    <div class="event-date">${dateDisplay}</div>
+                    <div class="event-name">${event.name}</div>
+                    <span class="event-tag">${event.type.charAt(0).toUpperCase() + event.type.slice(1)}</span>
+                `;
+                
+                timeline.appendChild(item);
+            });
+        }
+
+        // Filter functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.dataset.filter;
+                document.querySelectorAll('.event-item').forEach(item => {
+                    if (filter === 'all' || item.dataset.type === filter) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Initialize
+        generateCalendar();
+        generateSuitabilityCards();
+        generateEventsTimeline();
+    </script>
+</body>
+</html>
