@@ -552,8 +552,9 @@
             { date: '2025-12-11', name: 'KU Day', type: 'academic', description: 'Kathmandu University Day celebration' },
             { date: '2025-12-14', endDate: '2025-12-21', name: 'MBA & EMBA Mid Term', type: 'exam', description: 'Mid-term examination period - avoid scheduling events' },
             { date: '2025-12-25', name: 'Christmas', type: 'holiday', description: 'Christmas holiday' },
-            { date: '2025-12-30', name: 'Tamu Losar Holiday', type: 'holiday', description: 'Tamu Losar celebration' },
-            { date: '2026-01-11', name: 'Prithvi Jayanti', type: 'holiday', description: 'Prithvi Jayanti - National Unity Day. Commemorates the birth of King Prithvi Narayan Shah. Good for cultural events!' },
+            { date: '2025-12-30', name: 'Tamu Losar Holiday', type: 'holiday', description: 'Tamu Losar celebration. Open for events!' },
+            { date: '2026-01-01', name: 'New Year Day', type: 'holiday', description: 'New Year Day - Avoid scheduling major events.' },
+            { date: '2026-01-11', name: 'Prithvi Jayanti', type: 'holiday', description: 'Prithvi Jayanti - National Unity Day. Commemorates King Prithvi Narayan Shah. Good for cultural events!' },
             { date: '2026-01-15', name: 'Maghe Shankranti', type: 'holiday', description: 'Maghe Shankranti festival - marks the end of the coldest month. Traditional celebrations with Yomari and sweets. Open for events!' },
             { date: '2026-01-19', name: 'Sonam Loshar', type: 'holiday', description: 'Sonam Loshar - Tamang New Year celebration. Cultural festivities and gatherings. Open for events!' },
             { date: '2026-01-23', name: 'Saraswati Puja', type: 'holiday', description: 'Saraswati Puja - Worship of the Goddess of Knowledge, Music & Arts. Special significance for educational institutions. Open for events!' },
@@ -658,6 +659,21 @@
             '2026-03-23', '2026-03-24', '2026-03-25'
         ];
 
+        // Helper: get event for a date
+        function getEventForDate(dateStr) {
+            const found = events.find(e => {
+                if (e.endDate) {
+                    return dateStr >= e.date && dateStr <= e.endDate;
+                }
+                return e.date === dateStr;
+            });
+            // Debug: log January events
+            if (dateStr.startsWith('2026-01') && found) {
+                console.log('FOUND JAN EVENT:', dateStr, found.name);
+            }
+            return found;
+        }
+
         // Generate Calendar
         function generateCalendar() {
             const grid = document.getElementById('calendarGrid');
@@ -670,16 +686,32 @@
                 const firstDay = new Date(year, month, 1).getDay();
                 const daysInMonth = new Date(year, month + 1, 0).getDate();
                 
-                let html = `<div class="month-header">${monthNames[month]} ${year}</div>`;
-                html += '<div class="weekdays">';
+                // Create month header
+                const header = document.createElement('div');
+                header.className = 'month-header';
+                header.textContent = `${monthNames[month]} ${year}`;
+                card.appendChild(header);
+                
+                // Create weekdays row
+                const weekdaysRow = document.createElement('div');
+                weekdaysRow.className = 'weekdays';
                 dayNames.forEach(day => {
-                    html += `<div class="weekday">${day}</div>`;
+                    const wd = document.createElement('div');
+                    wd.className = 'weekday';
+                    wd.textContent = day;
+                    weekdaysRow.appendChild(wd);
                 });
-                html += '</div><div class="days">';
+                card.appendChild(weekdaysRow);
+                
+                // Create days grid
+                const daysGrid = document.createElement('div');
+                daysGrid.className = 'days';
                 
                 // Empty cells before first day
                 for (let i = 0; i < firstDay; i++) {
-                    html += '<div class="day empty"></div>';
+                    const empty = document.createElement('div');
+                    empty.className = 'day empty';
+                    daysGrid.appendChild(empty);
                 }
                 
                 // Days
@@ -688,59 +720,61 @@
                     const dayOfWeek = new Date(year, month, day).getDay();
                     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
                     
-                    let classes = ['day'];
-                    let eventData = null;
+                    const dayEl = document.createElement('div');
+                    dayEl.className = 'day';
+                    dayEl.textContent = day;
+                    dayEl.dataset.date = dateStr;
                     
-                    // Check for events
-                    const event = events.find(e => {
-                        if (e.endDate) {
-                            return dateStr >= e.date && dateStr <= e.endDate;
-                        }
-                        return e.date === dateStr;
-                    });
+                    const event = getEventForDate(dateStr);
                     
                     if (event) {
-                        classes.push(event.type);
-                        eventData = event;
+                        dayEl.classList.add(event.type);
+                        dayEl.classList.add('has-event');
+                        
+                        // Store event data directly on element
+                        dayEl._eventData = event;
+                        
+                        // Add event listeners directly
+                        dayEl.addEventListener('mouseenter', function(e) {
+                            showTooltipForEvent(e, this._eventData);
+                        });
+                        dayEl.addEventListener('mouseleave', hideTooltip);
+                        dayEl.addEventListener('click', function(e) {
+                            showTooltipForEvent(e, this._eventData);
+                            setTimeout(hideTooltip, 3000);
+                        });
                     }
                     
                     if (isWeekend && !event) {
-                        classes.push('weekend');
+                        dayEl.classList.add('weekend');
                     }
                     
                     // Check suitability
                     if (goodDates.includes(dateStr)) {
-                        classes.push('good-weekend');
+                        dayEl.classList.add('good-weekend');
                     } else if (avoidDates.includes(dateStr)) {
-                        classes.push('avoid-weekend');
+                        dayEl.classList.add('avoid-weekend');
                     }
                     
                     // Today check
                     const today = new Date();
                     if (year === today.getFullYear() && month === today.getMonth() && day === today.getDate()) {
-                        classes.push('today');
+                        dayEl.classList.add('today');
                     }
                     
-                    html += `<div class="${classes.join(' ')}" data-date="${dateStr}" ${eventData ? `data-event='${JSON.stringify(eventData)}'` : ''}>${day}</div>`;
+                    daysGrid.appendChild(dayEl);
                 }
                 
-                html += '</div>';
-                card.innerHTML = html;
+                card.appendChild(daysGrid);
                 grid.appendChild(card);
-            });
-            
-            // Add hover events
-            document.querySelectorAll('.day[data-event]').forEach(day => {
-                day.addEventListener('mouseenter', showTooltip);
-                day.addEventListener('mouseleave', hideTooltip);
             });
         }
 
-        // Tooltip functions
-        function showTooltip(e) {
-            const event = JSON.parse(e.target.dataset.event);
-            const tooltip = document.getElementById('tooltip');
+        // Tooltip function - receives event data directly
+        function showTooltipForEvent(e, event) {
+            if (!event) return;
             
+            const tooltip = document.getElementById('tooltip');
             document.getElementById('tooltipTitle').textContent = event.name;
             document.getElementById('tooltipDesc').textContent = event.description;
             
@@ -748,8 +782,30 @@
             typeEl.textContent = event.type.charAt(0).toUpperCase() + event.type.slice(1);
             typeEl.style.background = getTypeColor(event.type);
             
-            tooltip.style.left = e.pageX + 15 + 'px';
-            tooltip.style.top = e.pageY + 15 + 'px';
+            // Position tooltip with bounds checking
+            const rect = e.target.getBoundingClientRect();
+            const tooltipWidth = 300;
+            const tooltipHeight = 150;
+            
+            let left = rect.right + 10;
+            let top = rect.top;
+            
+            // Check if tooltip would go off right edge
+            if (left + tooltipWidth > window.innerWidth) {
+                left = rect.left - tooltipWidth - 10;
+            }
+            
+            // Check if tooltip would go off bottom
+            if (top + tooltipHeight > window.innerHeight) {
+                top = window.innerHeight - tooltipHeight - 10;
+            }
+            
+            // Ensure not off left or top
+            left = Math.max(10, left);
+            top = Math.max(10, top);
+            
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + window.scrollY + 'px';
             tooltip.classList.add('visible');
         }
 
@@ -847,10 +903,10 @@
                     }
                 });
                 
-                // Filter calendar days
-                document.querySelectorAll('.day[data-event]').forEach(day => {
-                    const eventData = JSON.parse(day.dataset.event);
-                    if (filter === 'all' || eventData.type === filter) {
+                // Filter calendar days using stored event data
+                document.querySelectorAll('.day.has-event').forEach(day => {
+                    const event = day._eventData;
+                    if (event && (filter === 'all' || event.type === filter)) {
                         day.style.opacity = '1';
                         day.style.transform = 'scale(1)';
                     } else {
@@ -860,7 +916,7 @@
                 });
                 
                 // Reset non-event days visibility
-                document.querySelectorAll('.day:not([data-event])').forEach(day => {
+                document.querySelectorAll('.day:not(.has-event)').forEach(day => {
                     if (filter === 'all') {
                         day.style.opacity = '1';
                     } else {
@@ -874,6 +930,20 @@
         generateCalendar();
         generateSuitabilityCards();
         generateEventsTimeline();
+        
+        // Debug: Show which days have events attached
+        const debugInfo = [];
+        document.querySelectorAll('.day.has-event').forEach(day => {
+            debugInfo.push(day.dataset.date + ': ' + (day._eventData ? day._eventData.name : 'NO DATA'));
+        });
+        console.log('Days with has-event class:', debugInfo);
+        
+        // Create visible debug panel
+        const debugPanel = document.createElement('div');
+        debugPanel.style.cssText = 'background:#333;padding:15px;margin-top:20px;border-radius:10px;font-size:12px;';
+        debugPanel.innerHTML = '<h4 style="color:#00ff88;margin-bottom:10px;">Debug: Events Found (' + debugInfo.length + ' total)</h4>' +
+            '<div style="max-height:200px;overflow:auto;color:#aaa;">' + debugInfo.join('<br>') + '</div>';
+        document.querySelector('.container').appendChild(debugPanel);
     </script>
 </body>
 </html>
