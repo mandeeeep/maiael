@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Behavioral Finance Market Analysis</title>
+    <style>
+        /* 
+        BEHAVIORAL FINANCE PRESENTATION - LANDSCAPE OPTIMIZED
+        =====================================================
+        
+        This presentation is optimized for landscape PDF export with:
+        - Landscape page orientation (11" x 8.5")
+        - Proper page break handling to avoid content splitting
+        - Compact layouts for landscape viewing
+        - Print-optimized typography and spacing
+        
+        For PDF export: Use landscape orientation and "Fit to page" settings
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Add landscape class to body for PDF export optimization */
+        body.landscape {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #fafafa;
+        }
+
+        /* Always use landscape optimizations */
+        body.landscape {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        @media screen and (orientation: landscape) {
+            body {
+                max-width: 1400px;
+                margin: 0 auto;
+                background: white;
+            }
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            page-break-after: always;
+        }
+
+        /* Additional landscape optimizations */
+        @media screen and (max-height: 800px) {
+            .slide {
+                min-height: auto;
+                padding: 40px 30px;
+            }
+            
+            .slide-title {
+                font-size: 3rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .slide-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #7f8c8d;
+            margin-bottom: 60px;
+            letter-spacing: 0.01em;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #34495e;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #5d6d7e;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape-optimized metric grid */
+        @media screen and (orientation: landscape) {
+            .metric-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+                margin: 30px 0;
+            }
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #3498db;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .metric-change {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .positive {
+            color: #27ae60;
+        }
+
+        .negative {
+            color: #e74c3c;
+        }
+
+        .neutral {
+            color: #95a5a6;
+        }
+
+        /* Optimize tables for landscape */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .data-table th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.95rem;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Landscape table optimizations */
+        @media screen and (orientation: landscape) {
+            .data-table {
+                font-size: 0.85rem;
+                margin: 20px 0;
+            }
+            
+            .data-table th {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+            
+            .data-table td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .behavioral-insight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .behavioral-insight h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .behavioral-insight p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Landscape behavioral insight optimization */
+        @media screen and (orientation: landscape) {
+            .behavioral-insight {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .behavioral-insight h3 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+            
+            .behavioral-insight p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+        }
+
+        .case-study {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 6px solid #e74c3c;
+        }
+
+        .case-study.contradictory {
+            border-left-color: #e74c3c;
+        }
+
+        .case-study.expected {
+            border-left-color: #f39c12;
+        }
+
+        .case-study-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .case-study-subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .case-study-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #34495e;
+        }
+
+        /* Landscape case study optimization */
+        @media screen and (orientation: landscape) {
+            .case-study {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            .case-study-subtitle {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            
+            .case-study-content {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        }
+
+        .key-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        /* Landscape key factors optimization */
+        @media screen and (orientation: landscape) {
+            .key-factors {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                margin: 20px 0;
+            }
+        }
+
+        .factor-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .factor-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .factor-desc {
+            color: #5d6d7e;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape comparison grid optimization */
+        @media screen and (orientation: landscape) {
+            .comparison-grid {
+                gap: 20px;
+                margin: 25px 0;
+            }
+        }
+
+        .comparison-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .comparison-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #5d6d7e;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 20px;
+            }
+            
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Mobile-specific fullscreen button */
+            .fullscreen-btn {
+                top: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .nav-controls {
+                bottom: 20px;
+                right: 20px;
+                gap: 8px;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .slide-index {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 16px;
+            }
+            
+            /* Mobile fullscreen optimization */
+            body:-webkit-full-screen .slide,
+            body:fullscreen .slide {
+                padding: 20px !important;
+                min-height: 100vh !important;
+            }
+            
+            /* Ensure touch targets are large enough in fullscreen */
+            .fullscreen-btn:active,
+            .nav-btn:active {
+                transform: scale(0.95);
+            }
+        }
+
+
+
+        /* Slide Index */
+        .slide-index {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .slide-index-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .slide-index-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide-index-display {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .slide-nav-btn {
+            background: #ecf0f1;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: all 0.2s ease;
+        }
+
+        .slide-nav-btn:hover {
+            background: #bdc3c7;
+            transform: scale(1.05);
+        }
+
+        .slide-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Main Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn:disabled {
+            background: rgba(189, 195, 199, 0.5);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Fullscreen Button */
+        .fullscreen-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            z-index: 1001;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .fullscreen-btn:active {
+            transform: scale(0.95);
+        }
+
+        .fullscreen-btn.fullscreen-active {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .fullscreen-btn.fullscreen-active:hover {
+            background: rgba(231, 76, 60, 1);
+        }
+
+        /* Hide controls in native fullscreen but keep functionality */
+        body:-webkit-full-screen .slide-index,
+        body:-webkit-full-screen .nav-controls,
+        body:fullscreen .slide-index,
+        body:fullscreen .nav-controls {
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        body:-webkit-full-screen .slide-index:hover,
+        body:-webkit-full-screen .nav-controls:hover,
+        body:fullscreen .slide-index:hover,
+        body:fullscreen .nav-controls:hover {
+            opacity: 1;
+        }
+
+        /* Fullscreen slide styling */
+        body:-webkit-full-screen .slide,
+        body:fullscreen .slide {
+            min-height: 100vh;
+            height: 100vh;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        /* Slide container for navigation */
+        .slides-container {
+            position: relative;
+        }
+
+        .slide {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .slide:not(.active) {
+            display: none;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* Keyboard shortcut hint */
+        .keyboard-hint {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .keyboard-hint.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Print optimizations for landscape PDF export */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0.5in;
+            }
+            
+            .slide-index,
+            .keyboard-hint {
+                display: none !important;
+            }
+            
+            .slide {
+                page-break-after: always;
+                page-break-inside: avoid;
+                min-height: auto;
+                padding: 30px 20px;
+                display: block !important;
+            }
+            
+            .slide:last-child {
+                page-break-after: avoid;
+            }
+            
+            /* Prevent breaking of key elements */
+            .behavioral-insight,
+            .case-study,
+            .comparison-grid,
+            .metric-grid,
+            .key-factors {
+                page-break-inside: avoid;
+            }
+            
+            /* Optimize table printing */
+            .data-table {
+                font-size: 0.85rem;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 8px 10px;
+            }
+            
+            /* Optimize metric cards for print */
+            .metric-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .metric-value {
+                font-size: 1.8rem;
+            }
+            
+            /* Optimize case studies */
+            .case-study {
+                padding: 25px;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            /* Optimize factor cards */
+            .factor-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            /* Ensure comparison grid stays together */
+            .comparison-grid {
+                margin: 20px 0;
+            }
+            
+            /* Optimize titles */
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body class="landscape">
+    <!-- Keyboard Shortcut Hint -->
+    <div class="keyboard-hint" id="keyboardHint">
+        Use ← → arrow keys or Home/End to navigate • Press ⛶ or F11 for fullscreen • Escape to exit
+    </div>
+
+    <!-- Slide Index Controls -->
+    <div class="slide-index">
+        <div class="slide-index-title">Slide Navigation</div>
+        <div class="slide-index-controls">
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide - 1)" id="prevSlideBtn" title="Previous slide">‹</button>
+            <div class="slide-index-display">
+                <span id="currentSlideNum">1</span> / <span id="totalSlides">17</span>
+            </div>
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide + 1)" id="nextSlideBtn" title="Next slide">›</button>
+        </div>
+    </div>
+
+    <!-- Slides Container -->
+    <div class="slides-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <h1 class="slide-title">Behavioral Finance: Market Psychology Analysis</h1>
+        <p class="slide-subtitle">NEPSE Market Study • November 16-21, 2025</p>
+        <div class="highlight-box">
+            <p style="font-size: 1.2rem; color: #5d6d7e; margin: 0;">
+                Presented by Dinesh Koirala, Pooja Neupane and Mandeep Raj Shrestha
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Table of Contents -->
+    <div class="slide">
+        <h1>Table of Contents</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Market Analysis</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" onclick="goToSlide(3); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">1. 📊 Market Overview</a></li>
+                    <li><a href="#" onclick="goToSlide(4); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">2. 📈 Winners & Losers Analysis</a></li>
+                    <li><a href="#" onclick="goToSlide(5); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">3. 📉 Top Losers Deep Dive</a></li>
+                    <li><a href="#" onclick="goToSlide(6); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">4. 🔄 Behavioral Patterns</a></li>
+                    <li><a href="#" onclick="goToSlide(7); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">5. 💹 Trading Activity</a></li>
+                    <li><a href="#" onclick="goToSlide(8); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">6. 🏢 Sector Performance</a></li>
+                    <li><a href="#" onclick="goToSlide(9); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">7. 📅 Week-over-Week Insights</a></li>
+                    <li><a href="#" onclick="goToSlide(10); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">8. 🔄 Sector Rotation Analysis</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Case Studies & Conclusions</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" onclick="goToSlide(11); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">9. 🏭 Case Study: SAGAR</a></li>
+                    <li><a href="#" onclick="goToSlide(12); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">10. 📞 Case Study: Nepal Telecom</a></li>
+                    <li><a href="#" onclick="goToSlide(13); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">11. 🏗️ Case Study: NRN Infrastructure</a></li>
+                    <li><a href="#" onclick="goToSlide(14); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">12. ⚡ Case Study: SAHAS Urja</a></li>
+                    <li><a href="#" onclick="goToSlide(15); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">13. ⚖️ Cross-Comparison Analysis</a></li>
+                    <li><a href="#" onclick="goToSlide(16); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">14. 🧠 Behavioral Finance Insights</a></li>
+                    <li><a href="#" onclick="goToSlide(17); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">15. 📝 Conclusion</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Market Overview -->
+    <div class="slide">
+        <h1>Market Overview</h1>
+        
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-label">NEPSE Index</div>
+                <div class="metric-value">2,560.29</div>
+                <div class="metric-change positive">+0.57%</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Total Turnover</div>
+                <div class="metric-value">₹20.41B</div>
+                <div class="metric-change positive">+0.08%</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Trading Days</div>
+                <div class="metric-value">5</div>
+                <div class="metric-change neutral">Weekdays</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Market Cap</div>
+                <div class="metric-value">₹4.3T</div>
+                <div class="metric-change positive">+0.60%</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Technical Indicators</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div><strong>RSI (Daily):</strong> 44.01</div>
+                <div><strong>RSI (Weekly):</strong> 44.33</div>
+                <div><strong>MACD:</strong> <span class="negative">-18.04</span></div>
+                <div><strong>Support:</strong> 2,440-2,480</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Top Performers & Losers -->
+    <div class="slide">
+        <h1>Winners & Losers: Week-over-Week Analysis</h1>
+        
+        <h2>Top Gainers: This Week vs Last Week</h2>
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-top: 4px solid #27ae60;">
+                <h3 style="color: #27ae60;">This Week (Nov 16-21)</h3>
+                <table class="data-table" style="box-shadow: none;">
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Point Change</th>
+                            <th>% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SAGAR</strong></td>
+                            <td>+313.70</td>
+                            <td class="positive">+61.00%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BANDIPUR</strong></td>
+                            <td>+231.30</td>
+                            <td class="positive">+61.00%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>JHAPA</strong></td>
+                            <td>+162.10</td>
+                            <td class="positive">+55.25%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BUNGAL</strong></td>
+                            <td>+146.50</td>
+                            <td class="positive">+33.11%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>HIMSTAR</strong></td>
+                            <td>+188.50</td>
+                            <td class="positive">+31.42%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="comparison-card" style="border-top: 4px solid #3498db;">
+                <h3 style="color: #3498db;">Last Week (Nov 9-14)</h3>
+                <table class="data-table" style="box-shadow: none;">
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Point Change</th>
+                            <th>% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>SAGAR</strong></td>
+                            <td>+194.80</td>
+                            <td class="positive">+60.97%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BUNGAL</strong></td>
+                            <td>+140.10</td>
+                            <td class="positive">+46.33%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MABEL</strong></td>
+                            <td>+145.10</td>
+                            <td class="positive">+34.33%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BANDIPUR</strong></td>
+                            <td>+94.20</td>
+                            <td class="positive">+33.05%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BEDC</strong></td>
+                            <td>+150.00</td>
+                            <td class="positive">+26.50%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Slide 5: Top Losers Analysis -->
+    <div class="slide">
+        <h1>Top Losers: Week-over-Week Analysis</h1>
+        
+        <h2>Top Losers: This Week vs Last Week</h2>
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-top: 4px solid #e74c3c;">
+                <h3 style="color: #e74c3c;">This Week (Nov 16-21)</h3>
+                <table class="data-table" style="box-shadow: none;">
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Point Change</th>
+                            <th>% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>BEDC</strong></td>
+                            <td>-148.90</td>
+                            <td class="negative">-20.80%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>PHCL</strong></td>
+                            <td>-38.70</td>
+                            <td class="negative">-10.94%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>RURU</strong></td>
+                            <td>-72.10</td>
+                            <td class="negative">-8.69%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>SHLB</strong></td>
+                            <td>-120.00</td>
+                            <td class="negative">-6.59%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>USLB</strong></td>
+                            <td>-88.10</td>
+                            <td class="negative">-4.67%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="comparison-card" style="border-top: 4px solid #f39c12;">
+                <h3 style="color: #f39c12;">Last Week (Nov 9-14)</h3>
+                <table class="data-table" style="box-shadow: none;">
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Point Change</th>
+                            <th>% Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>USLB</strong></td>
+                            <td>-527.00</td>
+                            <td class="negative">-21.85%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>BHDC</strong></td>
+                            <td>-58.00</td>
+                            <td class="negative">-10.74%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>ULBSL</strong></td>
+                            <td>-435.00</td>
+                            <td class="negative">-10.06%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>NFS</strong></td>
+                            <td>-67.00</td>
+                            <td class="negative">-9.44%</td>
+                        </tr>
+                        <tr>
+                            <td><strong>MLBS</strong></td>
+                            <td>-137.10</td>
+                            <td class="negative">-8.23%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Losers Analysis & Behavioral Patterns</h3>
+            <p><strong>Classic Reversal:</strong> BEDC was a top gainer last week (+26.50%) but became the biggest loser this week (-20.80%), demonstrating momentum reversal behavior.</p>
+            <p><strong>Loss Aversion in Action:</strong> Continued selling pressure on USLB (-21.85% → -4.67%) shows panic and loss aversion psychology.</p>
+            <p><strong>Volatility Clustering:</strong> Extreme percentage losses indicate high volatility periods where emotions drive selling decisions.</p>
+            <p><strong>Contrarian Opportunity:</strong> Severe drops often signal potential oversold conditions for informed investors.</p>
+        </div>
+    </div>
+
+    <!-- Slide 6: Behavioral Patterns -->
+    <div class="slide">
+        <h1>Week-over-Week Behavioral Patterns</h1>
+        
+        <h2>Cross-Week Analysis: Winners & Losers</h2>
+        
+        <div class="behavioral-insight">
+            <h3>Momentum Persistence & Reversal Patterns</h3>
+            <p><strong>Momentum Persistence:</strong> SAGAR (+61% both weeks) and BUNGAL (+33.11% this week, +46.33% last week) show strong momentum continuation across consecutive weeks.</p>
+            <p><strong>Reversal Patterns:</strong> BEDC was a top gainer last week (+26.50%) but became the biggest loser this week (-20.80%), demonstrating classic momentum reversal behavior.</p>
+            <p><strong>Volatility Clustering:</strong> Extreme percentage changes in both weeks indicate periods of high volatility clustering - once volatility increases, it tends to persist.</p>
+            <p><strong>Herding Behavior:</strong> Repeated appearances of same stocks (SAGAR, BANDIPUR, BUNGAL) across weeks show investors following momentum rather than fundamentals.</p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Trading Activity -->
+    <div class="slide">
+        <h1>Trading Activity</h1>
+        
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-label">Total Transactions</div>
+                <div class="metric-value">280,793</div>
+                <div class="metric-change positive">+7.61%</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Shares Traded</div>
+                <div class="metric-value">44.94M</div>
+                <div class="metric-change positive">+3.98%</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">High Beta Avg</div>
+                <div class="metric-value">2.87</div>
+                <div class="metric-change neutral">Volatility Measure</div>
+            </div>
+        </div>
+
+        <h2>Most Active Stocks</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Company</th>
+                    <th>Turnover (₹)</th>
+                    <th>Transactions</th>
+                    <th>Volume</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><strong>SAHAS</strong></td>
+                    <td>₹1.16B</td>
+                    <td>8,439</td>
+                    <td>1.71M</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>BARUN</strong></td>
+                    <td>₹734M</td>
+                    <td>6,387</td>
+                    <td>2.13M</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><strong>NRN</strong></td>
+                    <td>₹619M</td>
+                    <td>-</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><strong>BUNGAL</strong></td>
+                    <td>-</td>
+                    <td>26,401</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><strong>UNHPL</strong></td>
+                    <td>₹612M</td>
+                    <td>-</td>
+                    <td>1.18M</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Slide 8: Sector Performance -->
+    <div class="slide">
+        <h1>Sector Performance</h1>
+        
+        <h2>Sector Performance: Week-over-Week Analysis</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Sector</th>
+                    <th>Last Week Level</th>
+                    <th>This Week Level</th>
+                    <th>This Week Change</th>
+                    <th>This Week %</th>
+                    <th>Last Week %</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Hotels & Tourism</strong></td>
+                    <td>6,253.86</td>
+                    <td>6,631.12</td>
+                    <td class="positive">+309.43</td>
+                    <td class="positive">+4.89%</td>
+                    <td class="positive">+1.08%</td>
+                </tr>
+                <tr>
+                    <td><strong>Manufacturing & Processing</strong></td>
+                    <td>7,330.47</td>
+                    <td>7,377.86</td>
+                    <td class="positive">+110.59</td>
+                    <td class="positive">+1.52%</td>
+                    <td class="negative">-0.86%</td>
+                </tr>
+                <tr>
+                    <td><strong>HydroPower</strong></td>
+                    <td>3,323.97</td>
+                    <td>3,347.03</td>
+                    <td class="positive">+42.35</td>
+                    <td class="positive">+1.28%</td>
+                    <td class="negative">-0.58%</td>
+                </tr>
+                <tr>
+                    <td><strong>Development Bank</strong></td>
+                    <td>5,442.87</td>
+                    <td>5,318.72</td>
+                    <td class="negative">-178.52</td>
+                    <td class="positive">+1.03%</td>
+                    <td class="negative">-3.28%</td>
+                </tr>
+                <tr>
+                    <td><strong>Finance</strong></td>
+                    <td>2,381.37</td>
+                    <td>2,244.53</td>
+                    <td class="negative">-118.18</td>
+                    <td class="negative">-0.82%</td>
+                    <td class="negative">-4.96%</td>
+                </tr>
+                <tr>
+                    <td><strong>Non-Life Insurance</strong></td>
+                    <td>10,816.33</td>
+                    <td>10,526.69</td>
+                    <td class="negative">-222.61</td>
+                    <td class="negative">-0.63%</td>
+                    <td class="negative">-2.06%</td>
+                </tr>
+                <tr>
+                    <td><strong>Banking</strong></td>
+                    <td>1,363.76</td>
+                    <td>1,327.01</td>
+                    <td class="negative">-32.25</td>
+                    <td class="negative">-0.34%</td>
+                    <td class="negative">-2.36%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="behavioral-insight" style="margin-top: 40px;">
+            <h3>Sector Rotation & Behavioral Patterns</h3>
+            <p><strong>Momentum Continuation:</strong> Hotels & Tourism maintained positive momentum (+1.08% → +4.89%), showing sector rotation favorability.</p>
+            <p><strong>Mean Reversion:</strong> Manufacturing & Processing and HydroPower shifted from negative last week to positive this week, indicating potential value-seeking behavior.</p>
+            <p><strong>Persistent Weakness:</strong> Finance sector declined both weeks (-4.96% → -0.82%), showing sustained investor skepticism in financial services.</p>
+            <p><strong>Recovery Patterns:</strong> Development Bank showed remarkable recovery (+1.03% after -3.28% decline), suggesting oversold conditions being corrected.</p>
+        </div>
+    </div>
+
+    <!-- Slide 9: Week-over-Week Behavioral Insights -->
+    <div class="slide">
+        <h1>Week-over-Week Behavioral Insights</h1>
+        
+        <h2>Cross-Week Pattern Analysis</h2>
+        
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Momentum Persisters</h3>
+                <div class="stat-row">
+                    <span class="stat-label">SAGAR</span>
+                    <span class="stat-value">+61% → +61%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">BUNGAL</span>
+                    <span class="stat-value">+46.33% → +33.11%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">BANDIPUR</span>
+                    <span class="stat-value">+33.05% → +61%</span>
+                </div>
+                <p style="margin-top: 20px; color: #5d6d7e; font-size: 0.9rem;">
+                    <strong>Behavioral Pattern:</strong> IPO hype and momentum effects create self-reinforcing cycles where rising stocks continue attracting buyers.
+                </p>
+            </div>
+
+            <div class="comparison-card" style="border-left: 6px solid #e74c3c;">
+                <h3 style="color: #e74c3c;">Classic Reversals</h3>
+                <div class="stat-row">
+                    <span class="stat-label">BEDC</span>
+                    <span class="stat-value">+26.5% → -20.80%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">USLB</span>
+                    <span class="stat-value">-21.85% → -4.67%</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">PHCL</span>
+                    <span class="stat-value">-7.36% → -10.94%</span>
+                </div>
+                <p style="margin-top: 20px; color: #5d6d7e; font-size: 0.9rem;">
+                    <strong>Behavioral Pattern:</strong> Overreaction followed by correction, and continued weakness due to loss aversion and panic selling.
+                </p>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Key Week-over-Week Behavioral Insights</h3>
+            <p><strong>1. Momentum Clustering:</strong> Same stocks appearing in top performers across weeks (SAGAR, BUNGAL, BANDIPUR) shows how initial momentum attracts sustained attention and continued buying pressure.</p>
+            <p><strong>2. Volatility Persistence:</strong> High percentage changes in consecutive weeks indicate volatility clustering - once markets become turbulent, the turbulence tends to continue.</p>
+            <p><strong>3. Reversal Prediction:</strong> Extreme movements in one week often signal potential reversals in subsequent weeks (BEDC case), making contrarian strategies viable.</p>
+            <p><strong>4. Overreaction & Correction:</strong> Strong initial reactions (positive or negative) often followed by subsequent corrections, demonstrating market's tendency to overrespond and then self-correct.</p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Sector Rotation Analysis -->
+    <div class="slide">
+        <h1>Sector Rotation Analysis</h1>
+        
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Hotels & Tourism</div>
+                <div class="factor-desc"><strong>+1.08% → +4.89%</strong><br>Continued momentum shows sector preference and herding toward tourism recovery narrative.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Finance Sector</div>
+                <div class="factor-desc"><strong>-4.96% → -0.82%</strong><br>Persistent weakness despite improvement, indicating fundamental skepticism among investors.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Development Banks</div>
+                <div class="factor-desc"><strong>-3.28% → +1.03%</strong><br>Strong recovery suggests oversold conditions being corrected through value-seeking behavior.</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Key Sector Rotation Behavioral Insights</h3>
+            <p><strong>1. Sector Rotation Psychology:</strong> Capital flows between sectors show investors constantly seeking the "next hot sector" rather than maintaining long-term allocations.</p>
+            <p><strong>2. Narrative-Driven Flows:</strong> Tourism recovery narrative attracts continued investment, while financial sector faces skepticism despite showing signs of recovery.</p>
+            <p><strong>3. Value-Seeking Behavior:</strong> Oversold sectors like Development Banks attract contrarian investors seeking value, leading to recovery after extreme pessimism.</p>
+            <p><strong>4. Momentum Chasing:</strong> Sectors showing momentum continue attracting capital, creating self-reinforcing cycles until reversal occurs.</p>
+        </div>
+    </div>
+
+    <!-- Slide 11: Case Study 1 - SAGAR -->
+    <div class="slide">
+        <h1>Case Study: SAGAR Distillery</h1>
+        
+        <div class="case-study contradictory">
+            <div class="case-study-title">SAGAR Distillery Limited</div>
+            <div class="case-study-subtitle">Q1 Loss of ₹15.32M → +61% Price Surge</div>
+            
+            <div class="case-study-content">
+                <p><strong>Fundamental Event:</strong> Reported Q1 net loss of ₹15.32 million on November 16, 2025</p>
+                <p><strong>Market Reaction:</strong> Became the top weekly gainer with 61% price increase</p>
+                
+                <h3 style="margin-top: 30px; margin-bottom: 15px;">Key Behavioral Factors:</h3>
+                <div class="key-factors">
+                    <div class="factor-card">
+                        <div class="factor-title">Post-IPO Hype</div>
+                        <div class="factor-desc">Newly listed companies in Nepal typically rise for weeks regardless of fundamentals. Investors believe "ipo ko share mathi nai jancha" (IPO stocks only go up).</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Supply Squeeze</div>
+                        <div class="factor-desc">Low selling pressure created artificial scarcity. Even small buy orders pushed prices rapidly upward as few investors were willing to sell.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Herding & FOMO</div>
+                        <div class="factor-desc">Early upward movement attracted more retail traders, amplifying momentum through social proof and fear of missing out.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Overreaction Rebound</div>
+                        <div class="factor-desc">Markets previously overreacted to poor expectations, causing a sharp rebound after the actual loss announcement.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Behavioral Insight:</strong> SAGAR's rally demonstrates how post-IPO psychology, supply constraints, and momentum chasing can override fundamental analysis in the short term.</p>
+        </div>
+    </div>
+
+    <!-- Slide 12: Case Study 2 - NTC -->
+    <div class="slide">
+        <h1>Case Study: Nepal Telecom</h1>
+        
+        <div class="case-study expected">
+            <div class="case-study-title">Nepal Doorsanchar Company (NTC)</div>
+            <div class="case-study-subtitle">₹13.2B Profit → Flat/Negative Movement</div>
+            
+            <div class="case-study-content">
+                <p><strong>Fundamental Event:</strong> Reported massive Q1 profit of ₹13.2 billion on November 17, 2025</p>
+                <p><strong>Market Reaction:</strong> Price remained flat to mildly negative despite exceptional fundamentals</p>
+                
+                <h3 style="margin-top: 30px; margin-bottom: 15px;">Key Behavioral Factors:</h3>
+                <div class="key-factors">
+                    <div class="factor-card">
+                        <div class="factor-title">Priced-In Effect</div>
+                        <div class="factor-desc">Strong profits were already anticipated by investors, so the announcement didn't create new momentum or surprise buying.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Low-Beta Inertia</div>
+                        <div class="factor-desc">As a defensive, dividend-oriented stock, NTC attracts long-term value investors rather than short-term momentum traders.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Anchoring Bias</div>
+                        <div class="factor-desc">Investors remain psychologically fixed to NTC's typical price band around ₹800-900, limiting upside expectations.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Sector Rotation</div>
+                        <div class="factor-desc">Liquidity moved toward high-beta gainers like hydropower and microfinance, away from stable telecoms.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Behavioral Insight:</strong> NTC demonstrates how defensive stocks can underreact to positive news when market sentiment favors speculative, high-momentum plays over value investments.</p>
+        </div>
+    </div>
+
+    <!-- Slide 13: Case Study 3 - NRN -->
+    <div class="slide">
+        <h1>Case Study: NRN Infrastructure</h1>
+        
+        <div class="case-study contradictory">
+            <div class="case-study-title">NRN Infrastructure & Development</div>
+            <div class="case-study-subtitle">42.105% Dividend Proposal → Price Decline</div>
+            
+            <div class="case-study-content">
+                <p><strong>Fundamental Event:</strong> Proposed attractive 42.105% total dividend on November 12, 2025</p>
+                <p><strong>Market Reaction:</strong> Stock showed mildly downward trading pattern during the week</p>
+                
+                <h3 style="margin-top: 30px; margin-bottom: 15px;">Key Behavioral Factors:</h3>
+                <div class="key-factors">
+                    <div class="factor-card">
+                        <div class="factor-title">Buy the Rumor, Sell the News</div>
+                        <div class="factor-desc">High dividend was largely expected. When officially announced, investors who accumulated earlier began booking profits.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Psychological Resistance</div>
+                        <div class="factor-desc">Stock approached ₹2,000 level where many investors tend to sell due to anchoring and fear of reversal.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Bonus Share Dilution</div>
+                        <div class="factor-desc">Large bonus component implies temporary EPS dilution, motivating informed investors to exit before book closure.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Liquidity Migration</div>
+                        <div class="factor-desc">Market liquidity directed toward high-beta gainers like SAGAR and hydropower stocks, reducing interest in NRN.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Behavioral Insight:</strong> Even strong fundamental announcements can trigger selling when expectations are already high and profit-taking psychology dominates.</p>
+        </div>
+    </div>
+
+    <!-- Slide 14: Case Study 4 - SAHAS -->
+    <div class="slide">
+        <h1>Case Study: SAHAS Urja</h1>
+        
+        <div class="case-study expected">
+            <div class="case-study-title">SAHAS Urja Limited</div>
+            <div class="case-study-subtitle">21% Bonus + Cash Dividend + 100% Rights → Initial Rise, Then Fall</div>
+            
+            <div class="case-study-content">
+                <p><strong>Fundamental Event:</strong> Announced 21% bonus shares, 1.1053% cash dividend, and 100% rights issue on November 11, 2025</p>
+                <p><strong>Market Reaction:</strong> Rose on Nov 17-18, then fell on Nov 19-20. Still the week's top-traded company (₹1.16B turnover)</p>
+                
+                <h3 style="margin-top: 30px; margin-bottom: 15px;">Key Behavioral Factors:</h3>
+                <div class="key-factors">
+                    <div class="factor-card">
+                        <div class="factor-title">Announcement Excitement</div>
+                        <div class="factor-desc">Initial buying to qualify for bonus shares and future rights eligibility drove early momentum.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Psychological Resistance</div>
+                        <div class="factor-desc">Price approached ₹700 level (touching ₹704), prompting widespread profit-taking behavior.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Dilution Fear</div>
+                        <div class="factor-desc">100% rights announcement signals future EPS dilution, causing informed investors to reduce positions early.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">High Turnover = Rotation</div>
+                        <div class="factor-desc">₹1.16B weekly turnover indicates heavy trading activity rather than long-term accumulation.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Behavioral Insight:</strong> SAHAS shows how announcement-driven rallies often lack sustainability when dilution expectations and sector rotation come into play.</p>
+        </div>
+    </div>
+
+    <!-- Slide 15: Cross-Comparison -->
+    <div class="slide">
+        <h1>Cross-Stock Behavioral Comparison</h1>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Stock</th>
+                    <th>Fundamental Event</th>
+                    <th>Price Reaction</th>
+                    <th>Key Behavioral Patterns</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>SAGAR</strong></td>
+                    <td>Q1 Loss Posted</td>
+                    <td class="positive" style="font-size: 1.2rem;">+61%</td>
+                    <td>IPO hype, herding, low selling pressure, momentum chasing</td>
+                </tr>
+                <tr>
+                    <td><strong>NTC</strong></td>
+                    <td>Massive Profit</td>
+                    <td class="neutral">Flat/Negative</td>
+                    <td>Priced-in effect, anchoring bias, low-beta inertia</td>
+                </tr>
+                <tr>
+                    <td><strong>NRN</strong></td>
+                    <td>42.105% Dividend</td>
+                    <td class="negative">Declined</td>
+                    <td>Sell-the-news, resistance levels, dilution psychology</td>
+                </tr>
+                <tr>
+                    <td><strong>SAHAS</strong></td>
+                    <td>Bonus + Rights</td>
+                    <td class="neutral">Up → Down</td>
+                    <td>Announcement excitement, rights dilution, shifting momentum</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="behavioral-insight" style="margin-top: 40px;">
+            <h3>Key Takeaway</h3>
+            <p>These four cases demonstrate that <strong>sentiment and psychology often trump fundamentals</strong> in short-term market movements. Understanding behavioral biases is crucial for interpreting NEPSE dynamics.</p>
+        </div>
+    </div>
+
+    <!-- Slide 16: Behavioral Finance Insights -->
+    <div class="slide">
+        <h1>Behavioral Finance Insights</h1>
+        
+        <h2>Primary Behavioral Patterns Identified</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Herding Behavior</div>
+                <div class="factor-desc">Concentration of trades in SAHAS, BARUN, UNHPL, and BUNGAL shows investors following crowd psychology rather than independent analysis.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Overreaction</div>
+                <div class="factor-desc">Sharp jumps in SAGAR (+61%), BANDIPUR (+61%), and JHAPA (+55%) demonstrate momentum-chasing and emotional decision-making.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Underreaction</div>
+                <div class="factor-desc">Market index moved mildly (+0.57%) despite huge volatility in individual stocks, showing delayed price discovery.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Anchoring Bias</div>
+                <div class="factor-desc">Heavy repeated turnover in SAHAS shows traders anchored to its historical performance and IPO status.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Disposition Effect</div>
+                <div class="factor-desc">Investors quickly selling losers like BEDC while holding gainers, confirming loss aversion psychology.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Risk Preference</div>
+                <div class="factor-desc">High-beta stocks (avg β=2.87) attracting significant activity implies high risk appetite during this period.</div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 40px;">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Confirmation Bias in Action</h3>
+            <p>Sustained buying in hydropower sector despite mixed macro signals shows investors seeking information that confirms their existing beliefs while ignoring contradictory data.</p>
+        </div>
+    </div>
+
+
+
+    <!-- Slide 17: Conclusion -->
+    <div class="slide">
+        <h1>Conclusion</h1>
+        
+        <div class="behavioral-insight">
+            <h3>NEPSE is Heavily Sentiment-Driven</h3>
+            <p>The price movements during November 16-21, 2025, clearly demonstrate that <strong>fundamentals alone do not explain short-term fluctuations</strong>. Instead, investor psychology plays a decisive role:</p>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h3>What the Data Shows</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                    <li style="padding: 12px 0; border-bottom: 1px solid #ecf0f1;">📈 Stocks can rise sharply on bad news (SAGAR)</li>
+                    <li style="padding: 12px 0; border-bottom: 1px solid #ecf0f1;">📉 Stocks can fall on good news (NRN)</li>
+                    <li style="padding: 12px 0; border-bottom: 1px solid #ecf0f1;">➡️ Fundamentals may be ignored (NTC)</li>
+                    <li style="padding: 12px 0;">🎯 Psychology drives short-term movements</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card">
+                <h3>Key Behavioral Biases</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 20px;">
+                    <li style="padding: 12px 0; border-bottom: 1px solid #ecf0f1;">🔗 Herding & Social Proof</li>
+                    <li style="padding: 12px 0; border-bottom: 1px solid #ecf0f1;">⚡ Overreaction & Momentum</li>
+                    <li style="padding: 12px 0; border-bottom: 1px solid #ecf0f1;">🎯 Anchoring & Expectations</li>
+                    <li style="padding: 12px 0;">💡 Buy Rumor, Sell News</li>
+                </ul>
+            </div>
+        </div>
+
+
+    </div>
+
+    <!-- Fullscreen Button -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fullscreenBtn" title="Toggle Fullscreen (Mobile-Friendly)">⛶</button>
+
+    <!-- Main Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="previousSlide()" id="prevBtn" title="Previous slide (←)">◀</button>
+        <button class="nav-btn" onclick="nextSlide()" id="nextBtn" title="Next slide (→)">▶</button>
+    </div>
+
+    <!-- Navigation JavaScript -->
+    <script>
+        // Slide navigation functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Initialize
+        function initPresentation() {
+            // Show first slide
+            showSlide(0);
+            
+            // Enhanced keyboard event handling
+            setupKeyboardNavigation();
+            
+            // Show keyboard hint for 3 seconds
+            setTimeout(() => {
+                const hint = document.getElementById('keyboardHint');
+                hint.classList.add('show');
+                setTimeout(() => {
+                    hint.classList.remove('show');
+                }, 3000);
+            }, 1000);
+        }
+
+        // Setup keyboard navigation
+        function setupKeyboardNavigation() {
+            // Single keyboard event handler
+            document.addEventListener('keydown', function(event) {
+                // Skip if user is typing in input fields
+                if (event.target && (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA')) {
+                    return;
+                }
+                
+                // Handle navigation keys
+                event.preventDefault();
+                
+                switch(event.key) {
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        previousSlide();
+                        break;
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                    case ' ':
+                        nextSlide();
+                        break;
+                    case 'Home':
+                        navigateToSlide(0);
+                        break;
+                    case 'End':
+                        navigateToSlide(totalSlides - 1);
+                        break;
+                    case 'Escape':
+                        // Exit fullscreen if in fullscreen mode, otherwise show hint
+                        if (isFullscreen()) {
+                            event.preventDefault();
+                            exitFullscreen();
+                        } else {
+                            const hint = document.getElementById('keyboardHint');
+                            if (hint) {
+                                hint.classList.toggle('show');
+                            }
+                        }
+                        break;
+                    
+                    case 'F11':
+                        event.preventDefault();
+                        toggleFullscreen();
+                        break;
+                }
+            });
+            
+            // Make sure body can receive focus
+            document.body.tabIndex = 0;
+            
+            // Force focus after page load
+            setTimeout(() => {
+                document.body.focus();
+            }, 100);
+        }
+
+        // Show specific slide
+        function showSlide(slideIndex) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            if (slides[slideIndex]) {
+                slides[slideIndex].classList.add('active');
+                currentSlide = slideIndex;
+                
+                // Update displays
+                document.getElementById('currentSlideNum').textContent = slideIndex + 1;
+                document.getElementById('totalSlides').textContent = totalSlides;
+                
+                // Update button states
+                updateButtons();
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Navigate to specific slide
+        function navigateToSlide(slideIndex) {
+            if (slideIndex >= 0 && slideIndex < totalSlides) {
+                showSlide(slideIndex);
+            }
+        }
+
+        // Navigate to next slide
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                navigateToSlide(currentSlide + 1);
+            }
+        }
+
+        // Navigate to previous slide
+        function previousSlide() {
+            if (currentSlide > 0) {
+                navigateToSlide(currentSlide - 1);
+            }
+        }
+
+        // Browser fullscreen API functionality
+        function toggleFullscreen() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            // Check if browser supports fullscreen API
+            if (!supportsFullscreen()) {
+                alert('Fullscreen is not supported in this browser. Please use landscape mode or rotate your device for better viewing.');
+                return;
+            }
+            
+            // Check if already in fullscreen mode using native API
+            if (isFullscreen()) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+        }
+
+        // Check if browser supports fullscreen API
+        function supportsFullscreen() {
+            return !!(
+                document.fullscreenEnabled ||
+                document.webkitFullscreenEnabled ||
+                document.mozFullScreenEnabled ||
+                document.msFullscreenEnabled
+            );
+        }
+
+        // Check if currently in fullscreen mode
+        function isFullscreen() {
+            return !!(document.fullscreenElement || 
+                     document.webkitFullscreenElement || 
+                     document.mozFullScreenElement || 
+                     document.msFullscreenElement);
+        }
+
+        // Enter fullscreen using native browser API
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else if (elem.webkitRequestFullscreen) { // Safari
+                elem.webkitRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Exit fullscreen using native browser API
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { // Safari
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Firefox
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) { // IE/Edge
+                document.msExitFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Update fullscreen button appearance and state
+        function updateFullscreenButton() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (isFullscreen()) {
+                fullscreenBtn.classList.add('fullscreen-active');
+                fullscreenBtn.title = 'Exit Fullscreen';
+                
+                // Auto-hide navigation controls after 3 seconds in fullscreen
+                setTimeout(() => {
+                    if (isFullscreen()) {
+                        const slideIndex = document.querySelector('.slide-index');
+                        const navControls = document.querySelector('.nav-controls');
+                        if (slideIndex) slideIndex.style.opacity = '0.3';
+                        if (navControls) navControls.style.opacity = '0.3';
+                    }
+                }, 3000);
+            } else {
+                fullscreenBtn.classList.remove('fullscreen-active');
+                fullscreenBtn.title = 'Enter Fullscreen';
+                
+                // Show navigation controls again when not in fullscreen
+                const slideIndex = document.querySelector('.slide-index');
+                const navControls = document.querySelector('.nav-controls');
+                if (slideIndex) slideIndex.style.opacity = '1';
+                if (navControls) navControls.style.opacity = '1';
+            }
+        }
+
+        // Handle fullscreen change events
+        function setupFullscreenListeners() {
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+            
+            // Re-show controls on mouse movement in fullscreen
+            document.addEventListener('mousemove', function() {
+                if (isFullscreen()) {
+                    const slideIndex = document.querySelector('.slide-index');
+                    const navControls = document.querySelector('.nav-controls');
+                    if (slideIndex) slideIndex.style.opacity = '1';
+                    if (navControls) navControls.style.opacity = '1';
+                }
+            });
+        }
+
+
+
+        // Handle escape key for keyboard hint (no fullscreen functionality)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const hint = document.getElementById('keyboardHint');
+                if (hint) {
+                    hint.classList.toggle('show');
+                }
+            }
+        });
+
+        // Update button states
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevSlideBtn = document.getElementById('prevSlideBtn');
+            const nextSlideBtn = document.getElementById('nextSlideBtn');
+            
+            // Disable/enable buttons
+            const prevDisabled = currentSlide === 0;
+            const nextDisabled = currentSlide === totalSlides - 1;
+            
+            prevBtn.disabled = prevDisabled;
+            nextBtn.disabled = nextDisabled;
+            prevSlideBtn.disabled = prevDisabled;
+            nextSlideBtn.disabled = nextDisabled;
+            
+            // Button text is already set correctly (◀ ▶)
+        }
+
+        // Keyboard handling is now directly in the event listener
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make navigation functions globally available
+            window.nextSlide = nextSlide;
+            window.previousSlide = previousSlide;
+            window.navigateToSlide = navigateToSlide;
+            window.toggleFullscreen = toggleFullscreen;
+            window.isFullscreen = isFullscreen;
+            window.supportsFullscreen = supportsFullscreen;
+            
+            // Setup fullscreen event listeners
+            setupFullscreenListeners();
+            
+            // Initialize presentation
+            initPresentation();
+            
+            // Update initial fullscreen button state
+            setTimeout(updateFullscreenButton, 100);
+        });
+
+        // Enhanced touch support for fullscreen button
+        document.getElementById('fullscreenBtn').addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            toggleFullscreen();
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    previousSlide();
+                }
+            }
+        }
+
+        // Auto-hide controls after inactivity
+        let controlsTimeout;
+        
+        function resetControlsTimeout() {
+            clearTimeout(controlsTimeout);
+            document.querySelector('.slide-index').style.opacity = '1';
+            
+            controlsTimeout = setTimeout(() => {
+                if (currentSlide !== 0 && currentSlide !== totalSlides - 1) {
+                    document.querySelector('.slide-index').style.opacity = '0.6';
+                }
+            }, 3000);
+        }
+
+        // Show controls on mouse movement
+        document.addEventListener('mousemove', resetControlsTimeout);
+        
+        // Reset timeout on slide change
+        const originalShowSlide = showSlide;
+        showSlide = function(slideIndex) {
+            originalShowSlide(slideIndex);
+            resetControlsTimeout();
+        };
+    </script>
+
+</body>
+</html>
