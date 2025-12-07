@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Debt: Capitalizing Leases for True Valuation</title>
+    <style>
+        /* 
+        LEASE ACCOUNTING PRESENTATION - LANDSCAPE OPTIMIZED
+        =====================================================
+        
+        This presentation is optimized for landscape PDF export with:
+        - Landscape page orientation (11" x 8.5")
+        - Proper page break handling to avoid content splitting
+        - Compact layouts for landscape viewing
+        - Print-optimized typography and spacing
+        
+        For PDF export: Use landscape orientation and "Fit to page" settings
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Add landscape class to body for PDF export optimization */
+        body.landscape {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #fafafa;
+        }
+
+        /* Always use landscape optimizations */
+        body.landscape {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        @media screen and (orientation: landscape) {
+            body {
+                max-width: 1400px;
+                margin: 0 auto;
+                background: white;
+            }
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            page-break-after: always;
+        }
+
+        /* Additional landscape optimizations */
+        @media screen and (max-height: 800px) {
+            .slide {
+                min-height: auto;
+                padding: 40px 30px;
+            }
+            
+            .slide-title {
+                font-size: 3rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .slide-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #7f8c8d;
+            margin-bottom: 60px;
+            letter-spacing: 0.01em;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #34495e;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #5d6d7e;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape-optimized metric grid */
+        @media screen and (orientation: landscape) {
+            .metric-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+                margin: 30px 0;
+            }
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #3498db;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .metric-change {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .positive {
+            color: #27ae60;
+        }
+
+        .negative {
+            color: #e74c3c;
+        }
+
+        .neutral {
+            color: #95a5a6;
+        }
+
+        /* Optimize tables for landscape */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .data-table th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.95rem;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Landscape table optimizations */
+        @media screen and (orientation: landscape) {
+            .data-table {
+                font-size: 0.85rem;
+                margin: 20px 0;
+            }
+            
+            .data-table th {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+            
+            .data-table td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .behavioral-insight {
+            background: #667eea;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .behavioral-insight h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .behavioral-insight p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Landscape behavioral insight optimization */
+        @media screen and (orientation: landscape) {
+            .behavioral-insight {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .behavioral-insight h3 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+            
+            .behavioral-insight p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+        }
+
+        .case-study {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 6px solid #e74c3c;
+        }
+
+        .case-study.contradictory {
+            border-left-color: #e74c3c;
+        }
+
+        .case-study.expected {
+            border-left-color: #f39c12;
+        }
+
+        .case-study.crisis {
+            border-left-color: #e74c3c;
+        }
+
+        .case-study.policy {
+            border-left-color: #3498db;
+        }
+
+        .case-study-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .case-study-subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .case-study-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #34495e;
+        }
+
+        /* Landscape case study optimization */
+        @media screen and (orientation: landscape) {
+            .case-study {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            .case-study-subtitle {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            
+            .case-study-content {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        }
+
+        .key-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        /* Landscape key factors optimization */
+        @media screen and (orientation: landscape) {
+            .key-factors {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                margin: 20px 0;
+            }
+        }
+
+        .factor-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .factor-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .factor-desc {
+            color: #5d6d7e;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape comparison grid optimization */
+        @media screen and (orientation: landscape) {
+            .comparison-grid {
+                gap: 20px;
+                margin: 25px 0;
+            }
+        }
+
+        .comparison-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .comparison-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #5d6d7e;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 20px;
+            }
+            
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Mobile-specific fullscreen button */
+            .fullscreen-btn {
+                top: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .nav-controls {
+                bottom: 20px;
+                right: 20px;
+                gap: 8px;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .slide-index {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 16px;
+            }
+            
+            /* Mobile fullscreen optimization */
+            body:-webkit-full-screen .slide,
+            body:fullscreen .slide {
+                padding: 20px !important;
+                min-height: 100vh !important;
+            }
+            
+            /* Ensure touch targets are large enough in fullscreen */
+            .fullscreen-btn:active,
+            .nav-btn:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Lease-specific styling */
+        .lease-step {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 6px solid #f39c12;
+        }
+
+        .lease-step h4 {
+            color: #f39c12;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            gap: 20px;
+        }
+
+        .process-step {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            background: #f39c12;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+
+        .iceberg-metaphor {
+            background: #e3f2fd;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            position: relative;
+            text-align: center;
+        }
+
+        .iceberg-visual {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .debt-layer {
+            background: white;
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hidden-debt {
+            background: rgba(231, 76, 60, 0.1);
+            border: 2px solid #e74c3c;
+        }
+
+        .reported-debt {
+            background: rgba(52, 152, 219, 0.1);
+            border: 2px solid #3498db;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 30px 0;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            min-width: 280px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: right;
+            padding-right: 15px;
+            line-height: 1.3;
+        }
+
+        .bar-container {
+            flex: 1;
+            background: #ecf0f1;
+            border-radius: 4px;
+            height: 30px;
+            position: relative;
+        }
+
+        .bar-fill {
+            background: #3498db;
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .valuation-impact {
+            background: #ff6b6b;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .valuation-impact h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .valuation-impact p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        .rationale-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .rationale-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .rationale-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #f39c12;
+        }
+
+        .rationale-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .rationale-desc {
+            color: #5d6d7e;
+            line-height: 1.6;
+        }
+
+        /* Slide Index */
+        .slide-index {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .slide-index-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .slide-index-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide-index-display {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .slide-nav-btn {
+            background: #ecf0f1;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: all 0.2s ease;
+        }
+
+        .slide-nav-btn:hover {
+            background: #bdc3c7;
+            transform: scale(1.05);
+        }
+
+        .slide-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Main Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn:disabled {
+            background: rgba(189, 195, 199, 0.5);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Fullscreen Button */
+        .fullscreen-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            z-index: 1001;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .fullscreen-btn:active {
+            transform: scale(0.95);
+        }
+
+        .fullscreen-btn.fullscreen-active {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .fullscreen-btn.fullscreen-active:hover {
+            background: rgba(231, 76, 60, 1);
+        }
+
+        /* Hide controls in native fullscreen but keep functionality */
+        body:-webkit-full-screen .slide-index,
+        body:-webkit-full-screen .nav-controls,
+        body:fullscreen .slide-index,
+        body:fullscreen .nav-controls {
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        body:-webkit-full-screen .slide-index:hover,
+        body:-webkit-full-screen .nav-controls:hover,
+        body:fullscreen .slide-index:hover,
+        body:fullscreen .nav-controls:hover {
+            opacity: 1;
+        }
+
+        /* Fullscreen slide styling */
+        body:-webkit-full-screen .slide,
+        body:fullscreen .slide {
+            min-height: 100vh;
+            height: 100vh;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Slide container for navigation */
+        .slides-container {
+            position: relative;
+        }
+
+        .slide {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .slide:not(.active) {
+            display: none;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* Keyboard shortcut hint */
+        .keyboard-hint {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .keyboard-hint.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Print optimizations for landscape PDF export */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0.5in;
+            }
+            
+            .slide-index,
+            .keyboard-hint {
+                display: none !important;
+            }
+            
+            .slide {
+                page-break-after: always;
+                page-break-inside: avoid;
+                min-height: auto;
+                padding: 30px 20px;
+                display: block !important;
+            }
+            
+            .slide:last-child {
+                page-break-after: avoid;
+            }
+            
+            /* Prevent breaking of key elements */
+            .behavioral-insight,
+            .case-study,
+            .comparison-grid,
+            .metric-grid,
+            .key-factors,
+            .process-flow,
+            .rationale-grid {
+                page-break-inside: avoid;
+            }
+            
+            /* Optimize table printing */
+            .data-table {
+                font-size: 0.85rem;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 8px 10px;
+            }
+            
+            /* Optimize metric cards for print */
+            .metric-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .metric-value {
+                font-size: 1.8rem;
+            }
+            
+            /* Optimize case studies */
+            .case-study {
+                padding: 25px;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            /* Optimize factor cards */
+            .factor-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            /* Ensure comparison grid stays together */
+            .comparison-grid {
+                margin: 20px 0;
+            }
+            
+            /* Optimize titles */
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body class="landscape">
+    <!-- Keyboard Shortcut Hint -->
+    <div class="keyboard-hint" id="keyboardHint">
+        Use ← → arrow keys or Home/End to navigate • Press ⛶ or F11 for fullscreen • Escape to exit
+    </div>
+
+    <!-- Slide Index Controls -->
+    <div class="slide-index">
+        <div class="slide-index-title">Slide Navigation</div>
+        <div class="slide-index-controls">
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide - 1)" id="prevSlideBtn" title="Previous slide">‹</button>
+            <div class="slide-index-display">
+                <span id="currentSlideNum">1</span> / <span id="totalSlides">14</span>
+            </div>
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide + 1)" id="nextSlideBtn" title="Next slide">›</button>
+        </div>
+    </div>
+
+    <!-- Slides Container -->
+    <div class="slides-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <div style="text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 80vh;">
+            <h1 class="slide-title" style="font-size: 4rem; margin-bottom: 30px;">Hidden Debt:<br>Capitalizing Leases for True Valuation</h1>
+            
+            <div style="margin: 60px 0;">
+                <p style="font-size: 1.4rem; color: #7f8c8d; margin-bottom: 40px;">Presented by:</p>
+                <div style="font-size: 1.2rem; color: #2c3e50; line-height: 2;">
+                    <p><strong>Dinesh Koirala</strong></p>
+                    <p><strong>Pooja Neupane</strong></p>
+                    <p><strong>Mandeep Raj Shrestha</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Table of Contents -->
+    <div class="slide">
+        <h1>Table of Contents</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Lease Accounting Fundamentals</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" onclick="goToSlide(3); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">1. 📊 Lease Classification System</a></li>
+                    <li><a href="#" onclick="goToSlide(4); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">2. 💰 Leases as Debt Arguments</a></li>
+                    <li><a href="#" onclick="goToSlide(5); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">3. ⚖️ Profitability & Leverage Distortion</a></li>
+                    <li><a href="#" onclick="goToSlide(6); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">4. 🔄 Four-Step Capitalization Process</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Impact Analysis & Conclusions</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" onclick="goToSlide(7); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">5. 📈 Hidden Debt Revelation</a></li>
+                    <li><a href="#" onclick="goToSlide(8); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">6. 📊 Profitability Impact Analysis</a></li>
+                    <li><a href="#" onclick="goToSlide(9); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">7. 🏢 Industry-Level Impact</a></li>
+                    <li><a href="#" onclick="goToSlide(10); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">8. 💹 Sector Analysis</a></li>
+                    <li><a href="#" onclick="goToSlide(11); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">9. 💼 Enterprise Value Impact</a></li>
+                    <li><a href="#" onclick="goToSlide(12); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">10. 💰 Valuation Impact</a></li>
+                    <li><a href="#" onclick="goToSlide(13); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">11. 🎯 True Valuation Reality</a></li>
+                    <li><a href="#" onclick="goToSlide(14); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">12. 🔍 Strategic Rationale</a></li>
+                    <li><a href="#" onclick="goToSlide(15); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">13. 👁️ Analyst's Mandate</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Lease Classification -->
+    <div class="slide">
+        <h1>Lease Classification Creates Artificial Divide</h1>
+        
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Capital / Financial Leases</h3>
+                <p style="margin-bottom: 20px; color: #5d6d7e;"><strong>Treatment:</strong> Treated like an asset purchase financed with debt. Both the asset and corresponding liability appear on the balance sheet.</p>
+                
+                <h4 style="color: #2c3e50; margin-bottom: 15px;">Criteria (FASB): A lease is "Capital" if it meets ONE of these four conditions:</h4>
+                <ol style="color: #34495e; line-height: 1.8;">
+                    <li>Lease term is ≥ 75% of the asset's life</li>
+                    <li>Ownership transfers to the lessee</li>
+                    <li>Includes a 'bargain purchase' option</li>
+                    <li>Present value of payments is ≥ 90% of the asset's value</li>
+                </ol>
+            </div>
+
+            <div class="comparison-card" style="border-left: 6px solid #e74c3c3 style="color;">
+                <h: #e74c3c;">Operating Leases</h3>
+                <p style="margin-bottom: 20px; color: #5d6d7e;"><strong>Treatment:</strong> Treated as a simple rental expense. Lease payments are listed on the income statement as operating expense, but the asset and long-term liability are absent from the balance sheet.</p>
+                
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+                    <p style="color: #856404; margin: 0; font-weight: 600;">⚠️ Source of 'off-balance sheet financing'</p>
+                </div>
+                
+                <h4 style="color: #2c3e50; margin: 20px 0 15px;">Criteria:</h4>
+                <p style="color: #34495e;">Any lease that does not meet the criteria for a capital lease.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;"><strong>Key Insight:</strong> This distinction is driven primarily by who effectively owns the asset, not the nature of the financial commitment.</p>
+        </div>
+    </div>
+
+    <!-- Slide 4: Leases as Debt -->
+    <div class="slide">
+        <h1>All Lease Commitments Are Debt</h1>
+        
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-top: 30px;">
+            <div>
+                <h2 style="color: #2c3e50; margin-bottom: 20px;">Supporting Arguments</h2>
+                
+                <div class="key-factors" style="grid-template-columns: 1fr;">
+                    <div class="factor-card">
+                        <div class="factor-title">Fixed financial commitment</div>
+                        <div class="factor-desc">Lease payments are specified contractually, like bond coupons, with failure to pay having negative consequences.</div>
+                    </div>
+                    
+                    <div class="factor-card">
+                        <div class="factor-title">Tax-deductible expense</div>
+                        <div class="factor-desc">Lease payments reduce taxable income, similar to interest expense on traditional debt.</div>
+                    </div>
+                    
+                    <div class="factor-card">
+                        <div class="factor-title">Asset risk transfer</div>
+                        <div class="factor-desc">Missing payments can result in loss of critical operating assets (store locations, equipment).</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div style="background: #ecf0f1; color: #2c3e50; padding: 25px; border-radius: 8px; height: fit-content; border-left: 4px solid #3498db;">
+                    <h3 style="color: #2c3e50; margin-bottom: 15px;">Key Insight</h3>
+                    <p style="font-size: 1rem; line-height: 1.6;">
+                        The financial distinction between debt and equity is based on the nature of the cash flow claim. Leases are not residual claims; they are fixed claims. Therefore, they should be treated as debt in financial analysis, regardless of accounting rules.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 25px; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+            <p style="font-size: 1rem; color: #2c3e50; font-style: italic; margin: 0;">
+                "We should be doing what is right in valuation... rather than bending our assessments to fit accounting rules that do not make sense."<br>
+                <strong>– Aswath Damodaran</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 5: Profitability & Leverage Distortion -->
+    <div class="slide">
+        <h1>Ignoring Leases Distorts Profitability & Leverage</h1>
+        
+        <div class="comparison-grid" style="grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 40px;">
+            <div class="lease-step">
+                <h4>Return on Capital (ROC)</h4>
+                <p><strong>Effect:</strong> Operating Income is artificially lower (due to lease expense), and Capital is artificially lower (because leases are off-balance sheet).</p>
+                <p style="color: #f39c12; font-weight: 600; margin-top: 10px;">Result: ROC is often <strong>misleadingly higher</strong></p>
+            </div>
+
+            <div class="lease-step">
+                <h4>Debt Ratio (Debt / Capital)</h4>
+                <p><strong>Effect:</strong> Debt does not include lease commitments, leading to understated Capital.</p>
+                <p style="color: #e74c3c; font-weight: 600; margin-top: 10px;">Result: The Debt Ratio is <strong>significantly lower</strong>, hiding the true leverage.</p>
+            </div>
+
+            <div class="lease-step">
+                <h4>Interest Coverage (EBIT / Interest)</h4>
+                <p><strong>Effect:</strong> Operating Income is lower, and Interest expense does not include imputed interest from leases.</p>
+                <p style="color: #3498db; font-weight: 600; margin-top: 10px;">Result: The coverage ratio appears healthier than it is.</p>
+            </div>
+
+            <div class="lease-step">
+                <h4>A Tale of Two Retailers</h4>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin: 15px 0;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 5px;">🏪</div>
+                        <div style="font-weight: 600; color: #2c3e50;">Abercrombie & Fitch</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">Leases almost all stores</div>
+                    </div>
+                    <div style="color: #e74c3c; font-size: 1.5rem;">⚔️</div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 5px;">🏬</div>
+                        <div style="font-weight: 600; color: #2c3e50;">Target</div>
+                        <div style="font-size: 0.9rem; color: #7f8c8d;">Buys many stores using debt</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Takeaway:</strong> Consider two retailers. Abercrombie & Fitch leases almost all of its stores. Target buys many of its stores using debt. A direct comparison of their reported financial ratios is fundamentally contaminated by this accounting difference.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 6: Four-Step Process -->
+    <div class="slide">
+        <h1>Four-Step Process to Uncover True Debt</h1>
+        
+        <div class="process-flow">
+            <div class="process-step">
+                <div class="step-number">1</div>
+                <h4 style="color: #f39c12; margin-bottom: 15px;">Uncover Future Commitments</h4>
+                <p style="color: #5d6d7e; line-height: 1.6;">Extract all operating lease commitments from the footnotes of the financial statements (typically for the next 5 years and a lump sum beyond).</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">2</div>
+                <h4 style="color: #f39c12; margin-bottom: 15px;">Determine the Cost of Debt</h4>
+                <p style="color: #5d6d7e; line-height: 1.6;">Estimate the firm's pre-tax cost of debt. Use the company's bond rating or a "synthetic" rating based on its interest coverage ratio.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">3</div>
+                <h4 style="color: #f39c12; margin-bottom: 15px;">Calculate the 'Debt Value' of Leases</h4>
+                <p style="color: #5d6d7e; line-height: 1.6;">Discount the future lease commitments back to the present using the pre-tax cost of debt as the discount rate. This present value is the debt equivalent of the leases.</p>
+            </div>
+
+            <div class="process-step">
+                <div class="step-number">4</div>
+                <h4 style="color: #f39c12; margin-bottom: 15px;">Adjust Operating Income</h4>
+                <p style="color: #5d6d7e; line-height: 1.6;">Recalculate EBIT. Add back the operating lease expense (since it's a financing cost) and subtract the depreciation on the newly created 'leased asset'.</p>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 40px;">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Formula for Adjusted EBIT</h3>
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-weight: 600;">
+                Adjusted EBIT = Stated EBIT + Operating Lease Expense - Depreciation on Leased Asset
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 7: Hidden Debt Revelation -->
+    <div class="slide">
+        <h1>Lease Capitalization Reveals Billions in Hidden Debt</h1>
+        
+        <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">Reported Debt vs. Adjusted Debt (in Millions USD)</h3>
+            
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Target</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 85%; background: #95a5a6;">$17,090M</div>
+                    </div>
+                    <div class="bar-container" style="margin-left: 10px;">
+                        <div class="bar-fill" style="width: 100%;">$19,353M</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Abercrombie & Fitch</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 5%; background: #95a5a6; color: #2c3e50; justify-content: flex-start; padding-left: 8px; font-size: 0.8rem;">$43M</div>
+                    </div>
+                    <div class="bar-container" style="margin-left: 10px;">
+                        <div class="bar-fill" style="width: 25%; color: white;">$2,041M</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Starbucks</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 12%; background: #95a5a6;">$1,261M</div>
+                    </div>
+                    <div class="bar-container" style="margin-left: 10px;">
+                        <div class="bar-fill" style="width: 52%;">$5,194M</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 30px; margin-top: 20px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 20px; height: 20px; background: #95a5a6; border-radius: 3px;"></div>
+                    <span style="color: #5d6d7e;">Reported Debt</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 20px; height: 20px; background: #3498db; border-radius: 3px;"></div>
+                    <span style="color: #5d6d7e;">Adjusted Debt (incl. Leases)</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Finding:</strong> For retailers like <strong>A&F</strong> and <strong>Starbucks</strong>, operating leases represent the vast majority of their financial leverage. Reported debt figures are profoundly understated.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Profitability Impact -->
+    <div class="slide">
+        <h1>True Profitability Is Often Lower</h1>
+        
+        <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">Stated ROC vs. Adjusted ROC (After-Tax)</h3>
+            
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Target</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 30%; background: #f39c12;">9.11%</div>
+                    </div>
+                    <div class="bar-container" style="margin-left: 10px;">
+                        <div class="bar-fill" style="width: 28%; background: #3498db;">8.59%</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Abercrombie & Fitch</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 90%; background: #f39c12;">26.87%</div>
+                    </div>
+                    <div class="bar-container" style="margin-left: 10px;">
+                        <div class="bar-fill" style="width: 35%; background: #3498db;">10.66%</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Starbucks</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 44%; background: #f39c12;">13.11%</div>
+                    </div>
+                    <div class="bar-container" style="margin-left: 10px;">
+                        <div class="bar-fill" style="width: 27%; background: #3498db;">7.98%</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="display: flex; justify-content: center; gap: 30px; margin-top: 20px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 20px; height: 20px; background: #f39c12; border-radius: 3px;"></div>
+                    <span style="color: #5d6d7e;">Stated ROC</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 20px; height: 20px; background: #3498db; border-radius: 3px;"></div>
+                    <span style="color: #5d6d7e;">Adjusted ROC</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Analysis</h3>
+            <p>Return on Capital drops because the denominator (Capital) increases significantly with the addition of capitalized leases. For firms with high unadjusted ROC (like A&F and Starbucks), this effect is dramatic, revealing a more realistic picture of their capital efficiency.</p>
+        </div>
+    </div>
+
+    <!-- Slide 9: Industry Impact -->
+    <div class="slide">
+        <h1>Distortion Systemic in Lease-Heavy Industries</h1>
+        
+        <div class="chart-container">
+            <h3 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">Percentage Increase in Total Debt After Capitalizing Leases</h3>
+            
+            <div class="bar-chart">
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Education Services</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 100%;">+574%</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Home Entertainment Software</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 77%;">+440%</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Apparel Retail</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 67%;">+382%</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Drug Retail</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 34%;">+196%</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Home Furnishing Retail</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 31%;">+180%</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Specialty Stores</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 27%;">+154%</div>
+                    </div>
+                </div>
+                
+                <div class="bar-item">
+                    <div class="bar-label"><strong>Footwear</strong></div>
+                    <div class="bar-container">
+                        <div class="bar-fill" style="width: 24%;">+136%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Insight:</strong> In sectors like <strong>retail and restaurants</strong>, what companies report as "debt" is often a fraction of their true fixed financial commitments. Any cross-sector analysis that <strong>ignores leases is fundamentally flawed</strong>.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Sector-Level Analysis -->
+    <div class="slide">
+        <h1>Sector Profitability Also Misrepresented</h1>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Primary Industry</th>
+                    <th>Stated ROC</th>
+                    <th style="background: #34495e;">Adjusted ROC</th>
+                    <th>Stated Op. Margin</th>
+                    <th style="background: #34495e;">Adjusted Op. Margin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Apparel Retail</strong></td>
+                    <td>17.95%</td>
+                    <td style="background: #34495e; color: white;">12.20%</td>
+                    <td>7.07%</td>
+                    <td style="background: #34495e; color: white;">9.72%</td>
+                </tr>
+                <tr>
+                    <td><strong>Restaurants</strong></td>
+                    <td>14.53%</td>
+                    <td style="background: #34495e; color: white;">9.57%</td>
+                    <td>13.44%</td>
+                    <td style="background: #34495e; color: white;">13.29%</td>
+                </tr>
+                <tr>
+                    <td><strong>Drug Retail</strong></td>
+                    <td>9.51%</td>
+                    <td style="background: #34495e; color: white;">4.23%</td>
+                    <td>5.70%</td>
+                    <td style="background: #34495e; color: white;">4.06%</td>
+                </tr>
+                <tr>
+                    <td><strong>Education Services</strong></td>
+                    <td>35.17%</td>
+                    <td style="background: #34495e; color: white;">18.28%</td>
+                    <td>17.43%</td>
+                    <td style="background: #34495e; color: white;">16.18%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="behavioral-insight">
+            <h3>Key Findings</h3>
+            <p>The <strong>Adjusted ROC</strong> is lower than the <strong>Stated ROC</strong> because the increase in the capital base outweighs adjustments to operating income. Conversely, <strong>Operating Margins</strong> often rise because lease expenses are moved from operating to financing costs.</p>
+        </div>
+    </div>
+
+    <!-- Slide 11: Enterprise Value Impact -->
+    <div class="slide">
+        <h1>Enterprise Value Multiples Built on Flawed Foundation</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; line-height: 1.6;">
+                When operating leases are capitalized, both the numerator (Enterprise Value) and the denominator (EBITDA) change, altering key multiples used in relative valuation.
+            </p>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Multiple</th>
+                    <th>A&F (Stated)</th>
+                    <th style="background: #ecf0f1;">A&F (Adjusted)</th>
+                    <th>Starbucks (Stated)</th>
+                    <th style="background: #ecf0f1;">Starbucks (Adjusted)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>EV / Revenues</strong></td>
+                    <td>0.44x</td>
+                    <td style="background: #ecf0f1;">1.01x</td>
+                    <td>0.93x</td>
+                    <td style="background: #ecf0f1;">1.31x</td>
+                </tr>
+                <tr>
+                    <td><strong>EV / EBITDA</strong></td>
+                    <td>2.36x</td>
+                    <td style="background: #ecf0f1;">3.70x</td>
+                    <td>7.64x</td>
+                    <td style="background: #ecf0f1;">6.78x</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="background: #fff3cd; border: 2px solid #ffc107; padding: 25px; border-radius: 12px; margin-top: 30px;">
+            <h3 style="color: #856404; margin-bottom: 15px;">Critical Analysis</h3>
+            <p style="color: #856404; font-size: 1.1rem; margin: 0; line-height: 1.6;">
+                <strong>Comparing EV/EBITDA multiples across firms without adjusting for lease treatment is an apples-to-oranges comparison. The firm that leases its assets will almost always look deceptively cheaper.</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 12: Valuation Impact -->
+    <div class="slide">
+        <h1>Lease Capitalization Alters Intrinsic Value</h1>
+        
+        <div style="margin-bottom: 40px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                Valuation is a function of cash flows, growth, and risk. Capitalizing leases affects every single input.
+            </p>
+        </div>
+
+        <div class="process-flow" style="margin-bottom: 40px;">
+            <div class="process-step">
+                <h4 style="color: #3498db; margin-bottom: 15px;">Free Cash Flow to Firm (FCFF)</h4>
+                <ul style="text-align: left; color: #5d6d7e; line-height: 1.6;">
+                    <li>Operating Income increases</li>
+                    <li>Net Capital Expenditures increase (to reflect changes in the PV of leases)</li>
+                </ul>
+            </div>
+
+            <div class="process-step">
+                <h4 style="color: #3498db; margin-bottom: 15px;">Cost of Capital (WACC)</h4>
+                <ul style="text-align: left; color: #5d6d7e; line-height: 1.6;">
+                    <li>Debt-to-Capital ratio increases significantly</li>
+                    <li>Cost of Debt & Equity may change due to higher perceived leverage</li>
+                    <li style="color: #f39c12; font-weight: 600;">Overall WACC generally <strong>decreases</strong></li>
+                </ul>
+            </div>
+
+            <div class="process-step">
+                <h4 style="color: #3498db; margin-bottom: 15px;">Expected Growth (g = ROC * Reinvestment Rate)</h4>
+                <ul style="text-align: left; color: #5d6d7e; line-height: 1.6;">
+                    <li>Both ROC and the Reinvestment Rate are adjusted</li>
+                    <li>The effect on sustainable growth is unpredictable</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="valuation-impact">
+            <h3>Final Impact</h3>
+            <p>The net result of these shifts can dramatically increase or decrease the final estimated value per share.</p>
+        </div>
+    </div>
+
+    <!-- Slide 13: True Valuation Reality -->
+    <div class="slide">
+        <h1>A&F and Starbucks Worth Less Than They Appear</h1>
+        
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #e74c3c;">
+                <h3 style="color: #e74c3c; text-align: center;">Abercrombie & Fitch</h3>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <div style="background: #95a5a6; color: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                        <div style="font-size: 0.9rem; margin-bottom: 5px;">Value per Share (Stated numbers)</div>
+                        <div style="font-size: 2rem; font-weight: bold;">$59.14</div>
+                    </div>
+                    
+                    <div style="background: #2c3e50; color: white; padding: 20px; border-radius: 8px;">
+                        <div style="font-size: 0.9rem; margin-bottom: 5px;">Value per Share (Leases Capitalized)</div>
+                        <div style="font-size: 2rem; font-weight: bold;">$27.12</div>
+                    </div>
+                </div>
+                
+                <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107;">
+                    <p style="color: #856404; margin: 0;"><strong>Excess Returns:</strong></p>
+                    <p style="color: #856404; margin: 5px 0 0 0;">Drop from <strong>14.66%</strong> to <strong>1.04%</strong></p>
+                </div>
+            </div>
+
+            <div class="comparison-card" style="border-left: 6px solid #3498db;">
+                <h3 style="color: #3498db; text-align: center;">Starbucks</h3>
+                
+                <div style="text-align: center; margin: 30px 0;">
+                    <div style="background: #95a5a6; color: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                        <div style="font-size: 0.9rem; margin-bottom: 5px;">Value per Share (Stated numbers)</div>
+                        <div style="font-size: 2rem; font-weight: bold;">$6.49</div>
+                    </div>
+                    
+                    <div style="background: #2c3e50; color: white; padding: 20px; border-radius: 8px;">
+                        <div style="font-size: 0.9rem; margin-bottom: 5px;">Value per Share (Leases Capitalized)</div>
+                        <div style="font-size: 2rem; font-weight: bold;">$3.73</div>
+                    </div>
+                </div>
+                
+                <div style="background: #f8d7da; padding: 20px; border-radius: 8px; border-left: 4px solid #e74c3c;">
+                    <p style="color: #721c24; margin: 0;"><strong>Excess Returns:</strong></p>
+                    <p style="color: #721c24; margin: 5px 0 0 0;">Flip from <strong>+3.32%</strong> to <strong style="color: #e74c3c;">-0.80%</strong> (value-destroying)</p>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+            <p style="color: #5d6d7e; font-style: italic; margin: 0;">Source: Table 23, Damodaran, 'Leases, Debt, and Value'</p>
+        </div>
+    </div>
+
+    <!-- Slide 14: Strategic Rationale -->
+    <div class="slide">
+        <h1>Leasing Rationale Remains Sound</h1>
+        
+        <div style="margin-bottom: 40px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                Capitalizing leases simply removes the cosmetic accounting benefit. The sound strategic reasons for leasing remain.
+            </p>
+        </div>
+
+        <div class="rationale-grid">
+            <div class="rationale-card">
+                <div class="rationale-icon">💰</div>
+                <div class="rationale-title">Lower Costs</div>
+                <div class="rationale-desc">Lessors may have economies of scale or tax advantages that they pass on to the lessee.</div>
+            </div>
+
+            <div class="rationale-card">
+                <div class="rationale-icon">🛡️</div>
+                <div class="rationale-title">Reduced Asset Risk</div>
+                <div class="rationale-desc">The lessee avoids the risk that an asset (like real estate) depreciates in value faster than expected. It allows a retailer to focus on retailing, not real estate speculation.</div>
+            </div>
+
+            <div class="rationale-card">
+                <div class="rationale-icon">🔄</div>
+                <div class="rationale-title">Flexibility</div>
+                <div class="rationale-desc">Lease agreements can allow for easier upgrades, which is critical for assets with high technological obsolescence (e.g., computers).</div>
+            </div>
+
+            <div class="rationale-card">
+                <div class="rationale-icon">🔧</div>
+                <div class="rationale-title">Service</div>
+                <div class="rationale-desc">Leases often come bundled with service and support contracts from the lessor.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 15: Analyst's Mandate -->
+    <div class="slide">
+        <h1>See Reality, Not Accounting Convention</h1>
+
+        <div style="margin-top: 40px;">
+            <h2 style="color: #2c3e50; text-align: center; margin-bottom: 30px;">The Analyst's Mandate</h2>
+            
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 40px; margin-bottom: 30px; align-items: start;">
+                <div>
+                    <h3 style="color: #2c3e50; margin-bottom: 20px; font-size: 1.4rem;">Key Points:</h3>
+                    <ol style="color: #34495e; line-height: 2; font-size: 1.1rem; padding-left: 20px;">
+                        <li>Operating leases are debt in disguise, and standard accounting hides this reality.</li>
+                        <li>This distortion creates a false picture of leverage, profitability, and ultimately, value.</li>
+                        <li>A straightforward 4-step process allows us to correct for this distortion.</li>
+                    </ol>
+                </div>
+                <div style="display: flex; align-items: center; justify-content: center;">
+                    <div style="font-size: 5rem; color: #bdc3c7;">💡</div>
+                </div>
+            </div>
+            
+            <div style="background: #f8f9fa; padding: 30px; border-radius: 12px; margin-top: 30px; border-left: 4px solid #34495e;">
+                <p style="font-size: 1.2rem; line-height: 1.8; margin: 0; text-align: center; font-weight: 600; color: #2c3e50;">
+                    Financial standards will eventually change to reflect this reality. But analysts cannot afford to wait. The tools exist today to look past flawed accounting rules and make decisions based on a firm's true economic standing.
+                </p>
+                <p style="font-size: 1.2rem; line-height: 1.8; margin: 20px 0 0 0; text-align: center; font-weight: 600; color: #34495e;">
+                    The choice is between accepting the official story and uncovering the hidden truth.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fullscreen Button -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fullscreenBtn" title="Toggle Fullscreen (Mobile-Friendly)">⛶</button>
+
+    <!-- Main Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="previousSlide()" id="prevBtn" title="Previous slide (←)">◀</button>
+        <button class="nav-btn" onclick="nextSlide()" id="nextBtn" title="Next slide (→)">▶</button>
+    </div>
+
+    <!-- Navigation JavaScript -->
+    <script>
+        // Slide navigation functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Initialize
+        function initPresentation() {
+            // Show first slide
+            showSlide(0);
+            
+            // Enhanced keyboard event handling
+            setupKeyboardNavigation();
+            
+            // Show keyboard hint for 3 seconds
+            setTimeout(() => {
+                const hint = document.getElementById('keyboardHint');
+                hint.classList.add('show');
+                setTimeout(() => {
+                    hint.classList.remove('show');
+                }, 3000);
+            }, 1000);
+        }
+
+        // Setup keyboard navigation
+        function setupKeyboardNavigation() {
+            // Single keyboard event handler
+            document.addEventListener('keydown', function(event) {
+                // Skip if user is typing in input fields
+                if (event.target && (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA')) {
+                    return;
+                }
+                
+                // Handle navigation keys
+                event.preventDefault();
+                
+                switch(event.key) {
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        previousSlide();
+                        break;
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                    case ' ':
+                        nextSlide();
+                        break;
+                    case 'Home':
+                        navigateToSlide(0);
+                        break;
+                    case 'End':
+                        navigateToSlide(totalSlides - 1);
+                        break;
+                    case 'Escape':
+                        // Exit fullscreen if in fullscreen mode, otherwise show hint
+                        if (isFullscreen()) {
+                            event.preventDefault();
+                            exitFullscreen();
+                        } else {
+                            const hint = document.getElementById('keyboardHint');
+                            if (hint) {
+                                hint.classList.toggle('show');
+                            }
+                        }
+                        break;
+                    
+                    case 'F11':
+                        event.preventDefault();
+                        toggleFullscreen();
+                        break;
+                }
+            });
+            
+            // Make sure body can receive focus
+            document.body.tabIndex = 0;
+            
+            // Force focus after page load
+            setTimeout(() => {
+                document.body.focus();
+            }, 100);
+        }
+
+        // Show specific slide
+        function showSlide(slideIndex) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            if (slides[slideIndex]) {
+                slides[slideIndex].classList.add('active');
+                currentSlide = slideIndex;
+                
+                // Update displays
+                document.getElementById('currentSlideNum').textContent = slideIndex + 1;
+                document.getElementById('totalSlides').textContent = totalSlides;
+                
+                // Update button states
+                updateButtons();
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Navigate to specific slide
+        function navigateToSlide(slideIndex) {
+            if (slideIndex >= 0 && slideIndex < totalSlides) {
+                showSlide(slideIndex);
+            }
+        }
+
+        // Navigate to next slide
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                navigateToSlide(currentSlide + 1);
+            }
+        }
+
+        // Navigate to previous slide
+        function previousSlide() {
+            if (currentSlide > 0) {
+                navigateToSlide(currentSlide - 1);
+            }
+        }
+
+        // Browser fullscreen API functionality
+        function toggleFullscreen() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            // Check if browser supports fullscreen API
+            if (!supportsFullscreen()) {
+                alert('Fullscreen is not supported in this browser. Please use landscape mode or rotate your device for better viewing.');
+                return;
+            }
+            
+            // Check if already in fullscreen mode using native API
+            if (isFullscreen()) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+        }
+
+        // Check if browser supports fullscreen API
+        function supportsFullscreen() {
+            return !!(
+                document.fullscreenEnabled ||
+                document.webkitFullscreenEnabled ||
+                document.mozFullScreenEnabled ||
+                document.msFullscreenEnabled
+            );
+        }
+
+        // Check if currently in fullscreen mode
+        function isFullscreen() {
+            return !!(document.fullscreenElement || 
+                     document.webkitFullscreenElement || 
+                     document.mozFullScreenElement || 
+                     document.msFullscreenElement);
+        }
+
+        // Enter fullscreen using native browser API
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else if (elem.webkitRequestFullscreen) { // Safari
+                elem.webkitRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Exit fullscreen using native browser API
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { // Safari
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Firefox
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) { // IE/Edge
+                document.msExitFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Update fullscreen button appearance and state
+        function updateFullscreenButton() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (isFullscreen()) {
+                fullscreenBtn.classList.add('fullscreen-active');
+                fullscreenBtn.title = 'Exit Fullscreen';
+                
+                // Auto-hide navigation controls after 3 seconds in fullscreen
+                setTimeout(() => {
+                    if (isFullscreen()) {
+                        const slideIndex = document.querySelector('.slide-index');
+                        const navControls = document.querySelector('.nav-controls');
+                        if (slideIndex) slideIndex.style.opacity = '0.3';
+                        if (navControls) navControls.style.opacity = '0.3';
+                    }
+                }, 3000);
+            } else {
+                fullscreenBtn.classList.remove('fullscreen-active');
+                fullscreenBtn.title = 'Enter Fullscreen';
+                
+                // Show navigation controls again when not in fullscreen
+                const slideIndex = document.querySelector('.slide-index');
+                const navControls = document.querySelector('.nav-controls');
+                if (slideIndex) slideIndex.style.opacity = '1';
+                if (navControls) navControls.style.opacity = '1';
+            }
+        }
+
+        // Handle fullscreen change events
+        function setupFullscreenListeners() {
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+            
+            // Re-show controls on mouse movement in fullscreen
+            document.addEventListener('mousemove', function() {
+                if (isFullscreen()) {
+                    const slideIndex = document.querySelector('.slide-index');
+                    const navControls = document.querySelector('.nav-controls');
+                    if (slideIndex) slideIndex.style.opacity = '1';
+                    if (navControls) navControls.style.opacity = '1';
+                }
+            });
+        }
+
+        // Update button states
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevSlideBtn = document.getElementById('prevSlideBtn');
+            const nextSlideBtn = document.getElementById('nextSlideBtn');
+            
+            // Disable/enable buttons
+            const prevDisabled = currentSlide === 0;
+            const nextDisabled = currentSlide === totalSlides - 1;
+            
+            prevBtn.disabled = prevDisabled;
+            nextBtn.disabled = nextDisabled;
+            prevSlideBtn.disabled = prevDisabled;
+            nextSlideBtn.disabled = nextDisabled;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make navigation functions globally available
+            window.nextSlide = nextSlide;
+            window.previousSlide = previousSlide;
+            window.navigateToSlide = navigateToSlide;
+            window.toggleFullscreen = toggleFullscreen;
+            window.isFullscreen = isFullscreen;
+            window.supportsFullscreen = supportsFullscreen;
+            window.goToSlide = navigateToSlide;
+            
+            // Setup fullscreen event listeners
+            setupFullscreenListeners();
+            
+            // Initialize presentation
+            initPresentation();
+            
+            // Update initial fullscreen button state
+            setTimeout(updateFullscreenButton, 100);
+        });
+
+        // Enhanced touch support for fullscreen button
+        document.getElementById('fullscreenBtn').addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            toggleFullscreen();
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    previousSlide();
+                }
+            }
+        }
+
+        // Auto-hide controls after inactivity
+        let controlsTimeout;
+        
+        function resetControlsTimeout() {
+            clearTimeout(controlsTimeout);
+            document.querySelector('.slide-index').style.opacity = '1';
+            
+            controlsTimeout = setTimeout(() => {
+                if (currentSlide !== 0 && currentSlide !== totalSlides - 1) {
+                    document.querySelector('.slide-index').style.opacity = '0.6';
+                }
+            }, 3000);
+        }
+
+        // Show controls on mouse movement
+        document.addEventListener('mousemove', resetControlsTimeout);
+        
+        // Reset timeout on slide change
+        const originalShowSlide = showSlide;
+        showSlide = function(slideIndex) {
+            originalShowSlide(slideIndex);
+            resetControlsTimeout();
+        };
+    </script>
+
+</body>
+</html>
