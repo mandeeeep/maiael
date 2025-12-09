@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tulipmania: Asset Price Bubble Case Study</title>
+    <style>
+        /* 
+        TULIPMANIA PRESENTATION - LANDSCAPE OPTIMIZED
+        =============================================
+        
+        This presentation is optimized for landscape PDF export with:
+        - Landscape page orientation (11" x 8.5")
+        - Proper page break handling to avoid content splitting
+        - Compact layouts for landscape viewing
+        - Print-optimized typography and spacing
+        
+        For PDF export: Use landscape orientation and "Fit to page" settings
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Add landscape class to body for PDF export optimization */
+        body.landscape {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #fafafa;
+        }
+
+        /* Always use landscape optimizations */
+        body.landscape {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        @media screen and (orientation: landscape) {
+            body {
+                max-width: 1400px;
+                margin: 0 auto;
+                background: white;
+            }
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            page-break-after: always;
+        }
+
+        /* Additional landscape optimizations */
+        @media screen and (max-height: 800px) {
+            .slide {
+                min-height: auto;
+                padding: 40px 30px;
+            }
+            
+            .slide-title {
+                font-size: 3rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .slide-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #7f8c8d;
+            margin-bottom: 60px;
+            letter-spacing: 0.01em;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            border-bottom: 3px solid #9b59b6;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #34495e;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #5d6d7e;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape-optimized metric grid */
+        @media screen and (orientation: landscape) {
+            .metric-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+                margin: 30px 0;
+            }
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #9b59b6;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .metric-change {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .positive {
+            color: #27ae60;
+        }
+
+        .negative {
+            color: #e74c3c;
+        }
+
+        .neutral {
+            color: #95a5a6;
+        }
+
+        /* Optimize tables for landscape */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .data-table th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.95rem;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Landscape table optimizations */
+        @media screen and (orientation: landscape) {
+            .data-table {
+                font-size: 0.85rem;
+                margin: 20px 0;
+            }
+            
+            .data-table th {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+            
+            .data-table td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .behavioral-insight {
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .behavioral-insight h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .behavioral-insight p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Landscape behavioral insight optimization */
+        @media screen and (orientation: landscape) {
+            .behavioral-insight {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .behavioral-insight h3 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+            
+            .behavioral-insight p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+        }
+
+        .case-study {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 6px solid #e67e22;
+        }
+
+        .case-study.contradictory {
+            border-left-color: #e74c3c;
+        }
+
+        .case-study.expected {
+            border-left-color: #f39c12;
+        }
+
+        .case-study-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .case-study-subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .case-study-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #34495e;
+        }
+
+        /* Landscape case study optimization */
+        @media screen and (orientation: landscape) {
+            .case-study {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            .case-study-subtitle {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            
+            .case-study-content {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        }
+
+        .key-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        /* Landscape key factors optimization */
+        @media screen and (orientation: landscape) {
+            .key-factors {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                margin: 20px 0;
+            }
+        }
+
+        .factor-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .factor-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .factor-desc {
+            color: #5d6d7e;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: #ecf0f1;
+            border-left: 4px solid #9b59b6;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape comparison grid optimization */
+        @media screen and (orientation: landscape) {
+            .comparison-grid {
+                gap: 20px;
+                margin: 25px 0;
+            }
+        }
+
+        .comparison-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .comparison-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #5d6d7e;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 20px;
+            }
+            
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Mobile-specific fullscreen button */
+            .fullscreen-btn {
+                top: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .nav-controls {
+                bottom: 20px;
+                right: 20px;
+                gap: 8px;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .slide-index {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 16px;
+            }
+            
+            /* Mobile fullscreen optimization */
+            body:-webkit-full-screen .slide,
+            body:fullscreen .slide {
+                padding: 20px !important;
+                min-height: 100vh !important;
+            }
+            
+            /* Ensure touch targets are large enough in fullscreen */
+            .fullscreen-btn:active,
+            .nav-btn:active {
+                transform: scale(0.95);
+            }
+        }
+
+
+
+        /* Slide Index */
+        .slide-index {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .slide-index-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .slide-index-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide-index-display {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .slide-nav-btn {
+            background: #ecf0f1;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: all 0.2s ease;
+        }
+
+        .slide-nav-btn:hover {
+            background: #bdc3c7;
+            transform: scale(1.05);
+        }
+
+        .slide-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Main Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn:disabled {
+            background: rgba(189, 195, 199, 0.5);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Fullscreen Button */
+        .fullscreen-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            z-index: 1001;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .fullscreen-btn:active {
+            transform: scale(0.95);
+        }
+
+        .fullscreen-btn.fullscreen-active {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .fullscreen-btn.fullscreen-active:hover {
+            background: rgba(231, 76, 60, 1);
+        }
+
+        /* Hide controls in native fullscreen but keep functionality */
+        body:-webkit-full-screen .slide-index,
+        body:-webkit-full-screen .nav-controls,
+        body:fullscreen .slide-index,
+        body:fullscreen .nav-controls {
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        body:-webkit-full-screen .slide-index:hover,
+        body:-webkit-full-screen .nav-controls:hover,
+        body:fullscreen .slide-index:hover,
+        body:fullscreen .nav-controls:hover {
+            opacity: 1;
+        }
+
+        /* Fullscreen slide styling */
+        body:-webkit-full-screen .slide,
+        body:fullscreen .slide {
+            min-height: 100vh;
+            height: 100vh;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+        /* Slide container for navigation */
+        .slides-container {
+            position: relative;
+        }
+
+        .slide {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .slide:not(.active) {
+            display: none;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* Keyboard shortcut hint */
+        .keyboard-hint {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .keyboard-hint.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Print optimizations for landscape PDF export */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0.5in;
+            }
+            
+            .slide-index,
+            .keyboard-hint {
+                display: none !important;
+            }
+            
+            .slide {
+                page-break-after: always;
+                page-break-inside: avoid;
+                min-height: auto;
+                padding: 30px 20px;
+                display: block !important;
+            }
+            
+            .slide:last-child {
+                page-break-after: avoid;
+            }
+            
+            /* Prevent breaking of key elements */
+            .behavioral-insight,
+            .case-study,
+            .comparison-grid,
+            .metric-grid,
+            .key-factors {
+                page-break-inside: avoid;
+            }
+            
+            /* Optimize table printing */
+            .data-table {
+                font-size: 0.85rem;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 8px 10px;
+            }
+            
+            /* Optimize metric cards for print */
+            .metric-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .metric-value {
+                font-size: 1.8rem;
+            }
+            
+            /* Optimize case studies */
+            .case-study {
+                padding: 25px;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            /* Optimize factor cards */
+            .factor-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            /* Ensure comparison grid stays together */
+            .comparison-grid {
+                margin: 20px 0;
+            }
+            
+            /* Optimize titles */
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body class="landscape">
+    <!-- Keyboard Shortcut Hint -->
+    <div class="keyboard-hint" id="keyboardHint">
+        Use ← → arrow keys or Home/End to navigate • Press ⛶ or F11 for fullscreen • Escape to exit
+    </div>
+
+    <!-- Slide Index Controls -->
+    <div class="slide-index">
+        <div class="slide-index-title">Slide Navigation</div>
+        <div class="slide-index-controls">
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide - 1)" id="prevSlideBtn" title="Previous slide">‹</button>
+            <div class="slide-index-display">
+                <span id="currentSlideNum">1</span> / <span id="totalSlides">16</span>
+            </div>
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide + 1)" id="nextSlideBtn" title="Next slide">›</button>
+        </div>
+    </div>
+
+    <!-- Slides Container -->
+    <div class="slides-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <h1 class="slide-title">Tulipmania: How to Spot an Asset Price Bubble</h1>
+        <p class="slide-subtitle">Behavioral Finance Case Study • FIN 642 • EMBA Spring 2024</p>
+        <div class="highlight-box">
+            <p style="font-size: 1.2rem; color: #5d6d7e; margin: 0;">
+                Presented by: Pooja Neupane, Mandeep Raj Shrestha, Dinesh Kumar Koirala
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Table of Contents -->
+    <div class="slide">
+        <h1>Table of Contents</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Historical Analysis</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" onclick="goToSlide(3); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">1. 📜 Introduction to Asset Price Bubbles</a></li>
+                    <li><a href="#" onclick="goToSlide(4); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">2. 🏛️ Economic & Social Context (1630s Holland)</a></li>
+                    <li><a href="#" onclick="goToSlide(5); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">3. 💰 Bubble Formation Process</a></li>
+                    <li><a href="#" onclick="goToSlide(6); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">4. 📊 Role of Credit & Leverage</a></li>
+                    <li><a href="#" onclick="goToSlide(7); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">5. ⚡ The Crash & Market Failure</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Modern Applications & Lessons</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" onclick="goToSlide(8); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">6. 🌍 Modern Market Parallels</a></li>
+                    <li><a href="#" onclick="goToSlide(9); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">7. 🤖 The AI Boom: Innovation or Bubble?</a></li>
+                    <li><a href="#" onclick="goToSlide(10); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">8. 🏛️ Lessons for Regulators</a></li>
+                    <li><a href="#" onclick="goToSlide(11); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">9. 🧠 Psychological Factors Behind Bubbles</a></li>
+                    <li><a href="#" onclick="goToSlide(12); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">10. 🔄 Human Psychology & Recurring Bubbles</a></li>
+                    <li><a href="#" onclick="goToSlide(13); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">11. 🛡️ Prevention & Mitigation Strategies</a></li>
+                    <li><a href="#" onclick="goToSlide(14); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">12. 📝 Case Study Comparison</a></li>
+                    <li><a href="#" onclick="goToSlide(15); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">13. 🎯 Key Takeaways & Conclusion</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Introduction to Asset Price Bubbles -->
+    <div class="slide">
+        <h1>Introduction to Asset Price Bubbles</h1>
+        
+        <div class="behavioral-insight">
+            <h3>What Are Asset Price Bubbles?</h3>
+            <p>Asset price bubbles are periods when the prices of assets rise far above their fundamental value and then crash suddenly. They represent one of the most fascinating and destructive phenomena in financial markets.</p>
+        </div>
+
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-label">Historical Period</div>
+                <div class="metric-value">1630s</div>
+                <div class="metric-change neutral">Dutch Republic</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Asset Class</div>
+                <div class="metric-value">Tulip Bulbs</div>
+                <div class="metric-change neutral">Exotic Flowers</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Price Decline</div>
+                <div class="metric-value">95-99%</div>
+                <div class="metric-change negative">From Peak</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Duration</div>
+                <div class="metric-value">~3 Years</div>
+                <div class="metric-change neutral">Boom to Bust</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Case Study Framework</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div><strong>📜 Past:</strong> How the tulip bubble formed and crashed</div>
+                <div><strong>🌍 Present:</strong> Lessons for modern financial markets</div>
+                <div><strong>🔮 Future:</strong> Are we destined to repeat such episodes?</div>
+                <div><strong>🧠 Psychology:</strong> How investor biases fuel bubbles and crashes</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Economic & Social Context -->
+    <div class="slide">
+        <h1>Economic & Social Context: 1630s Holland</h1>
+        
+        <h2>The Dutch Republic: Europe's Commercial Powerhouse</h2>
+        
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Economic Environment</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Trade & Finance</span>
+                    <span class="stat-value">Advanced</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Commercial Culture</span>
+                    <span class="stat-value">Commerce-focused</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Social Mobility</span>
+                    <span class="stat-value">Trading-based</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Wealth Distribution</span>
+                    <span class="stat-value">Uneven</span>
+                </div>
+            </div>
+
+            <div class="comparison-card" style="border-left: 6px solid #9b59b6;">
+                <h3 style="color: #9b59b6;">Social Dynamics</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Merchant Lifestyle</span>
+                    <span class="stat-value">Modest</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Status Signaling</span>
+                    <span class="stat-value">Gardens & Flowers</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Tulip Appeal</span>
+                    <span class="stat-value">Exotic & Striking</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Scarcity Factor</span>
+                    <span class="stat-value">Limited Supply</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Key Contextual Factors</h3>
+            <p><strong>Status Goods:</strong> Tulips were scarce, difficult to reproduce quickly, and especially prized when they had rare patterns or "broken" colors, making them ideal status goods.</p>
+            <p><strong>Social Mobility:</strong> Trading culture created possibilities for social mobility through successful commercial activities, laying groundwork for speculative behavior.</p>
+            <p><strong>Perfect Storm:</strong> The combination of limited supply, rising demand, and easy tradability created conditions perfect for bubble formation.</p>
+        </div>
+    </div>
+
+    <!-- Slide 5: Bubble Formation Process -->
+    <div class="slide">
+        <h1>How Tulips Became Financial Assets</h1>
+        
+        <h2>Bubble Formation: From Consumer Goods to Speculation</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Limited Supply Growth</div>
+                <div class="factor-desc">Bulbs multiplied slowly via "daughter bulbs," making supply highly inelastic and creating natural scarcity.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Rising Demand</div>
+                <div class="factor-desc">As tulips became fashionable, more people wanted them both for gardens and for trade, increasing overall demand.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Tradability Innovation</div>
+                <div class="factor-desc">Bulbs were easy to store and move, eventually traded via promissory notes (early futures contracts) in tavern "colleges."</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Broad Participation</div>
+                <div class="factor-desc">Artisans and weavers entered the market in large numbers, seeing trading as a path out of low-paid work.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Greater-Fool Speculation</div>
+                <div class="factor-desc">People stopped buying tulips for enjoyment and started promising to deliver tulips later, hoping to sell to someone else at higher prices.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Displacement + Boom</div>
+                <div class="factor-desc">Genuine reason for price rise (rare fashionable tulips) triggered more trading, attention, and self-reinforcing price increases.</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Kindleberger & Aliber's Framework:</strong> The tulip bubble perfectly illustrates the "displacement + boom" phase where a legitimate innovation creates the foundation for speculative excess.</p>
+        </div>
+    </div>
+
+    <!-- Slide 6: Role of Credit & Leverage -->
+    <div class="slide">
+        <h1>Role of Credit & Leverage</h1>
+        
+        <h2>How Credit Availability Magnified the Boom</h2>
+        
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-label">Down Payment Required</div>
+                <div class="metric-value">~3%</div>
+                <div class="metric-change positive">Minimal Equity</div>
+            </div>
+
+            <div class="metric-card">
+                <div class="metric-label">Collateral Type</div>
+                <div class="metric-value">Bulb/Note</div>
+                <div class="metric-change neutral">Self-Securing</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Buyer Assumption</div>
+                <div class="metric-value">Resell Higher</div>
+                <div class="metric-change neutral">Before Balance Due</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Impact</div>
+                <div class="metric-value">Massive</div>
+                <div class="metric-change negative">Amplified Volatility</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Credit-Fueled Speculation</h3>
+            <p><strong>Easy Credit:</strong> Only 3% down payment required, making speculation accessible to many traders.</p>
+            <p><strong>Self-Securing Collateral:</strong> The bulb or note served as collateral as long as prices kept rising.</p>
+            <p><strong>Double-Edged Effect:</strong> Amplifies both the upside gains and the severity of defaults when prices fall.</p>
+        </div>
+
+        <div class="highlight-box">
+            <p><strong>Modern Parallel:</strong> This 3% down payment requirement mirrors modern margin lending and low down payment mortgages that fuel contemporary bubbles.</p>
+        </div>
+    </div>
+
+    <!-- Slide 7: The Crash & Market Failure -->
+    <div class="slide">
+        <h1>Mania, Fraud & The Crash</h1>
+        
+        <h2>From "Windhandel" to Market Collapse</h2>
+        
+        <div class="case-study crisis">
+            <div class="case-study-title">"Windhandel" - Trading in the Wind</div>
+            <div class="case-study-subtitle">When Speculation Became Pure Fantasy</div>
+            
+            <div class="case-study-content">
+                <p><strong>"Windhandel" - Trading in the Wind:</strong> As prices rose far beyond plausible value, trading became exchanging promises for promises.</p>
+                
+                <div class="key-factors" style="margin-top: 20px;">
+                    <div class="factor-card">
+                        <div class="factor-title">Fraud Discovery</div>
+                        <div class="factor-desc">Notes claimed bulbs that didn't exist or didn't match quality.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Stories Over Reality</div>
+                        <div class="factor-desc">Success stories attracted new participants and reinforced herding.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Liquidity Collapse</div>
+                        <div class="factor-desc">No buyers even at drastically reduced prices broke market assumptions.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Kindleberger's Cycle Completed</h3>
+            <p><strong>Expectation Flip:</strong> Everyone tried to sell simultaneously, creating a liquidity crisis.</p>
+            <p><strong>Rapid Collapse:</strong> Prices fell 95-99% within days, with widespread credit defaults.</p>
+            <p><strong>Complete Reversion:</strong> Tulips returned to being simple consumer goods.</p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Modern Market Parallels -->
+    <div class="slide">
+        <h1>Modern Market Parallels</h1>
+        
+
+        
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #3498db;">
+                <h3 style="color: #3498db;">Dot-Com Bubble (1990s)</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Displacement</span>
+                    <span class="stat-value">Internet Revolution</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Outcome</span>
+                    <span class="stat-value">Massive crash</span>
+                </div>
+            </div>
+
+            <div class="comparison-card" style="border-left: 6px solid #e74c3c;">
+                <h3 style="color: #e74c3c;">US Housing Crisis (2000-2007)</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Displacement</span>
+                    <span class="stat-value">Financial Engineering</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Outcome</span>
+                    <span class="stat-value">Global Financial Crisis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="case-study">
+            <div class="case-study-title">NEPSE Bubble Episodes</div>
+            <div class="case-study-subtitle">Kathmandu University's Own Market Experience</div>
+            
+            <div class="case-study-content">
+                <p><strong>Multiple Phases:</strong> NEPSE experienced bubble phases around 2007-08, 2016-17, and during COVID-19.</p>
+                <p><strong>COVID-19 Bull Run:</strong> Index reached ~3,200 points by August 2021 despite weak economic conditions.</p>
+                <p><strong>Modern Parallels:</strong> Land prices in Kathmandu show similar bubble characteristics.</p>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Universal Patterns</h3>
+            <p><strong>1. Compelling Story</strong> • <strong>2. Price Uncertainty</strong> • <strong>3. Easy Credit</strong> • <strong>4. Broad Participation</strong></p>
+        </div>
+    </div>
+
+    <!-- Slide 9: The AI Boom -->
+    <div class="slide">
+        <h1>The AI Boom: Innovation or Bubble?</h1>
+        
+        <div class="case-study">
+            <div class="case-study-title">AI Sector Valuations</div>
+            <div class="case-study-subtitle">Transformative Technology vs. Speculative Excess</div>
+            
+            <div class="case-study-content">
+                <p><strong>Transformative Potential:</strong> AI is genuinely transformative with massive long-term potential.</p>
+                <p><strong>Valuation Challenge:</strong> Prices in AI sectors often move ahead of earnings, driven by narrative strength rather than fundamentals.</p>
+                
+                <div class="key-factors" style="margin-top: 20px;">
+                    <div class="factor-card">
+                        <div class="factor-title">Story-Driven Pricing</div>
+                        <div class="factor-desc">Prices based on narrative strength, not current performance.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">FOMO Behavior</div>
+                        <div class="factor-desc">Investors rush toward AI announcements regardless of business impact.</div>
+                    </div>
+                    <div class="factor-card">
+                        <div class="factor-title">Uncertain Value</div>
+                        <div class="factor-desc">Difficulty in anchoring prices when future value is uncertain.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Early Pattern Recognition</h3>
+            <p><strong>Displacement Phase:</strong> This resembles displacement and boom phases from Kindleberger's cycle.</p>
+            <p><strong>Key Question:</strong> Can we distinguish innovation from speculation before it's too late?</p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Lessons for Regulators -->
+    <div class="slide">
+        <h1>Lessons for Regulators & Institutions</h1>
+        
+
+        
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Monitor Credit, Not Just Prices</div>
+                <div class="factor-desc">A leveraged boom is more dangerous than an unleveraged one. Use margin requirements and loan-to-value limits.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Transparency & Verification</div>
+                <div class="factor-desc">Stronger disclosure and independent audits help counter fraud and excessive optimism during manias.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Market Structure Matters</div>
+                <div class="factor-desc">Tulips traded in taverns at night. Today's equivalent might be unregulated online platforms.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Circuit Breakers & Controls</div>
+                <div class="factor-desc">Key venues under supervision and mechanisms like circuit breakers reduce extremes and provide reflection time.</div>
+            </div>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Effective Tools</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 15px;">
+                    <li style="padding: 8px 0;">✓ Margin requirements & limits</li>
+                    <li style="padding: 8px 0;">✓ Loan-to-value ratios</li>
+                    <li style="padding: 8px 0;">✓ Circuit breakers</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card" style="border-left: 6px solid #e74c3c;">
+                <h3 style="color: #e74c3c;">Modern Challenges</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 15px;">
+                    <li style="padding: 8px 0;">✗ Balancing innovation vs. protection</li>
+                    <li style="padding: 8px 0;">✗ Detecting bubbles early</li>
+                    <li style="padding: 8px 0;">✗ Global market coordination</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Psychological Factors -->
+    <div class="slide">
+        <h1>Psychological Factors Behind Bubbles</h1>
+        
+        <h2>Why Humans Repeat the Same Mistakes</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Herd Behavior & Social Proof</div>
+                <div class="factor-desc">People copy others' actions when unsure. Seeing peers make money convinces them it's safe.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Overconfidence</div>
+                <div class="factor-desc">Traders overestimate their timing ability and underestimate risk, leading to aggressive positions.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Extrapolation Bias</div>
+                <div class="factor-desc">Investors assume recent price increases will continue and treat short streaks as typical.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Greater-Fool Thinking</div>
+                <div class="factor-desc">Buy at high prices expecting to sell to someone else at even higher prices.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Confirmation Bias</div>
+                <div class="factor-desc">Seek information supporting optimism while ignoring sober warnings.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">FOMO & Regret Aversion</div>
+                <div class="factor-desc">Fear of missing out pushes investors to join late at high prices.</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>The Perfect Storm</h3>
+            <p>These psychological factors, interacting with credit expansion and market structure, jointly create and burst bubbles.</p>
+        </div>
+    </div>
+
+    <!-- Slide 12: Human Psychology & Recurring Bubbles -->
+    <div class="slide">
+        <h1 style="margin-bottom: 15px;">Human Psychology & Recurring Bubbles</h1>
+        
+
+        
+        <div class="behavioral-insight" style="margin-bottom: 15px;">
+            <h3 style="margin-bottom: 8px;">Kindleberger & Aliber's Perspective</h3>
+            <p style="margin: 0; font-size: 0.95rem;">Financial crises recur because human psychology hasn't changed since 1637. Core biases persist even with better regulations.</p>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 4px solid #e74c3c; padding: 12px;">
+                <h4 style="color: #e74c3c; margin-bottom: 8px; font-size: 1rem;">Persistent Traits</h4>
+                <div class="stat-row" style="padding: 3px 0;">
+                    <span class="stat-label">Overreaction</span>
+                    <span class="stat-value">To trends</span>
+                </div>
+                <div class="stat-row" style="padding: 3px 0;">
+                    <span class="stat-label">Herding</span>
+                    <span class="stat-value">Following others</span>
+                </div>
+                <div class="stat-row" style="padding: 3px 0;">
+                    <span class="stat-label">Overconfidence</span>
+                    <span class="stat-value">In judgment</span>
+                </div>
+                <div class="stat-row" style="padding: 3px 0;">
+                    <span class="stat-label">FOMO</span>
+                    <span class="stat-value">Missing out fear</span>
+                </div>
+            </div>
+
+            <div class="comparison-card" style="border-left: 4px solid #f39c12; padding: 12px;">
+                <h4 style="color: #f39c12; margin-bottom: 8px; font-size: 1rem;">Modern Amplifiers</h4>
+                <div class="stat-row" style="padding: 3px 0;">
+                    <span class="stat-label">Technology</span>
+                    <span class="stat-value">Fast information</span>
+                </div>
+                <div class="stat-row" style="padding: 3px 0;">
+                    <span class="stat-label">Globalization</span>
+                    <span class="stat-value">Capital mobility</span>
+                </div>
+                <div class="stat-row" style="padding: 3px 0;">
+                    <span class="stat-label">Complexity</span>
+                    <span class="stat-value">Financial products</span>
+                </div>
+                <div class="stat-row" style="padding: 3px 0;">
+                    <span class="stat-label">Media</span>
+                    <span class="stat-value">24/7 news</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 15px; padding: 12px;">
+            <h4 style="color: #2c3e50; margin-bottom: 8px; font-size: 1rem;">Realistic Assessment</h4>
+            <p style="margin: 0; font-size: 0.9rem;">As long as psychological traits exist, bubbles will recur in new forms, but significant mitigation is possible.</p>
+        </div>
+    </div>
+
+    <!-- Slide 13: Prevention & Mitigation -->
+    <div class="slide">
+        <h1>Prevention & Mitigation Strategies</h1>
+        
+
+        
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Education & Awareness</div>
+                <div class="factor-desc">Teaching behavioral biases helps investors recognize warning signs early.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Macro-Prudential Tools</div>
+                <div class="factor-desc">Capital requirements and leverage limits lean against credit-fueled booms.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Market Design & Discipline</div>
+                <div class="factor-desc">Circuit breakers, position limits, and personal investment rules reduce bubble damage.</div>
+            </div>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">What IS Possible</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 10px;">
+                    <li style="padding: 6px 0;">✓ Reduce frequency & scale of bubbles</li>
+                    <li style="padding: 6px 0;">✓ Minimize systemic damage</li>
+                    <li style="padding: 6px 0;">✓ Improve market resilience</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card" style="border-left: 6px solid #e74c3c;">
+                <h3 style="color: #e74c3c;">What is UNREALISTIC</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 10px;">
+                    <li style="padding: 6px 0;">✗ Eliminate cycles entirely</li>
+                    <li style="padding: 6px 0;">✗ Remove human emotion</li>
+                    <li style="padding: 6px 0;">✗ Perfect market efficiency</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Realistic Goal</h3>
+            <p>As long as markets consist of humans with emotions and narratives, bubbles and crashes will likely recur. The realistic goal is to reduce their frequency, scale, and damage, not to eliminate cycles entirely.</p>
+        </div>
+    </div>
+    <!-- Slide 14: Case Study Comparison -->
+    <div class="slide">
+        <h1>Cross-Case Behavioral Comparison</h1>
+        
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Case Study <th>Displacement Event</th>
+                   </th>
+                    <th>Credit/Leverage</th>
+                    <th>Key Behavioral Patterns</th>
+                    <th>Outcome</th>
+                </tr>
+            </thead>
+                <tr>
+            <tbody>
+                    <td><strong>Tulipmania (1630s)</strong></td>
+                    <td>Rare exotic flowers</td>
+                    <td>3% down, 33:1 leverage</td>
+                    <td>Status signaling-fool thinking, greater <td class="negative">95-99% crash</td>
+                   </td>
+                </tr>
+                <tr>
+                    <td><strong>Dot-Com (1990s)</strong></td>Internet revolution</td>
+                    <td>Easy margin lending>
+                    <td <td>New economy narrative, overconfidence</td>
+                    <td class="negative">Massive correction</td>
+               </td>
+                    </tr>
+                <tr>
+                    <td><strong>Housing (2000s)</strong></td>
+                    </td>
+                   <td>Financial engineering <td>Subprime, derivatives <td>Complex</td>
+                    products, herding<td class="negative</td>
+                ">Global crisis</td>
+                    </tr>
+                <tr>
+                    <td><strong>202NEPSE (0-21)</strong></td>
+                    <td>COVID liquidity surge</td>
+                    <td>Easy margin,>
+                    <td>FOMO, online trading</td retail participation</td>
+                    <td class="neutral">Volatile recovery</td>
+                </tr>
+                <tr>
+                    <td><strong>AI Boom (2020</td>
+                    s)</strong><td>AI transformation</td>
+                    <td>High valuations, growth stocks</td>
+                    <td>Narrative dominance, momentum</td>
+                    <td class="neutral">Ongoing development</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="behavioral-insight" style="margin-top: 40px;">
+            <h3>Universal Pattern Recognition</h3>
+            <p>Despite different assets and eras, the same behavioral forces repeat: herding, overconfidence, narrative dominance, and credit create similar expansion boom-bust cycles across centuries.</p>
+        </div>
+    </div>
+
+    <!-- Slide 15: Key Takeaways -->
+    <div class="slide">
+        <h1 style="margin-bottom: 15px;">Key Takeaways & Conclusion</h1>
+        
+
+        
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h3 style="margin-bottom: 10px;">Individual Investors</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 5px;">
+                    <li style="padding: 4px 0;">🎯 Beware "This time is different" stories</li>
+                    <li style="padding: 4px 0;">📊 Don't over-rely on recent trends</li>
+                    <li style="padding: 4px 0;">👥 Avoid herding and FOMO behavior</li>
+                    <li style="padding: 4px 0;">💰 Never speculate with excessive leverage</li>
+            </div>
+
+            <div class="comparison-card">
+                <h3 style="margin-bottom: 10px;">Regulators & Institutions</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 5px;">
+                    <li style="padding: 4px 0;">📈 Monitor credit expansion</li>
+                    <li style="padding: 4px 0;">🔍 Ensure transparency</li>
+                    <li style="padding: 4px 0;">🏛️ Design resilient structures</li>
+                    <li style="padding: 4px 0;">📚 Educate about behavioral biases</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="behavioral-insight" style="margin-top: 15px; padding: 15px;">
+            <h3 style="margin-bottom: 8px; font-size: 1.2rem;">The Eternal Cycle</h3>
+            <p style="font-size: 0.95rem; margin: 0;"><strong>Bubbles arise when psychology, credit, and market structure interact.</strong> Behavioral forces remain consistent across centuries.</p>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 15px;">
+            <div class="comparison-card" style="border-left: 4px solid #9b59b6; padding: 10px;">
+                <h4 style="color: #9b59b6; margin-bottom: 8px; font-size: 1rem;">Key Lessons</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+                    <li style="padding: 2px 0;">📜 History provides templates</li>
+                    <li style="padding: 2px 0;">🧠 Psychology drives behavior</li>
+                    <li style="padding: 2px 0;">🌍 Patterns repeat across time</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card" style="border-left: 4px solid #e67e22; padding: 10px;">
+                <h4 style="color: #e67e22; margin-bottom: 8px; font-size: 1rem;">Path Forward</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+                    <li style="padding: 2px 0;">🎓 Education about biases</li>
+                    <li style="padding: 2px 0;">🏛️ Resilient frameworks</li>
+                    <li style="padding: 2px 0;">💡 Personal discipline</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 15px; padding: 12px; text-align: center;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0; line-height: 1.3;">
+                <strong>"Recognize behavioral warning signs early, not just predict bubbles."</strong>
+            </p>
+        </div>
+    </div>
+
+
+
+    <!-- Fullscreen Button -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fullscreenBtn" title="Toggle Fullscreen (Mobile-Friendly)">⛶</button>
+
+    <!-- Main Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="previousSlide()" id="prevBtn" title="Previous slide (←)">◀</button>
+        <button class="nav-btn" onclick="nextSlide()" id="nextBtn" title="Next slide (→)">▶</button>
+    </div>
+
+    <!-- Navigation JavaScript -->
+    <script>
+        // Slide navigation functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Initialize
+        function initPresentation() {
+            // Show first slide
+            showSlide(0);
+            
+            // Enhanced keyboard event handling
+            setupKeyboardNavigation();
+            
+            // Show keyboard hint for 3 seconds
+            setTimeout(() => {
+                const hint = document.getElementById('keyboardHint');
+                hint.classList.add('show');
+                setTimeout(() => {
+                    hint.classList.remove('show');
+                }, 3000);
+            }, 1000);
+        }
+
+        // Setup keyboard navigation
+        function setupKeyboardNavigation() {
+            // Single keyboard event handler
+            document.addEventListener('keydown', function(event) {
+                // Skip if user is typing in input fields
+                if (event.target && (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA')) {
+                    return;
+                }
+                
+                // Handle navigation keys
+                event.preventDefault();
+                
+                switch(event.key) {
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        previousSlide();
+                        break;
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                    case ' ':
+                        nextSlide();
+                        break;
+                    case 'Home':
+                        navigateToSlide(0);
+                        break;
+                    case 'End':
+                        navigateToSlide(totalSlides - 1);
+                        break;
+                    case 'Escape':
+                        // Exit fullscreen if in fullscreen mode, otherwise show hint
+                        if (isFullscreen()) {
+                            event.preventDefault();
+                            exitFullscreen();
+                        } else {
+                            const hint = document.getElementById('keyboardHint');
+                            if (hint) {
+                                hint.classList.toggle('show');
+                            }
+                        }
+                        break;
+                    
+                    case 'F11':
+                        event.preventDefault();
+                        toggleFullscreen();
+                        break;
+                }
+            });
+            
+            // Make sure body can receive focus
+            document.body.tabIndex = 0;
+            
+            // Force focus after page load
+            setTimeout(() => {
+                document.body.focus();
+            }, 100);
+        }
+
+        // Show specific slide
+        function showSlide(slideIndex) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            if (slides[slideIndex]) {
+                slides[slideIndex].classList.add('active');
+                currentSlide = slideIndex;
+                
+                // Update displays
+                document.getElementById('currentSlideNum').textContent = slideIndex + 1;
+                document.getElementById('totalSlides').textContent = totalSlides;
+                
+                // Update button states
+                updateButtons();
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Navigate to specific slide
+        function navigateToSlide(slideIndex) {
+            if (slideIndex >= 0 && slideIndex < totalSlides) {
+                showSlide(slideIndex);
+            }
+        }
+
+        // Navigate to next slide
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                navigateToSlide(currentSlide + 1);
+            }
+        }
+
+        // Navigate to previous slide
+        function previousSlide() {
+            if (currentSlide > 0) {
+                navigateToSlide(currentSlide - 1);
+            }
+        }
+
+        // Browser fullscreen API functionality
+        function toggleFullscreen() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            // Check if browser supports fullscreen API
+            if (!supportsFullscreen()) {
+                alert('Fullscreen is not supported in this browser. Please use landscape mode or rotate your device for better viewing.');
+                return;
+            }
+            
+            // Check if already in fullscreen mode using native API
+            if (isFullscreen()) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+        }
+
+        // Check if browser supports fullscreen API
+        function supportsFullscreen() {
+            return !!(
+                document.fullscreenEnabled ||
+                document.webkitFullscreenEnabled ||
+                document.mozFullScreenEnabled ||
+                document.msFullscreenEnabled
+            );
+        }
+
+        // Check if currently in fullscreen mode
+        function isFullscreen() {
+            return !!(document.fullscreenElement || 
+                     document.webkitFullscreenElement || 
+                     document.mozFullScreenElement || 
+                     document.msFullscreenElement);
+        }
+
+        // Enter fullscreen using native browser API
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else if (elem.webkitRequestFullscreen) { // Safari
+                elem.webkitRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Exit fullscreen using native browser API
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { // Safari
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Firefox
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) { // IE/Edge
+                document.msExitFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Update fullscreen button appearance and state
+        function updateFullscreenButton() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (isFullscreen()) {
+                fullscreenBtn.classList.add('fullscreen-active');
+                fullscreenBtn.title = 'Exit Fullscreen';
+                
+                // Auto-hide navigation controls after 3 seconds in fullscreen
+                setTimeout(() => {
+                    if (isFullscreen()) {
+                        const slideIndex = document.querySelector('.slide-index');
+                        const navControls = document.querySelector('.nav-controls');
+                        if (slideIndex) slideIndex.style.opacity = '0.3';
+                        if (navControls) navControls.style.opacity = '0.3';
+                    }
+                }, 3000);
+            } else {
+                fullscreenBtn.classList.remove('fullscreen-active');
+                fullscreenBtn.title = 'Enter Fullscreen';
+                
+                // Show navigation controls again when not in fullscreen
+                const slideIndex = document.querySelector('.slide-index');
+                const navControls = document.querySelector('.nav-controls');
+                if (slideIndex) slideIndex.style.opacity = '1';
+                if (navControls) navControls.style.opacity = '1';
+            }
+        }
+
+        // Handle fullscreen change events
+        function setupFullscreenListeners() {
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+            
+            // Re-show controls on mouse movement in fullscreen
+            document.addEventListener('mousemove', function() {
+                if (isFullscreen()) {
+                    const slideIndex = document.querySelector('.slide-index');
+                    const navControls = document.querySelector('.nav-controls');
+                    if (slideIndex) slideIndex.style.opacity = '1';
+                    if (navControls) navControls.style.opacity = '1';
+                }
+            });
+        }
+
+
+
+        // Handle escape key for keyboard hint (no fullscreen functionality)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const hint = document.getElementById('keyboardHint');
+                if (hint) {
+                    hint.classList.toggle('show');
+                }
+            }
+        });
+
+        // Update button states
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevSlideBtn = document.getElementById('prevSlideBtn');
+            const nextSlideBtn = document.getElementById('nextSlideBtn');
+            
+            // Disable/enable buttons
+            const prevDisabled = currentSlide === 0;
+            const nextDisabled = currentSlide === totalSlides - 1;
+            
+            prevBtn.disabled = prevDisabled;
+            nextBtn.disabled = nextDisabled;
+            prevSlideBtn.disabled = prevDisabled;
+            nextSlideBtn.disabled = nextDisabled;
+            
+            // Button text is already set correctly (◀ ▶)
+        }
+
+        // Keyboard handling is now directly in the event listener
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make navigation functions globally available
+            window.nextSlide = nextSlide;
+            window.previousSlide = previousSlide;
+            window.navigateToSlide = navigateToSlide;
+            window.toggleFullscreen = toggleFullscreen;
+            window.isFullscreen = isFullscreen;
+            window.supportsFullscreen = supportsFullscreen;
+            
+            // Setup fullscreen event listeners
+            setupFullscreenListeners();
+            
+            // Initialize presentation
+            initPresentation();
+            
+            // Update initial fullscreen button state
+            setTimeout(updateFullscreenButton, 100);
+        });
+
+        // Enhanced touch support for fullscreen button
+        document.getElementById('fullscreenBtn').addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            toggleFullscreen();
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    previousSlide();
+                }
+            }
+        }
+
+        // Auto-hide controls after inactivity
+        let controlsTimeout;
+        
+        function resetControlsTimeout() {
+            clearTimeout(controlsTimeout);
+            document.querySelector('.slide-index').style.opacity = '1';
+            
+            controlsTimeout = setTimeout(() => {
+                if (currentSlide !== 0 && currentSlide !== totalSlides - 1) {
+                    document.querySelector('.slide-index').style.opacity = '0.6';
+                }
+            }, 3000);
+        }
+
+        // Show controls on mouse movement
+        document.addEventListener('mousemove', resetControlsTimeout);
+        
+        // Reset timeout on slide change
+        const originalShowSlide = showSlide;
+        showSlide = function(slideIndex) {
+            originalShowSlide(slideIndex);
+            resetControlsTimeout();
+        };
+    </script>
+
+</body>
+</html>
