@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Finance Fundamentals - Investment & Financing Decisions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1e40af;
+            --secondary-color: #3b82f6;
+            --accent-color: #06b6d4;
+            --success-color: #10b981;
+            --warning-color: #f59e0b;
+            --danger-color: #ef4444;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 18px;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-primary);
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+            background: var(--bg-secondary);
+        }
+
+        .nav-link.active {
+            color: var(--primary-color);
+            background: var(--bg-secondary);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2rem;
+            min-height: calc(100vh - 100px);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--bg-primary);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toc-list {
+            list-style: none;
+        }
+
+        .toc-item {
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            display: block;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .toc-link:hover {
+            color: var(--primary-color);
+            background: var(--bg-secondary);
+            transform: translateX(4px);
+        }
+
+        .toc-link.active {
+            color: var(--primary-color);
+            background: var(--bg-secondary);
+            font-weight: 500;
+        }
+
+        /* Content Area */
+        .content {
+            background: var(--bg-primary);
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 3rem;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .content-body {
+            padding: 3rem;
+        }
+
+        /* Section Styles */
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 120px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--border-color);
+        }
+
+        .section-subtitle {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 2.5rem 0 1.5rem 0;
+        }
+
+        .section-subsubtitle {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 2rem 0 1rem 0;
+        }
+
+        .section-subsubtitle-4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+
+        .section-subsubtitle-5 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin: 1.25rem 0 0.5rem 0;
+        }
+
+        /* Paragraphs and Text */
+        p {
+            margin-bottom: 1.25rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin: 1.25rem 0;
+            padding-left: 2rem;
+        }
+
+        li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+
+        /* Strong text */
+        strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Image Carousel */
+        .image-carousel {
+            background: var(--bg-primary);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .carousel-slide {
+            display: none;
+            position: relative;
+        }
+
+        .carousel-slide.active {
+            display: block;
+        }
+
+        .carousel-image {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 0.5rem;
+        }
+
+        .carousel-image:hover {
+            transform: scale(1.02);
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .carousel-nav:hover {
+            background: rgba(0, 0, 0, 0.9);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .carousel-prev {
+            left: 1rem;
+        }
+
+        .carousel-next {
+            right: 1rem;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            gap: 0.5rem;
+        }
+
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .carousel-indicator.active {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        .carousel-title {
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Fullscreen Modal */
+        .fullscreen-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 10000;
+            cursor: pointer;
+        }
+
+        .fullscreen-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fullscreen-image {
+            max-width: 95%;
+            max-height: 95%;
+            object-fit: contain;
+            cursor: pointer;
+        }
+
+        .fullscreen-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .fullscreen-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Formula Boxes */
+        .formula {
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border: 2px solid var(--secondary-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .formula::before {
+            content: "📊";
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-primary);
+            padding: 0 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .formula-large {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border-color: var(--warning-color);
+            color: #92400e;
+        }
+
+        .formula-large::before {
+            content: "💡";
+        }
+
+        /* Highlight Boxes */
+        .highlight {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border-left: 6px solid var(--warning-color);
+            border-radius: 0 1rem 1rem 0;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-style: italic;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .highlight::before {
+            content: "💭";
+            margin-right: 0.5rem;
+        }
+
+        /* Key Points */
+        .key-point {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border-left: 6px solid var(--success-color);
+            border-radius: 0 1rem 1rem 0;
+            padding: 2rem;
+            margin: 2rem 0;
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .key-point::before {
+            content: "🎯";
+            margin-right: 0.5rem;
+        }
+
+        /* Decision Boxes */
+        .decision {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border: 3px solid var(--success-color);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #065f46;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .decision::before {
+            content: "✅";
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-primary);
+            padding: 0 1rem;
+            font-size: 2rem;
+        }
+
+        /* Tables */
+        .table-container {
+            overflow-x: auto;
+            margin: 2rem 0;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--bg-primary);
+            font-size: 1rem;
+        }
+
+        th {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 1.25rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        td {
+            padding: 1.25rem;
+            border-bottom: 1px solid var(--border-color);
+            line-height: 1.6;
+        }
+
+        tr:nth-child(even) {
+            background: var(--bg-secondary);
+        }
+
+        tr:hover {
+            background: var(--bg-tertiary);
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+
+        /* Calculation Steps */
+        .calculation-steps {
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            border: 2px solid var(--border-color);
+        }
+
+        .calc-step {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            margin: 0.75rem 0;
+            font-weight: 500;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .calc-step:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .calc-arrow {
+            text-align: center;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+        }
+
+        /* Mobile Responsive */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .sidebar {
+                position: static;
+                order: -1;
+            }
+
+            .toc-list {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 0.5rem;
+            }
+
+            .toc-link {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .main-container {
+                padding: 0 1rem;
+            }
+
+            .hero-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .content-body {
+                padding: 2rem 1.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .formula {
+                font-size: 1.1rem;
+                padding: 1.5rem;
+            }
+
+            .formula-large {
+                font-size: 1.3rem;
+            }
+
+            .table-container {
+                font-size: 0.9rem;
+            }
+
+            th, td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        /* Scroll to top button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: var(--shadow-lg);
+            transition: all 0.3s ease;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-to-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        /* Smooth animations */
+        .section {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:nth-child(2) { animation-delay: 0.1s; }
+        .section:nth-child(3) { animation-delay: 0.2s; }
+        .section:nth-child(4) { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">💼 Corporate Finance Hub</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#investment" class="nav-link">Investment Decisions</a></li>
+                    <li><a href="#financing" class="nav-link">Financing Decisions</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-toggle">☰</button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">
+                📑 Table of Contents
+            </h3>
+            <ul class="toc-list">
+                <li class="toc-item"><a href="#investment-overview" class="toc-link">Investment Overview</a></li>
+                <li class="toc-item"><a href="#hurdle-rate" class="toc-link">The Hurdle Rate</a></li>
+                <li class="toc-item"><a href="#investment-return" class="toc-link">Investment Return</a></li>
+                <li class="toc-item"><a href="#npv-decision" class="toc-link">NPV Decision</a></li>
+                <li class="toc-item"><a href="#financing-overview" class="toc-link">Financing Overview</a></li>
+                <li class="toc-item"><a href="#debt-equity" class="toc-link">Debt vs Equity</a></li>
+                <li class="toc-item"><a href="#working-capital" class="toc-link">Working Capital</a></li>
+                <li class="toc-item"><a href="#cash-cycles" class="toc-link">Cash Cycles</a></li>
+            </ul>
+        </aside>
+
+        <!-- Content -->
+        <main class="content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <h1 class="hero-title">Corporate Finance Fundamentals</h1>
+                <p class="hero-subtitle">Master the art of investment and financing decisions that drive business value</p>
+            </section>
+
+            <div class="content-body">
+                
+                <!-- Image Carousel Section -->
+                <div class="image-carousel">
+                    <div class="carousel-title">📸 Course Materials & Diagrams</div>
+                    <div class="carousel-container">
+                        <div class="carousel-slide active">
+                            <img src="investment-info.png" alt="Investment Decision Framework" class="carousel-image" onclick="openFullscreen(this)">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="finance-info-1.png" alt="Financing Decision Framework" class="carousel-image" onclick="openFullscreen(this)">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="finance-info-2.png" alt="Debt vs Equity vs Leases Comparison" class="carousel-image" onclick="openFullscreen(this)">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="finance-info-3.png" alt="Working Capital Analysis" class="carousel-image" onclick="openFullscreen(this)">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="operating-cash-cycles-diagram.jpg" alt="Operating & Cash Cycles Timeline" class="carousel-image" onclick="openFullscreen(this)">
+                        </div>
+                        
+                        <button class="carousel-nav carousel-prev" onclick="changeSlide(-1)">‹</button>
+                        <button class="carousel-nav carousel-next" onclick="changeSlide(1)">›</button>
+                    </div>
+                    <div class="carousel-indicators">
+                        <span class="carousel-indicator active" onclick="currentSlide(1)"></span>
+                        <span class="carousel-indicator" onclick="currentSlide(2)"></span>
+                        <span class="carousel-indicator" onclick="currentSlide(3)"></span>
+                        <span class="carousel-indicator" onclick="currentSlide(4)"></span>
+                        <span class="carousel-indicator" onclick="currentSlide(5)"></span>
+                    </div>
+                </div>
+
+                <!-- Investment Decisions Section -->
+                <section class="section" id="investment">
+                    <h2 class="section-title">📈 Investment Decisions</h2>
+                    
+
+                    
+                    <div id="investment-overview">
+                        <h3 class="section-subtitle">The Foundation: What Makes Businesses Valuable?</h3>
+                        <p>Think about why some companies are worth billions while others struggle to survive. The secret lies in understanding how businesses create value through smart investment decisions. Corporate finance isn't just about numbers—it's about making choices that make your business more valuable.</p>
+                        
+                        <p>Every successful business follows three golden rules:</p>
+                        
+                        <div class="key-point">
+                            <strong>The Three Pillars of Corporate Finance:</strong><br>
+                            1. <strong>What to invest in</strong> (Investment Decisions)<br>
+                            2. <strong>How to pay for it</strong> (Financing Decisions)<br>
+                            3. <strong>What to do with extra cash</strong> (Dividend Decisions)
+                        </div>
+                        
+                        <p>Today, we're diving deep into the first pillar: <strong>Investment Decisions</strong>. At its heart, every investment decision follows one simple rule:</p>
+                        
+                        <div class="formula-large">
+                            Expected Return > Required Return
+                        </div>
+                        
+                        <p>This is your decision-making compass. If a project can generate returns higher than what investors demand, it's worth doing. If not, walk away. Simple, powerful, and profitable.</p>
+                    </div>
+
+                    <div id="hurdle-rate">
+                        <h3 class="section-subtitle">Setting the Bar: Understanding Your Hurdle Rate</h3>
+                        
+                        <h4 class="section-subsubtitle">What Exactly Is a Hurdle Rate?</h4>
+                        <p>Imagine you're deciding whether to invest in a new project. You need to know: "What's the minimum return I should accept?" This minimum acceptable return is your <strong>hurdle rate</strong>—the benchmark every investment must clear.</p>
+                        
+                        <p>Think of it like this: if you can earn 8% safely in government bonds, why would you invest in a risky business project unless it promises at least 8% plus extra for taking that risk?</p>
+                        
+                        <div class="formula">
+                            Hurdle Rate = Risk-Free Rate + Risk Premium
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">Understanding Risk in Finance</h4>
+                        <p>Here's a counterintuitive truth: <strong>not all risk matters</strong>. In finance, we distinguish between two types:</p>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Risk Type</th>
+                                        <th>What It Means</th>
+                                        <th>Can You Eliminate It?</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Company-Specific Risk</strong></td>
+                                        <td>Problems unique to your company (bad management, product failures, competitive threats)</td>
+                                        <td>✅ Yes - Just diversify your investments</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Market Risk</strong></td>
+                                        <td>Problems that affect everyone (recession, interest rate changes, wars)</td>
+                                        <td>❌ No - You can't escape the market</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="key-point">
+                            The Magic Insight: Smart investors only get paid for market risk, not company-specific risk. This is because they can easily diversify away company-specific problems by spreading their investments across many companies.
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">The CAPM: Calculating Your Cost of Equity</h4>
+                        <p>The Capital Asset Pricing Model (CAPM) is finance's most famous formula for calculating what return investors should expect. Don't let the name scare you—it makes intuitive sense:</p>
+                        
+                        <div class="formula">
+                            Expected Return = Risk-Free Rate + Beta × (Market Risk Premium)
+                        </div>
+                        
+                        <p><strong>Breaking it down:</strong></p>
+                        <ul>
+                            <li><strong>Risk-Free Rate:</strong> What you can earn on government bonds (the "safe" return)</li>
+                            <li><strong>Beta (β):</strong> How risky your investment is compared to the market (1 = same as market, 2 = twice as risky)</li>
+                            <li><strong>Market Risk Premium:</strong> Extra return investors demand for taking market risk</li>
+                        </ul>
+                        
+                        <h4 class="section-subsubtitle">WACC: Your Overall Hurdle Rate</h4>
+                        <p>Most companies use both debt and equity to fund their operations. Your Weighted Average Cost of Capital (WACC) combines both sources of funding into one hurdle rate:</p>
+                        
+                        <div class="formula">
+                            WACC = (Debt % × After-Tax Debt Cost) + (Equity % × Cost of Equity)
+                        </div>
+                        
+                        <p><strong>Pro tip:</strong> Notice the "after-tax" part for debt. This is because interest payments are tax-deductible, making debt effectively cheaper than it appears.</p>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Source of Capital</th>
+                                        <th>Weight</th>
+                                        <th>Cost</th>
+                                        <th>After-Tax Cost</th>
+                                        <th>Weighted Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Debt</td>
+                                        <td>30%</td>
+                                        <td>6.0%</td>
+                                        <td>3.6% (6% × 60%)</td>
+                                        <td>1.08%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Equity</td>
+                                        <td>70%</td>
+                                        <td>12.0%</td>
+                                        <td>12.0%</td>
+                                        <td>8.40%</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Total WACC</strong></td>
+                                        <td><strong>100%</strong></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><strong>9.48%</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <p>This 9.48% becomes your minimum acceptable return for any new project.</p>
+                    </div>
+
+                    <div id="investment-return">
+                        <h3 class="section-subtitle">Measuring Returns: It's All About Cash Flow</h3>
+                        
+                        <h4 class="section-subsubtitle">Cash vs. Profits: Why The Difference Matters</h4>
+                        <p>Here's a crucial principle that many people miss: <strong>profits don't equal cash</strong>. You can show huge profits on paper while running out of money to pay bills.</p>
+                        
+                        <div class="highlight">
+                            "You can't spend accounting profits—you can only spend cash."
+                        </div>
+                        
+                        <p>For example, if you sell something for $1,000 but let the customer pay in 90 days, you've recorded a $1,000 profit, but you don't have the cash yet to pay your employees this month.</p>
+                        
+                        <h4 class="section-subsubtitle">Calculating Free Cash Flow: The Real Return</h4>
+                        <p>Free Cash Flow to the Firm (FCFF) tells you how much cash a project actually generates. Here's the step-by-step process:</p>
+                        
+                        <div class="calculation-steps">
+                            <div class="calc-step">Start with EBIT (Earnings Before Interest and Taxes)</div>
+                            <div class="calc-arrow">−</div>
+                            <div class="calc-step">Subtract taxes on EBIT</div>
+                            <div class="calc-arrow">=</div>
+                            <div class="calc-step">Net Operating Profit After Tax (NOPAT)</div>
+                            <div class="calc-arrow">+</div>
+                            <div class="calc-step">Add back depreciation (non-cash expense)</div>
+                            <div class="calc-arrow">−</div>
+                            <div class="calc-step">Subtract capital expenditures (new investments)</div>
+                            <div class="calc-arrow">−</div>
+                            <div class="calc-step">Subtract increase in working capital</div>
+                            <div class="calc-arrow">=</div>
+                            <div class="calc-step"><strong>Free Cash Flow to the Firm (FCFF)</strong></div>
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">The Sunk Cost Trap</h4>
+                        <p>One of the biggest mistakes in investment analysis is considering <strong>sunk costs</strong>—money already spent that can't be recovered.</p>
+                        
+                        <div class="key-point">
+                            <strong>Real-World Example:</strong> Disney spent $500 million researching a Rio theme park before deciding whether to build it. The $500 million is a sunk cost—it doesn't matter whether they proceed or not, that money is gone. The decision should only consider future costs and benefits.
+                        </div>
+                        
+                        <p>Focus only on <strong>incremental cash flows</strong>—the additional money the project will generate or cost from this point forward.</p>
+                    </div>
+
+                    <div id="npv-decision">
+                        <h3 class="section-subtitle">The Final Decision: Net Present Value (NPV)</h3>
+                        
+                        <h4 class="section-subsubtitle">Why Money Today Is Worth More Than Money Tomorrow</h4>
+                        <p>The concept of Time Value of Money is fundamental: <strong>a dollar today is worth more than a dollar tomorrow</strong>. Why? Because you can invest today's dollar and earn a return.</p>
+                        
+                        <p>NPV brings everything together by calculating the present value of all future cash flows from a project:</p>
+                        
+                        <div class="formula">
+                            NPV = Present Value of Future Cash Flows - Initial Investment
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">The Decision Rule</h4>
+                        <p>Here's where it all comes together:</p>
+                        
+                        <div class="decision">
+                            If NPV > 0: ACCEPT the project<br>
+                            If NPV < 0: REJECT the project
+                        </div>
+                        
+                        <p><strong>Why it works:</strong> A positive NPV means the project creates more value than it costs. It generates returns higher than your hurdle rate, making your company more valuable.</p>
+                        
+                        <h4 class="section-subsubtitle">The Investment Decision Framework</h4>
+                        <p>Here's your complete roadmap for making smart investment decisions:</p>
+                        
+                        <ol>
+                            <li><strong>Calculate your hurdle rate</strong> using WACC (based on the project's market risk)</li>
+                            <li><strong>Estimate future cash flows</strong> (focus on cash, not profits)</li>
+                            <li><strong>Discount those cash flows</strong> back to present value using your hurdle rate</li>
+                            <li><strong>Compare to initial investment</strong> - if positive, proceed</li>
+                        </ol>
+                        
+                        <div class="key-point">
+                            <strong>The Power of This Framework:</strong> It removes emotion and gut feelings from investment decisions, replacing them with logical, data-driven analysis. Companies using this approach consistently outperform those that don't.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Financing Decisions Section -->
+                <section class="section" id="financing">
+                    <h2 class="section-title">💰 Financing Decisions</h2>
+                    
+
+                    
+                    <div id="financing-overview">
+                        <h3 class="section-subtitle">The Big Picture: How Businesses Get Money</h3>
+                        <p>Imagine you want to buy a house. You have three main options: get a mortgage (debt), find a partner to co-own with you (equity), or rent instead (leasing). Businesses face the exact same choices when they need money for growth, new equipment, or expansion.</p>
+                        
+                        <p>Understanding these three financing options—and when to use each—is crucial for building a successful business. Let's break them down in simple terms.</p>
+                    </div>
+
+                    <div id="debt-equity">
+                        <h3 class="section-subtitle">The Great Debate: Debt vs. Equity</h3>
+                        
+                        <h4 class="section-subsubtitle">Debt Financing: The Borrower's Path</h4>
+                        <p>Debt is like getting a loan from the bank. You receive money today and promise to pay it back with interest. Simple, right? But there are important implications:</p>
+                        
+                        <ul>
+                            <li><strong>Fixed Payments:</strong> You owe specific amounts at specific times</li>
+                            <li><strong>No Ownership Loss:</strong> You keep full control of your business</li>
+                            <li><strong>Tax Benefits:</strong> Interest payments reduce your taxes</li>
+                            <li><strong>High Priority:</strong> If things go bad, lenders get paid first</li>
+                        </ul>
+                        
+                        <div class="key-point">
+                            <strong>The Risk:</strong> If you can't make payments, you could lose your business to the lenders.
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">Equity Financing: The Partnership Path</h4>
+                        <p>Equity means selling a piece of your business to investors. Instead of owing them money, they become your partners:</p>
+                        
+                        <ul>
+                            <li><strong>Flexible Payments:</strong> No fixed payments required</li>
+                            <li><strong>Shared Ownership:</strong> Investors get a say in how you run things</li>
+                            <li><strong>No Tax Benefits:</strong> Dividends aren't tax-deductible</li>
+                            <li><strong>Lowest Priority:</strong> In bankruptcy, owners get paid last</li>
+                        </ul>
+                        
+                        <div class="key-point">
+                            <strong>The Trade-off:</strong> You get money without repayment pressure, but you give up some control and future profits.
+                        </div>
+                        
+
+                        
+                        <h4 class="section-subsubtitle">Direct Comparison: Side by Side</h4>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Factor</th>
+                                        <th>Debt Financing</th>
+                                        <th>Equity Financing</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>What You Get</strong></td>
+                                        <td>Fixed payments at fixed times</td>
+                                        <td>Flexible payments (only if you choose to pay dividends)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>What You Give Up</strong></td>
+                                        <td>Nothing (you keep 100% ownership)</td>
+                                        <td>Partial ownership and control</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Tax Treatment</strong></td>
+                                        <td>Interest payments reduce taxes</td>
+                                        <td>Dividends don't reduce taxes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Risk Level</strong></td>
+                                        <td>High - Missed payments = possible bankruptcy</td>
+                                        <td>Low - No mandatory payments</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Priority in Bankruptcy</strong></td>
+                                        <td>First in line to get paid</td>
+                                        <td>Last in line (get whatever's left)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">The Third Option: Leasing</h4>
+                        <p>Sometimes you need to use something but don't want to own it. This is where leasing comes in:</p>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Lease Type</th>
+                                        <th>When It's Used</th>
+                                        <th>Key Characteristics</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Operating Lease</strong></td>
+                                        <td>Short-term, flexible needs</td>
+                                        <td>Like renting an apartment - you can leave, owner maintains the property</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Financial Lease</strong></td>
+                                        <td>Long-term, specific needs</td>
+                                        <td>Like a mortgage - you're locked in, you maintain the property</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">How Companies Choose: The Business Life Cycle</h4>
+                        <p>The right financing choice depends on where your business is in its life cycle:</p>
+                        
+                        <div class="key-point">
+                            <strong>Startups:</strong> Limited options → Rely on founder's money and bank loans<br>
+                            <strong>Growing Companies:</strong> Need more capital → Issue stock to public investors<br>
+                            <strong>Mature Companies:</strong> Stable cash flow → Can afford lots of debt at good rates
+                        </div>
+                    </div>
+
+                    <div id="working-capital">
+                        <h3 class="section-subtitle">Part 2: Working Capital Management</h3>
+                        
+                        <h4 class="section-subsubtitle">Why This Matters More Than You Think</h4>
+                        <p>Working capital management might sound boring, but it's actually the lifeblood of your business. While you're busy planning major investments, your daily cash management determines whether you can pay tomorrow's bills.</p>
+                        
+                        <div class="highlight">
+                            <strong>The Harsh Reality:</strong> Poor working capital management kills more businesses than bad investment decisions. You can have the best strategy in the world, but if you can't pay your employees this Friday, you're done.
+                        </div>
+                        
+
+                        
+                        <h4 class="section-subsubtitle">What Is Working Capital?</h4>
+                        <p>Working capital is simply the difference between what you own (assets) and what you owe (liabilities) in the short term:</p>
+                        
+                        <div class="formula">
+                            Working Capital = Current Assets - Current Liabilities
+                        </div>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Current Assets (What You Own)</th>
+                                        <th>Current Liabilities (What You Owe)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>💵 Cash in the bank</td>
+                                        <td>💳 Bills you need to pay soon</td>
+                                    </tr>
+                                    <tr>
+                                        <td>📋 Money customers owe you</td>
+                                        <td>🏪 Inventory you need to replace</td>
+                                    </tr>
+                                    <tr>
+                                        <td>📦 Products waiting to be sold</td>
+                                        <td>⚡ Money borrowed short-term</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">The Problem with Simple Calculations</h4>
+                        <p>The basic formula can be misleading. For example, having lots of cash might make your working capital look great, but if that cash isn't being used productively, it's actually a problem.</p>
+                        
+                        <p>That's why financial professionals use <strong>Operating Working Capital</strong>, which removes non-operating items:</p>
+                        
+                        <div class="formula">
+                            Operating Working Capital = (Current Assets - Cash) - (Current Liabilities - Debt)
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">The Most Important Number: Change in Working Capital</h4>
+                        <p>Here's the key insight: it's not how much working capital you have, it's <strong>how it changes</strong> over time:</p>
+                        
+                        <div class="formula">
+                            Change in Working Capital = This Year - Last Year
+                        </div>
+                        
+                        <div class="key-point">
+                            <strong>The Big Insight:</strong> A negative change means your company is using cash to grow (which is normal for growing businesses). A positive change means your growth is actually generating extra cash.
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">Real-World Examples: Different Business Models</h4>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Business Model</th>
+                                        <th>Working Capital Impact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>🛒 Walmart</strong></td>
+                                        <td>Buy inventory, then sell it quickly</td>
+                                        <td>Uses lots of cash to stock shelves → Negative change (cash drain)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>📦 Amazon</strong></td>
+                                        <td>Get paid by customers immediately, pay suppliers later</td>
+                                        <td>Collects cash fast, pays suppliers slowly → Positive change (cash generator)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>💻 Salesforce</strong></td>
+                                        <td>Sell software subscriptions, get paid upfront</td>
+                                        <td>Customers pay for the whole year on day 1 → Positive change (cash generator)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="key-point">
+                            <strong>Why This Matters:</strong> Amazon and Salesforce generate "free" cash as they grow, while Walmart needs to spend cash to grow. This affects how much external funding each company needs and their overall valuation.
+                        </div>
+                    </div>
+
+                    <div id="cash-cycles">
+                        <h3 class="section-subtitle">Part 3: Operating and Cash Cycles</h3>
+                        
+                        <h4 class="section-subsubtitle">The Cash Flow Timeline</h4>
+                        <p>Think about a simple business: buying materials, making a product, selling it, and getting paid. Sounds straightforward, right? The challenge is that these activities don't happen at the same time.</p>
+                        
+
+                        
+                        <h4 class="section-subsubtitle">Understanding the Timeline</h4>
+                        <p>Let's follow one product through a typical business cycle:</p>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Day</th>
+                                        <th>What Happens</th>
+                                        <th>Cash Effect</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>0</td>
+                                        <td>Buy materials on credit (don't pay yet)</td>
+                                        <td>No cash change</td>
+                                    </tr>
+                                    <tr>
+                                        <td>30</td>
+                                        <td>Pay the supplier for materials</td>
+                                        <td>-$1,000 (cash goes out)</td>
+                                    </tr>
+                                    <tr>
+                                        <td>60</td>
+                                        <td>Sell the finished product (on credit)</td>
+                                        <td>No cash change</td>
+                                    </tr>
+                                    <tr>
+                                        <td>105</td>
+                                        <td>Get paid by the customer</td>
+                                        <td>+$1,400 (cash comes in)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">The Two Key Cycles</h4>
+                        
+                        <div class="formula">
+                            Operating Cycle = Inventory Period + Receivables Period
+                        </div>
+                        <p>The total time from buying materials to getting paid by customers.</p>
+                        
+                        <div class="formula">
+                            Cash Cycle = Operating Cycle - Payables Period
+                        </div>
+                        <p>The time your own money is tied up in the business.</p>
+                        
+                        <p><strong>In our example:</strong></p>
+                        <ul>
+                            <li>Operating Cycle: 105 days (Day 0 to Day 105)</li>
+                            <li>Cash Cycle: 75 days (Day 30 to Day 105)</li>
+                        </ul>
+                        
+                        <div class="key-point">
+                            <strong>The Goal:</strong> Minimize your cash cycle. The shorter it is, the faster you get your money back to reinvest or use for other purposes.
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">Real-World Examples</h4>
+                        <p>Different companies have very different cash cycles based on their business models:</p>
+                        
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Cash Cycle</th>
+                                        <th>What This Means</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Amazon</strong></td>
+                                        <td>-69 days</td>
+                                        <td>They get paid by customers BEFORE they have to pay suppliers (negative = good!)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Boeing</strong></td>
+                                        <td>181 days</td>
+                                        <td>Long production cycle, but suppliers give them 235 days to pay (net positive)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Typical Retailer</strong></td>
+                                        <td>60-90 days</td>
+                                        <td>Normal cycle: buy inventory, sell it, collect payment</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">How to Calculate Cycles in Real Companies</h4>
+                        <p>For real companies, we use financial statements to calculate these cycles:</p>
+                        
+                        <div class="calculation-steps">
+                            <div class="calc-step">Calculate Inventory Period = 365 ÷ (Cost of Goods Sold ÷ Average Inventory)</div>
+                            <div class="calc-step">Calculate Receivables Period = 365 ÷ (Sales ÷ Average Receivables)</div>
+                            <div class="calc-step">Calculate Payables Period = 365 ÷ (Cost of Goods Sold ÷ Average Payables)</div>
+                            <div class="calc-step">Operating Cycle = Inventory Period + Receivables Period</div>
+                            <div class="calc-step">Cash Cycle = Operating Cycle - Payables Period</div>
+                        </div>
+                        
+                        <h4 class="section-subsubtitle">Three Ways to Improve Your Cash Cycle</h4>
+                        
+                        <ol>
+                            <li><strong>Speed Up Inventory:</strong> Sell products faster (just-in-time inventory, better forecasting)</li>
+                            <li><strong>Speed Up Collections:</strong> Get paid faster (discounts for early payment, better credit policies)</li>
+                            <li><strong>Slow Down Payments:</strong> Pay suppliers later (negotiate better terms, take full payment periods)</li>
+                        </ol>
+                        
+                        <div class="key-point">
+                            <strong>The Bottom Line:</strong> A shorter cash cycle means you need less external funding, can grow faster, and have more cash available for other opportunities. It's one of the most powerful tools for improving your company's financial health.
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop">↑</button>
+
+    <script>
+        // Smooth scrolling and active state management
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('.nav-link');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Update active states
+                        updateActiveStates(this);
+                    }
+                });
+            });
+            
+            // Smooth scrolling for TOC links
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Update active states
+                        updateActiveStates(this);
+                    }
+                });
+            });
+            
+            // Scroll to top functionality
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            scrollToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Intersection Observer for active TOC states
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -70% 0px',
+                threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        updateActiveTOC(id);
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all sections
+            document.querySelectorAll('section[id]').forEach(section => {
+                observer.observe(section);
+            });
+        });
+        
+        function updateActiveStates(clickedElement) {
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to clicked nav link
+            if (clickedElement.classList.contains('nav-link')) {
+                clickedElement.classList.add('active');
+            }
+        }
+        
+        function updateActiveTOC(id) {
+            // Remove active class from all TOC links
+            document.querySelectorAll('.toc-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to corresponding TOC link
+            const activeTOC = document.querySelector(`.toc-link[href="#${id}"]`);
+            if (activeTOC) {
+                activeTOC.classList.add('active');
+            }
+        }
+        
+        // Mobile menu toggle
+        const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        
+        mobileMenuToggle.addEventListener('click', function() {
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+        
+        // Responsive behavior
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                navMenu.style.display = 'flex';
+            } else {
+                navMenu.style.display = 'none';
+            }
+        });
+        
+        // Image Carousel Functionality
+        let slideIndex = 1;
+        showSlide(slideIndex);
+
+        function changeSlide(n) {
+            showSlide(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlide(slideIndex = n);
+        }
+
+        function showSlide(n) {
+            let slides = document.getElementsByClassName("carousel-slide");
+            let indicators = document.getElementsByClassName("carousel-indicator");
+            
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+            for (let i = 0; i < indicators.length; i++) {
+                indicators[i].classList.remove("active");
+            }
+            
+            slides[slideIndex - 1].classList.add("active");
+            indicators[slideIndex - 1].classList.add("active");
+        }
+
+        // Fullscreen Modal Functionality
+        function openFullscreen(img) {
+            const modal = document.getElementById("fullscreenModal");
+            const fullscreenImg = document.getElementById("fullscreenImage");
+            
+            modal.classList.add("active");
+            fullscreenImg.src = img.src;
+            fullscreenImg.alt = img.alt;
+        }
+
+        function closeFullscreen() {
+            document.getElementById("fullscreenModal").classList.remove("active");
+        }
+
+        // Close fullscreen on click outside image
+        document.getElementById("fullscreenModal").addEventListener("click", function(e) {
+            if (e.target === this) {
+                closeFullscreen();
+            }
+        });
+
+        // Close fullscreen on escape key
+        document.addEventListener("keydown", function(e) {
+            if (e.key === "Escape") {
+                closeFullscreen();
+            }
+        });
+    </script>
+
+    <!-- Fullscreen Modal -->
+    <div id="fullscreenModal" class="fullscreen-modal">
+        <img id="fullscreenImage" class="fullscreen-image" onclick="closeFullscreen()">
+        <button class="fullscreen-close" onclick="closeFullscreen()">×</button>
+    </div>
+</body>
+</html>
