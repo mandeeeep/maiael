@@ -848,10 +848,10 @@ em {
     margin: 2% auto;
     padding: 0;
     border-radius: 8px;
-    width: 90%;
-    max-width: 1200px;
-    height: 90%;
-    max-height: 800px;
+    width: 95%;
+    max-width: 1400px;
+    height: 95%;
+    max-height: 900px;
     display: flex;
     flex-direction: column;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
@@ -913,12 +913,6 @@ em {
 .pdf-viewer-controls button:hover {
     background: #F1F5F9;
     border-color: #94A3B8;
-}
-
-#zoomLevel {
-    font-size: 14px;
-    color: #64748B;
-    font-weight: 500;
 }
 
 .pdf-container {
@@ -2145,7 +2139,6 @@ em {
 
             <!-- Footer -->
             <footer class="document-footer">            
-                <p><em>This analysis is based on the Nepal Rastra Bank's Artificial Intelligence Guidelines consultative document and supporting regulatory frameworks.</em></p>
             </footer>
         </article>
     </main>
@@ -2158,12 +2151,6 @@ em {
                 <span class="close" onclick="closePDFModal()">&times;</span>
             </div>
             <div class="modal-body">
-                <div class="pdf-viewer-controls">
-                    <button onclick="zoomOut()">-</button>
-                    <span id="zoomLevel">100%</span>
-                    <button onclick="zoomIn()">+</button>
-                    <button onclick="resetZoom()">Reset</button>
-                </div>
                 <div class="pdf-container" id="pdfContainer">
                     <!-- PDF will be loaded here -->
                     <div class="pdf-placeholder">
@@ -2200,7 +2187,7 @@ em {
    ========================================================================== */
 
 // State management
-let currentZoom = 100;
+//let currentZoom = 100;
 let activeSection = 0;
 
 // DOM Elements
@@ -2209,7 +2196,7 @@ const tocToggle = document.getElementById('tocToggle');
 const tocLinks = document.querySelectorAll('.toc-list a');
 const sections = document.querySelectorAll('.section');
 const modal = document.getElementById('pdfModal');
-const zoomLevel = document.getElementById('zoomLevel');
+//const zoomLevel = document.getElementById('zoomLevel');
 const pdfContainer = document.getElementById('pdfContainer');
 
 // Initialize the application
@@ -2412,36 +2399,37 @@ function loadPDFContent(slideId) {
     if (isMobile || isTablet) {
         // Create download link with native viewer
         const downloadUrl = `pdfs/${slideId}.pdf`;
-        pdfContainer.innerHTML = `
-            <div class="pdf-placeholder" style="padding: 40px; text-align: center;">
-                <h3 style="color: #0F172A; margin-bottom: 20px;">📱 Mobile/Tablet PDF Viewer</h3>
-                <p style="margin-bottom: 30px; color: #64748B;">PDF will open in your device's native PDF viewer for optimal mobile experience.</p>
-                
-                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                    <button onclick="downloadPDF('${slideId}')" style="
-                        background: #3B82F6; color: white; border: none; 
-                        padding: 12px 24px; border-radius: 8px; cursor: pointer;
-                        font-size: 16px; font-weight: 500;
-                    ">
-                        📥 Download PDF
-                    </button>
-                    
-                    <button onclick="openNativePDF('${slideId}')" style="
-                        background: #10B981; color: white; border: none; 
-                        padding: 12px 24px; border-radius: 8px; cursor: pointer;
-                        font-size: 16px; font-weight: 500;
-                    ">
-                        🔍 Open in Viewer
-                    </button>
-                </div>
-                
-                <div style="margin-top: 30px; padding: 20px; background: #F1F5F9; border-radius: 8px;">
-                    <h4 style="color: #0F172A; margin-bottom: 12px;">📋 PDF Content Preview:</h4>
-                    <p style="color: #64748B; margin: 0;">${slideTitles[slideId] || 'Slide Content'}</p>
-                    <p style="color: #64748B; font-size: 14px; margin-top: 8px;">This PDF contains visual diagrams and detailed explanations for ${slideTitles[slideId] || 'the selected slide'}.</p>
-                </div>
-            </div>
-        `;
+		pdfContainer.innerHTML = `
+			<div style="padding: 20px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+				<h3 style="color: #0F172A; margin-bottom: 20px;">${slideTitles[slideId] || 'PDF Viewer'}</h3>
+				
+				<div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
+					<button onclick="downloadPDF('${slideId}')" style="
+						background: #3B82F6; color: white; border: none; 
+						padding: 16px 28px; border-radius: 8px; cursor: pointer;
+						font-size: 16px; font-weight: 600; min-width: 140px;
+						box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+					">
+						📱 Download
+					</button>
+					
+					<button onclick="openNativePDF('${slideId}')" style="
+						background: #10B981; color: white; border: none; 
+						padding: 16px 28px; border-radius: 8px; cursor: pointer;
+						font-size: 16px; font-weight: 600; min-width: 140px;
+						box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+					">
+						🔍 View
+					</button>
+				</div>
+				
+				<div style="background: #F8F9FA; padding: 16px; border-radius: 8px; max-width: 400px; margin: 0 auto;">
+					<p style="color: #6B7280; margin: 0; font-size: 14px;">
+						📄 ${slideTitles[slideId] || 'Slide Content'}
+					</p>
+				</div>
+			</div>
+			`;
     } else {
         // Desktop PDF handling with iframe
         pdfContainer.innerHTML = `
@@ -2472,42 +2460,6 @@ function openNativePDF(slideId) {
     link.href = `pdfs/${slideId}.pdf`;
     link.target = '_blank';
     link.click();
-}
-
-/* ==========================================================================
-   ZOOM FUNCTIONALITY
-   PDF viewer zoom controls
-   ========================================================================== */
-
-function zoomIn() {
-    if (currentZoom < 200) {
-        currentZoom += 25;
-        updateZoom();
-    }
-}
-
-function zoomOut() {
-    if (currentZoom > 50) {
-        currentZoom -= 25;
-        updateZoom();
-    }
-}
-
-function resetZoom() {
-    currentZoom = 100;
-    updateZoom();
-}
-
-function updateZoom() {
-    const pdfContainer = document.getElementById('pdfContainer');
-    zoomLevel.textContent = `${currentZoom}%`;
-    
-    // Apply zoom to PDF content
-    const pdfContent = pdfContainer.querySelector('.pdf-placeholder') || pdfContainer.querySelector('object');
-    if (pdfContent) {
-        pdfContent.style.transform = `scale(${currentZoom / 100})`;
-        pdfContent.style.transformOrigin = 'center top';
-    }
 }
 
 /* ==========================================================================
@@ -2562,19 +2514,6 @@ function initializeImageLightbox() {
             switch(e.key) {
                 case 'Escape':
                     closeImageLightbox();
-                    break;
-                case '=':
-                case '+':
-                    e.preventDefault();
-                    imageZoomIn();
-                    break;
-                case '-':
-                    e.preventDefault();
-                    imageZoomOut();
-                    break;
-                case '0':
-                    e.preventDefault();
-                    resetImageZoom();
                     break;
             }
         }
@@ -2981,9 +2920,6 @@ if ('serviceWorker' in navigator) {
 window.NRBWhitepaper = {
     openPDFModal,
     closePDFModal,
-    zoomIn,
-    zoomOut,
-    resetZoom,
     printDocument,
     exportToPDF,
     toggleMobileTOC,
