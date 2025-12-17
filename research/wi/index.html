@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Bank Data Analytics Project - Power BI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .nav {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .nav li {
+            margin: 0;
+        }
+
+        .nav a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #333;
+            transition: background-color 0.3s;
+        }
+
+        .nav a:hover {
+            background-color: #f1f5f9;
+        }
+
+        .content {
+            padding: 60px 0;
+        }
+
+        .section {
+            background: white;
+            margin-bottom: 30px;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section h2 {
+            color: #1e3a8a;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: #374151;
+            font-size: 1.5rem;
+            margin: 30px 0 15px 0;
+        }
+
+        .section h4 {
+            color: #4b5563;
+            font-size: 1.2rem;
+            margin: 20px 0 10px 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 25px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .card h4 {
+            color: #1e40af;
+            margin-bottom: 15px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status.completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status.in-progress {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status.pending {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .highlight {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .data-source {
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .data-source.wdi {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+
+        .data-source.gfd {
+            border-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .data-source.gem {
+            border-color: #8b5cf6;
+            background: #f3e8ff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        th {
+            background: #f8fafc;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .diagram-container {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .diagram-container:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .diagram-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .diagram-container img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .diagram-container h4 {
+            color: #1e40af;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .diagram-container p {
+            margin: 10px 0;
+            line-height: 1.6;
+        }
+
+        .diagram-container p strong {
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .diagram-container small {
+            color: #6b7280;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            display: block;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .next-steps {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .next-steps h3 {
+            color: #92400e;
+            margin-bottom: 15px;
+        }
+
+        .next-steps ol {
+            margin-left: 20px;
+        }
+
+        .next-steps li {
+            margin-bottom: 8px;
+            color: #451a03;
+        }
+
+        footer {
+            background: #1f2937;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .metrics {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 10px;
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .metric .number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #3b82f6;
+            display: block;
+        }
+
+        .metric .label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive Design for Diagrams */
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+            }
+            
+            header h1 {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .diagram-container {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            
+            .diagram-container h4 {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>World Bank Data Analytics Project</h1>
+            <p style="font-size: 1rem; margin-top: 10px; opacity: 0.8;">Comprehensive Global Economic Intelligence Through Dimensional Analysis</p>
+        </div>
+    </header>
+
+    <nav class="nav">
+        <div class="container">
+            <ul>
+                <li><a href="#overview">Overview</a></li>
+                <li><a href="#architecture">Data Architecture</a></li>
+                <li><a href="#transformation">Transformation</a></li>
+                <li><a href="#sources">Data Sources</a></li>
+                <li><a href="#analytics">Analytics</a></li>
+                <li><a href="#visualization">Visualization</a></li>
+                <li><a href="#next-steps">Next Steps</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="content">
+        <div class="container">
+            <!-- Project Overview -->
+            <section id="overview" class="section">
+                <h2>📊 Project Overview</h2>
+                <div class="highlight">
+                    <p><strong>Objective:</strong> Create a comprehensive Business Analytics presentation using World Bank data to demonstrate advanced Power BI capabilities including data transformation, DAX calculations, aggregations, and sophisticated visualizations for strategic business decision-making.</p>
+                </div>
+
+                <div class="metrics">
+                    <div class="metric">
+                        <span class="number">217</span>
+                        <span class="label">Countries</span>
+                    </div>
+                    <div class="metric">
+                        <span class="number">1,400+</span>
+                        <span class="label">Indicators</span>
+                    </div>
+                    <div class="metric">
+                        <span class="number">60+</span>
+                        <span class="label">Years of Data</span>
+                    </div>
+                    <div class="metric">
+                        <span class="number">8</span>
+                        <span class="label">Tables in Model</span>
+                    </div>
+                </div>
+
+                <h3>Business Value Proposition</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>🎯 Market Entry Analysis</h4>
+                        <p>Identify optimal markets for expansion through comprehensive economic and business environment analysis across multiple dimensions.</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚠️ Risk Assessment</h4>
+                        <p>Evaluate country-specific business risks using historical crisis patterns and economic volatility indicators.</p>
+                    </div>
+                    <div class="card">
+                        <h4>📈 Investment Prioritization</h4>
+                        <p>Rank countries by growth potential and convergence trajectories using multi-dimensional analysis frameworks.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔮 Economic Forecasting</h4>
+                        <p>Forecast economic shifts for strategic planning using historical patterns and leading indicators.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Data Architecture -->
+            <section id="architecture" class="section">
+                <h2>🏗️ Data Architecture - Star Schema Design</h2>
+                
+                <div class="diagram-container">
+                    <h4>🏗️ Star Schema Diagram</h4>
+                    <p><strong>8-Table Dimensional Model</strong></p>
+                    <img src="imgs/1.png" alt="Star Schema Diagram - 8-Table Dimensional Model" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <p style="margin-top: 10px; color: #6b7280; font-size: 0.9rem;">Shows relationships between shared dimensions (Country, Date) and fact tables (WDI, GFD, GEM) with their respective indicator dimensions.</p>
+                </div>
+
+                <h3>Implemented Star Schema Structure</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Table Type</th>
+                            <th>Table Name</th>
+                            <th>Purpose</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Shared Dimension</strong></td>
+                            <td>Country</td>
+                            <td>217 countries with income levels, regions, lending types</td>
+                            <td><span class="status completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Shared Dimension</strong></td>
+                            <td>DATE_DIM</td>
+                            <td>Time dimension (1960-2023) with crisis period flags</td>
+                            <td><span class="status completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dimension</strong></td>
+                            <td>WDI_INDICATOR_DIM</td>
+                            <td>World Development Indicators metadata</td>
+                            <td><span class="status completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fact</strong></td>
+                            <td>WDI_FACT</td>
+                            <td>World Development Indicators data (1,400+ indicators)</td>
+                            <td><span class="status completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dimension</strong></td>
+                            <td>GFD_INDICATOR_DIM</td>
+                            <td>Global Financial Development metadata</td>
+                            <td><span class="status completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fact</strong></td>
+                            <td>GFD_FACT</td>
+                            <td>Global Financial Development data (banking, markets, access)</td>
+                            <td><span class="status completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dimension</strong></td>
+                            <td>GEM_INDICATOR_DIM</td>
+                            <td>Global Economic Monitor metadata</td>
+                            <td><span class="status completed">Completed</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fact</strong></td>
+                            <td>GEM_FACT</td>
+                            <td>Global Economic Monitor data (trends, forecasts)</td>
+                            <td><span class="status completed">Completed</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Dimensional Analysis Framework</h3>
+                <div class="highlight">
+                    <p><strong>Core Success Factor:</strong> The analytical power comes from combining three key dimensions that transform basic data into sophisticated business insights:</p>
+                    <ul style="margin: 15px 0; padding-left: 20px;">
+                        <li><strong>Indicators:</strong> What we're measuring (GDP, inflation, infrastructure, financial development)</li>
+                        <li><strong>Countries:</strong> Who we're analyzing (income levels, regions, development stages)</li>
+                        <li><strong>Time:</strong> When we're measuring (historical trends, crisis periods, economic cycles)</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Transformation Process -->
+            <section id="transformation" class="section">
+                <h2>🔧 Data Transformation Process</h2>
+                
+                <h3>Current Transformation Status</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>✅ WDI Data Transformation</h4>
+                        <p><strong>Status:</strong> <span class="status completed">Completed</span></p>
+                        <ul style="margin-top: 10px;">
+                            <li>Country dimension created (217 countries)</li>
+                            <li>Date dimension generated (1960-2023)</li>
+                            <li>Fact table unpivoted and cleaned</li>
+                            <li>Indicator dimension extracted</li>
+                            <li>Data types optimized</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>✅ GFD Data Transformation</h4>
+                        <p><strong>Status:</strong> <span class="status completed">Completed</span></p>
+                        <ul style="margin-top: 10px;">
+                            <li>Excel file imported and processed</li>
+                            <li>Data structure analyzed and cleaned</li>
+                            <li>Year format cleaned (removed YR suffix)</li>
+                            <li>Value type conversion completed</li>
+                            <li>Indicator dimension created</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>✅ GEM Data Transformation</h4>
+                        <p><strong>Status:</strong> <span class="status completed">Completed</span></p>
+                        <ul style="margin-top: 10px;">
+                            <li>Excel file imported and processed</li>
+                            <li>Transformation pattern applied successfully</li>
+                            <li>Data type conversion standardized</li>
+                            <li>Fact table (GEM_FACT) created</li>
+                            <li>Indicator dimension (GEM_INDICATOR_DIM) established</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Key Transformation Achievements</h3>
+                <div class="highlight">
+                    <h4>WDI Data Processing (70MB Excel File)</h4>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Unpivoting:</strong> Converted wide format (years as columns) to long format for analysis</li>
+                        <li><strong>Data Cleaning:</strong> Handled missing values, standardized country codes</li>
+                        <li><strong>Type Conversion:</strong> Ensured proper data types for relationships and calculations</li>
+                        <li><strong>Quality Control:</strong> Implemented null handling for data integrity</li>
+                        <li><strong>Performance Optimization:</strong> Selected only necessary columns for efficient processing</li>
+                    </ul>
+                </div>
+
+                <div class="diagram-container">
+                    <h4>✅ Data Transformation Pipeline - COMPLETE</h4>
+                    <p><strong>All Transformations & Relationships Successfully Implemented</strong></p>
+                    <img src="imgs/5.png" alt="Transformation Pipeline - All Complete & Ready for Analytics" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <p style="margin-top: 10px; color: #059669; font-size: 0.9rem; font-weight: 600;">Complete workflow: All data transformations (WDI, GFD, GEM) → Model relationships → Ready for analytics development</p>
+                </div>
+            <!-- Data Sources -->
+            <section id="sources" class="section">
+                <h2>📁 Data Sources</h2>
+                
+                <div class="data-source wdi">
+                    <h3>🌍 World Development Indicators (WDI)</h3>
+                    <p><strong>Primary Data Source</strong> - Comprehensive global development metrics</p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Coverage:</strong> 217 countries, 1960-2023 (60+ years)</li>
+                        <li><strong>Indicators:</strong> 1,400+ development indicators</li>
+                        <li><strong>File Size:</strong> 70MB Excel file</li>
+                        <li><strong>Key Metrics:</strong> GDP, population, infrastructure, education, health, governance</li>
+                        <li><strong>Business Value:</strong> Market size analysis, development stage assessment, growth trajectory tracking</li>
+                    </ul>
+                </div>
+
+                <div class="data-source gfd">
+                    <h3>🏦 Global Financial Development (GFD)</h3>
+                    <p><strong>Secondary Data Source</strong> - Financial system and market development</p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Focus:</strong> Banking sector development, financial markets, access to finance</li>
+                        <li><strong>Structure:</strong> Clean long format (no unpivoting required)</li>
+                        <li><strong>Key Metrics:</strong> Financial depth, banking efficiency, market capitalization, FDI flows</li>
+                        <li><strong>Business Value:</strong> Investment attractiveness assessment, financial sector analysis</li>
+                    </ul>
+                </div>
+
+                <div class="data-source gem">
+                    <h3>📈 Global Economic Monitor (GEM)</h3>
+                    <p><strong>Tertiary Data Source</strong> - Economic trends and forecasts</p>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Focus:</strong> Real-time economic monitoring, short-term forecasts</li>
+                        <li><strong>Structure:</strong> Similar to GFD, clean format ready for transformation</li>
+                        <li><strong>Key Metrics:</strong> Economic growth forecasts, commodity prices, trade indicators</li>
+                        <li><strong>Business Value:</strong> Early warning systems, economic cycle analysis</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Analytics Framework -->
+            <section id="analytics" class="section">
+                <h2>🧠 Analytical Framework</h2>
+                
+                <div class="diagram-container">
+                    <h4>📊 Dimensional Analysis Framework</h4>
+                    <p><strong>Multi-Dimensional Business Intelligence</strong></p>
+                    <img src="imgs/2.png" alt="Analytical Framework - Multi-Dimensional Business Intelligence" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <p style="margin-top: 10px; color: #6b7280; font-size: 0.9rem;">Illustrates how Income Level × Region × Time dimensions create sophisticated business insights beyond basic descriptive analytics.</p>
+                </div>
+
+                <h3>Core Indicator Selection Strategy</h3>
+                
+                <h4>Phase 1: Essential Financial & Economic Indicators</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Indicator Code</th>
+                            <th>Name</th>
+                            <th>Business Application</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NY.GDP.MKTP.CD</td>
+                            <td>GDP (current US$)</td>
+                            <td>Market size analysis</td>
+                        </tr>
+                        <tr>
+                            <td>NY.GDP.PCAP.CD</td>
+                            <td>GDP per capita</td>
+                            <td>Market maturity assessment</td>
+                        </tr>
+                        <tr>
+                            <td>NY.GDP.MKTP.KD.ZG</td>
+                            <td>GDP growth (%)</td>
+                            <td>Growth trajectory analysis</td>
+                        </tr>
+                        <tr>
+                            <td>FS.AST.DOMS.GD.ZS</td>
+                            <td>Financial system deposits %</td>
+                            <td>Banking sector development</td>
+                        </tr>
+                        <tr>
+                            <td>BX.KLT.DINV.WD.GD.ZS</td>
+                            <td>FDI net inflows %</td>
+                            <td>Investment attractiveness</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Country Classification Framework</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>🏆 High Income Countries</h4>
+                        <p><strong>Business Application:</strong> Benchmark targets for emerging markets</p>
+                        <p><strong>Analysis:</strong> Maturity analysis, competitive positioning, innovation adoption patterns</p>
+                    </div>
+                    <div class="card">
+                        <h4>📈 Upper Middle Income</h4>
+                        <p><strong>Business Application:</strong> Growth markets with infrastructure development needs</p>
+                        <p><strong>Analysis:</strong> Investment attraction strategies, market entry timing, convergence potential</p>
+                    </div>
+                    <div class="card">
+                        <h4>🌱 Lower Middle Income</h4>
+                        <p><strong>Business Application:</strong> Developing markets with transformation potential</p>
+                        <p><strong>Analysis:</strong> Long-term growth plays, risk-adjusted returns, demographic dividend capture</p>
+                    </div>
+                    <div class="card">
+                        <h4>🌍 Low Income Countries</h4>
+                        <p><strong>Business Application:</strong> Frontier markets with high risk/reward potential</p>
+                        <p><strong>Analysis:</strong> Transformational investments, early mover advantage, development financing</p>
+                    </div>
+                </div>
+
+                <h3>Crisis Analysis Framework</h3>
+                <div class="highlight">
+                    <h4>Historical Periods for Strategic Analysis</h4>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>2008-2009:</strong> Global Financial Crisis - Crisis resilience assessment, policy response effectiveness</li>
+                        <li><strong>2020-2022:</strong> COVID-19 Pandemic - Supply chain resilience, digital acceleration, fiscal response analysis</li>
+                        <li><strong>1990s:</strong> Globalization acceleration - Trade integration impact, FDI attraction strategies</li>
+                        <li><strong>2000s:</strong> Emerging market rise - Resource sector investment, BRIC emergence analysis</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Visualization Strategy -->
+            <section id="visualization" class="section">
+                <h2>📊 Visualization Strategy</h2>
+                
+                <div class="diagram-container">
+                    <h4>🎨 Dashboard Layout Concept</h4>
+                    <p><strong>Interactive Multi-Dimensional Analysis</strong></p>
+                    <img src="imgs/3.png" alt="Dashboard Layout - Interactive Multi-Dimensional Analysis" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <p style="margin-top: 10px; color: #6b7280; font-size: 0.9rem;">Shows proposed dashboard structure with global filters, dimensional slicers, and drill-down capabilities.</p>
+                </div>
+
+                <h3>Planned Dashboard Concepts</h3>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>🌍 Dashboard 1: Global Economic Landscape</h4>
+                        <p><strong>Primary View:</strong> World map with GDP rankings, filterable by income level, region, and time period</p>
+                        <p><strong>Key Features:</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Interactive time slider (1960-2024)</li>
+                            <li>Income level and regional filters</li>
+                            <li>Convergence speed indicators</li>
+                            <li>Growth trajectory maps</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>⚡ Dashboard 2: Crisis Response Analysis</h4>
+                        <p><strong>Primary Focus:</strong> How different country types responded to major economic shocks</p>
+                        <p><strong>Key Features:</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Crisis impact heat maps</li>
+                            <li>Recovery trajectory timelines</li>
+                            <li>Resilience index rankings</li>
+                            <li>Policy response correlation</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🏢 Dashboard 3: Business Environment Scorecard</h4>
+                        <p><strong>Strategic Focus:</strong> Investment attractiveness by country type and region</p>
+                        <p><strong>Key Features:</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Multi-dimensional filtering</li>
+                            <li>Regulatory effectiveness comparison</li>
+                            <li>Market entry barrier analysis</li>
+                            <li>Investment climate scorecards</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>💰 Dashboard 4: Financial Development</h4>
+                        <p><strong>Primary Theme:</strong> Financial sector development patterns by country classification</p>
+                        <p><strong>Key Features:</strong></p>
+                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Financial development index</li>
+                            <li>FDI flow analysis</li>
+                            <li>Banking sector maturity comparison</li>
+                            <li>Investment climate scorecards</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Advanced Visualization Techniques</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>📊 Scatter Plot Matrices</h4>
+                        <p>Multi-dimensional analysis with income level color coding and regional clustering</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔥 Correlation Heat Maps</h4>
+                        <p>Statistical relationships visualization between economic indicators</p>
+                    </div>
+                    <div class="card">
+                        <h4>🗺️ Geographic Clustering</h4>
+                        <p>Regional performance analysis with convergence trajectory mapping</p>
+                    </div>
+                    <div class="card">
+                        <h4>📈 Time-Series Forecasting</h4>
+                        <p>Predictive trend analysis with confidence intervals</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Next Steps -->
+            <section id="next-steps" class="section">
+                <h2>🚀 Next Steps</h2>
+                
+                <div class="next-steps">
+                    <h3>Current Status: Data Model Complete!</h3>
+                    <div class="highlight" style="background: #ecfdf5; border: 2px solid #10b981; padding: 20px; margin: 20px 0;">
+                        <h4 style="color: #065f46; margin-bottom: 15px;">✅ All Transformations Completed Successfully</h4>
+                        <ul style="color: #065f46; padding-left: 20px;">
+                            <li><strong>WDI transformation:</strong> All 4 tables created and optimized</li>
+                            <li><strong>GFD transformation:</strong> Data cleaned, fact and indicator tables established</li>
+                            <li><strong>GEM transformation:</strong> All tables created and standardized</li>
+                            <li><strong>Model relationships:</strong> 8-table star schema relationships implemented</li>
+                        </ul>
+                    </div>
+                    
+                    <h4 style="color: #92400e; margin-top: 25px;">🚀 Next Phase: Analytics & Visualization</h4>
+                    <ol>
+                        <li><strong>Create DAX measures</strong> - Build sophisticated financial analysis measures leveraging dimensional analysis</li>
+                        <li><strong>Dashboard development</strong> - Create interactive visualizations for presentation</li>
+                        <li><strong>Advanced analytics</strong> - Implement correlation analysis, forecasting, and business intelligence features</li>
+                        <li><strong>Presentation preparation</strong> - Prepare compelling narratives and executive-level insights</li>
+                    </ol>
+                </div>
+
+                <h3>Current Development Phase: Analytics & Insights</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>✅ Model Architecture</h4>
+                        <p><strong>COMPLETED:</strong> 8-table star schema with all relationships established and data integrity verified</p>
+                    </div>
+                    <div class="card">
+                        <h4>📊 DAX Measures Development</h4>
+                        <p>Build sophisticated financial analysis measures: growth rates, dimensional comparisons, and business intelligence calculations</p>
+                    </div>
+                    <div class="card">
+                        <h4>📈 Advanced Analytics</h4>
+                        <p>Implement correlation analysis, forecasting models, and multi-dimensional business insights</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎨 Dashboard Creation</h4>
+                        <p>Design interactive visualizations showcasing dimensional analysis for presentation</p>
+                    </div>
+                </div>
+
+                <h3>Key DAX Measures to Implement</h3>
+                <div class="highlight">
+                    <h4>Core Financial Metrics</h4>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Year-over-Year Growth:</strong> Track economic momentum across countries and time</li>
+                        <li><strong>Regional Performance:</strong> Compare regions against global averages</li>
+                        <li><strong>Crisis Impact Assessment:</strong> Measure recovery speed and resilience</li>
+                        <li><strong>Convergence Speed:</strong> Track income level mobility and catch-up rates</li>
+                        <li><strong>Economic Volatility:</strong> Assess risk through growth stability analysis</li>
+                        <li><strong>Investment Attractiveness:</strong> Composite scoring for market prioritization</li>
+                    </ul>
+                </div>
+
+                <h3>Expected Business Value</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>🎯 Strategic Intelligence</h4>
+                        <p>Cross-dataset analysis combining development indicators with financial metrics for comprehensive market assessment</p>
+                    </div>
+                    <div class="card">
+                        <h4>⏰ Time Series Analysis</h4>
+                        <p>Track trends across 60+ years with dimensional context for pattern recognition</p>
+                    </div>
+                    <div class="card">
+                        <h4>🌍 Regional Comparisons</h4>
+                        <p>Compare regions and income groups across all datasets for benchmarking</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚠️ Crisis Intelligence</h4>
+                        <p>Analyze 2008 Financial Crisis and COVID-19 impact patterns for future resilience planning</p>
+                    </div>
+                </div>
+
+                <div class="diagram-container">
+                    <h4>🗺️ Strategic Market Positioning</h4>
+                    <p><strong>Investment Timeline & Risk-Return Analysis</strong></p>
+                    <img src="imgs/4.png" alt="Market Positioning - Investment Timeline & Risk-Return Analysis" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <p style="margin-top: 10px; color: #6b7280; font-size: 0.9rem;">Shows optimal market entry points based on convergence analysis, economic cycles, and dimensional risk assessment.</p>
+                </div>
+            </section>
+
+            <!-- Success Metrics -->
+            <section class="section">
+                <h2>🏆 Success Metrics</h2>
+                
+                <div class="grid">
+                    <div class="card">
+                        <h4>💻 Technical Excellence</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Advanced Power BI capabilities demonstration</li>
+                            <li>Sophisticated data modeling implementation</li>
+                            <li>Complex DAX calculations showcase</li>
+                            <li>8-table star schema optimization</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🎯 Business Relevance</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Actionable insights for business decisions</li>
+                            <li>Concrete opportunities and risks identification</li>
+                            <li>Strategic recommendations delivery</li>
+                            <li>Investment prioritization frameworks</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>🚀 Innovation</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Out-of-the-box analytical approaches</li>
+                            <li>Beyond descriptive analytics</li>
+                            <li>Predictive and prescriptive insights</li>
+                            <li>Multi-dimensional business intelligence</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h4>📢 Executive Communication</h4>
+                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
+                            <li>Clear narrative flow</li>
+                            <li>Compelling visualizations</li>
+                            <li>Executive-level insights delivery</li>
+                            <li>Strategic business decision support</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>2025 World Bank Data Analytics Project</p>          
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add active state to navigation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
