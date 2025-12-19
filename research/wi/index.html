@@ -364,8 +364,9 @@
                 <li><a href="#transformation">Transformation</a></li>
                 <li><a href="#sources">Data Sources</a></li>
                 <li><a href="#analytics">Analytics</a></li>
-                <li><a href="#visualization">Visualization</a></li>
-                <li><a href="#next-steps">Next Steps</a></li>
+                <li><a href="#visualization">Dashboards</a></li>
+                <li><a href="#measures">Measures</a></li>
+                <li><a href="#next-steps">Status</a></li>
             </ul>
         </div>
     </nav>
@@ -393,8 +394,16 @@
                         <span class="label">Years of Data</span>
                     </div>
                     <div class="metric">
+                        <span class="number">8+</span>
+                        <span class="label">Dashboards</span>
+                    </div>
+                    <div class="metric">
                         <span class="number">8</span>
                         <span class="label">Tables in Model</span>
+                    </div>
+                    <div class="metric">
+                        <span class="number">25+</span>
+                        <span class="label">DAX Measures</span>
                     </div>
                 </div>
 
@@ -427,6 +436,13 @@
                     <h4>🏗️ Star Schema Diagram</h4>
                     <p><strong>8-Table Dimensional Model</strong></p>
                     <img src="imgs/1.png" alt="Star Schema Diagram - 8-Table Dimensional Model" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <p style="margin-top: 10px; color: #6b7280; font-size: 0.9rem;">Shows relationships between shared dimensions (Country, Date) and fact tables (WDI, GFD, GEM) with their respective indicator dimensions.</p>
+                </div>
+				
+				<div class="diagram-container">
+                    <h4>Relationship Explanation</h4>
+                    <p><strong>Relations Model</strong></p>
+                    <img src="imgs/1.1.png" alt="Star Schema Diagram - 8-Table Dimensional Model" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                     <p style="margin-top: 10px; color: #6b7280; font-size: 0.9rem;">Shows relationships between shared dimensions (Country, Date) and fact tables (WDI, GFD, GEM) with their respective indicator dimensions.</p>
                 </div>
 
@@ -562,6 +578,8 @@
                     <img src="imgs/5.png" alt="Transformation Pipeline - All Complete & Ready for Analytics" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                     <p style="margin-top: 10px; color: #059669; font-size: 0.9rem; font-weight: 600;">Complete workflow: All data transformations (WDI, GFD, GEM) → Model relationships → Ready for analytics development</p>
                 </div>
+				
+
             <!-- Data Sources -->
             <section id="sources" class="section">
                 <h2>📁 Data Sources</h2>
@@ -614,7 +632,7 @@
 
                 <h3>Core Indicator Selection Strategy</h3>
                 
-                <h4>Phase 1: Essential Financial & Economic Indicators</h4>
+                <h4>WDI Indicators (World Development Indicators)</h4>
                 <table>
                     <thead>
                         <tr>
@@ -648,6 +666,82 @@
                             <td>BX.KLT.DINV.WD.GD.ZS</td>
                             <td>FDI net inflows %</td>
                             <td>Investment attractiveness</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>GFD Indicators (Global Financial Development)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Financial Dimension</th>
+                            <th>Indicator Selection Method</th>
+                            <th>Business Application</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Access</strong></td>
+                            <td>All indicators tagged as 'Access' in gfd_series</td>
+                            <td>Financial inclusion assessment - bank accounts, digital payments, borrowing behavior</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Depth</strong></td>
+                            <td>All indicators tagged as 'Depth' in gfd_series</td>
+                            <td>Financial system size relative to economy - credit to GDP, bond markets, insurance assets</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Efficiency</strong></td>
+                            <td>All indicators tagged as 'Efficiency' in gfd_series</td>
+                            <td>How well financial institutions convert inputs to outputs - ROA, ROE, cost-to-income ratios</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Stability</strong></td>
+                            <td>All indicators tagged as 'Stability' in gfd_series</td>
+                            <td>Systemic risk and resilience - bank Z-scores, nonperforming loans, capital ratios</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>GEM Indicators (Global Economic Monitor)</h4>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Indicator Code</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Inflation</strong></td>
+                            <td>CPTOTSAXNZGY</td>
+                            <td>CPI inflation rate (YoY, seasonally adjusted)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exchange Rate</strong></td>
+                            <td>DPANUSLCU</td>
+                            <td>Official exchange rate (LCU per USD)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trade</strong></td>
+                            <td>DXGSRMRCHNSCD</td>
+                            <td>Merchandise exports (current USD)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trade</strong></td>
+                            <td>DMGSRMRCHNSCD</td>
+                            <td>Merchandise imports (current USD)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>External Resilience</strong></td>
+                            <td>IMPCOV</td>
+                            <td>Import coverage (months of imports)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>External Resilience</strong></td>
+                            <td>TOTRESV</td>
+                            <td>Total foreign reserves</td>
                         </tr>
                     </tbody>
                 </table>
@@ -695,79 +789,170 @@
                 <div class="diagram-container">
                     <h4>🎨 Dashboard Layout Concept</h4>
                     <p><strong>Interactive Multi-Dimensional Analysis</strong></p>
-                    <img src="imgs/3.png" alt="Dashboard Layout - Interactive Multi-Dimensional Analysis" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <img src="imgs/6.png" alt="Dashboard Layout - Interactive Multi-Dimensional Analysis" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
                     <p style="margin-top: 10px; color: #6b7280; font-size: 0.9rem;">Shows proposed dashboard structure with global filters, dimensional slicers, and drill-down capabilities.</p>
                 </div>
 
-                <h3>Planned Dashboard Concepts</h3>
+                <h3>Implemented Dashboard Suite (8 Dashboards)</h3>
                 
                 <div class="grid">
                     <div class="card">
-                        <h4>🌍 Dashboard 1: Global Economic Landscape</h4>
-                        <p><strong>Primary View:</strong> World map with GDP rankings, filterable by income level, region, and time period</p>
-                        <p><strong>Key Features:</strong></p>
-                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
-                            <li>Interactive time slider (1960-2024)</li>
-                            <li>Income level and regional filters</li>
-                            <li>Convergence speed indicators</li>
-                            <li>Growth trajectory maps</li>
-                        </ul>
+                        <h4>🌍 Dashboard: World Overview (WDI)</h4>
+                        <p><strong>Primary Visualizations:</strong> Choropleth world map with GDP per capita color coding, horizontal bar charts for top countries ranking</p>
+                        <p><strong>Key Interactivity:</strong> Time period slicer, income level and region filters, click-through country details</p>
+                        <p><strong>Measures Used:</strong> GDP Total, GDP per capita, GDP Growth %, connected through Country and Date dimensions</p>
                     </div>
                     
                     <div class="card">
-                        <h4>⚡ Dashboard 2: Crisis Response Analysis</h4>
-                        <p><strong>Primary Focus:</strong> How different country types responded to major economic shocks</p>
-                        <p><strong>Key Features:</strong></p>
-                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
-                            <li>Crisis impact heat maps</li>
-                            <li>Recovery trajectory timelines</li>
-                            <li>Resilience index rankings</li>
-                            <li>Policy response correlation</li>
-                        </ul>
+                        <h4>⚡ Dashboard: Crisis Analysis (WDI)</h4>
+                        <p><strong>Primary Visualizations:</strong> Matrix with conditional formatting showing crisis vs pre-crisis performance, horizontal bar charts for resilience rankings</p>
+                        <p><strong>Key Interactivity:</strong> Crisis period filters (2008-2009, 2020-2021), country and region selection</p>
+                        <p><strong>Measures Used:</strong> Crisis Impact, Pre-Crisis Growth, Resilience Score, all filtered through IsCrisisYear dimension flags</p>
                     </div>
                     
                     <div class="card">
-                        <h4>🏢 Dashboard 3: Business Environment Scorecard</h4>
-                        <p><strong>Strategic Focus:</strong> Investment attractiveness by country type and region</p>
-                        <p><strong>Key Features:</strong></p>
-                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
-                            <li>Multi-dimensional filtering</li>
-                            <li>Regulatory effectiveness comparison</li>
-                            <li>Market entry barrier analysis</li>
-                            <li>Investment climate scorecards</li>
-                        </ul>
+                        <h4>🎯 Dashboard: Investment Attractiveness (WDI)</h4>
+                        <p><strong>Primary Visualizations:</strong> Scatter plot matrix showing GDP vs Growth with income level color coding, horizontal ranking charts</p>
+                        <p><strong>Key Interactivity:</strong> Income level and region filters, tooltips showing detailed country metrics</p>
+                        <p><strong>Measures Used:</strong> Investment Score (GDP Total + ABS(Crisis Impact)), Stability Score, Regional vs Global comparisons</p>
                     </div>
                     
                     <div class="card">
-                        <h4>💰 Dashboard 4: Financial Development</h4>
-                        <p><strong>Primary Theme:</strong> Financial sector development patterns by country classification</p>
-                        <p><strong>Key Features:</strong></p>
-                        <ul style="margin: 10px 0; padding-left: 20px; font-size: 0.9rem;">
-                            <li>Financial development index</li>
-                            <li>FDI flow analysis</li>
-                            <li>Banking sector maturity comparison</li>
-                            <li>Investment climate scorecards</li>
-                        </ul>
+                        <h4>🏢 Dashboard: Business Climate (GFD)</h4>
+                        <p><strong>Primary Visualizations:</strong> KPI cards showing Access/Depth/Efficiency/Stability averages, horizontal bar charts by country and region</p>
+                        <p><strong>Key Interactivity:</strong> Financial dimension slicers, income level and regional filtering</p>
+                        <p><strong>Measures Used:</strong> Access Average, Depth Average, Efficiency Average, Stability Average - all calculated using GFD topic filtering</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🛡️ Dashboard: Crisis & COVID Resilience (GFD)</h4>
+                        <p><strong>Primary Visualizations:</strong> Matrix comparing Pre-Crisis vs Crisis vs Post-COVID stability scores with heat map coloring</p>
+                        <p><strong>Key Interactivity:</strong> Time period selection, country drill-down, regional comparison views</p>
+                        <p><strong>Measures Used:</strong> Stability Pre Crisis, Stability Crisis Years, Stability Post COVID - connected through crisis period flags</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>📈 Dashboard: Macroeconomic Overview (GEM)</h4>
+                        <p><strong>Primary Visualizations:</strong> Line charts showing inflation and exchange rate trends over time, multi-series time series analysis</p>
+                        <p><strong>Key Interactivity:</strong> Country selection, time period filtering, metric switching between inflation and exchange rates</p>
+                        <p><strong>Measures Used:</strong> Inflation Rate (CPTOTSAXNZGY), Exchange Rate (DPANUSLCU) - filtered by specific GEM series codes</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🌐 Dashboard: Trade & External Resilience (GEM)</h4>
+                        <p><strong>Primary Visualizations:</strong> Horizontal bar charts for export/import flows, KPI cards for import coverage and total reserves</p>
+                        <p><strong>Key Interactivity:</strong> Trade flow comparisons, resilience metric filtering, country performance rankings</p>
+                        <p><strong>Measures Used:</strong> Merchandise Exports/Imports (DXGSRMRCHNSCD/DMGSRMRCHNSCD), Import Coverage (IMPCOV), Total Reserves (TOTRESV)</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h4>🔍 Dashboard: Country Profile (Matrix Overview)</h4>
+                        <p><strong>Primary Visualizations:</strong> Large matrix showing all indicators by country with region, income group, and timeline groupings</p>
+                        <p><strong>Key Interactivity:</strong> Country selection, indicator filtering, regional and income group comparisons</p>
+                        <p><strong>Measures Used:</strong> Cross-dataset integration showing WDI, GFD, and GEM indicators in unified matrix format</p>
                     </div>
                 </div>
 
-                <h3>Advanced Visualization Techniques</h3>
+                <h3>Implemented Visualization Components</h3>
                 <div class="grid">
                     <div class="card">
-                        <h4>📊 Scatter Plot Matrices</h4>
-                        <p>Multi-dimensional analysis with income level color coding and regional clustering</p>
+                        <h4>🗺️ Choropleth Maps</h4>
+                        <p>World map visualizations with GDP per capita color coding for geographic pattern recognition</p>
                     </div>
                     <div class="card">
-                        <h4>🔥 Correlation Heat Maps</h4>
-                        <p>Statistical relationships visualization between economic indicators</p>
+                        <h4>📊 Horizontal Bar Charts</h4>
+                        <p>Country rankings and comparisons with X-Y axis swapping technique for measure-based sorting</p>
                     </div>
                     <div class="card">
-                        <h4>🗺️ Geographic Clustering</h4>
-                        <p>Regional performance analysis with convergence trajectory mapping</p>
+                        <h4>🔢 KPI Cards</h4>
+                        <p>Financial development averages (Access, Depth, Efficiency, Stability) for quick metric comparison</p>
                     </div>
                     <div class="card">
-                        <h4>📈 Time-Series Forecasting</h4>
-                        <p>Predictive trend analysis with confidence intervals</p>
+                        <h4>📈 Line Charts</h4>
+                        <p>Time series analysis for inflation and exchange rate trends over multiple decades</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔄 Matrix Visualizations</h4>
+                        <p>Crisis analysis with conditional formatting and country profile overview matrix</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DAX Measures -->
+            <section id="measures" class="section">
+                <h2>🧮 DAX Measures & Analytical Framework</h2>
+                
+
+
+                <h3>Financial Development Measures (GFD Dataset)</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>💳 Access Average</h4>
+                        <p><strong>Formula:</strong> CALCULATE(AVERAGE(gfd_fact[Value]), gfd_series[Topic] = "Access")</p>
+                        <p><strong>Purpose:</strong> Measures financial inclusion through bank accounts, digital payments, and borrowing behavior per 1,000 adults</p>
+                    </div>
+                    <div class="card">
+                        <h4>🏦 Depth Average</h4>
+                        <p><strong>Formula:</strong> CALCULATE(AVERAGE(gfd_fact[Value]), gfd_series[Topic] = "Depth")</p>
+                        <p><strong>Purpose:</strong> Captures financial system size relative to economy - credit to GDP, bond markets, insurance assets</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚡ Efficiency Average</h4>
+                        <p><strong>Formula:</strong> CALCULATE(AVERAGE(gfd_fact[Value]), gfd_series[Topic] = "Efficiency")</p>
+                        <p><strong>Purpose:</strong> Reflects how well financial institutions convert inputs to outputs - ROA, ROE, cost-to-income ratios</p>
+                    </div>
+                    <div class="card">
+                        <h4>🛡️ Stability Average</h4>
+                        <p><strong>Formula:</strong> CALCULATE(AVERAGE(gfd_fact[Value]), gfd_series[Topic] = "Stability")</p>
+                        <p><strong>Purpose:</strong> Systemic risk and resilience - bank Z-scores, nonperforming loans, capital ratios</p>
+                    </div>
+                </div>
+
+                <h3>Crisis Analysis Measures</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>📊 Stability Pre Crisis</h4>
+                        <p><strong>Purpose:</strong> Baseline financial stability before 2008 global financial crisis (2005-2007)</p>
+                        <p><strong>Business Value:</strong> Reference point for crisis impact evaluation</p>
+                    </div>
+                    <div class="card">
+                        <h4>⚠️ Stability Crisis Years</h4>
+                        <p><strong>Purpose:</strong> Financial stability during 2008-2009 and 2020-2021 crisis periods</p>
+                        <p><strong>Business Value:</strong> Identifies vulnerable regions and fragile banking systems</p>
+                    </div>
+                    <div class="card">
+                        <h4>🔄 Stability Post COVID</h4>
+                        <p><strong>Purpose:</strong> Post-pandemic recovery and structural resilience measurement</p>
+                        <p><strong>Business Value:</strong> Highlights which financial systems rebounded effectively</p>
+                    </div>
+                    <div class="card">
+                        <h4>🎯 Resilience Score</h4>
+                        <p><strong>Purpose:</strong> Crisis recovery capability ranking based on ABS(Crisis Impact)</p>
+                        <p><strong>Business Value:</strong> Identifies most stable markets during global crises</p>
+                    </div>
+                </div>
+
+                <h3>Investment Analysis Measures</h3>
+                <div class="grid">
+                    <div class="card">
+                        <h4>📈 Investment Score</h4>
+                        <p><strong>Formula:</strong> [GDP Total] + ABS([Crisis Impact])</p>
+                        <p><strong>Purpose:</strong> Combined market size and resilience for risk-adjusted opportunities</p>
+                    </div>
+                    <div class="card">
+                        <h4>💰 GDP Total</h4>
+                        <p><strong>Purpose:</strong> Market size assessment for opportunity identification</p>
+                        <p><strong>Business Value:</strong> Investment priority ranking by economic size</p>
+                    </div>
+                    <div class="card">
+                        <h4>🌍 Regional vs Global</h4>
+                        <p><strong>Purpose:</strong> Performance comparison showing percentage difference from global average</p>
+                        <p><strong>Business Value:</strong> Identifies overperforming regions for strategic positioning</p>
+                    </div>
+                    <div class="card">
+                        <h4>📊 Country Count</h4>
+                        <p><strong>Purpose:</strong> Dataset scope indicator for analysis comprehensiveness</p>
+                        <p><strong>Business Value:</strong> Market coverage assessment for global strategy</p>
                     </div>
                 </div>
             </section>
@@ -776,57 +961,51 @@
             <section id="next-steps" class="section">
                 <h2>🚀 Next Steps</h2>
                 
-                <div class="next-steps">
-                    <h3>Current Status: Data Model Complete!</h3>
-                    <div class="highlight" style="background: #ecfdf5; border: 2px solid #10b981; padding: 20px; margin: 20px 0;">
-                        <h4 style="color: #065f46; margin-bottom: 15px;">✅ All Transformations Completed Successfully</h4>
-                        <ul style="color: #065f46; padding-left: 20px;">
-                            <li><strong>WDI transformation:</strong> All 4 tables created and optimized</li>
-                            <li><strong>GFD transformation:</strong> Data cleaned, fact and indicator tables established</li>
-                            <li><strong>GEM transformation:</strong> All tables created and standardized</li>
-                            <li><strong>Model relationships:</strong> 8-table star schema relationships implemented</li>
-                        </ul>
-                    </div>
-                    
-                    <h4 style="color: #92400e; margin-top: 25px;">🚀 Next Phase: Analytics & Visualization</h4>
-                    <ol>
-                        <li><strong>Create DAX measures</strong> - Build sophisticated financial analysis measures leveraging dimensional analysis</li>
-                        <li><strong>Dashboard development</strong> - Create interactive visualizations for presentation</li>
-                        <li><strong>Advanced analytics</strong> - Implement correlation analysis, forecasting, and business intelligence features</li>
-                        <li><strong>Presentation preparation</strong> - Prepare compelling narratives and executive-level insights</li>
-                    </ol>
+                <div class="diagram-container">
+                    <h4>🗺️ Analytical Journey</h4>
+                    <p><strong>Data Review Planning</strong></p>
+                    <img src="imgs/7.png" alt="Market Positioning - Investment Timeline & Risk-Return Analysis" style="max-width: 100%; height: auto; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <p style="margin-top: 10px; color: #6b7280; font-size: 0.9rem;"></p>
                 </div>
 
-                <h3>Current Development Phase: Analytics & Insights</h3>
-                <div class="grid">
-                    <div class="card">
-                        <h4>✅ Model Architecture</h4>
-                        <p><strong>COMPLETED:</strong> 8-table star schema with all relationships established and data integrity verified</p>
-                    </div>
-                    <div class="card">
-                        <h4>📊 DAX Measures Development</h4>
-                        <p>Build sophisticated financial analysis measures: growth rates, dimensional comparisons, and business intelligence calculations</p>
-                    </div>
-                    <div class="card">
-                        <h4>📈 Advanced Analytics</h4>
-                        <p>Implement correlation analysis, forecasting models, and multi-dimensional business insights</p>
-                    </div>
-                    <div class="card">
-                        <h4>🎨 Dashboard Creation</h4>
-                        <p>Design interactive visualizations showcasing dimensional analysis for presentation</p>
-                    </div>
-                </div>
-
-                <h3>Key DAX Measures to Implement</h3>
+                <h3>Implemented DAX Measures Library</h3>
                 <div class="highlight">
-                    <h4>Core Financial Metrics</h4>
+                    <h4>Core Financial Development Measures (GFD Dataset)</h4>
                     <ul style="margin: 10px 0; padding-left: 20px;">
-                        <li><strong>Year-over-Year Growth:</strong> Track economic momentum across countries and time</li>
-                        <li><strong>Regional Performance:</strong> Compare regions against global averages</li>
-                        <li><strong>Crisis Impact Assessment:</strong> Measure recovery speed and resilience</li>
-                        <li><strong>Convergence Speed:</strong> Track income level mobility and catch-up rates</li>
-                        <li><strong>Economic Volatility:</strong> Assess risk through growth stability analysis</li>
-                        <li><strong>Investment Attractiveness:</strong> Composite scoring for market prioritization</li>
+                        <li><strong>Access Average:</strong> Financial inclusion assessment - bank accounts, digital payments, borrowing behavior</li>
+                        <li><strong>Depth Average:</strong> Financial system size relative to economy - credit to GDP, bond markets, insurance assets</li>
+                        <li><strong>Efficiency Average:</strong> How well financial institutions convert inputs to outputs - ROA, ROE, cost-to-income ratios</li>
+                        <li><strong>Stability Average:</strong> Systemic risk and resilience indicators - bank Z-scores, nonperforming loans, capital ratios</li>
+                    </ul>
+                    
+                    <h4>Crisis Analysis Measures</h4>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Stability Pre Crisis:</strong> Baseline financial stability before 2008 global financial crisis</li>
+                        <li><strong>Stability Crisis Years:</strong> Financial stability during 2008-2009 and 2020-2021 crisis periods</li>
+                        <li><strong>Stability Post COVID:</strong> Post-pandemic recovery and structural resilience measurement</li>
+                        <li><strong>Crisis Impact:</strong> Quantified impact during major economic shock periods</li>
+                        <li><strong>Resilience Score:</strong> Crisis recovery capability ranking</li>
+                    </ul>
+                    
+                    <h4>Macroeconomic Measures (GEM Dataset)</h4>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Inflation Rate:</strong> Annual consumer price inflation affecting purchasing power and business costs</li>
+                        <li><strong>Exchange Rate (LCU per USD):</strong> Currency valuation affecting foreign investment and trade competitiveness</li>
+                    </ul>
+                    
+                    <h4>Trade & External Resilience Measures</h4>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Merchandise Exports/Imports:</strong> Trade flow analysis for external strength assessment</li>
+                        <li><strong>Import Coverage (Months):</strong> Months of imports that can be financed with reserves</li>
+                        <li><strong>Total Reserves:</strong> Foreign currency reserves for external shock absorption</li>
+                    </ul>
+                    
+                    <h4>Investment Analysis Measures</h4>
+                    <ul style="margin: 10px 0; padding-left: 20px;">
+                        <li><strong>Investment Score:</strong> Combined market size and resilience for risk-adjusted opportunities</li>
+                        <li><strong>GDP Growth %:</strong> Year-over-year economic momentum tracking</li>
+                        <li><strong>Regional vs Global:</strong> Performance comparison for strategic positioning</li>
+                        <li><strong>Country Count:</strong> Dataset scope and market coverage metrics</li>
                     </ul>
                 </div>
 
