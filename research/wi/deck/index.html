@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Bank Data Analytics Project</title>
+    <style>
+        /* 
+        WORLD BANK DATA ANALYTICS PROJECT - LANDSCAPE OPTIMIZED
+        ========================================================
+        
+        This presentation is optimized for landscape PDF export with:
+        - Landscape page orientation (11" x 8.5")
+        - Proper page break handling to avoid content splitting
+        - Compact layouts for landscape viewing
+        - Print-optimized typography and spacing
+        
+        For PDF export: Use landscape orientation and "Fit to page" settings
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Add landscape class to body for PDF export optimization */
+        body.landscape {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #fafafa;
+        }
+
+        /* Always use landscape optimizations */
+        body.landscape {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        @media screen and (orientation: landscape) {
+            body {
+                max-width: 1400px;
+                margin: 0 auto;
+                background: white;
+            }
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            page-break-after: always;
+        }
+
+        /* Additional landscape optimizations */
+        @media screen and (max-height: 800px) {
+            .slide {
+                min-height: auto;
+                padding: 40px 30px;
+            }
+            
+            .slide-title {
+                font-size: 3rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .slide-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #7f8c8d;
+            margin-bottom: 60px;
+            letter-spacing: 0.01em;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #34495e;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #5d6d7e;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape-optimized metric grid */
+        @media screen and (orientation: landscape) {
+            .metric-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+                margin: 30px 0;
+            }
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #3498db;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .metric-change {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .positive {
+            color: #27ae60;
+        }
+
+        .negative {
+            color: #e74c3c;
+        }
+
+        .neutral {
+            color: #95a5a6;
+        }
+
+        /* Optimize tables for landscape */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .data-table th {
+            background: #34495e;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.95rem;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Landscape table optimizations */
+        @media screen and (orientation: landscape) {
+            .data-table {
+                font-size: 0.85rem;
+                margin: 20px 0;
+            }
+            
+            .data-table th {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+            
+            .data-table td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .behavioral-insight {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .behavioral-insight h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .behavioral-insight p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Landscape behavioral insight optimization */
+        @media screen and (orientation: landscape) {
+            .behavioral-insight {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .behavioral-insight h3 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+            
+            .behavioral-insight p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+        }
+
+        .case-study {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 6px solid #e67e22;
+        }
+
+        .case-study.contradictory {
+            border-left-color: #e74c3c;
+        }
+
+        .case-study.expected {
+            border-left-color: #f39c12;
+        }
+
+        .case-study-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .case-study-subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .case-study-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #34495e;
+        }
+
+        /* Landscape case study optimization */
+        @media screen and (orientation: landscape) {
+            .case-study {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            .case-study-subtitle {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            
+            .case-study-content {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        }
+
+        .key-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        /* Landscape key factors optimization */
+        @media screen and (orientation: landscape) {
+            .key-factors {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                margin: 20px 0;
+            }
+        }
+
+        .factor-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .factor-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .factor-desc {
+            color: #5d6d7e;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: #ecf0f1;
+            border-left: 4px solid #3498db;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape comparison grid optimization */
+        @media screen and (orientation: landscape) {
+            .comparison-grid {
+                gap: 20px;
+                margin: 25px 0;
+            }
+        }
+
+        .comparison-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .comparison-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #5d6d7e;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 20px;
+            }
+            
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Mobile-specific fullscreen button */
+            .fullscreen-btn {
+                top: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .nav-controls {
+                bottom: 20px;
+                right: 20px;
+                gap: 8px;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .slide-index {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 16px;
+            }
+            
+            /* Mobile fullscreen optimization */
+            body:-webkit-full-screen .slide,
+            body:fullscreen .slide {
+                padding: 20px !important;
+                min-height: 100vh !important;
+            }
+            
+            /* Ensure touch targets are large enough in fullscreen */
+            .fullscreen-btn:active,
+            .nav-btn:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Slide Index */
+        .slide-index {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .slide-index-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .slide-index-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide-index-display {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .slide-nav-btn {
+            background: #ecf0f1;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: all 0.2s ease;
+        }
+
+        .slide-nav-btn:hover {
+            background: #bdc3c7;
+            transform: scale(1.05);
+        }
+
+        .slide-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Main Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn:disabled {
+            background: rgba(189, 195, 199, 0.5);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Fullscreen Button */
+        .fullscreen-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            z-index: 1001;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .fullscreen-btn:active {
+            transform: scale(0.95);
+        }
+
+        .fullscreen-btn.fullscreen-active {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .fullscreen-btn.fullscreen-active:hover {
+            background: rgba(231, 76, 60, 1);
+        }
+
+        /* Hide controls in native fullscreen but keep functionality */
+        body:-webkit-full-screen .slide-index,
+        body:-webkit-full-screen .nav-controls,
+        body:fullscreen .slide-index,
+        body:fullscreen .nav-controls {
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        body:-webkit-full-screen .slide-index:hover,
+        body:-webkit-full-screen .nav-controls:hover,
+        body:fullscreen .slide-index:hover,
+        body:fullscreen .nav-controls:hover {
+            opacity: 1;
+        }
+
+        /* Fullscreen slide styling */
+        body:-webkit-full-screen .slide,
+        body:fullscreen .slide {
+            min-height: 100vh;
+            height: 100vh;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Slide container for navigation */
+        .slides-container {
+            position: relative;
+        }
+
+        .slide {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .slide:not(.active) {
+            display: none;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* Keyboard shortcut hint */
+        .keyboard-hint {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .keyboard-hint.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Slide-specific responsive image styles */
+        .slide img {
+            max-width: 80% !important;
+            max-height: 60vh !important;
+            height: auto !important;
+            border: 2px solid #ecf0f1;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Optimize image slides for presentation */
+        .slide h1 + div {
+            padding: 20px 0 !important;
+        }
+
+        /* Print optimizations for landscape PDF export */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0.5in;
+            }
+            
+            .slide-index,
+            .keyboard-hint {
+                display: none !important;
+            }
+            
+            .slide {
+                page-break-after: always;
+                page-break-inside: avoid;
+                min-height: auto;
+                padding: 30px 20px;
+                display: block !important;
+            }
+            
+            .slide:last-child {
+                page-break-after: avoid;
+            }
+            
+            /* Prevent breaking of key elements */
+            .behavioral-insight,
+            .case-study,
+            .comparison-grid,
+            .metric-grid,
+            .key-factors {
+                page-break-inside: avoid;
+            }
+            
+            /* Optimize table printing */
+            .data-table {
+                font-size: 0.85rem;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 8px 10px;
+            }
+            
+            /* Optimize metric cards for print */
+            .metric-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .metric-value {
+                font-size: 1.8rem;
+            }
+            
+            /* Optimize case studies */
+            .case-study {
+                padding: 25px;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            /* Optimize factor cards */
+            .factor-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            /* Ensure comparison grid stays together */
+            .comparison-grid {
+                margin: 20px 0;
+            }
+            
+            /* Optimize titles */
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body class="landscape">
+    <!-- Keyboard Shortcut Hint -->
+    <div class="keyboard-hint" id="keyboardHint">
+        Use ← → arrow keys or Home/End to navigate • Press ⛶ or F11 for fullscreen • Escape to exit
+    </div>
+
+    <!-- Slide Index Controls -->
+    <div class="slide-index">
+        <div class="slide-index-title">Slide Navigation</div>
+        <div class="slide-index-controls">
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide - 1)" id="prevSlideBtn" title="Previous slide">‹</button>
+            <div class="slide-index-display">
+                <span id="currentSlideNum">1</span> / <span id="totalSlides">23</span>
+            </div>
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide + 1)" id="nextSlideBtn" title="Next slide">›</button>
+        </div>
+    </div>
+
+    <!-- Slides Container -->
+    <div class="slides-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <h1 class="slide-title">World Bank Data Analytics Project</h1>
+        <p class="slide-subtitle">Business Analytics • EMBA Spring 2024 • Kathmandu University</p>
+        <div class="highlight-box">
+            <p style="font-size: 1.2rem; color: #5d6d7e; margin: 0;">
+                Submitted By: Bishesh Dhakal (24509), Dinesh Koirala (24511), Mandeep Raj Shrestha (24516)
+            </p>
+            <p style="font-size: 1.1rem; color: #7f8c8d; margin-top: 10px;">
+                Submitted To: Sir Bal Bhadra Maharjan
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 2: Table of Contents -->
+    <div class="slide">
+        <h1>Table of Contents</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Project Overview & Architecture</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" onclick="goToSlide(3); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">1. 📊 Introduction & Objectives</a></li>
+                    <li><a href="#" onclick="goToSlide(4); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">2. 📈 Scope & Scale Analysis</a></li>
+                    <li><a href="#" onclick="goToSlide(5); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">3. 🏗️ Data Architecture & Star Schema</a></li>
+                    <li><a href="#" onclick="goToSlide(6); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">4. 📊 ER Diagram</a></li>
+                    <li><a href="#" onclick="goToSlide(7); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">5. 📊 Data Analysis Planning</a></li>
+                    <li><a href="#" onclick="goToSlide(8); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">6. 📊 Data Sources & Transformation</a></li>
+                    <li><a href="#" onclick="goToSlide(9); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">7. 🔄 Analytical Framework</a></li>
+                    <li><a href="#" onclick="goToSlide(10); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">8. 📱 Dashboards & Visualizations</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Analytics & Business Value</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" onclick="goToSlide(11); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">9. 📊 DAX Measures</a></li>
+                    <li><a href="#" onclick="goToSlide(12); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">10. 💼 Business Value Proposition</a></li>
+                    <li><a href="#" onclick="goToSlide(13); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">11. 🎯 Country Classification Framework</a></li>
+                    <li><a href="#" onclick="goToSlide(14); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">12. ⚠️ Crisis Analysis Framework</a></li>
+                    <li><a href="#" onclick="goToSlide(15); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">13. 🚀 Success Metrics & Innovation</a></li>
+                    <li><a href="#" onclick="goToSlide(15); return false;" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">14. 📝 Conclusion & Key Takeaways</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="behavioral-insight" style="margin-top: 30px;">
+            <h3>Dashboard Snapshots Include:</h3>
+            <p>Country Profile • World Overview • Crisis Analysis • Investment Attractiveness • Business Climate • Crisis & COVID Resilience • Macroeconomics Overview • Trade and External Resilience</p>
+        </div>
+    </div>
+
+    <!-- Slide 3: Introduction & Objectives -->
+    <div class="slide">
+        <h1>Introduction & Project Objectives</h1>
+        
+        <div class="behavioral-insight">
+            <h3>Project Overview</h3>
+            <p>The World Bank Data Analytics Project integrates global development and financial indicators to support strategic, data-driven decision-making. Using data transformation, dimensional modeling, and interactive visualization within an analytics environment, the project consolidates multiple World Bank data sources to deliver multi-dimensional economic and financial insights.</p>
+        </div>
+
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Data Transformation Techniques</div>
+                <div class="factor-desc">Implementing robust data transformation processes to convert raw World Bank datasets into analytical formats suitable for business intelligence applications.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Data Modeling & Relationship Building</div>
+                <div class="factor-desc">Creating star schema architecture with proper dimensional modeling and establishing meaningful relationships between different data sources.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">DAX Calculations</div>
+                <div class="factor-desc">Developing advanced Data Analysis Expressions (DAX) measures to perform complex calculations and derive meaningful business metrics from macroeconomic data.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Interactive Visualizations</div>
+                <div class="factor-desc">Building comprehensive dashboards with interactive features to facilitate strategic business decision-making using global development data.</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Use-Case Driven Design Principles</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <div><strong>📊 Indicators:</strong> Selected to mirror investor and business evaluation criteria</div>
+                <div><strong>🏗️ Architecture:</strong> Star-schema optimized for cross-country comparison and time-series analysis</div>
+                <div><strong>📈 Measures:</strong> Designed to translate macroeconomic data into actionable business signals</div>
+                <div><strong>📱 Dashboards:</strong> Structured around exploration, comparative, and risk-assessment workflows</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 4: Scope & Scale -->
+    <div class="slide">
+        <h1>Scope & Scale Analysis</h1>
+        
+        <h2>Comprehensive Global Data Coverage</h2>
+        
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-label">Countries Covered</div>
+                <div class="metric-value">217</div>
+                <div class="metric-change neutral">Global Coverage</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Time Span</div>
+                <div class="metric-value">60+ Years</div>
+                <div class="metric-change neutral">1960-2023</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Dashboards</div>
+                <div class="metric-value">8</div>
+                <div class="metric-change positive">Interactive Analytics</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Data Model Tables</div>
+                <div class="metric-value">8</div>
+                <div class="metric-change neutral">Structured Design</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">DAX Measures</div>
+                <div class="metric-value">25+</div>
+                <div class="metric-change positive">Advanced Calculations</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Multi-Dimensional Analysis Scope</h3>
+            <p>The scope spans descriptive, diagnostic, and multidimensional analysis, supporting both historical pattern recognition and forecasting. This comprehensive approach enables strategic business decision-making across multiple timeframes and geographic regions.</p>
+        </div>
+    </div>
+
+    <!-- Slide 5: Data Architecture & Star Schema -->
+    <div class="slide">
+        <h1>Data Architecture & Star Schema Design</h1>
+        
+        <h2>Scalable Data Model Foundation</h2>
+        
+        <div class="comparison-card" style="border-left: 6px solid #3498db;">
+            <h3 style="color: #3498db;">Data Model Tables</h3>
+            <div class="stat-row">
+                <span class="stat-label">COUNTRY_DIM</span>
+                <span class="stat-value">Metadata</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">DATE_DIM</span>
+                <span class="stat-value">1960-2023</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">WDI_SERIES/FACT</span>
+                <span class="stat-value">Development Data</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">GFD_SERIES/FACT</span>
+                <span class="stat-value">Financial Metrics</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">GEM_SERIES/FACT</span>
+                <span class="stat-value">Economic Trends</span>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Architecture Benefits</h3>
+            <p><strong>Enhanced Performance:</strong> Optimized query performance through dimensional modeling.</p>
+            <p><strong>Analytical Flexibility:</strong> Multi-source integration while maintaining coherency across dimensions.</p>
+            <p><strong>Scalable Design:</strong> Supports growth in data volume and analytical complexity.</p>
+        </div>
+    </div>
+
+    <!-- Slide 6: ER Diagram -->
+    <div class="slide">
+        <h1>Entity Relationship Diagram</h1>
+        
+        <h2>Star Schema ER Diagram</h2>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-er-diagram.png" alt="Entity Relationship Diagram" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        
+
+    </div>
+
+    <!-- Slide 7: Data Analysis Planning -->
+    <div class="slide">
+        <h1>Data Analysis Planning</h1>
+        
+        <h2>Strategic Analysis Framework</h2>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-data-analysis-planning.png" alt="Data Analysis Planning" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        
+        <div class="behavioral-insight">
+            <h3>Planning Methodology</h3>
+            <p><strong>Role-Based Design:</strong> Analytics aligned with real-world business leader and investor evaluation criteria.</p>
+            <p><strong>Multi-Dimensional Approach:</strong> Combining indicators, countries, and time for comprehensive analysis.</p>
+            <p><strong>Crisis Analysis Focus:</strong> Historical period analysis for resilience and recovery pattern recognition.</p>
+        </div>
+    </div>
+
+    <!-- Slide 8: Data Sources & Transformation -->
+    <div class="slide">
+        <h1>Data Sources & Transformation Process</h1>
+        
+        <h2>Three Core World Bank Datasets</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 4px solid #3498db;">
+                <div class="factor-title">World Development Indicators (WDI)</div>
+                <div class="factor-desc">• Comprehensive global development metrics<br>• GDP, population, infrastructure, education, health, governance<br>• Business applications: market size analysis, development stage assessment, growth trajectory tracking</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #27ae60;">
+                <div class="factor-title">Global Financial Development (GFD)</div>
+                <div class="factor-desc">• Financial system and market development<br>• Financial depth, banking efficiency, market capitalization, FDI flows<br>• Business applications: investment attractiveness assessment, financial sector analysis</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #e67e22;">
+                <div class="factor-title">Global Economic Monitor (GEM)</div>
+                <div class="factor-desc">• Economic trends and forecasts<br>• Economic growth forecasts, commodity prices, trade indicators<br>• Business applications: early warning systems, economic cycle analysis</div>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h3 style="color: #2c3e50; margin-bottom: 15px;">Data Transformation Process</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <div><strong>🔄 Unpivoting:</strong> Converting wide format (years as columns) to long format</div>
+                <div><strong>🧹 Cleaning:</strong> Standardizing country codes and handling missing values</div>
+                <div><strong>🔧 Type Conversion:</strong> Ensuring correct field types for analytical relationships</div>
+                <div><strong>✅ Quality Assurance:</strong> Null checks and integrity enforcement</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 9: Analytical Framework -->
+    <div class="slide">
+        <h1>Analytical Framework</h1>
+        
+        <h2>Multi-Dimensional Analysis Approach</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Dimensional Analysis Framework</div>
+                <div class="factor-desc">Combines Indicators (what we're measuring), Countries (who we're analyzing), and Time (when we're measuring) to support multi-hierarchy analytics and multi-dimensional reporting.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Country Classification Framework</div>
+                <div class="factor-desc">Countries categorized by income level: High Income (benchmark targets), Upper Middle Income (growth markets), Lower Middle Income (developing markets), Low Income (frontier markets).</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Crisis Analysis Framework</div>
+                <div class="factor-desc">Critical historical periods defined: 2008-2009 Global Financial Crisis, 2020-2022 COVID-19 Pandemic, 1990s Globalization Era, enabling resilience analysis.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Multi-Dimensional Workflow</div>
+                <div class="factor-desc">Structured analytical process supporting exploration, comparative analysis, and risk assessment across multiple dimensions and timeframes.</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Analytical Depth</h3>
+            <p>This approach transforms basic data into sophisticated business insights through strategic dimensional combinations, enabling multi-hierarchy analytics that supports comprehensive multi-dimensional reporting and decision-making.</p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Dashboards & Visualizations -->
+    <div class="slide">
+        <h1>Dashboards & Visualizations</h1>
+        
+        <h2>Eight Interactive Analytical Dashboards</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 4px solid #3498db;">
+                <div class="factor-title">WDI Dashboards</div>
+                <div class="factor-desc">• World Overview - GDP Analysis<br>• Crisis Analysis - Resilience Tracking<br>• Investment Attractiveness - Market Scoring</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #27ae60;">
+                <div class="factor-title">GFD Dashboards</div>
+                <div class="factor-desc">• Business Climate - Financial Metrics<br>• Crisis & COVID Resilience - Stability Analysis</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #e67e22;">
+                <div class="factor-title">GEM Dashboards</div>
+                <div class="factor-desc">• Macroeconomic Overview - Inflation & Exchange Rates<br>• Trade & External Resilience - Trade Flow Analysis</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #9b59b6;">
+                <div class="factor-title">Integrated Analytics</div>
+                <div class="factor-desc">• Country Profile Matrix - Cross-Dataset Integration</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Interactive Features</h3>
+            <p><strong>Advanced Interactivity:</strong> Slicers, filters, drill-down capabilities, and tooltips support both exploration and executive usage across all dashboards.</p>
+        </div>
+    </div>
+
+    <!-- Slide 11: DAX Measures -->
+    <div class="slide">
+        <h1>DAX Measures</h1>
+        
+        <h2>Advanced Analytical Calculations</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 4px solid #27ae60;">
+                <div class="factor-title">Financial Development Metrics</div>
+                <div class="factor-desc">
+                    • Access Average - Financial inclusion measurement<br>
+                    • Depth Average - Financial system size relative to economy<br>
+                    • Efficiency Average - Conversion of input to output<br>
+                    • Stability Average - Systemic resilience indicator
+                </div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #e74c3c;">
+                <div class="factor-title">Crisis-Oriented Measures</div>
+                <div class="factor-desc">
+                    • Stability Pre Crisis - Baseline financial stability<br>
+                    • Stability Crisis Years - Financial stability during crisis periods<br>
+                    • Stability Post COVID - Post-pandemic recovery measurement<br>
+                    • Resilience Score - Crisis recovery capability ranking<br>
+                    • Crisis Impact - Quantified impact during economic shocks
+                </div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #3498db;">
+                <div class="factor-title">Economic & Investment Measures</div>
+                <div class="factor-desc">
+                    • GDP Total & Growth - Investment priority ranking<br>
+                    • Merchandise Exports/Imports - Trade flow analysis<br>
+                    • Total Reserves - External shock absorption capacity<br>
+                    • Investment Score - Combined market size and resilience
+                </div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #f39c12;">
+                <div class="factor-title">Macroeconomic Measures</div>
+                <div class="factor-desc">
+                    • Inflation Rate - Annual consumer price inflation<br>
+                    • Exchange Rate (LCU per USD) - Currency valuation<br>
+                    • Import Coverage - Trade resilience measurement<br>
+                    • Total Reserves - Foreign currency reserves
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Business Value Proposition -->
+    <div class="slide">
+        <h1>Business Value Proposition</h1>
+        
+        <h2>Strategic Intelligence Outcomes</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 4px solid #27ae60;">
+                <div class="factor-title">Market Entry Optimization</div>
+                <div class="factor-desc">• Approach: Comprehensive Analysis<br>• Focus: Multi-Dimensional<br>• Outcome: Optimal Markets<br>• Benefit: Strategic Expansion</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #e74c3c;">
+                <div class="factor-title">Risk Assessment</div>
+                <div class="factor-desc">• Methodology: Historical Patterns<br>• Indicators: Economic Volatility<br>• Output: Risk Profiles<br>• Application: Country-Specific</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #3498db;">
+                <div class="factor-title">Investment Prioritization</div>
+                <div class="factor-desc">• Criteria: Growth Potential<br>• Framework: Convergence Trajectories<br>• Analysis: Multi-Dimensional<br>• Result: Prioritized Ranking</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #f39c12;">
+                <div class="factor-title">Economic Forecasting</div>
+                <div class="factor-desc">• Base: Historical Patterns<br>• Tools: Leading Indicators<br>• Purpose: Strategic Planning<br>• Output: Economic Shifts</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Strategic Value</h3>
+            <p>The combination of long-term trend analysis and multi-dimensional segmentation enables targeted business decision support, transforming raw economic data into actionable strategic intelligence.</p>
+        </div>
+    </div>
+
+    <!-- Slide 13: Country Classification Framework -->
+    <div class="slide">
+        <h1>Country Classification Framework</h1>
+        
+        <h2>Income-Level Based Strategic Segmentation</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 4px solid #27ae60;">
+                <div class="factor-title">High Income Countries</div>
+                <div class="factor-desc">• Business Application: Benchmark Targets<br>• Analysis Focus: Maturity Assessment<br>• Key Metrics: Competitive Positioning<br>• Opportunities: Innovation Patterns</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #3498db;">
+                <div class="factor-title">Upper Middle Income</div>
+                <div class="factor-desc">• Business Application: Growth Markets<br>• Focus Area: Infrastructure Development<br>• Strategy: Market Entry Timing<br>• Potential: Convergence Plays</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #f39c12;">
+                <div class="factor-title">Lower Middle Income</div>
+                <div class="factor-desc">• Business Application: Developing Markets<br>• Opportunity: Transformation Potential<br>• Strategy: Long-term Growth<br>• Advantage: Demographic Dividend</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #e74c3c;">
+                <div class="factor-title">Low Income Countries</div>
+                <div class="factor-desc">• Business Application: Frontier Markets<br>• Risk/Reward: High Potential<br>• Strategy: Early Mover Advantage<br>• Investment Type: Transformational</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Strategic Intelligence</h3>
+            <p>Each grouping supports targeted business intelligence strategies, enabling customized approaches for market entry, investment prioritization, and risk assessment based on economic development stage.</p>
+        </div>
+    </div>
+
+    <!-- Slide 13: Crisis Analysis Framework -->
+    <div class="slide">
+        <h1>Crisis Analysis Framework</h1>
+        
+        <h2>Historical Periods for Resilience Analysis</h2>
+        
+        <div class="metric-grid">
+            <div class="metric-card">
+                <div class="metric-label">Global Financial Crisis</div>
+                <div class="metric-value">2008-2009</div>
+                <div class="metric-change negative">Systemic Banking Crisis</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">COVID-19 Pandemic</div>
+                <div class="metric-value">2020-2022</div>
+                <div class="metric-change negative">Global Health Crisis</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Globalization Era</div>
+                <div class="metric-value">1990s</div>
+                <div class="metric-change neutral">Economic Integration</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-label">Emerging Markets</div>
+                <div class="metric-value">2000s</div>
+                <div class="metric-change positive">Growth Expansion</div>
+            </div>
+        </div>
+
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Resilience Measurement</div>
+                <div class="factor-desc">Compare country performance during crisis vs pre-crisis periods to quantify resilience and recovery patterns.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Early Warning Systems</div>
+                <div class="factor-desc">Identify leading indicators and vulnerability patterns from historical crisis data for proactive risk management.</div>
+            </div>
+            <div class="factor-card">
+                <div class="factor-title">Recovery Patterns</div>
+                <div class="factor-desc">Analyze post-crisis recovery trajectories to understand structural resilience and adaptation capabilities.</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Crisis Intelligence Value</h3>
+            <p>These defined periods enable comparisons across crisis and non-crisis periods, providing crucial insights for investment decision-making, risk assessment, and strategic planning in volatile environments.</p>
+        </div>
+    </div>
+
+    <!-- Slide 14: Success Metrics & Innovation -->
+    <div class="slide">
+        <h1>Success Metrics & Innovation</h1>
+        
+        <h2>Project Achievement Criteria</h2>
+        
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 4px solid #27ae60;">
+                <div class="factor-title">Business Relevance</div>
+                <div class="factor-desc">• Actionable Insights: Business Decisions<br>• Opportunity Identification: Concrete & Risks<br>• Investment Framework: Prioritization System</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #3498db;">
+                <div class="factor-title">Innovation</div>
+                <div class="factor-desc">• Predictive Insights: Advanced Analytics<br>• Prescriptive Analysis: Strategic Recommendations<br>• Multi-Dimensional BI: Complex Integration</div>
+            </div>
+            <div class="factor-card" style="border-left: 4px solid #e67e22;">
+                <div class="factor-title">Communication</div>
+                <div class="factor-desc">• Executive Delivery: C-Level Ready<br>• Strategic Support: Decision Making<br>• Business Impact: Actionable Outcomes</div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>Innovation Highlights</h3>
+            <p><strong>Multi-Source Integration:</strong> Seamless combination of WDI, GFD, and GEM datasets.</p>
+            <p><strong>Role-Based Design:</strong> Analytics aligned with real-world business leader and investor evaluation criteria.</p>
+            <p><strong>Scalable Architecture:</strong> Star schema supporting future data expansion and analytical complexity.</p>
+        </div>
+    </div>
+
+    <!-- Slide 15: Conclusion & Key Takeaways -->
+    <div class="slide">
+        <h1 style="margin-bottom: 15px;">Conclusion & Key Takeaways</h1>
+        
+        <div class="behavioral-insight" style="margin-bottom: 15px;">
+            <h3 style="margin-bottom: 8px;">Project Achievement Summary</h3>
+            <p style="margin: 0; font-size: 0.95rem;">The World Bank Data Analytics Project successfully applies advanced analytics to global development data, supporting investment and market opportunity assessment through executive-ready dashboards and strategic business intelligence.</p>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-card">
+                <h3 style="margin-bottom: 10px;">Technical Achievements</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 5px;">
+                    <li style="padding: 4px 0;">🎯 217 countries, 1,400+ indicators integrated</li>
+                    <li style="padding: 4px 0;">📊 8 interactive dashboards with DAX measures</li>
+                    <li style="padding: 4px 0;">🏗️ Star schema architecture with 8 tables</li>
+                    <li style="padding: 4px 0;">📈 60+ years of longitudinal data analysis</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card">
+                <h3 style="margin-bottom: 10px;">Business Value Delivered</h3>
+                <ul style="list-style: none; padding: 0; margin-top: 5px;">
+                    <li style="padding: 4px 0;">🎯 Market entry optimization framework</li>
+                    <li style="padding: 4px 0;">⚠️ Risk assessment and early warning systems</li>
+                    <li style="padding: 4px 0;">💰 Investment prioritization methodology</li>
+                    <li style="padding: 4px 0;">🔮 Economic forecasting capabilities</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="behavioral-insight" style="margin-top: 15px; padding: 15px;">
+            <h3 style="margin-bottom: 8px; font-size: 1.2rem;">Strategic Impact</h3>
+            <p style="font-size: 0.95rem; margin: 0;"><strong>Transformative Analytics:</strong> By structuring economic and financial indicators across time and geography, the project enables evaluation of growth potential, financial system maturity, and macroeconomic risk.</p>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 15px;">
+            <div class="comparison-card" style="border-left: 4px solid #3498db; padding: 10px;">
+                <h4 style="color: #3498db; margin-bottom: 8px; font-size: 1rem;">Key Innovations</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+                    <li style="padding: 2px 0;">📊 Multi-source data integration</li>
+                    <li style="padding: 2px 0;">🎯 Role-based analytical design</li>
+                    <li style="padding: 2px 0;">📱 Executive-ready dashboards</li>
+                </ul>
+            </div>
+
+            <div class="comparison-card" style="border-left: 4px solid #27ae60; padding: 10px;">
+                <h4 style="color: #27ae60; margin-bottom: 8px; font-size: 1rem;">Future Applications</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+                    <li style="padding: 2px 0;">🚀 Strategic expansion planning</li>
+                    <li style="padding: 2px 0;">💼 Investment decision support</li>
+                    <li style="padding: 2px 0;">⚠️ Risk management enhancement</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 15px; padding: 12px; text-align: center;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0; line-height: 1.3;">
+                <strong>"Transforming global development data into strategic business intelligence for data-driven decision making."</strong>
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 16: Dashboard Snapshot - Country Profile -->
+    <div class="slide">
+        <h1>Dashboard Snapshot: Country Profile</h1>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-country-profile.png" alt="Country Profile Dashboard" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        
+
+    </div>
+
+    <!-- Slide 17: Dashboard Snapshot - World Overview -->
+    <div class="slide">
+        <h1>Dashboard Snapshot: World Overview</h1>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-world-overview.png" alt="World Overview Dashboard" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        
+
+    </div>
+
+    <!-- Slide 18: Dashboard Snapshot - Crisis Analysis -->
+    <div class="slide">
+        <h1>Dashboard Snapshot: Crisis Analysis</h1>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-crisis-analysis.png" alt="Crisis Analysis Dashboard" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        
+
+    </div>
+
+    <!-- Slide 19: Dashboard Snapshot - Investment Attractiveness -->
+    <div class="slide">
+        <h1>Dashboard Snapshot: Investment Attractiveness</h1>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-investment-attractiveness.png" alt="Investment Attractiveness Dashboard" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        
+
+    </div>
+
+    <!-- Slide 20: Dashboard Snapshot - Business Climate -->
+    <div class="slide">
+        <h1>Dashboard Snapshot: Business Climate</h1>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-business-climate.png" alt="Business Climate Dashboard" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+
+    </div>
+
+    <!-- Slide 21: Dashboard Snapshot - Crisis & COVID Resilience -->
+    <div class="slide">
+        <h1>Dashboard Snapshot: Crisis & COVID Resilience</h1>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-crisis-covid-resilience.png" alt="Crisis & COVID Resilience Dashboard" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        
+
+    </div>
+
+    <!-- Slide 22: Dashboard Snapshot - Macroeconomics Overview -->
+    <div class="slide">
+        <h1>Dashboard Snapshot: Macroeconomics Overview</h1>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-macroeconomics-overview.png" alt="Macroeconomics Overview Dashboard" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+
+    </div>
+
+    <!-- Slide 23: Dashboard Snapshot - Trade and External Resilience -->
+    <div class="slide">
+        <h1>Dashboard Snapshot: Trade and External Resilience</h1>
+        
+        <div style="text-align: center; padding: 20px 0;">
+            <img src="placeholder-trade-external-resilience.png" alt="Trade and External Resilience Dashboard" style="max-width: 80%; max-height: 60vh; height: auto; border: 2px solid #ecf0f1; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+        </div>
+        
+
+    </div>
+
+    <!-- Fullscreen Button -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fullscreenBtn" title="Toggle Fullscreen (Mobile-Friendly)">⛶</button>
+
+    <!-- Main Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="previousSlide()" id="prevBtn" title="Previous slide (←)">◀</button>
+        <button class="nav-btn" onclick="nextSlide()" id="nextBtn" title="Next slide (→)">▶</button>
+    </div>
+
+    <!-- Navigation JavaScript -->
+    <script>
+        // Slide navigation functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Initialize
+        function initPresentation() {
+            // Show first slide
+            showSlide(0);
+            
+            // Enhanced keyboard event handling
+            setupKeyboardNavigation();
+            
+            // Show keyboard hint for 3 seconds
+            setTimeout(() => {
+                const hint = document.getElementById('keyboardHint');
+                hint.classList.add('show');
+                setTimeout(() => {
+                    hint.classList.remove('show');
+                }, 3000);
+            }, 1000);
+        }
+
+        // Setup keyboard navigation
+        function setupKeyboardNavigation() {
+            // Single keyboard event handler
+            document.addEventListener('keydown', function(event) {
+                // Skip if user is typing in input fields
+                if (event.target && (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA')) {
+                    return;
+                }
+                
+                // Handle navigation keys
+                event.preventDefault();
+                
+                switch(event.key) {
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        previousSlide();
+                        break;
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                    case ' ':
+                        nextSlide();
+                        break;
+                    case 'Home':
+                        navigateToSlide(0);
+                        break;
+                    case 'End':
+                        navigateToSlide(totalSlides - 1);
+                        break;
+                    case 'Escape':
+                        // Exit fullscreen if in fullscreen mode, otherwise show hint
+                        if (isFullscreen()) {
+                            event.preventDefault();
+                            exitFullscreen();
+                        } else {
+                            const hint = document.getElementById('keyboardHint');
+                            if (hint) {
+                                hint.classList.toggle('show');
+                            }
+                        }
+                        break;
+                    
+                    case 'F11':
+                        event.preventDefault();
+                        toggleFullscreen();
+                        break;
+                }
+            });
+            
+            // Make sure body can receive focus
+            document.body.tabIndex = 0;
+            
+            // Force focus after page load
+            setTimeout(() => {
+                document.body.focus();
+            }, 100);
+        }
+
+        // Show specific slide
+        function showSlide(slideIndex) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            if (slides[slideIndex]) {
+                slides[slideIndex].classList.add('active');
+                currentSlide = slideIndex;
+                
+                // Update displays
+                document.getElementById('currentSlideNum').textContent = slideIndex + 1;
+                document.getElementById('totalSlides').textContent = totalSlides;
+                
+                // Update button states
+                updateButtons();
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Navigate to specific slide
+        function navigateToSlide(slideIndex) {
+            if (slideIndex >= 0 && slideIndex < totalSlides) {
+                showSlide(slideIndex);
+            }
+        }
+
+        // Navigate to next slide
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                navigateToSlide(currentSlide + 1);
+            }
+        }
+
+        // Navigate to previous slide
+        function previousSlide() {
+            if (currentSlide > 0) {
+                navigateToSlide(currentSlide - 1);
+            }
+        }
+
+        // Browser fullscreen API functionality
+        function toggleFullscreen() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            // Check if browser supports fullscreen API
+            if (!supportsFullscreen()) {
+                alert('Fullscreen is not supported in this browser. Please use landscape mode or rotate your device for better viewing.');
+                return;
+            }
+            
+            // Check if already in fullscreen mode using native API
+            if (isFullscreen()) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+        }
+
+        // Check if browser supports fullscreen API
+        function supportsFullscreen() {
+            return !!(
+                document.fullscreenEnabled ||
+                document.webkitFullscreenEnabled ||
+                document.mozFullScreenEnabled ||
+                document.msFullscreenEnabled
+            );
+        }
+
+        // Check if currently in fullscreen mode
+        function isFullscreen() {
+            return !!(
+                document.fullscreenElement || 
+                document.webkitFullscreenElement || 
+                document.mozFullScreenElement || 
+                document.msFullscreenElement
+            );
+        }
+
+        // Enter fullscreen using native browser API
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else if (elem.webkitRequestFullscreen) { // Safari
+                elem.webkitRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Exit fullscreen using native browser API
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { // Safari
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Firefox
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) { // IE/Edge
+                document.msExitFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Update fullscreen button appearance and state
+        function updateFullscreenButton() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (isFullscreen()) {
+                fullscreenBtn.classList.add('fullscreen-active');
+                fullscreenBtn.title = 'Exit Fullscreen';
+                
+                // Auto-hide navigation controls after 3 seconds in fullscreen
+                setTimeout(() => {
+                    if (isFullscreen()) {
+                        const slideIndex = document.querySelector('.slide-index');
+                        const navControls = document.querySelector('.nav-controls');
+                        if (slideIndex) slideIndex.style.opacity = '0.3';
+                        if (navControls) navControls.style.opacity = '0.3';
+                    }
+                }, 3000);
+            } else {
+                fullscreenBtn.classList.remove('fullscreen-active');
+                fullscreenBtn.title = 'Enter Fullscreen';
+                
+                // Show navigation controls again when not in fullscreen
+                const slideIndex = document.querySelector('.slide-index');
+                const navControls = document.querySelector('.nav-controls');
+                if (slideIndex) slideIndex.style.opacity = '1';
+                if (navControls) navControls.style.opacity = '1';
+            }
+        }
+
+        // Handle fullscreen change events
+        function setupFullscreenListeners() {
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+            
+            // Re-show controls on mouse movement in fullscreen
+            document.addEventListener('mousemove', function() {
+                if (isFullscreen()) {
+                    const slideIndex = document.querySelector('.slide-index');
+                    const navControls = document.querySelector('.nav-controls');
+                    if (slideIndex) slideIndex.style.opacity = '1';
+                    if (navControls) navControls.style.opacity = '1';
+                }
+            });
+        }
+
+        // Handle escape key for keyboard hint (no fullscreen functionality)
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const hint = document.getElementById('keyboardHint');
+                if (hint) {
+                    hint.classList.toggle('show');
+                }
+            }
+        });
+
+        // Update button states
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevSlideBtn = document.getElementById('prevSlideBtn');
+            const nextSlideBtn = document.getElementById('nextSlideBtn');
+            
+            // Disable/enable buttons
+            const prevDisabled = currentSlide === 0;
+            const nextDisabled = currentSlide === totalSlides - 1;
+            
+            prevBtn.disabled = prevDisabled;
+            nextBtn.disabled = nextDisabled;
+            prevSlideBtn.disabled = prevDisabled;
+            nextSlideBtn.disabled = nextDisabled;
+            
+            // Button text is already set correctly (◀ ▶)
+        }
+
+        // Keyboard handling is now directly in the event listener
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make navigation functions globally available
+            window.nextSlide = nextSlide;
+            window.previousSlide = previousSlide;
+            window.navigateToSlide = navigateToSlide;
+            window.toggleFullscreen = toggleFullscreen;
+            window.isFullscreen = isFullscreen;
+            window.supportsFullscreen = supportsFullscreen;
+            
+            // Setup fullscreen event listeners
+            setupFullscreenListeners();
+            
+            // Initialize presentation
+            initPresentation();
+            
+            // Update initial fullscreen button state
+            setTimeout(updateFullscreenButton, 100);
+        });
+
+        // Enhanced touch support for fullscreen button
+        document.getElementById('fullscreenBtn').addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            toggleFullscreen();
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    previousSlide();
+                }
+            }
+        }
+
+        // Auto-hide controls after inactivity
+        let controlsTimeout;
+        
+        function resetControlsTimeout() {
+            clearTimeout(controlsTimeout);
+            document.querySelector('.slide-index').style.opacity = '1';
+            
+            controlsTimeout = setTimeout(() => {
+                if (currentSlide !== 0 && currentSlide !== totalSlides - 1) {
+                    document.querySelector('.slide-index').style.opacity = '0.6';
+                }
+            }, 3000);
+        }
+
+        // Show controls on mouse movement
+        document.addEventListener('mousemove', resetControlsTimeout);
+        
+        // Reset timeout on slide change
+        const originalShowSlide = showSlide;
+        showSlide = function(slideIndex) {
+            originalShowSlide(slideIndex);
+            resetControlsTimeout();
+        };
+    </script>
+
+</body>
+</html>
