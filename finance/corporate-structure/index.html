@@ -937,6 +937,9 @@
             cursor: default;
             opacity: 0;
             transition: opacity 0.3s ease;
+            touch-action: none;
+            -webkit-touch-callout: none;
+            overflow: hidden;
         }
         
         .image-zoom-modal.active {
@@ -952,6 +955,8 @@
             padding: 12px 20px;
             background: rgba(255, 255, 255, 0.95);
             border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            touch-action: none;
+            -webkit-touch-callout: none;
         }
         
         .zoom-controls-left {
@@ -979,6 +984,8 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            touch-action: none;
+            -webkit-touch-callout: none;
         }
         
         .zoom-btn:hover {
@@ -1012,6 +1019,8 @@
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            touch-action: none;
+            -webkit-touch-callout: none;
         }
         
         .close-zoom:hover {
@@ -2436,6 +2445,21 @@
                 
                 // Prevent body scrolling when modal is open
                 document.body.style.overflow = 'hidden';
+                
+                // Block all touch events from reaching the slide deck
+                document.addEventListener('touchstart', blockTouchEvents, { capture: true, passive: false });
+                document.addEventListener('touchmove', blockTouchEvents, { capture: true, passive: false });
+                document.addEventListener('touchend', blockTouchEvents, { capture: true, passive: false });
+                document.addEventListener('touchcancel', blockTouchEvents, { capture: true, passive: false });
+            }
+        }
+        
+        function blockTouchEvents(e) {
+            // Only block if modal is active
+            const modal = document.getElementById('imageZoomModal');
+            if (modal && modal.classList.contains('active')) {
+                e.preventDefault();
+                e.stopPropagation();
             }
         }
         
@@ -2452,6 +2476,12 @@
                 
                 // Restore body scrolling
                 document.body.style.overflow = '';
+                
+                // Remove touch event blockers
+                document.removeEventListener('touchstart', blockTouchEvents, { capture: true });
+                document.removeEventListener('touchmove', blockTouchEvents, { capture: true });
+                document.removeEventListener('touchend', blockTouchEvents, { capture: true });
+                document.removeEventListener('touchcancel', blockTouchEvents, { capture: true });
             }
         }
         
