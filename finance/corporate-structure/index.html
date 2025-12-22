@@ -1030,6 +1030,10 @@
             cursor: grab;
             position: relative;
             background: rgba(255, 255, 255, 0.5);
+            touch-action: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
         
         .zoom-image-container:active {
@@ -1042,6 +1046,7 @@
             object-fit: contain;
             transition: transform 0.1s ease-out;
             box-shadow: none;
+            pointer-events: none;
         }
         
         /* Instructions */
@@ -2281,8 +2286,22 @@
             // Close on background click
             modal.addEventListener('click', function(e) {
                 if (e.target === modal) {
+                    e.stopPropagation();
                     closeZoom();
                 }
+            });
+            
+            // Stop event propagation for all interactions
+            modal.addEventListener('wheel', function(e) {
+                e.stopPropagation();
+            });
+            
+            modal.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
+            });
+            
+            modal.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
             });
             
             // Zoom In
@@ -2315,6 +2334,7 @@
             
             // Mouse drag for panning
             container.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
                 if (zoomLevel > 1) {
                     isDragging = true;
                     startX = e.clientX - panX;
@@ -2324,6 +2344,7 @@
             });
             
             container.addEventListener('mousemove', function(e) {
+                e.stopPropagation();
                 if (isDragging && zoomLevel > 1) {
                     e.preventDefault();
                     panX = e.clientX - startX;
@@ -2332,7 +2353,8 @@
                 }
             });
             
-            container.addEventListener('mouseup', function() {
+            container.addEventListener('mouseup', function(e) {
+                e.stopPropagation();
                 isDragging = false;
                 if (zoomLevel > 1) {
                     container.style.cursor = 'grab';
@@ -2341,7 +2363,8 @@
                 }
             });
             
-            container.addEventListener('mouseleave', function() {
+            container.addEventListener('mouseleave', function(e) {
+                e.stopPropagation();
                 isDragging = false;
                 container.style.cursor = 'default';
             });
@@ -2351,6 +2374,7 @@
             let touchStartZoom = 1;
             
             container.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
                 if (e.touches.length === 2) {
                     touchStartDistance = Math.hypot(
                         e.touches[0].clientX - e.touches[1].clientX,
@@ -2365,6 +2389,7 @@
             });
             
             container.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
                 e.preventDefault();
                 if (e.touches.length === 2) {
                     const currentDistance = Math.hypot(
@@ -2381,7 +2406,8 @@
                 }
             });
             
-            container.addEventListener('touchend', function() {
+            container.addEventListener('touchend', function(e) {
+                e.stopPropagation();
                 isDragging = false;
             });
         }
