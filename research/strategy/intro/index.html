@@ -1,1 +1,750 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Management Models Reference</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .search-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+        
+        .search-box {
+            padding: 15px 25px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 50px;
+            width: 300px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .filter-btn {
+            padding: 12px 25px;
+            font-size: 0.9rem;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: white;
+            color: #667eea;
+        }
+        
+        .phase-section {
+            margin-bottom: 40px;
+        }
+        
+        .phase-header {
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .phase-header h2 {
+            font-size: 1.5rem;
+        }
+        
+        .phase-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+        
+        .phase-number {
+            background: rgba(255,255,255,0.2);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .phase-1 .phase-header { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .phase-2 .phase-header { background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%); }
+        .phase-3 .phase-header { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .phase-4 .phase-header { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .cross .phase-header { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+        
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            padding: 25px;
+            background: rgba(255,255,255,0.95);
+            border-radius: 0 0 15px 15px;
+        }
+        
+        .model-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid;
+        }
+        
+        .model-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .phase-1 .model-card { border-color: #38ef7d; }
+        .phase-2 .model-card { border-color: #f7b733; }
+        .phase-3 .model-card { border-color: #00f2fe; }
+        .phase-4 .model-card { border-color: #fee140; }
+        .cross .model-card { border-color: #fbc2eb; }
+        
+        .model-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+        }
+        
+        .model-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .model-acronym {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        
+        .model-purpose {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .model-elements {
+            margin-bottom: 15px;
+        }
+        
+        .model-elements h4 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .model-elements ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .model-elements li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        
+        .model-elements li:last-child {
+            border-bottom: none;
+        }
+        
+        .model-elements li strong {
+            color: #667eea;
+        }
+        
+        .key-questions {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        
+        .key-questions h4 {
+            color: #856404;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .key-questions p {
+            font-size: 0.85rem;
+            color: #664d03;
+        }
+        
+        .cross-cutting-badge {
+            display: inline-block;
+            background: #a18cd1;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-top: 10px;
+        }
+        
+        .diagram-section {
+            background: rgba(255,255,255,0.95);
+            padding: 40px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+        
+        .diagram-section h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .flow-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .flow-box {
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 200px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .flow-box.phase-1 { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
+        .flow-box.phase-2 { background: linear-gradient(135deg, #fc4a1a 0%, #f7b733 100%); }
+        .flow-box.phase-3 { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .flow-box.phase-4 { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .flow-box.cross { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+        
+        .flow-arrow {
+            font-size: 2rem;
+            color: #667eea;
+        }
+        
+        .flow-models {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        
+        .flow-model-tag {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            padding: 30px;
+            margin-top: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .models-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .search-box {
+                width: 100%;
+            }
+            
+            .flow-row {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Strategic Management Models Reference</h1>
+            <p>Quick reference guide for all 10 strategic management frameworks</p>
+        </header>
+        
+        <div class="search-filter">
+            <input type="text" class="search-box" placeholder="Search models..." id="searchBox">
+            <button class="filter-btn active" data-filter="all">All Models</button>
+            <button class="filter-btn" data-filter="phase-1">External Analysis</button>
+            <button class="filter-btn" data-filter="phase-2">Internal Analysis</button>
+            <button class="filter-btn" data-filter="phase-3">Strategy Formulation</button>
+            <button class="filter-btn" data-filter="phase-4">Implementation</button>
+            <button class="filter-btn" data-filter="cross">Cross-Cutting</button>
+        </div>
+        
+        <!-- Phase 1: External Analysis -->
+        <section class="phase-section phase-1">
+            <div class="phase-header">
+                <div class="phase-number">1</div>
+                <div>
+                    <h2>External Environment Analysis</h2>
+                    <p>Understand your business environment, industry structure, and competitive landscape</p>
+                </div>
+            </div>
+            <div class="models-grid">
+                <!-- EFE -->
+                <div class="model-card" data-name="efe external factor evaluation opportunities threats">
+                    <div class="model-header">
+                        <div class="model-name">External Factor Evaluation</div>
+                        <div class="model-acronym">EFE</div>
+                    </div>
+                    <div class="model-purpose">Identifies and prioritizes external opportunities and threats affecting your organization</div>
+                    <div class="model-elements">
+                        <h4>Key Components:</h4>
+                        <ul>
+                            <li><strong>Opportunities</strong> - External factors that could benefit your organization</li>
+                            <li><strong>Threats</strong> - External factors that could harm your organization</li>
+                            <li><strong>Weights</strong> - Importance of each factor (0.0 to 1.0)</li>
+                            <li><strong>Ratings</strong> - How well your organization responds (1-4)</li>
+                            <li><strong>Weighted Scores</strong> - Weight × Rating for each factor</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>What external factors could help or hurt us? How are we currently responding to these factors? What's our total weighted score?</p>
+                    </div>
+                </div>
+                
+                <!-- Five Forces -->
+                <div class="model-card" data-name="porters five forces industry structure competitive intensity">
+                    <div class="model-header">
+                        <div class="model-name">Porter's Five Forces</div>
+                        <div class="model-acronym">5 FORCES</div>
+                    </div>
+                    <div class="model-purpose">Analyzes industry structure and competitive intensity to determine industry attractiveness</div>
+                    <div class="model-elements">
+                        <h4>The Five Forces:</h4>
+                        <ul>
+                            <li><strong>Competitive Rivalry</strong> - Intensity of competition among existing firms</li>
+                            <li><strong>Threat of New Entrants</strong> - Ease/difficulty for new competitors to enter</li>
+                            <li><strong>Threat of Substitutes</strong> - Availability of alternative products/services</li>
+                            <li><strong>Bargaining Power of Buyers</strong> - Customer ability to negotiate prices</li>
+                            <li><strong>Bargaining Power of Suppliers</strong> - Supplier ability to influence prices</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>How attractive is this industry? What forces drive competition and profitability? Where should we compete?</p>
+                    </div>
+                </div>
+                
+                <!-- CPM -->
+                <div class="model-card" data-name="cpm competitive profile matrix competitors benchmarking">
+                    <div class="model-header">
+                        <div class="model-name">Competitive Profile Matrix</div>
+                        <div class="model-acronym">CPM</div>
+                    </div>
+                    <div class="model-purpose">Benchmarks your organization against competitors on key success factors</div>
+                    <div class="model-elements">
+                        <h4>Key Components:</h4>
+                        <ul>
+                            <li><strong>Critical Success Factors</strong> - Key factors that determine success in the industry</li>
+                            <li><strong>Weights</strong> - Importance of each factor (0.0 to 1.0)</li>
+                            <li><strong>Ratings</strong> - Performance of each company on each factor (1-4)</li>
+                            <li><strong>Weighted Scores</strong> - Weight × Rating for each company</li>
+                            <li><strong>Comparison</strong> - Your score vs. competitors' scores</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>How do we compare to our major competitors? What are our relative strengths and weaknesses?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Phase 2: Internal Analysis -->
+        <section class="phase-section phase-2">
+            <div class="phase-header">
+                <div class="phase-number">2</div>
+                <div>
+                    <h2>Internal Capability Assessment</h2>
+                    <p>Understand your organization's strengths, weaknesses, and value creation activities</p>
+                </div>
+            </div>
+            <div class="models-grid">
+                <!-- Value Chain -->
+                <div class="model-card" data-name="porters value chain primary activities support activities">
+                    <div class="model-header">
+                        <div class="model-name">Porter's Value Chain</div>
+                        <div class="model-acronym">VC</div>
+                    </div>
+                    <div class="model-purpose">Breaks down organization into activities to identify where value is created and costs are incurred</div>
+                    <div class="model-elements">
+                        <h4>Primary Activities:</h4>
+                        <ul>
+                            <li><strong>Inbound Logistics</strong> - Receiving, storing, distributing inputs</li>
+                            <li><strong>Operations</strong> - Transforming inputs into final products</li>
+                            <li><strong>Outbound Logistics</strong> - Collecting, storing, distributing products</li>
+                            <li><strong>Marketing & Sales</strong> - Providing means for buyers to purchase</li>
+                            <li><strong>Service</strong> - Enhancing/maintaining product value</li>
+                        </ul>
+                    </div>
+                    <div class="model-elements">
+                        <h4>Support Activities:</h4>
+                        <ul>
+                            <li><strong>Firm Infrastructure</strong> - General management, planning, finance, legal</li>
+                            <li><strong>Human Resource Management</strong> - Recruiting, hiring, training, development</li>
+                            <li><strong>Technology Development</strong> - R&D, process automation, design</li>
+                            <li><strong>Procurement</strong> - Purchasing inputs used in value chain</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>Where does our organization create value? What activities are we excellent at? What are our cost drivers?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Phase 3: Strategy Formulation -->
+        <section class="phase-section phase-3">
+            <div class="phase-header">
+                <div class="phase-number">3</div>
+                <div>
+                    <h2>Strategy Formulation</h2>
+                    <p>Decide where to compete and how to win</p>
+                </div>
+            </div>
+            <div class="models-grid">
+                <!-- Ivey's 7 Steps -->
+                <div class="model-card" data-name="iveys 7 steps strategic planning process">
+                    <div class="model-header">
+                        <div class="model-name">Ivey's 7 Steps</div>
+                        <div class="model-acronym">7 STEPS</div>
+                    </div>
+                    <div class="model-purpose">Provides a comprehensive strategic planning process from problem definition to implementation</div>
+                    <div class="model-elements">
+                        <h4>The Seven Steps:</h4>
+                        <ul>
+                            <li><strong>Step 1: Define</strong> - Identify and clarify the problem or issue</li>
+                            <li><strong>Step 2: Gather Information</strong> - Collect external and internal data</li>
+                            <li><strong>Step 3: Generate Alternatives</strong> - Create multiple strategic options</li>
+                            <li><strong>Step 4: Evaluate Alternatives</strong> - Assess pros and cons of each option</li>
+                            <li><strong>Step 5: Decide</strong> - Select the best strategic alternative</li>
+                            <li><strong>Step 6: Implement</strong> - Execute the chosen strategy</li>
+                            <li><strong>Step 7: Follow Up</strong> - Review results and communicate outcomes</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>What problem are we solving? What options do we have? Which one should we choose? How do we execute it?</p>
+                    </div>
+                </div>
+                
+                <!-- Mintzberg's 5 Ps -->
+                <div class="model-card" data-name="mintzbergs 5 ps plan ploy pattern position perspective">
+                    <div class="model-header">
+                        <div class="model-name">Mintzberg's 5 Ps</div>
+                        <div class="model-acronym">5 Ps</div>
+                    </div>
+                    <div class="model-purpose">Views strategy from five different perspectives to broaden understanding beyond planning</div>
+                    <div class="model-elements">
+                        <h4>The Five Ps:</h4>
+                        <ul>
+                            <li><strong>Plan</strong> - A deliberate, conscious course of action</li>
+                            <li><strong>Ploy</strong> - A maneuver to outwit competitors</li>
+                            <li><strong>Pattern</strong> - Consistent behavior that emerges over time</li>
+                            <li><strong>Position</strong> - Where the organization sits in its environment</li>
+                            <li><strong>Perspective</strong> - The collective mindset and approach of the organization</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>Is strategy a plan, a ploy, a pattern, a position, or a perspective? How should we think about it?</p>
+                    </div>
+                </div>
+                
+                <!-- Porter's Diamond -->
+                <div class="model-card" data-name="porters diamond national advantage factor conditions demand related supporting strategy structure rivalry">
+                    <div class="model-header">
+                        <div class="model-name">Porter's Diamond Model</div>
+                        <div class="model-acronym">DIAMOND</div>
+                    </div>
+                    <div class="model-purpose">Analyzes a nation's competitive advantage and factors that drive international competitiveness</div>
+                    <div class="model-elements">
+                        <h4>The Four Main Components:</h4>
+                        <ul>
+                            <li><strong>Factor Conditions</strong> - Nation's production resources (infrastructure, labor, natural resources, capital)</li>
+                            <li><strong>Demand Conditions</strong> - Nature of domestic market demand driving growth and innovation</li>
+                            <li><strong>Related & Supporting Industries</strong> - Presence of supplier industries and clusters</li>
+                            <li><strong>Strategy, Structure & Rivalry</strong> - How companies are created, organized, and managed; domestic competition</li>
+                        </ul>
+                    </div>
+                    <div class="model-elements">
+                        <h4>Two Additional Factors:</h4>
+                        <ul>
+                            <li><strong>Government</strong> - Acts as catalyst and challenger to improve performance</li>
+                            <li><strong>Chance</strong> - External unpredictable events creating opportunities</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>What gives our nation competitive advantage? How do the four determinants interact? What role does government play?</p>
+                    </div>
+                </div>
+                
+                <!-- ACQR -->
+                <div class="model-card" data-name="acqr acceptable consistent qualitative quantitative resources">
+                    <div class="model-header">
+                        <div class="model-name">ACQR Criteria</div>
+                        <div class="model-acronym">ACQR</div>
+                    </div>
+                    <div class="model-purpose">Evaluates strategic alternatives against key acceptance and feasibility criteria</div>
+                    <div class="model-elements">
+                        <h4>The Five Criteria:</h4>
+                        <ul>
+                            <li><strong>A - Acceptable</strong> - Is it politically and culturally acceptable to stakeholders?</li>
+                            <li><strong>C - Consistent</strong> - Is it consistent with firm's history, vision, and strategy?</li>
+                            <li><strong>Q - Qualitative/Quantitative</strong> - Can we measure it? Is ROI positive? Does the math make sense?</li>
+                            <li><strong>R - Resources</strong> - Do we have the required resources? What are the risks?</li>
+                            <li><strong>I - Implementation</strong> - Can we execute this strategy effectively?</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>Is this strategy acceptable, consistent, measurable, feasible, and implementable?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Cross-Cutting Frameworks -->
+        <section class="phase-section cross">
+            <div class="phase-header">
+                <div class="phase-number">✦</div>
+                <div>
+                    <h2>Cross-Cutting Frameworks</h2>
+                    <p>These models apply throughout ALL phases of strategic management</p>
+                </div>
+            </div>
+            <div class="models-grid">
+                <!-- Bloom's Taxonomy -->
+                <div class="model-card" data-name="bloom's taxonomy cross-cutting remember understand apply analyze evaluate create">
+                    <div class="model-header">
+                        <div class="model-name">Bloom's Taxonomy</div>
+                        <div class="model-acronym">TAXONOMY</div>
+                    </div>
+                    <div class="model-purpose">Guides cognitive thinking depth from basic recall to creative strategic solutions</div>
+                    <div class="model-elements">
+                        <h4>Six Cognitive Levels (Low to High):</h4>
+                        <ul>
+                            <li><strong>Remember</strong> - Recall facts, terms, and basic concepts</li>
+                            <li><strong>Understand</strong> - Explain ideas or concepts in your own words</li>
+                            <li><strong>Apply</strong> - Use information in new situations</li>
+                            <li><strong>Analyze</strong> - Draw connections and break down information</li>
+                            <li><strong>Evaluate</strong> - Justify decisions based on criteria and evidence</li>
+                            <li><strong>Create</strong> - Produce new or original work and solutions</li>
+                        </ul>
+                    </div>
+                    <div class="model-elements">
+                        <h4>Application by Phase:</h4>
+                        <ul>
+                            <li><strong>Phase 1 (External):</strong> Analyze external factors and their relationships</li>
+                            <li><strong>Phase 2 (Internal):</strong> Analyze value chain activities and connections</li>
+                            <li><strong>Phase 3 (Formulation):</strong> Evaluate alternatives and create strategic options</li>
+                            <li><strong>Phase 4 (Implementation):</strong> Apply understanding to implement effectively</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>Are we just remembering information or are we analyzing, evaluating, and creating strategic solutions?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Phase 4: Implementation -->
+        <section class="phase-section phase-4">
+            <div class="phase-header">
+                <div class="phase-number">4</div>
+                <div>
+                    <h2>Strategy Implementation</h2>
+                    <p>Turn strategic decisions into action and ensure effective execution</p>
+                </div>
+            </div>
+            <div class="models-grid">
+                <!-- Activity System Map -->
+                <div class="model-card" data-name="activity system map strategic fit alignment">
+                    <div class="model-header">
+                        <div class="model-name">Activity System Map</div>
+                        <div class="model-acronym">ASM</div>
+                    </div>
+                    <div class="model-purpose">Visualizes how strategic activities reinforce each other to create competitive advantage</div>
+                    <div class="model-elements">
+                        <h4>Key Components:</h4>
+                        <ul>
+                            <li><strong>Strategic Theme</strong> - The central value proposition or positioning</li>
+                            <li><strong>Key Activities</strong> - Activities that directly support the theme</li>
+                            <li><strong>Supporting Activities</strong> - Activities that enable key activities</li>
+                            <li><strong>Connections</strong> - How activities reinforce each other</li>
+                            <li><strong>Fit</strong> - Coherence among all activities</li>
+                        </ul>
+                    </div>
+                    <div class="key-questions">
+                        <h4>Key Questions:</h4>
+                        <p>Do all our activities reinforce each other? Are we creating a coherent strategic system?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- How the Models Connect Section -->
+        <section class="diagram-section">
+            <h2>How the Models Connect</h2>
+            <div class="flowchart">
+                <div class="flow-row">
+                    <div class="flow-box phase-1">
+                        PHASE 1: External Analysis
+                        <div class="flow-models">
+                            <span class="flow-model-tag">EFE</span>
+                            <span class="flow-model-tag">Five Forces</span>
+                            <span class="flow-model-tag">CPM</span>
+                        </div>
+                    </div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-box phase-2">
+                        PHASE 2: Internal Analysis
+                        <div class="flow-models">
+                            <span class="flow-model-tag">Value Chain</span>
+                        </div>
+                    </div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-box phase-3">
+                        PHASE 3: Strategy Formulation
+                        <div class="flow-models">
+                            <span class="flow-model-tag">Ivey's 7 Steps</span>
+                            <span class="flow-model-tag">Mintzberg's 5 Ps</span>
+                            <span class="flow-model-tag">Diamond</span>
+                            <span class="flow-model-tag">ACQR</span>
+                        </div>
+                    </div>
+                    <span class="flow-arrow">→</span>
+                    <div class="flow-box phase-4">
+                        PHASE 4: Implementation
+                        <div class="flow-models">
+                            <span class="flow-model-tag">Activity Map</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flow-row">
+                    <div class="flow-box cross">
+                        Cross-Cutting Framework
+                        <div class="flow-models">
+                            <span class="flow-model-tag">Bloom's Taxonomy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Strategic Management Models Reference - For Quick Study Reference</p>
+        </footer>
+    </div>
+    
+    <script>
+        // Search functionality
+        const searchBox = document.getElementById('searchBox');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const modelCards = document.querySelectorAll('.model-card');
+        
+        searchBox.addEventListener('input', filterCards);
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                filterCards();
+            });
+        });
+        
+        function filterCards() {
+            const searchTerm = searchBox.value.toLowerCase();
+            const activeFilter = document.querySelector('.filter-btn.active').dataset.filter;
+            
+            modelCards.forEach(card => {
+                const name = card.dataset.name;
+                const matchesSearch = name.includes(searchTerm);
+                const matchesFilter = activeFilter === 'all' || card.closest('.phase-section').classList.contains(activeFilter);
+                
+                if (matchesSearch && matchesFilter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
