@@ -1021,6 +1021,127 @@ em {
 .mb-4 { margin-bottom: 24px; }
 .mt-2 { margin-top: 16px; }
 .mt-4 { margin-bottom: 24px; }
+
+/* ==========================================================================
+   IMAGE ZOOM MODAL STYLES
+   ========================================================================== */
+
+.zoom-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.92);
+    backdrop-filter: blur(4px);
+}
+
+.zoom-modal.active {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.zoom-modal-content {
+    width: 95%;
+    max-width: 1400px;
+    height: 93%;
+    max-height: 850px;
+    background: #1e293b;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.zoom-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    background: #0f172a;
+    border-bottom: 1px solid #334155;
+}
+
+.zoom-modal-header h4 {
+    margin: 0;
+    color: #f1f5f9;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.zoom-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.zoom-controls button {
+    padding: 8px 14px;
+    background: #334155;
+    color: #f1f5f9;
+    border: 1px solid #475569;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.zoom-controls button:hover {
+    background: #475569;
+    border-color: #64748b;
+}
+
+.zoom-controls button:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+.zoom-level {
+    color: #f1f5f9;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 50px;
+    text-align: center;
+    padding: 0 8px;
+}
+
+.zoom-close {
+    background: #dc2626 !important;
+    border-color: #ef4444 !important;
+}
+
+.zoom-close:hover {
+    background: #ef4444 !important;
+}
+
+.zoom-modal-body {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: auto;
+    padding: 20px;
+    background: #0f172a;
+}
+
+.zoom-image {
+    max-width: 100%;
+    max-height: calc(100vh - 150px);
+    object-fit: contain;
+    border-radius: 8px;
+    cursor: grab;
+    transition: transform 0.1s ease;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.zoom-image:active {
+    cursor: grabbing;
+}
     </style>
 </head>
 <body>
@@ -1797,7 +1918,13 @@ em {
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modalTitle">PDF Viewer</h3>
-                <span class="close" onclick="closePDFModal()">&times;</span>
+                <div class="pdf-viewer-controls">
+                    <button onclick="zoomPDFOut()" title="Zoom Out (-)">−</button>
+                    <span id="pdfZoomLevel" class="zoom-level">100%</span>
+                    <button onclick="zoomPDFIn()" title="Zoom In (+)">+</button>
+                    <button onclick="resetPDFZoom()" title="Reset (0)">⟲</button>
+                    <span class="close" onclick="closePDFModal()" title="Close (Esc)">&times;</span>
+                </div>
             </div>
             <div class="modal-body">
                 <div class="pdf-container" id="pdfContainer">
@@ -1810,19 +1937,52 @@ em {
         </div>
     </div>
 
+    <!-- Image Zoom Modal -->
+    <div id="imageZoomModal" class="zoom-modal">
+        <div class="zoom-modal-content">
+            <div class="zoom-modal-header">
+                <h4 id="zoomTitle">Image Viewer</h4>
+                <div class="zoom-controls">
+                    <button onclick="zoomImageOut()" title="Zoom Out (-)">−</button>
+                    <span id="imageZoomLevel" class="zoom-level">100%</span>
+                    <button onclick="zoomImageIn()" title="Zoom In (+)">+</button>
+                    <button onclick="resetImageZoom()" title="Reset (0)">⟲</button>
+                    <button onclick="downloadZoomImage()" title="Download">↓</button>
+                    <button class="zoom-close" onclick="closeImageZoom()" title="Close (Esc)">×</button>
+                </div>
+            </div>
+            <div class="zoom-modal-body">
+                <img id="zoomImage" class="zoom-image" src="" alt="">
+            </div>
+        </div>
+    </div>
+
     <script>
 /* ==========================================================================
    ESEWA DIGITAL ECOSYSTEM V2 - COMPREHENSIVE JAVASCRIPT
+   Enhanced with Zoom Dialogs for Images and Slides
    ========================================================================== */
+
+// Global state
+let currentImageZoom = 100;
+let currentImage = null;
+let currentPDFZoom = 100;
+let panState = { isDragging: false, startX: 0, startY: 0, currentX: 0, currentY: 0 };
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeNavigation();
     initializeScrollSpy();
     initializePDFModal();
+    initializeImageZoom();
     initializeResponsiveTOC();
     initializeAnimations();
     enhanceAccessibility();
+    initializeKeyboardShortcuts();
 });
+
+/* ==========================================================================
+   NAVIGATION FUNCTIONS
+   ========================================================================== */
 
 function initializeNavigation() {
     document.querySelectorAll('.toc-list a').forEach(link => {
@@ -1857,19 +2017,27 @@ function updateActiveLink(activeLink) {
     activeLink.classList.add('active');
 }
 
+/* ==========================================================================
+   PDF MODAL WITH ZOOM
+   ========================================================================== */
+
 function initializePDFModal() {
     const modal = document.getElementById('pdfModal');
-    window.addEventListener('click', function(e) {
-        if (e.target === modal) closePDFModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closePDFModal();
-    });
+    if (modal) {
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) closePDFModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closePDFModal();
+        });
+    }
 }
 
 function openPDFModal(slideId) {
     const modal = document.getElementById('pdfModal');
     const modalTitle = document.getElementById('modalTitle');
+    if (!modal || !modalTitle) return;
+    
     const slideNames = {
         'slide1': 'eSewa - Dilemma and Fintech Strategy',
         'slide2': 'eSewa - Digital Strategy Crossroads'
@@ -1878,17 +2046,21 @@ function openPDFModal(slideId) {
     modalTitle.textContent = slideNames[slideId] || 'PDF Viewer';
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
+    currentPDFZoom = 100;
     loadPDFContent(slideId);
 }
 
 function closePDFModal() {
     document.getElementById('pdfModal').style.display = 'none';
     document.body.style.overflow = 'auto';
+    currentPDFZoom = 100;
 }
 
 function loadPDFContent(slideId) {
     const pdfContainer = document.getElementById('pdfContainer');
     const modalTitle = document.getElementById('modalTitle');
+    if (!pdfContainer || !modalTitle) return;
+    
     const slideTitles = {
         'slide1': 'eSewa - Dilemma and Fintech Strategy',
         'slide2': 'eSewa - Digital Strategy Crossroads'
@@ -1903,21 +2075,76 @@ function loadPDFContent(slideId) {
     
     if (isMobile) {
         pdfContainer.innerHTML = `
-            <div style="padding: 20px; text-align: center;">
-                <h3 style="color: #0F172A; margin-bottom: 20px;">${slideTitles[slideId]}</h3>
-                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                    <button onclick="downloadPDF('${slideId}')" style="background: #3B82F6; color: white; border: none; padding: 14px 24px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600;">Download PDF</button>
-                    <button onclick="openNativePDF('${slideId}')" style="background: #10B981; color: white; border: none; padding: 14px 24px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600;">View PDF</button>
+            <div style="padding: 30px 20px; text-align: center; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                <h3 style="color: #0F172A; margin-bottom: 24px; font-size: 18px;">${slideTitles[slideId]}</h3>
+                <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px;">
+                    <button onclick="downloadPDF('${slideId}')" style="
+                        background: #3B82F6; color: white; border: none; 
+                        padding: 16px 28px; border-radius: 8px; cursor: pointer;
+                        font-size: 16px; font-weight: 600; min-width: 140px;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    ">
+                        Download PDF
+                    </button>
+                    <button onclick="openNativePDF('${slideId}')" style="
+                        background: #10B981; color: white; border: none; 
+                        padding: 16px 28px; border-radius: 8px; cursor: pointer;
+                        font-size: 16px; font-weight: 600; min-width: 140px;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                    ">
+                        View PDF
+                    </button>
+                </div>
+                <div style="background: #F8F9FA; padding: 16px; border-radius: 8px; max-width: 400px; margin: 0 auto;">
+                    <p style="color: #6B7280; margin: 0; font-size: 14px;">
+                        Use the buttons above to view or download the PDF slide.
+                    </p>
                 </div>
             </div>
         `;
     } else {
         pdfContainer.innerHTML = `
-            <iframe src="pdfs/${pdfFiles[slideId]}.pdf#toolbar=1&navpanes=1&scrollbar=1" 
-                    style="width: 100%; height: 100%; border: none;" title="PDF Viewer">
-                <div class="pdf-placeholder"><p>PDF viewer not supported. Please download the file.</p></div>
-            </iframe>
+            <div id="pdfContentWrapper" style="width: 100%; height: 100%; overflow: auto; display: flex; justify-content: center; align-items: flex-start;">
+                <iframe id="pdfIframe" src="pdfs/${pdfFiles[slideId]}.pdf#toolbar=1&navpanes=1&scrollbar=1" 
+                        style="width: 100%; height: 100%; border: none; border-radius: 4px; transform-origin: center top;"
+                        title="PDF Viewer">
+                </iframe>
+            </div>
         `;
+    }
+}
+
+/* ==========================================================================
+   PDF ZOOM FUNCTIONS
+   ========================================================================== */
+
+function zoomPDFIn() {
+    if (currentPDFZoom < 200) {
+        currentPDFZoom += 25;
+        applyPDFZoom();
+    }
+}
+
+function zoomPDFOut() {
+    if (currentPDFZoom > 50) {
+        currentPDFZoom -= 25;
+        applyPDFZoom();
+    }
+}
+
+function resetPDFZoom() {
+    currentPDFZoom = 100;
+    applyPDFZoom();
+}
+
+function applyPDFZoom() {
+    const iframe = document.getElementById('pdfIframe');
+    const zoomDisplay = document.getElementById('pdfZoomLevel');
+    if (iframe) {
+        iframe.style.transform = `scale(${currentPDFZoom / 100})`;
+    }
+    if (zoomDisplay) {
+        zoomDisplay.textContent = `${currentPDFZoom}%`;
     }
 }
 
@@ -1936,6 +2163,247 @@ function openNativePDF(slideId) {
     link.target = '_blank';
     link.click();
 }
+
+/* ==========================================================================
+   IMAGE ZOOM MODAL
+   ========================================================================== */
+
+function initializeImageZoom() {
+    // Add click handlers to all diagram images
+    const diagramImages = document.querySelectorAll('.diagram-image img');
+    diagramImages.forEach(img => {
+        img.addEventListener('click', function() {
+            openImageZoom(this);
+        });
+        
+        // Add keyboard accessibility
+        img.setAttribute('tabindex', '0');
+        img.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                openImageZoom(this);
+            }
+        });
+        
+        // Add visual indicator
+        img.setAttribute('title', 'Click to zoom');
+        img.style.cursor = 'pointer';
+    });
+    
+    // Close on background click
+    const imageZoomModal = document.getElementById('imageZoomModal');
+    if (imageZoomModal) {
+        imageZoomModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeImageZoom();
+            }
+        });
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        const zoomModal = document.getElementById('imageZoomModal');
+        if (zoomModal && zoomModal.style.display === 'block') {
+            switch(e.key) {
+                case 'Escape':
+                    closeImageZoom();
+                    break;
+                case '+':
+                case '=':
+                    e.preventDefault();
+                    zoomImageIn();
+                    break;
+                case '-':
+                    e.preventDefault();
+                    zoomImageOut();
+                    break;
+                case '0':
+                    e.preventDefault();
+                    resetImageZoom();
+                    break;
+            }
+        }
+    });
+}
+
+function openImageZoom(imgElement) {
+    const zoomModal = document.getElementById('imageZoomModal');
+    const zoomImage = document.getElementById('zoomImage');
+    const zoomTitle = document.getElementById('zoomTitle');
+    
+    if (!zoomModal || !zoomImage || !zoomTitle) return;
+    
+    // Get image info
+    const imgSrc = imgElement.src;
+    const imgAlt = imgElement.alt || 'Diagram Image';
+    const imgTitle = imgElement.closest('.diagram-container').querySelector('h4')?.textContent || imgAlt;
+    
+    // Set content
+    zoomImage.src = imgSrc;
+    zoomImage.alt = imgAlt;
+    zoomTitle.textContent = imgTitle;
+    
+    // Reset state
+    currentImage = imgElement;
+    currentImageZoom = 100;
+    panState = { isDragging: false, startX: 0, startY: 0, currentX: 0, currentY: 0 };
+    
+    // Show modal
+    zoomModal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    // Update zoom display
+    updateImageZoomDisplay();
+    
+    // Setup pan functionality
+    setupImagePan();
+    
+    // Focus close button
+    zoomModal.querySelector('.zoom-close').focus();
+}
+
+function closeImageZoom() {
+    const zoomModal = document.getElementById('imageZoomModal');
+    if (zoomModal) {
+        zoomModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    // Reset image transform
+    const zoomImage = document.getElementById('zoomImage');
+    if (zoomImage) {
+        zoomImage.style.transform = '';
+        zoomImage.style.cursor = '';
+    }
+}
+
+function zoomImageIn() {
+    if (currentImageZoom < 500) {
+        currentImageZoom += 25;
+        updateImageZoomDisplay();
+    }
+}
+
+function zoomImageOut() {
+    if (currentImageZoom > 25) {
+        currentImageZoom -= 25;
+        updateImageZoomDisplay();
+    }
+}
+
+function resetImageZoom() {
+    currentImageZoom = 100;
+    panState.currentX = 0;
+    panState.currentY = 0;
+    updateImageZoomDisplay();
+}
+
+function updateImageZoomDisplay() {
+    const zoomImage = document.getElementById('zoomImage');
+    const zoomDisplay = document.getElementById('imageZoomLevel');
+    
+    if (zoomImage) {
+        zoomImage.style.transform = `translate(${panState.currentX}px, ${panState.currentY}px) scale(${currentImageZoom / 100})`;
+        zoomImage.style.cursor = currentImageZoom > 100 ? 'grab' : 'default';
+    }
+    
+    if (zoomDisplay) {
+        zoomDisplay.textContent = `${currentImageZoom}%`;
+    }
+}
+
+function setupImagePan() {
+    const zoomImage = document.getElementById('zoomImage');
+    if (!zoomImage) return;
+    
+    // Mouse events
+    zoomImage.addEventListener('mousedown', function(e) {
+        if (currentImageZoom > 100) {
+            panState.isDragging = true;
+            panState.startX = e.clientX - panState.currentX;
+            panState.startY = e.clientY - panState.currentY;
+            zoomImage.style.cursor = 'grabbing';
+        }
+    });
+    
+    document.addEventListener('mousemove', function(e) {
+        if (panState.isDragging) {
+            e.preventDefault();
+            panState.currentX = e.clientX - panState.startX;
+            panState.currentY = e.clientY - panState.startY;
+            updateImageZoomDisplay();
+        }
+    });
+    
+    document.addEventListener('mouseup', function() {
+        if (panState.isDragging) {
+            panState.isDragging = false;
+            zoomImage.style.cursor = 'grab';
+        }
+    });
+    
+    // Touch events for mobile
+    zoomImage.addEventListener('touchstart', function(e) {
+        if (currentImageZoom > 100 && e.touches.length === 1) {
+            panState.isDragging = true;
+            panState.startX = e.touches[0].clientX - panState.currentX;
+            panState.startY = e.touches[0].clientY - panState.currentY;
+        }
+    });
+    
+    document.addEventListener('touchmove', function(e) {
+        if (panState.isDragging && e.touches.length === 1) {
+            e.preventDefault();
+            panState.currentX = e.touches[0].clientX - panState.startX;
+            panState.currentY = e.touches[0].clientY - panState.startY;
+            updateImageZoomDisplay();
+        }
+    });
+    
+    document.addEventListener('touchend', function() {
+        panState.isDragging = false;
+    });
+}
+
+function downloadZoomImage() {
+    if (currentImage) {
+        const link = document.createElement('a');
+        link.href = currentImage.src;
+        link.download = currentImage.alt || 'diagram-image.png';
+        link.click();
+    }
+}
+
+/* ==========================================================================
+   KEYBOARD SHORTCUTS
+   ========================================================================== */
+
+function initializeKeyboardShortcuts() {
+    document.addEventListener('keydown', function(e) {
+        // PDF shortcuts
+        if (document.getElementById('pdfModal').style.display === 'block') {
+            switch(e.key) {
+                case '+':
+                case '=':
+                    e.preventDefault();
+                    zoomPDFIn();
+                    break;
+                case '-':
+                    e.preventDefault();
+                    zoomPDFOut();
+                    break;
+                case '0':
+                    e.preventDefault();
+                    resetPDFZoom();
+                    break;
+            }
+        }
+    });
+}
+
+/* ==========================================================================
+   UTILITY FUNCTIONS
+   ========================================================================== */
 
 function initializeResponsiveTOC() {
     const tocToggle = document.getElementById('tocToggle');
@@ -1961,11 +2429,24 @@ function enhanceAccessibility() {
     });
 }
 
+/* ==========================================================================
+   EXPORT FUNCTIONS
+   ========================================================================== */
+
 window.eSewaResourceV2 = {
     openPDFModal,
     closePDFModal,
+    zoomPDFIn,
+    zoomPDFOut,
+    resetPDFZoom,
     downloadPDF,
-    openNativePDF
+    openNativePDF,
+    openImageZoom,
+    closeImageZoom,
+    zoomImageIn,
+    zoomImageOut,
+    resetImageZoom,
+    downloadZoomImage
 };
     </script>
 </body>
