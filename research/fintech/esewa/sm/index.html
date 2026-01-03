@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Digital Ecosystem Playbook: eSewa Case Study</title>
+    <style>
+        :root {
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --accent-color: #2c3e50;
+            --secondary-color: #5da4d6;
+            --card-bg: #ffffff;
+            --border-color: #e1e1e1;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 18px;
+        }
+
+        /* --- Layout & Navigation --- */
+        header {
+            background-color: var(--card-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .site-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+            width: 100%;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* --- Main Content --- */
+        main {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            margin-bottom: 4rem;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            color: #555;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+        }
+
+        strong {
+            color: var(--accent-color);
+        }
+
+        ul {
+            margin-bottom: 1.5rem;
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Special Components --- */
+        blockquote {
+            border-left: 4px solid var(--secondary-color);
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            background-color: #f4f8fb;
+            font-style: italic;
+            color: #555;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .pill {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: #eee;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #555;
+            margin-right: 5px;
+        }
+
+        /* --- Resource Cards --- */
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .resource-card {
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            background-color: #fff;
+            transition: transform 0.2s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* --- Modal / Viewer --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            position: relative;
+            background: white;
+            width: 90%;
+            max-width: 900px;
+            height: 85vh;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 15px 20px;
+            background: #f4f4f4;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-weight: bold;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+            line-height: 1;
+        }
+
+        .modal-body {
+            flex: 1;
+            padding: 0;
+            background-color: #333; /* Dark background for better image viewing */
+            overflow: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-body iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .fallback-message {
+            color: #aaa;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            section { padding: 25px; }
+            .nav-container { flex-direction: column; align-items: flex-start; }
+            nav ul { margin-top: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="site-title">Digital Business Strategy Course: eSewa</div>
+            <nav>
+                <ul>
+                    <li><a href="#part1">Context</a></li>
+                    <li><a href="#part2">Framework</a></li>
+                    <li><a href="#part3">Playbook</a></li>
+                    <li><a href="#part4">Case Study</a></li>
+                    <li><a href="#part5">Analysis</a></li>
+                    <li><a href="#resources">Resources</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Welcome / Intro -->
+        <section>
+            <h1>The Digital Ecosystem Playbook</h1>
+            <p class="lead"><strong>From Vision to Reality: A Case Study on eSewa's Digital Strategy in Nepal</strong></p>
+            <p>In 2009, Nepal's economy was dominated by cash. Digital payments were a foreign concept. Into this landscape stepped eSewa, a company that began with a simple service—recharging mobile phones—and went on to pioneer the country's transformation toward a cashless economy. Its journey from a basic utility to a comprehensive financial ecosystem is a powerful illustration of modern business principles in action.</p>
+            <p>This course module combines theoretical frameworks from MIS Quarterly with the practical application of eSewa's 16-year history to understand <em>Scope, Scale, Speed, and Sources of Value</em> in the digital age.</p>
+        </section>
+
+        <!-- Part 1: Context -->
+        <section id="part1">
+            <h2>Part 1: Context – The Digital Revolution in Nepal</h2>
+            <h3>Introduction: The Dawn of a New Battle</h3>
+            <p>In early 2025, Jagdish Khadka, the CEO of Nepal's pioneering digital wallet company, eSewa, found himself at a critical juncture. He was contemplating the imminent merger of his two largest competitors, Khalti and IME Pay—a move hailed by the media as "Nepal's first digital wallet merger" that would fundamentally reshape the country's financial technology landscape. The battle for the future of Nepal's payment industry was about to enter a decisive new phase.</p>
+
+            <h4>1.1 The Problem of Cash</h4>
+            <blockquote>"I recall my neighbor journeying miles just to pay an $0.59 electricity bill, often spending up to $7.34 and taking as long as two days." <br><small>— Rupesh Neupane, Head of Business Development at eSewa</small></blockquote>
+            <p>This story illustrates a massive "payment gap" where the cost and time required to make a simple payment far exceeded the value of the transaction itself. This widespread problem created a clear and urgent need for a better solution.</p>
+
+            <h4>1.2 The Rise of Connectivity</h4>
+            <ul>
+                <li><strong>Internet Penetration:</strong> The number of people with internet access jumped from a mere 2% in 2009 to 55.8% in 2023.</li>
+                <li><strong>Broadband Penetration:</strong> Driven by affordable data plans, this figure reached an astonishing 140% by January 2024.</li>
+            </ul>
+            <p>This explosion in connectivity and digital literacy created a vibrant but unregulated 'wild west' for digital finance, compelling the central bank to establish formal rules of the game.</p>
+        </section>
+
+        <!-- Part 2: Framework -->
+        <section id="part2">
+            <h2>Part 2: The Framework – Digital Business Strategy Theory</h2>
+            <p>A fundamental paradigm shift is reshaping corporate strategy. We have moved from aligning IT with business, to fusing them into a single <strong>Digital Business Strategy</strong>. This framework—based on the 4S Theme (Scope, Scale, Speed, Sources of Value)—is our analytical lens.</p>
+
+            <h3>The 4 Core Themes</h3>
+            
+            <p><strong>1. Scope</strong><br>
+            Scope expands beyond firm boundaries into dynamic ecosystems. It is trans-functional, integrating siloed operations and digitizing products. Success is determined not just by what a firm owns, but by the network of partners it can coordinate.</p>
+
+            <p><strong>2. Scale</strong><br>
+            Digital Scale is not about physical assets, but dynamic capabilities like network effects, cloud scalability, and information abundance. It allows for exponential growth that is impossible for traditional incumbents to match.</p>
+
+            <p><strong>3. Speed</strong><br>
+            Speed is the capacity to outpace competitors in product launches, data-driven decisions, and network formation. In the fintech arena, where market windows open and close rapidly, speed is a primary determinant of success.</p>
+
+            <p><strong>4. Sources of Value Creation & Capture</strong><br>
+            Digital strategy rewrites profitability. Value comes from information, multi-sided platforms, and controlling "digital control points." Firms that own the central platform can capture a disproportionate share of industry profits.</p>
+        </section>
+
+        <!-- Part 3: Playbook -->
+        <section id="part3">
+            <h2>Part 3: The Playbook in Action</h2>
+            <h3>Redefining Strategic Boundaries: The Scope of a Digital Ecosystem</h3>
+            <p>eSewa began with mobile recharges in 2009 but rapidly transformed into a trans-functional platform. It created a one-stop digital hub encompassing utility payments, financial services (over 50 banks), education (4,500 schools), and travel/entertainment.</p>
+            <p>Their strategy extended scope beyond internal boundaries by building a network of <strong>300,000 agents</strong>. This physical-to-digital bridge solved low digital literacy challenges, crossing traditional lines of banking and retail.</p>
+
+            <h3>Achieving Exponential Growth: The Scale of Digital Operations</h3>
+            <p>eSewa achieved scale not by building costly infrastructure, but through a digitally-enabled, human-powered network. This agent-led model overcame barriers like low internet penetration.</p>
+            <blockquote>"Our agent network is what makes eSewa truly inclusive." <br><small>— CEO Jagdish Khadka</small></blockquote>
+            <p>This created powerful network effects: more users attracted more merchants, and vice versa. Strategic partnerships with NTC, Ncell, and India’s PhonePe further amplified this dynamic.</p>
+
+            <h3>Competing at Digital Velocity: The Speed of Execution</h3>
+            <p>eSewa demonstrated strategic speed through three distinct phases:</p>
+            <ul>
+                <li><strong>Financial Inclusion:</strong> Rapid deployment of agents to build a foundational user base.</li>
+                <li><strong>Financial Convenience:</strong> Quick expansion into partnerships to become a comprehensive daily platform.</li>
+                <li><strong>Financial Freedom:</strong> Post-COVID introduction of sophisticated services like micro-lending and wealth management.</li>
+            </ul>
+        </section>
+
+        <!-- Part 4: Deep Dive -->
+        <section id="part4">
+            <h2>Part 4: Deep Dive Analysis – The Case of eSewa</h2>
+            <h3>Phase 1: Financial Inclusion (The Foundation)</h3>
+            <p>eSewa's most critical strategic move was the creation of the agent-led model in 2012. Local agents became the human face of the digital service. During initial days, "~85% of the transactions were generated from agents." This achieved <em>Scale</em> through alliances and <em>Scope</em> by accessing market segments invisible to purely digital competitors.</p>
+
+            <h3>Phase 2: Financial Convenience (Building the Ecosystem)</h3>
+            <p>By integrating with schools, utilities, and banks, eSewa created high switching costs. When a single app handles electricity bills and school fees, leaving becomes a significant inconvenience. This ecosystem approach built a competitive moat.</p>
+
+            <h3>The Current Landscape: A Market at an Inflection Point</h3>
+            <p>The fintech landscape has transformed from a blue ocean to a red ocean. There are now 25 licensed Payment Service Providers (PSPs).</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Competitor</th>
+                        <th>Core Strategy</th>
+                        <th>Key Differentiators</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>eSewa</strong></td>
+                        <td>Broad market leadership; one-stop ecosystem.</td>
+                        <td>Pioneer status, extensive agent network, profitability.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Khalti</strong></td>
+                        <td>Pure-play digital; targeting urban millennials.</td>
+                        <td>Modern UI/UX, youth appeal, exclusive ticketing.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>IME Pay</strong></td>
+                        <td>Financial inclusion via remittances.</td>
+                        <td>Extensive physical remittance agent network.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>The Imminent Merger</h4>
+            <p>The merger of Khalti and IME Pay creates a formidable rival. It fuses Khalti's urban youth segment with IME Pay's rural reach, creating a full-spectrum competitor poised to challenge eSewa across every segment.</p>
+        </section>
+
+        <!-- Part 5: Analysis -->
+        <section id="part5">
+            <h2>Part 5: Strategic Options & Recommendations</h2>
+            <p>At this defining crossroads, CEO Jagdish Khadka faces three distinct options.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Description</th>
+                        <th>Reward vs. Risk</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>1. Integrate Embedded Banking</strong></td>
+                        <td>Evolve into a "super app" offering savings, investments, and SME credit.</td>
+                        <td><strong>Reward:</strong> High profit per user (10x), deep lock-in.<br><strong>Risk:</strong> High regulatory burden, low initial conversion (2-3%), high complexity.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>2. Strengthen Core Digital Payments</strong></td>
+                        <td>Deepen penetration in rural/youth segments; focus on operational excellence.</td>
+                        <td><strong>Reward:</strong> Grow base by 10%, secure foundation.<br><strong>Risk:</strong> Potential strategic stagnation, vulnerability to innovation.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>3. Expand Internationally</strong></td>
+                        <td>Replicate the Nepal playbook in Africa or South Asia.</td>
+                        <td><strong>Reward:</strong> First-mover advantage in new markets.<br><strong>Risk:</strong> Long runway to profitability, immense execution risk.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Concluding Recommendation</h3>
+            <p>Given the immediate threat of a consolidated competitor, the strategic imperative is focus. The high capital requirements of Option 1 and the resource drain of Option 3 are unacceptable liabilities.</p>
+            <blockquote>"Focus is non-negotiable. Tapping local opportunities will solidify eSewa's foundation... strengthening core digital payments is a better bet to focus on at the moment."<br><small>— External Consultant</small></blockquote>
+            <p><strong>Recommendation:</strong> Pursue <strong>Option 2: Strengthening Core Digital Payments</strong>. This directly confronts the primary threat, leveraging existing strengths to build an unassailable foundation for future ventures.</p>
+        </section>
+
+        <!-- Part 6: Conclusion -->
+        <section id="part6">
+            <h2>Part 6: Conclusion – Imperatives for Digital Leadership</h2>
+            <p>eSewa's journey offers three crucial takeaways for modern business leaders:</p>
+            <ol>
+                <li><strong>Think in Ecosystems, Not Industries:</strong> Competitive advantage lies in the network you orchestrate, not just the products you build.</li>
+                <li><strong>Build Platforms for Scale and Speed:</strong> Create platforms that connect participants in a virtuous cycle, allowing for exponential growth.</li>
+                <li><strong>Architect for Value Capture:</strong> Design business models to control key digital points, ensuring you secure a disproportionate share of the value you create.</li>
+            </ol>
+            <p>The future of digital business strategy is already here; mastering this playbook is essential for those who intend to lead it.</p>
+        </section>
+
+        <!-- Resources / Media Viewers -->
+        <section id="resources">
+            <h2>Supplementary Materials</h2>
+            <p>Use the viewers below to examine the specific diagrams and strategic slide decks associated with this case study.</p>
+            
+            <div class="resource-grid">
+                <!-- PNG 1 -->
+                <div class="resource-card">
+                    <span class="icon">🖼️</span>
+                    <h4>Digital Strategy Framework</h4>
+                    <p>Visualizing the 4S Framework and eSewa's ecosystem.</p>
+                    <button class="btn" onclick="openImageViewer('../imgs/esewa-digital-strategy.png', 'Digital Strategy Framework')">View Image</button>
+                </div>
+
+                <!-- PNG 2 -->
+                <div class="resource-card">
+                    <span class="icon">🏔️</span>
+                    <h4>Navigating Nepal's Evolution</h4>
+                    <p>Geographic and demographic analysis of the market.</p>
+                    <button class="btn" onclick="openImageViewer('../imgs/esewa-navigating-fintech-evolution.png')">View Image</button>
+                </div>
+
+                <!-- PDF 1 -->
+                <div class="resource-card">
+                    <span class="icon">📄</span>
+                    <h4>Dilemma & Strategy</h4>
+                    <p>Strategic slide deck covering the competitive dilemma.</p>
+                    <button class="btn" onclick="openPdfViewer('../pdfs/esewa-dilemma-fintech-strategy.pdf', 'Dilemma and Fintech Strategy')">View PDF</button>
+                </div>
+
+                <!-- PDF 2 -->
+                <div class="resource-card">
+                    <span class="icon">📄</span>
+                    <h4>Digital Strategy Crossroads</h4>
+                    <p>Analysis of the strategic crossroads and future options.</p>
+                    <button class="btn" onclick="openPdfViewer('../pdfs/esewa-digital-strategy-crossroads.pdf', 'Digital Strategy Crossroads')">View PDF</button>
+                </div>
+            </div>
+        </section>
+
+        <footer style="text-align: center; margin-top: 60px; padding-bottom: 40px; color: #999; font-size: 0.9rem;">
+            <p>&copy; 2025 Digital Business Strategy Course. All Rights Reserved.</p>
+        </footer>
+
+    </main>
+
+    <!-- Image Viewer Modal -->
+    <div id="imageModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title" id="imgTitle">Image Viewer</span>
+                <button class="close-btn" onclick="closeModal('imageModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Placeholder Logic: On error, show text -->
+                <img id="imgDisplay" src="" alt="Resource" onerror="this.style.display='none'; document.getElementById('imgFallback').style.display='block';">
+                <div id="imgFallback" class="fallback-message" style="display:none;">
+                    <p>Image file not found.</p>
+                    <small>Ensure <strong>eSewa - Digital Strategy.png</strong> or <strong>eSewa - Navigating Nepal's Fintech Evolution.png</strong> is in the same folder as index.html.</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF Viewer Modal -->
+    <div id="pdfModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title" id="pdfTitle">PDF Viewer</span>
+                <button class="close-btn" onclick="closeModal('pdfModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- Iframe for PDF. Note: Native PDF support depends on the browser. -->
+                <iframe id="pdfDisplay" src="" type="application/pdf"></iframe>
+                <div id="pdfFallback" class="fallback-message" style="display:none;">
+                    <p>PDF preview not supported by your browser.</p>
+                    <p><a id="pdfDownloadLink" href="#" target="_blank" style="color: #5da4d6;">Click here to download/open file directly</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Logic
+        function openImageViewer(src, title) {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('imgDisplay');
+            const fallback = document.getElementById('imgFallback');
+            
+            document.getElementById('imgTitle').textContent = title;
+            img.src = src;
+            img.style.display = 'block';
+            fallback.style.display = 'none';
+            
+            modal.classList.add('active');
+        }
+
+        function openPdfViewer(src, title) {
+            const modal = document.getElementById('pdfModal');
+            const iframe = document.getElementById('pdfDisplay');
+            const fallback = document.getElementById('pdfFallback');
+            const downloadLink = document.getElementById('pdfDownloadLink');
+
+            document.getElementById('pdfTitle').textContent = title;
+            iframe.src = src;
+            downloadLink.href = src;
+
+            // Basic check for PDF support (modern browsers usually handle iframe well)
+            // We show the fallback link just in case
+            fallback.style.display = 'none'; 
+
+            modal.classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+            
+            // Reset sources after transition to stop memory load or audio playing
+            setTimeout(() => {
+                if(modalId === 'imageModal') {
+                    document.getElementById('imgDisplay').src = '';
+                } else if (modalId === 'pdfModal') {
+                    document.getElementById('pdfDisplay').src = '';
+                }
+            }, 300);
+        }
+
+        // Close modal when clicking outside content
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                event.target.classList.remove('active');
+            }
+        }
+
+        // Smooth scroll for nav
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
