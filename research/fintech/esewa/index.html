@@ -1,0 +1,1972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eSewa and Digital Ecosystem - Comprehensive Learning Resource V2</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+/* ==========================================================================
+   ESEWA DIGITAL ECOSYSTEM - COMPREHENSIVE LEARNING RESOURCE V2
+   Complete, detailed version with all source content preserved
+   ========================================================================== */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.7;
+    color: #334155;
+    background-color: #F8FAFC;
+    font-size: clamp(15px, 1.1vw + 0.5rem, 18px);
+}
+
+/* ==========================================================================
+   TYPOGRAPHY SYSTEM
+   Academic-grade typography with optimal readability
+   ========================================================================== */
+
+h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(28px, 4.5vw, 44px);
+    font-weight: 700;
+    line-height: 1.2;
+    color: #0F172A;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(22px, 3.5vw, 28px);
+    font-weight: 600;
+    line-height: 1.3;
+    color: #0F172A;
+    margin-bottom: 16px;
+    margin-top: 40px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #E2E8F0;
+}
+
+h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 600;
+    line-height: 1.4;
+    color: #0F172A;
+    margin-bottom: 12px;
+    margin-top: 28px;
+}
+
+h4 {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(16px, 2vw, 17px);
+    font-weight: 600;
+    line-height: 1.4;
+    color: #0F172A;
+    margin-bottom: 10px;
+    margin-top: 20px;
+}
+
+p {
+    margin-bottom: 14px;
+    line-height: 1.7;
+}
+
+ul, ol {
+    margin-bottom: 14px;
+    padding-left: 22px;
+}
+
+li {
+    margin-bottom: 6px;
+}
+
+strong {
+    font-weight: 600;
+    color: #0F172A;
+}
+
+em {
+    font-style: italic;
+    color: #64748B;
+}
+
+/* ==========================================================================
+   LAYOUT STRUCTURE
+   ========================================================================== */
+
+.content {
+    display: flex;
+    min-height: 100vh;
+}
+
+.paper {
+    background: #FFFFFF;
+    margin-left: 300px;
+    margin-right: auto;
+    width: 100%;
+    padding: clamp(28px, 4vw, 56px) clamp(36px, 7vw, 72px);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #E2E8F0;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   TABLE OF CONTENTS
+   ========================================================================== */
+
+.toc {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    background: #FFFFFF;
+    border-right: 1px solid #E2E8F0;
+    padding: 28px 20px;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.toc-header {
+    margin-bottom: 20px;
+}
+
+.toc-header h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #0F172A;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+}
+
+.toc-toggle {
+    display: none;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.toc-list li {
+    margin-bottom: 4px;
+}
+
+.toc-list a {
+    display: block;
+    padding: 8px 10px;
+    color: #64748B;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    border-left: 2px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.toc-list a:hover {
+    color: #0F172A;
+    background-color: #F8FAFC;
+}
+
+.toc-list a.active {
+    color: #2563EB;
+    background-color: #EFF6FF;
+    border-left-color: #2563EB;
+}
+
+.toc-sublist {
+    padding-left: 16px;
+    margin-top: 4px;
+}
+
+.toc-sublist a {
+    font-size: 12px;
+    padding: 6px 10px;
+}
+
+/* ==========================================================================
+   DOCUMENT STRUCTURE
+   ========================================================================== */
+
+.document-header {
+    margin-bottom: 48px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid #CBD5E1;
+}
+
+.document-meta {
+    margin-top: 16px;
+}
+
+.subtitle {
+    font-size: clamp(15px, 1.8vw, 18px);
+    color: #64748B;
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+
+.author {
+    font-size: 14px;
+    color: #64748B;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.section {
+    margin-bottom: 40px;
+}
+
+.module-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 60px 0;
+}
+
+.module-divider span {
+    font-size: 20px;
+    color: #94A3B8;
+    font-weight: 300;
+}
+
+.chapter-divider {
+    margin: 40px 0;
+}
+
+/* ==========================================================================
+   CONTENT COMPONENTS
+   ========================================================================== */
+
+.key-points {
+    background: #F8FAFC;
+    border-left: 4px solid #2563EB;
+    padding: 20px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.key-points h3 {
+    margin-top: 0;
+    color: #2563EB;
+    font-size: 16px;
+}
+
+.framework-box {
+    background: #F1F5F9;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.framework-box h4 {
+    color: #2563EB;
+    margin-top: 0;
+}
+
+.quote-box {
+    background: #F8FAFC;
+    border-left: 4px solid #2563EB;
+    padding: 20px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.quote-box blockquote {
+    font-family: 'Lora', serif;
+    font-size: clamp(16px, 2.2vw, 20px);
+    font-style: italic;
+    color: #0F172A;
+    margin: 0 0 12px 0;
+    line-height: 1.6;
+}
+
+.quote-box .quote-author {
+    font-size: 13px;
+    color: #64748B;
+    font-style: normal;
+}
+
+.quote-box .quote-author strong {
+    color: #0F172A;
+}
+
+.four-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.pillar-card {
+    background: #F8FAFC;
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid #E2E8F0;
+}
+
+.pillar-card h4 {
+    color: #2563EB;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.pillar-card .pillar-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+}
+
+.pillar-card p {
+    font-size: 13px;
+    color: #64748B;
+    margin-bottom: 0;
+}
+
+/* Timeline styles */
+.timeline {
+    margin: 28px 0;
+    position: relative;
+    padding-left: 28px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #2563EB;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 28px;
+    padding-left: 20px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    background: #2563EB;
+    border-radius: 50%;
+    border: 2px solid #FFFFFF;
+}
+
+.timeline-phase {
+    background: #F1F5F9;
+    padding: 14px 18px;
+    border-radius: 6px;
+    margin-bottom: 14px;
+}
+
+.timeline-phase h4 {
+    margin: 0;
+    color: #0F172A;
+    font-size: 16px;
+}
+
+.timeline-phase .phase-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #2563EB;
+    margin-bottom: 4px;
+}
+
+/* Comparison grids */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.comparison-item {
+    background: #F8FAFC;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #E2E8F0;
+}
+
+.comparison-item h4 {
+    color: #2563EB;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.comparison-item p {
+    font-size: 13px;
+    color: #64748B;
+    margin-bottom: 10px;
+}
+
+.comparison-item ul {
+    margin: 0;
+    font-size: 13px;
+}
+
+.three-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 24px 0;
+}
+
+.strategy-option {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.strategy-option h4 {
+    color: #0F172A;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.strategy-option .option-number {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    background: #2563EB;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.strategy-option .rewards-section {
+    background: #F0FDF4;
+    border-left: 3px solid #10B981;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.strategy-option .rewards-section h5 {
+    font-size: 13px;
+    color: #10B981;
+    margin: 0 0 6px 0;
+}
+
+.strategy-option .risks-section {
+    background: #FEF2F2;
+    border-left: 3px solid #EF4444;
+    padding: 10px 14px;
+    margin: 12px 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.strategy-option .risks-section h5 {
+    font-size: 13px;
+    color: #EF4444;
+    margin: 0 0 6px 0;
+}
+
+/* Tables */
+.market-table {
+    margin: 24px 0;
+    overflow-x: auto;
+}
+
+.market-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+}
+
+.market-table th,
+.market-table td {
+    padding: 14px;
+    text-align: left;
+    border-bottom: 1px solid #E2E8F0;
+    vertical-align: top;
+}
+
+.market-table th {
+    background: #F8FAFC;
+    font-weight: 600;
+    color: #0F172A;
+    font-size: 14px;
+}
+
+.market-table td {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* Data boxes */
+.data-box {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.data-box h4 {
+    margin-top: 0;
+    color: #0F172A;
+}
+
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+
+.data-item {
+    text-align: center;
+    padding: 12px;
+    background: #FFFFFF;
+    border-radius: 6px;
+}
+
+.data-item .value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2563EB;
+}
+
+.data-item .label {
+    font-size: 11px;
+    color: #64748B;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* Agent story */
+.agent-story {
+    background: linear-gradient(135deg, #F0FDF4 0%, #F8FAFC 100%);
+    border: 1px solid #86EFAC;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 24px 0;
+}
+
+.agent-story h4 {
+    color: #166534;
+    margin-top: 0;
+}
+
+.agent-story .metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.agent-story .metric {
+    background: #FFFFFF;
+    padding: 14px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.agent-story .metric .value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #166534;
+}
+
+.agent-story .metric .label {
+    font-size: 11px;
+    color: #64748B;
+    text-transform: uppercase;
+}
+
+/* ==========================================================================
+   MODULES
+   ========================================================================== */
+
+.module-header {
+    background: #F1F5F9;
+    border-radius: 8px;
+    padding: 24px;
+    margin: 32px 0 24px 0;
+    text-align: center;
+}
+
+.module-header h2 {
+    margin-top: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.module-header p {
+    color: #64748B;
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   DIAGRAMS AND VISUALS
+   ========================================================================== */
+
+.mermaid-placeholder {
+    margin: 36px 0;
+}
+
+.diagram-container {
+    background: #F1F5F9;
+    border: 1px dashed #CBD5E1;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+}
+
+.diagram-container h4 {
+    color: #64748B;
+    margin-bottom: 20px;
+    font-size: 15px;
+}
+
+.diagram-image {
+    margin: 20px 0;
+}
+
+.diagram-image img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #CBD5E1;
+    border-radius: 6px;
+}
+
+.diagram-caption {
+    font-size: 13px;
+    color: #64748B;
+    font-style: italic;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+/* ==========================================================================
+   PDF SLIDES SECTION
+   ========================================================================== */
+
+.pdf-slides-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin: 28px 0;
+}
+
+.pdf-slide-item {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pdf-slide-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 12px -3px rgba(0, 0, 0, 0.1);
+}
+
+.slide-thumbnail {
+    position: relative;
+    aspect-ratio: 16/9;
+    background: #F8FAFC;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slide-placeholder {
+    text-align: center;
+    color: #64748B;
+}
+
+.slide-number {
+    display: block;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.slide-placeholder p {
+    font-size: 13px;
+    margin: 0;
+}
+
+.slide-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(37, 99, 235, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.pdf-slide-item:hover .slide-overlay {
+    opacity: 1;
+}
+
+.zoom-icon {
+    font-size: 28px;
+    color: white;
+}
+
+.pdf-slide-item h3 {
+    font-size: 15px;
+    margin: 14px 14px 6px 14px;
+    color: #0F172A;
+}
+
+.pdf-slide-item p {
+    font-size: 13px;
+    margin: 0 14px 14px 14px;
+    color: #64748B;
+}
+
+/* ==========================================================================
+   MODAL STYLES
+   ========================================================================== */
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    background-color: #FFFFFF;
+    margin: 2% auto;
+    padding: 0;
+    border-radius: 8px;
+    width: 94%;
+    max-width: 1300px;
+    height: 94%;
+    max-height: 850px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    padding: 18px 22px;
+    border-bottom: 1px solid #E2E8F0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #0F172A;
+    font-size: 18px;
+}
+
+.close {
+    color: #64748B;
+    font-size: 26px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close:hover {
+    color: #0F172A;
+}
+
+.modal-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+
+.pdf-viewer-controls {
+    padding: 14px 22px;
+    border-bottom: 1px solid #E2E8F0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: #F8FAFC;
+}
+
+.pdf-viewer-controls button {
+    padding: 8px 14px;
+    border: 1px solid #CBD5E1;
+    background: #FFFFFF;
+    color: #334155;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    transition: all 0.2s ease;
+}
+
+.pdf-viewer-controls button:hover {
+    background: #F1F5F9;
+    border-color: #94A3B8;
+}
+
+.pdf-container {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pdf-placeholder {
+    text-align: center;
+    color: #64748B;
+    font-size: 15px;
+}
+
+.pdf-placeholder em {
+    color: #94A3B8;
+    font-size: 13px;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.document-footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 2px solid #CBD5E1;
+    font-size: 13px;
+    color: #64748B;
+}
+
+.document-footer p {
+    margin-bottom: 6px;
+}
+
+.document-footer em {
+    font-style: italic;
+    color: #94A3B8;
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+@media (max-width: 1100px) {
+    .paper {
+        margin-left: 0;
+        padding: clamp(22px, 3.5vw, 42px) clamp(22px, 5vw, 42px);
+        width: 100%;
+    }
+    
+    .toc {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid #E2E8F0;
+        padding: 20px;
+        transform: translateX(-100%);
+    }
+    
+    .toc.active {
+        transform: translateX(0);
+    }
+    
+    .content {
+        flex-direction: column;
+    }
+    
+    .toc-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 18px;
+        color: #64748B;
+        cursor: pointer;
+        padding: 4px;
+        margin-left: auto;
+    }
+    
+    .comparison-grid,
+    .three-options-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pdf-slides-grid {
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+}
+
+@media (max-width: 700px) {
+    .paper {
+        padding: 18px 14px;
+        width: 100%;
+    }
+    
+    .four-pillars-grid,
+    .comparison-grid,
+    .three-options-grid,
+    .pdf-slides-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        width: 94%;
+        margin: 3% auto;
+        height: 92%;
+    }
+    
+    .timeline {
+        padding-left: 22px;
+    }
+    
+    .timeline::before {
+        left: 0;
+    }
+    
+    .timeline-item::before {
+        left: -26px;
+    }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+*:focus {
+    outline: 2px solid #2563EB;
+    outline-offset: 2px;
+}
+
+.skip-link {
+    position: absolute;
+    top: -38px;
+    left: 6px;
+    background: #2563EB;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1001;
+}
+
+.skip-link:focus {
+    top: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    
+    .content,
+    .toc,
+    .pdf-slide-item {
+        transition: none;
+    }
+}
+
+.section {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hidden { display: none; }
+.visible { display: block; }
+.text-center { text-align: center; }
+.mb-0 { margin-bottom: 0; }
+.mb-2 { margin-bottom: 16px; }
+.mb-4 { margin-bottom: 24px; }
+.mt-2 { margin-top: 16px; }
+.mt-4 { margin-bottom: 24px; }
+    </style>
+</head>
+<body>
+    <!-- Skip link for accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Sticky Table of Contents -->
+    <nav class="toc" id="toc">
+        <div class="toc-header">
+            <h3>Contents</h3>
+            <button class="toc-toggle" id="tocToggle" aria-label="Toggle navigation">☰</button>
+        </div>
+        <ol class="toc-list">
+            <li><a href="#executive-summary" data-section="0">Executive Summary</a></li>
+            <li><a href="#part1-overview" data-section="1">Part 1: Strategic Framework Overview</a></li>
+            <li><a href="#part2-case-study" data-section="2">Part 2: Detailed Case Study</a></li>
+            <li><a href="#part3-analysis" data-section="3">Part 3: Strategic Analysis</a></li>
+            <li><a href="#part4-strategy" data-section="4">Part 4: Strategic Options</a></li>
+            <li><a href="#part5-conclusion" data-section="5">Part 5: Conclusion & Lessons</a></li>
+            <li><a href="#pdf-slides" data-section="6">Supporting Documentation</a></li>
+        </ol>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="content" id="main-content">
+        <article class="paper">
+            <!-- Header -->
+            <header class="document-header">
+                <h1>eSewa and Nepal's Digital Ecosystem</h1>
+                <p class="subtitle">A Comprehensive Learning Resource on Digital Business Strategy and FinTech Innovation</p>
+                <div class="document-meta">
+                    <p class="author">Complete Case Study Compilation</p>
+                </div>
+            </header>
+
+            <!-- Executive Summary -->
+            <section id="executive-summary" class="section">
+                <h2>Executive Summary</h2>
+                <p>This comprehensive learning resource examines the remarkable journey of eSewa, Nepal's pioneering digital payments provider, and its strategic evolution from a simple mobile recharge service to the dominant force in the nation's fintech landscape. Drawing from multiple analytical perspectives—including academic frameworks, strategic analysis, investor presentations, and internal memoranda—this resource provides an in-depth exploration of how eSewa mastered the principles of digital business strategy to achieve sustainable competitive advantage in one of the world's most challenging emerging markets.</p>
+                
+                <div class="key-points">
+                    <h3>Core Learning Objectives</h3>
+                    <ul>
+                        <li><strong>Understand Digital Business Strategy Fusion:</strong> Learn how technology and business strategy have merged into a single, indivisible concept in the digital age, as defined by MIS Quarterly research.</li>
+                        <li><strong>Master the 4S Framework:</strong> Explore Scope, Scale, Speed, and Sources of Value Creation as critical dimensions of digital strategy, with detailed explanations and real-world applications.</li>
+                        <li><strong>Analyze Strategic Evolution:</strong> Examine how eSewa navigated through three distinct phases of market development—Financial Inclusion, Financial Convenience, and Financial Freedom.</li>
+                        <li><strong>Evaluate Competitive Dynamics:</strong> Understand the forces that shaped Nepal's digital payment landscape, from regulatory frameworks to competitive consolidation.</li>
+                        <li><strong>Assess Strategic Options:</strong> Evaluate the trade-offs between embedded banking, core strengthening, and international expansion with comprehensive analysis.</li>
+                    </ul>
+                </div>
+
+                <p>By 2025, eSewa had achieved an extraordinary position in the market: 10 million registered users, 450,000 merchants, and 300,000 agents across all 77 districts of Nepal. The company posted consistent profitability, with net profit growing from NPR 177.59 million in 2022 to NPR 355.73 million in 2024. This success story provides a masterclass in applying digital business strategy principles to overcome infrastructure challenges, build trust in a cash-centric culture, and create sustainable competitive advantage through ecosystem orchestration.</p>
+                
+                <div class="diagram-container">
+                    <h4>Figure 1: eSewa Digital Strategy Overview</h4>
+                    <div class="diagram-image">
+                        <img src="imgs/esewa-digital-strategy.png" alt="eSewa Digital Strategy Overview showing the 4S Framework applied to eSewa's journey from 2009 to present">
+                    </div>
+                    <p class="diagram-caption">The strategic evolution of eSewa through the lens of the 4S Digital Business Strategy Framework, demonstrating mastery of Scope, Scale, Speed, and Value Creation.</p>
+                </div>
+            </section>
+
+            <div class="chapter-divider"></div>
+
+            <!-- Part 1: Strategic Framework -->
+            <section id="part1-overview" class="section">
+                <div class="module-header">
+                    <h2>Part 1: Strategic Framework Overview</h2>
+                    <p>The Digital Business Strategy Framework from MIS Quarterly Research</p>
+                </div>
+
+                <h2>1.0 Introduction: From Alignment to Fusion in the Digital Age</h2>
+                <p>For decades, the prevailing view of technology strategy was that it was a functional component that needed to be aligned with business strategy—a critical support player, but always subordinate. We have entered a new era where this model is obsolete. Business strategy and IT strategy are no longer merely aligned; they are fused into a single, overarching Digital Business Strategy. This fundamental paradigm shift moves technology from the back office to the absolute core of value creation and competitive advantage.</p>
+
+                <div class="quote-box">
+                    <blockquote>"The future of digital business strategy is already here, it is just unevenly distributed!"</blockquote>
+                    <p class="quote-author">— Bharadwaj et al., MIS Quarterly</p>
+                </div>
+
+                <p>The academic journal MIS Quarterly provides a working definition for this new paradigm, describing Digital Business Strategy as "an organizational strategy formulated and executed by leveraging digital resources to create differential value." This is not a siloed IT function but a pervasive, trans-functional approach that directly shapes a firm's market position. Digital resources become the connective tissue linking operations, marketing, and supply chains, enabling organizations to redefine their products, processes, and relationships with partners and customers.</p>
+
+                <p>The purpose of this framework is to introduce a powerful model for navigating this new era, built on four critical themes: Scope, Scale, Speed, and Sources of Value. To bring these principles to life, we will explore the remarkable journey of eSewa, Nepal's pioneering digital payments provider. The story of its rise from a simple startup to the dominant force in its nation's fintech landscape provides a masterclass in how these theoretical concepts translate into real-world market leadership and sustained growth.</p>
+
+                <h3>1.1 Defining Digital Business Strategy</h3>
+                <p>At its core, a Digital Business Strategy is defined as an "organizational strategy formulated and executed by leveraging digital resources to create differential value." This definition elevates digital technology from a supporting tool to the central engine of value creation, demanding a holistic fusion of business and technology at the highest level of corporate planning.</p>
+
+                <p>A fundamental paradigm shift is reshaping corporate strategy. For decades, Information Technology (IT) strategy was a functional-level activity, a subordinate process designed to support a pre-ordained business strategy. As articulated by Bharadwaj et al. in MIS Quarterly, this view is obsolete. In the modern era, the pervasive nature of digital resources has fused IT and business strategy into a single, indivisible concept: Digital Business Strategy. This analysis adopts this modern strategic framework to analyze the trajectory, competitive environment, and future options for eSewa, Nepal's pioneering fintech firm, which has navigated this fusion over its 16-year history.</p>
+
+                <h2>2.0 The Four Core Themes of Digital Business Strategy</h2>
+                <p>To navigate the complexities of the digital economy, a robust theoretical framework is essential for identifying sources of competitive advantage and formulating effective strategy. This analysis employs the four key themes of digital business strategy identified by Bharadwaj et al.—Scope, Scale, Speed, and Sources of Value Creation—as the analytical lens to evaluate eSewa's position and future paths.</p>
+
+                <div class="four-pillars-grid">
+                    <div class="pillar-card">
+                        <div class="pillar-icon">🔭</div>
+                        <h4>Scope</h4>
+                        <p>In the digital age, Scope is no longer defined by a company's portfolio of products or its linear supply chain. It expands to become trans-functional, using digital platforms to integrate siloed operations; it includes the digitization of products and services; and it extends beyond the firm's boundaries into dynamic ecosystems of partners and customers. The question shifts from "What do we sell?" to "What ecosystem can we orchestrate?"</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">📈</div>
+                        <h4>Scale</h4>
+                        <p>Digital Scale is not the industrial-era measure of physical assets but a multi-dimensional capability. It manifests as the dynamic ability to scale infrastructure up or down (e.g., via cloud computing); the exponential power of network effects on multi-sided platforms; the strategic leverage of information abundance ("big data"); and the rapid achievement of market reach through alliances and partnerships.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">⚡</div>
+                        <h4>Speed</h4>
+                        <p>Speed is the capacity to outpace competitors across four dimensions: accelerating product launches to stay ahead of market trends; making faster, data-driven decisions through "sense-and-respond" cycles; orchestrating supply chains with greater velocity; and rapidly forming and adapting partner networks to seize new opportunities. In the fintech arena, speed is a primary determinant of success.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <div class="pillar-icon">💎</div>
+                        <h4>Sources of Value</h4>
+                        <p>Digital business strategy rewrites the rules of profitability. New Sources of Value Creation emerge from leveraging information as a core asset; designing multi-sided business models that connect distinct user groups; coordinating value capture across networks of firms; and most critically, appropriating value by controlling key "digital control points" within an industry's architecture.</p>
+                    </div>
+                </div>
+
+                <h3>2.1 Theme 1: Scope — Redefining Strategic Boundaries</h3>
+                <p>In the digital age, the strategic importance of Scope is no longer confined to a company's portfolio of products or its linear supply chain. A digital business strategy fundamentally alters how we define an organization's boundaries, dissolving traditional industry silos and enabling the creation of dynamic, cross-industry ecosystems. Success is determined not just by what a firm owns, but by the network of partners, services, and customers it can effectively connect and coordinate.</p>
+
+                <p>Scope in a digital context is no longer defined by a firm's internal functions or industry classification. It expands in three critical ways: it becomes trans-functional, using digital platforms to integrate siloed operations; it includes the digitization of products and services, making the physical offering inseparable from its digital layer; and it extends beyond the firm's boundaries into dynamic ecosystems of partners and customers. For a firm like eSewa, this redefinition of Scope is critical; it means competitive advantage is no longer about having the most features in a single app, but about orchestrating the most valuable ecosystem of partners.</p>
+
+                <h3>2.2 Theme 2: Scale — Achieving Exponential Growth</h3>
+                <p>The concept of Scale has long been a driver of profitability, but its meaning has been radically redefined. In the industrial age, scale was achieved through capital-intensive assets: factories, physical distribution networks, and geographic footprint. In the digital age, scale is achieved through network effects, information abundance, and strategic partnerships, creating a dynamic capability for exponential and often asset-light growth.</p>
+
+                <p>Understanding these new levers of scale is paramount, as they allow digital-native firms to achieve market penetration and impact at a velocity and cost-structure that is impossible for traditional incumbents to match. A digital platform's value increases not with each factory built, but with each new user, partner, and service that joins its ecosystem.</p>
+
+                <h3>2.3 Theme 3: Speed — Competing at Digital Velocity</h3>
+                <p>In a digital business environment, Speed is not just a feature; it is a central driver of competitive advantage. Pervasive connectivity has recalibrated the clock-speed of entire industries. This manifests in accelerated product launches, faster and more data-driven decision-making, and the rapid formation of networks to sense and respond to market shifts. The ability to learn, adapt, and execute faster than competitors is fundamental to survival and success.</p>
+
+                <p>In the fintech arena, where market windows open and close with startling rapidity, the ability to execute with superior speed is a primary determinant of success or failure. eSewa's journey exemplifies this principle, having evolved its strategy through three distinct phases, each a rapid response to the maturing needs of the Nepalese market.</p>
+
+                <h3>2.4 Theme 4: Sources of Value Creation and Capture</h3>
+                <p>The ultimate objective of a digital business strategy is to architect new Sources of Value Creation and Capture. Digital business models unlock revenue streams that were previously unimaginable, deriving value from information, multi-sided platforms, and coordinated networks. Unlike traditional models, which often focus on a single transaction, digital platforms create ongoing value for multiple participants simultaneously.</p>
+
+                <p>Critically, firms that successfully control the key digital architecture of an industry can capture a disproportionate share of the profits. For eSewa, this means the future of profitability lies not just in transaction fees, but in its ability to own the central, indispensable platform within Nepal's financial ecosystem.</p>
+
+                <div class="diagram-container">
+                    <h4>Figure 2: eSewa Navigating Nepal's Fintech Evolution</h4>
+                    <div class="diagram-image">
+                        <img src="imgs/esewa-navigating-fintech-evolution.png" alt="eSewa Navigating Nepal's Fintech Evolution showing the three phases of Financial Inclusion, Financial Convenience, and Financial Freedom">
+                    </div>
+                    <p class="diagram-caption">Mapping eSewa's three-phase evolution onto the 4S Digital Business Strategy Framework, demonstrating how each pillar was applied throughout the company's journey.</p>
+                </div>
+            </section>
+
+            <div class="module-divider">
+                <span>◆</span>
+            </div>
+
+            <!-- Part 2: Detailed Case Study -->
+            <section id="part2-case-study" class="section">
+                <div class="module-header">
+                    <h2>Part 2: Detailed Case Study</h2>
+                    <p>eSewa's Complete Strategic Journey from 2009 to Present</p>
+                </div>
+
+                <h2>3.0 Case Study: How eSewa Built its Empire</h2>
+                <p>eSewa's 16-year journey serves as a practical embodiment of the digital business strategy framework. Its market leadership was not accidental but the result of a phased, intuitive mastery of Scope, Scale, Speed, and Value Creation. This section deconstructs eSewa's historical phases to reveal the strategic logic that must now be deliberately reapplied to counter emerging threats.</p>
+
+                <h3>3.1 The Birth of an Idea</h3>
+                <p>The inspiration for eSewa stemmed from the founder's own direct experience with the "payment gap." While running a web domain business in the mid-2000s, co-founder Biswas Dhakal had no credit card and had to ask his US-based uncle to pay vendors for him. This personal frustration sparked the idea for a local digital payment solution. The solution began with Biswas Dhakal, a co-founder with a natural instinct for using technology to solve everyday problems.</p>
+
+                <div class="quote-box">
+                    <blockquote>"As a child, he watched his father, a lawyer working on the ground floor, have to shout up to the third-floor kitchen to request tea for guests. Dhakal's solution was to build a homemade intercom system. This innovative, problem-solving mindset would become the foundation of his future venture."</blockquote>
+                    <p class="quote-author">— Early Life of Biswas Dhakal, Co-founder</p>
+                </div>
+
+                <p>Years later, in the mid-2000s, Dhakal encountered a new kind of friction. While running a business selling website domains, he struggled to pay his US-based vendors because he didn't have a credit card. He often had to rely on an uncle in the US to make payments for him. This personal "payment gap" sparked the idea for eSewa (a name derived from the Nepali word for 'service'). Starting with an initial investment of just USD 134, Dhakal conceptualized a payment gateway for Nepal.</p>
+
+                <p>The idea gained crucial validation in 2007 when the CEO of Laxmi Bank, a commercial bank, invested USD 24,000, signaling that the vision had serious potential. But a visionary idea and initial funding were just the beginning; eSewa was about to face the immense realities of a market not yet ready for a digital revolution.</p>
+
+                <h3>3.2 The Setting: Why Nepal Was Ready for Digital Change</h3>
+                <p>Nepal is a land of incredible beauty, from its deep valleys to the majestic Himalayan peaks. However, this same geography creates significant barriers to infrastructure development, which has historically impacted access to critical services, including banking. Economically, many Nepalis face significant challenges. With a GDP per capita of approximately USD 1,460 by 2025, a large portion of the population has struggled with access to essential services and financial inclusion.</p>
+
+                <h4>The Problem of Cash</h4>
+                <p>In a country with difficult terrain and limited infrastructure, a cash-based economy can be incredibly inefficient and expensive for ordinary people. This reality is captured perfectly by Rupesh Neupane, Head of Business Development at eSewa, who recalled a neighbor's struggle:</p>
+
+                <div class="quote-box">
+                    <blockquote>"To pay a simple electricity bill of NPR 80 (approximately USD 0.59), his neighbor had to travel for two days and spend over NPR 1,000 (approximately USD 7.34) on transportation. The cost of paying the bill was more than twelve times the bill itself."</blockquote>
+                    <p class="quote-author">— <strong>Rupesh Neupane</strong>, Head of Business Development, eSewa</p>
+                </div>
+
+                <p>This was the everyday friction of a cash-based economy. The core problem was the sheer time and cost required for simple transactions. This landscape of high costs and logistical nightmares set the stage for a technological solution that promised to redefine Nepal's economy.</p>
+
+                <h3>3.3 Phase 1: Financial Inclusion (2009-2017)</h3>
+                <p>eSewa's path from a simple idea to a market leader can be understood as a strategic evolution through three distinct phases. As Jabir Ali, Head of Business Growth and Innovation, explained, the journey was a transition through "financial inclusion, move towards financial convenience, and is now transitioning to offer financial freedom to its users."</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-phase">
+                            <p class="phase-label">Phase 1</p>
+                            <h4>Financial Inclusion (2009-2017)</h4>
+                        </div>
+                        <h4>Overcoming the Barriers</h4>
+                        <p>When eSewa officially launched in 2009, it faced a trifecta of monumental challenges. The digital infrastructure and culture needed for its success simply did not exist.</p>
+                        <ul>
+                            <li><strong>Low Internet Penetration:</strong> In 2009, internet access in Nepal was a mere 2%. A digital service was of little use to a population that was overwhelmingly offline.</li>
+                            <li><strong>Lack of Smartphones:</strong> In an era before the smartphone boom, these devices were a "rare luxury," not the ubiquitous tools they are today.</li>
+                            <li><strong>A Cash-Centric Culture:</strong> Most importantly, people preferred cash. The concept of digital money was foreign, and there was a deep-seated aversion to adopting new payment methods.</li>
+                        </ul>
+
+                        <h4>The Agent Network: A Revolutionary Solution</h4>
+                        <p>To solve the adoption challenge, eSewa introduced its most critical innovation in 2012: the agent-led model. This system was revolutionary because it allowed customers to use eSewa's services without needing a smartphone, a bank account, or even the eSewa app.</p>
+
+                        <p>The model was simple yet brilliant. eSewa onboarded a network of local agents—initially cyber cafes, but later expanding to mom-and-pop stores, pharmacies, and mobile repair shops. Customers could walk up to an agent, hand them cash, and have the agent perform a digital transaction on their behalf, from paying an electricity bill to recharging a mobile phone. These agents became more than just transaction points; they were trusted local guides who educated their communities about digital finance.</p>
+
+                        <div class="quote-box">
+                            <blockquote>"Our agent network is what makes eSewa truly inclusive. We're not just for tech-savvy users in Kathmandu; we're for every Nepali, no matter where they live."</blockquote>
+                            <p class="quote-author">— <strong>Jagdish Khadka</strong>, CEO, eSewa</p>
+                        </div>
+
+                        <p>This agent-led model was a masterful manipulation of Scope and Scale. It expanded eSewa's operational Scope beyond firm boundaries into a dynamic physical-digital ecosystem, directly addressing a market segment inaccessible to purely digital competitors. By onboarding thousands of cyber cafes, pharmacies, and mom-and-pop stores, eSewa created a human interface for its digital services.</p>
+
+                        <p>Concurrently, it achieved Scale not through digital network effects alone, but by leveraging alliances with these small businesses, creating a distributed physical presence that was prohibitively expensive for others to replicate. With agents handling approximately 85% of transactions initially, this hybrid model was the crucial bridge between Nepal's cash economy and its digital future.</p>
+
+                        <h4>Building Trust and Gaining Legitimacy</h4>
+                        <p>In its first several years, eSewa operated in a regulatory vacuum. With no formal rules governing digital wallets, the company had to self-regulate, establishing its own high standards for security, user verification, and transaction processing to build customer trust.</p>
+
+                        <p>A pivotal moment came in 2017 when Nepal's central bank, Nepal Rastra Bank (NRB), introduced the official Payment Service Provider (PSP) license. This license provided a formal legal framework for the industry. eSewa became the first company, along with IME Pay, to receive the PSP license from the NRB, a landmark achievement that validated its security protocols and reinforced its credibility with millions of current and potential users.</p>
+                    </div>
+                </div>
+
+                <h3>3.4 Phase 2: Financial Convenience (2017-2020)</h3>
+                <p>As technology adoption grew and new competitors emerged, eSewa shifted its strategy toward convenience. The goal was to transform its digital wallet into an integrated, "one-stop app" for everyday life. This was achieved through a series of strategic partnerships across key sectors.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-phase">
+                            <p class="phase-label">Phase 2</p>
+                            <h4>Financial Convenience (2017-2020)</h4>
+                        </div>
+                        <h4>Creating a One-Stop App</h4>
+                        <p>eSewa aggressively broadened its Scope by forging strategic partnerships across diverse sectors, transforming its app into a "one-stop" platform. By integrating with over 50 banks, 4,500 schools, utility providers, and the travel industry, eSewa created a new Source of Value through a highly coordinated network.</p>
+
+                        <ul>
+                            <li><strong>Banks & Financial Institutions:</strong> Partnerships with over 50 banks allowed users to easily connect their bank accounts and use the "Load Money" feature to fund their eSewa wallets in real-time.</li>
+                            <li><strong>Utility Providers:</strong> Collaborations with electricity, water, and internet providers turned the tedious task of paying bills into a few simple taps on a screen.</li>
+                            <li><strong>Education:</strong> By integrating with over 4,500 schools and colleges, eSewa eliminated the need for parents and students to make in-person fee payments.</li>
+                            <li><strong>Travel & Hospitality:</strong> Partnerships with domestic airlines, bus operators, and over 1,500 hotels offered users a transparent and simple platform for booking travel.</li>
+                            <li><strong>Entertainment:</strong> Collaborations with major cinema chains made it easy for users to purchase movie tickets directly through the app.</li>
+                        </ul>
+
+                        <p>This ecosystem generation created powerful lock-in effects; the convenience of managing all of life's payments through a single, integrated hub made switching to a less comprehensive competitor a significant downgrade for the user.</p>
+
+                        <h4>Building the Digital Infrastructure</h4>
+                        <p>The foundation of technology created the opportunity for eSewa's rise. The primary catalyst for Nepal's digital transformation was the dramatic increase in internet and smartphone access. The technological shift was swift and decisive, creating a fertile ground for digital innovation.</p>
+
+                        <div class="data-box">
+                            <h4>Nepal's Digital Transformation Metrics</h4>
+                            <div class="data-grid">
+                                <div class="data-item">
+                                    <div class="value">2% → 55.8%</div>
+                                    <div class="label">Internet Penetration (2009-2023)</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="value">140%</div>
+                                    <div class="label">Broadband Penetration (2024)</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="value">50+</div>
+                                    <div class="label">Bank Partnerships</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="value">4,500+</div>
+                                    <div class="label">Educational Institutions</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>This explosion in connectivity and digital literacy created a vibrant but initially unregulated environment for digital finance. As CEO Jagdish Khadka explained:</p>
+
+                        <div class="quote-box">
+                            <blockquote>"A Facebook user can easily use our app. So, in that sense, Facebook has also helped us tackle the barrier of digital illiteracy."</blockquote>
+                            <p class="quote-author">— <strong>Jagdish Khadka</strong>, CEO, eSewa</p>
+                        </div>
+
+                        <p>The COVID-19 pandemic served as a powerful accelerator, cementing digital payments as an essential service and propelling user adoption forward.</p>
+                    </div>
+                </div>
+
+                <h3>3.5 Phase 3: Financial Freedom (2020-Present)</h3>
+                <p>In its most recent phase, eSewa transitioned from a payment tool to a comprehensive financial ecosystem offering services like digital micro-lending, insurance, and remittances. This evolution represents a sophisticated strategy for Value Creation and Capture.</p>
+
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-phase">
+                            <p class="phase-label">Phase 3</p>
+                            <h4>Financial Freedom (2020-Present)</h4>
+                        </div>
+                        <h4>Beyond Payments: A Financial Ecosystem</h4>
+                        <p>Building on this momentum, the company evolved beyond a simple digital wallet into a comprehensive financial ecosystem. This new phase was defined by offering services that empowered users with financial freedom, including:</p>
+                        <ul>
+                            <li><strong>Digital Micro-lending:</strong> Providing access to credit for small businesses and individuals.</li>
+                            <li><strong>Insurance:</strong> Offering digital insurance products for protection and security.</li>
+                            <li><strong>Remittances:</strong> Facilitating international money transfers.</li>
+                            <li><strong>Wealth Management:</strong> Providing tools for financial growth and savings.</li>
+                        </ul>
+
+                        <p>By moving beyond transactions to life-enabling financial services, eSewa solidified its position as a central control point in its users' financial lives. This deepened customer relationships while also empowering agents with greater economic independence.</p>
+
+                        <h4>Grassroots Empowerment: The Agent Success Story</h4>
+                        <p>The agent network, the bedrock of eSewa's early success, had grown to over 300,000 agents by 2025. This network not only powered eSewa's reach but also created profound economic opportunities for the agents themselves.</p>
+
+                        <div class="agent-story">
+                            <h4>Case Study: Umesh Shrestha, eSewa Zone Owner</h4>
+                            <p>The story of Umesh Shrestha is a powerful testament to this impact. He started his career in 2008 with a small phone booth, but that business declined with the rise of mobile phones. He then pivoted to an internet café, only to see that business also fade. In 2015, he became an eSewa agent. The transformation was profound.</p>
+                            
+                            <div class="metrics">
+                                <div class="metric">
+                                    <div class="value">8</div>
+                                    <div class="label">Staff Employed</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="value">80</div>
+                                    <div class="label">Agents Supervised</div>
+                                </div>
+                                <div class="metric">
+                                    <div class="value">NPR 55,000</div>
+                                    <div class="label">Daily Earnings</div>
+                                </div>
+                            </div>
+                            
+                            <p style="margin-top: 16px;">"Today, I am an 'eSewa zone' owner overseeing 80 other agents. My daily earnings have increased from NPR 20,000 in early 2015 to around NPR 55,000 today, and I now employ a staff of eight." — Umesh Shrestha</p>
+                        </div>
+
+                        <div class="quote-box">
+                            <blockquote>"This model created 'grassroots-level empowerment.' Agent Umesh Shrestha's story illustrates how eSewa's agent network transformed declining businesses into thriving digital hubs."</blockquote>
+                            <p class="quote-author">— Strategic Analysis Document</p>
+                        </div>
+
+                        <p>This dual-sided value creation—creating value for both users and agents—fosters immense loyalty and erects a powerful competitive moat built on the deeply embedded trust of both participants in the ecosystem.</p>
+                    </div>
+                </div>
+
+                <h3>3.6 The Undisputed Leader</h3>
+                <p>By 2025, eSewa's position as the market leader was undeniable. It served ten million registered users through a network of 450,000 merchants and held a majority share in Nepal's digital wallet market. Co-founder Subash Sharma attributed this long-term success to a core principle that set them apart from competitors who came and went.</p>
+
+                <div class="quote-box">
+                    <blockquote>"Patience was key to eSewa's success... We posted our first break-even six years after starting our journey. This patience was the competitive differentiation for us to succeed in Nepal."</blockquote>
+                    <p class="quote-author">— <strong>Subash Sharma</strong>, Co-founder and Active Board Member, eSewa</p>
+                </div>
+
+                <p>This performance is unique in the sector. As Chief Strategy Officer Rabi Shakya confirms, "Despite the influx of new wallets, only eSewa and IME Pay have achieved profitability... We consider cash as our main competitor." This unique profitability wasn't an accident; it was the direct result of the long-term vision articulated by co-founder Subash Sharma.</p>
+
+                <div class="data-box">
+                    <h4>eSewa's Financial Performance</h4>
+                    <div class="data-grid">
+                        <div class="data-item">
+                            <div class="value">NPR 12.87B</div>
+                            <div class="label">Revenue (2022)</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="value">NPR 16.97B</div>
+                            <div class="label">Revenue (2023)</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="value">NPR 177.59M</div>
+                            <div class="label">Net Profit (2022)</div>
+                        </div>
+                        <div class="data-item">
+                            <div class="value">NPR 355.73M</div>
+                            <div class="label">Net Profit (2024)</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="module-divider">
+                <span>◆</span>
+            </div>
+
+            <!-- Part 3: Strategic Analysis -->
+            <section id="part3-analysis" class="section">
+                <div class="module-header">
+                    <h2>Part 3: Strategic Analysis</h2>
+                    <p>Competitive Landscape and Environmental Forces</p>
+                </div>
+
+                <h2>4.0 The Current Competitive Landscape: A Market at Inflection Point</h2>
+                <p>The fintech landscape in Nepal has transformed from a blue ocean pioneered by eSewa into a red ocean of intense competition, increasing regulatory pressure, and market consolidation. This new environment presents a critical challenge to eSewa's long-held dominance and marks a strategic inflection point for the company.</p>
+
+                <h3>4.1 The Rules of the Game: Government Regulation</h3>
+                <p>As digital payments grew, the government stepped in to create a formal, secure system. The country's central bank, Nepal Rastra Bank (NRB), took the lead. In 2015, the NRB established the Payment Systems Department (PSD). By 2017, it began issuing official licenses for two types of companies:</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-item">
+                        <h4>Payment Service Providers (PSPs)</h4>
+                        <p>Companies like digital wallets (e.g., eSewa) that provide payment services directly to customers.</p>
+                    </div>
+                    <div class="comparison-item">
+                        <h4>Payment System Operators (PSOs)</h4>
+                        <p>Companies that manage the underlying payment network infrastructure.</p>
+                    </div>
+                </div>
+
+                <p>For companies like eSewa, these new regulations had a dual impact, creating both opportunities and challenges:</p>
+
+                <div class="framework-box">
+                    <h4>Impact of Regulation on eSewa</h4>
+                    <ul>
+                        <li><strong>Benefit - Building Trust:</strong> In 2017, eSewa became the first company, along with IME Pay, to receive the PSP license from the NRB. This official government endorsement validated the security of its platform, helping it gain the "trust of millions of users" and reinforcing its credibility as a reliable financial service.</li>
+                        <li><strong>Challenge - Increasing Costs:</strong> With the license came stricter rules. New requirements for Know Your Customer (KYC) verification, Anti-Money Laundering (AML) protocols, and transaction limits meant eSewa had to invest more in technology and processes. These changes resulted in "additional compliance costs" and could sometimes inconvenience users who needed higher transaction limits.</li>
+                    </ul>
+                </div>
+
+                <p>By formalizing the market and building public trust, these regulations legitimized the industry and inadvertently invited a wave of new entrants, intensifying the competitive pressure.</p>
+
+                <h3>4.2 From Pioneer to Crowded Market</h3>
+                <p>When eSewa first launched, "there were no other players" in the market. It was a true pioneer. Fast forward to 2025, and the landscape had completely transformed. Customers now had "25 digital wallets to choose from," creating a highly competitive environment.</p>
+
+                <div class="market-table">
+                    <h4>Competitive Analysis: Major Players in Nepal's Digital Payment Market</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Company</th>
+                                <th>Core Strategy</th>
+                                <th>Key Strengths</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>eSewa</strong></td>
+                                <td>Broad market leadership; comprehensive "one-stop" ecosystem</td>
+                                <td>Pioneer status, extensive agent and merchant network, strong brand loyalty, profitability</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Khalti</strong></td>
+                                <td>"Pure-play digital strategy" targeting millennials and urban consumers</td>
+                                <td>Youth-centric brand, modern UI/UX, strong appeal among urban youth, backed by Nepal's largest ISP, WorldLink</td>
+                            </tr>
+                            <tr>
+                                <td><strong>IME Pay</strong></td>
+                                <td>Focus on "financial inclusion" leveraging parent company's remittance network</td>
+                                <td>Extensive physical network of remittance agents, strong foothold in rural areas and among families of migrant workers</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>4.3 The Game-Changing Merger</h3>
+                <p>In early 2025, the competitive landscape was shaken by the announcement that Khalti and IME Pay would merge. This move was set to create a "formidable rival with greater scale and comparable market share," posing the most direct and significant threat to eSewa's market leadership to date.</p>
+
+                <div class="quote-box">
+                    <blockquote>"This merger creates Nepal's first digital wallet merger and will fundamentally reshape the country's financial technology landscape."</blockquote>
+                    <p class="quote-author">— Industry Analyst, 2025</p>
+                </div>
+
+                <p>The strategic logic of the Khalti and IME Pay merger is clear: it creates a direct challenger by fusing complementary assets to expand Scope and Scale. The new entity will have an unparalleled Scope, covering Khalti's urban youth segment and IME Pay's rural remittance users. This combination immediately grants it a Scale—in both user base and agent network—that directly threatens eSewa's market leadership.</p>
+
+                <p>The merger is not merely an additive move; it is a multiplicative one, creating a full-spectrum competitor poised to challenge eSewa across every key market segment.</p>
+
+                <h3>4.4 Market and Regulatory Pressures</h3>
+                <p>eSewa's strategic decisions must also account for powerful external forces reshaping the industry:</p>
+
+                <div class="framework-box">
+                    <h4>External Pressures Facing eSewa</h4>
+                    <ul>
+                        <li><strong>Intensifying Competition:</strong> With 25 licensed PSPs, the market is crowded, leading to aggressive price wars that are squeezing profit margins.</li>
+                        <li><strong>Regulatory Headwinds:</strong> Stricter policies from Nepal Rastra Bank (NRB) on transaction limits and capital requirements are increasing operational complexity and compliance costs.</li>
+                        <li><strong>Looming Global Threats:</strong> The potential market entry of giants like Google Pay and Alipay poses a significant disruptive threat that could fundamentally alter the competitive landscape.</li>
+                        <li><strong>Low Customer Switching Costs:</strong> In a market with minimal product differentiation, brand loyalty is fragile, making customer retention a constant and costly challenge.</li>
+                    </ul>
+                </div>
+
+                <h3>4.5 Internal Assessment: Strengths and Vulnerabilities</h3>
+                <p>A balanced view of eSewa's current position reveals market-leading strengths and specific areas requiring strategic attention.</p>
+
+                <div class="comparison-grid">
+                    <div class="comparison-item" style="background: #F0FDF4; border-color: #86EFAC;">
+                        <h4>Core Strengths</h4>
+                        <ul>
+                            <li><strong>Market Leadership:</strong> A dominant position with 10 million registered users</li>
+                            <li><strong>Unmatched Network:</strong> Extensive reach with 450,000 merchants and 300,000 agents across all 77 districts</li>
+                            <li><strong>Pioneering Brand:</strong> High brand loyalty and trust built over 16 years as Nepal's first digital wallet</li>
+                            <li><strong>Sustained Profitability:</strong> A positive balance sheet for the past three years, a rare achievement in the sector</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-item" style="background: #FEF2F2; border-color: #FCA5A5;">
+                        <h4>Identified Vulnerabilities</h4>
+                        <ul>
+                            <li><strong>Dated UI/UX:</strong> A recognized need to modernize the user interface and experience to meet evolving user expectations</li>
+                            <li><strong>Eroding Brand Appeal in Youth Segment:</strong> While a core part of our user base, this demographic shows stronger affinity for Khalti's brand and UI/UX, posing a significant churn risk</li>
+                            <li><strong>Late Mover in Remittance:</strong> A recent entrant into the digital remittance space, a key strength of the newly merging IME Pay</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p>This internal assessment, when viewed against the external pressures, narrows our viable strategic options and dictates a response that leverages our core strengths while mitigating our known vulnerabilities.</p>
+
+                <h3>4.6 Connecting eSewa's Actions to the 4S Framework</h3>
+                <p>eSewa's three-phase journey directly maps onto the theoretical framework of digital business strategy, demonstrating how each pillar was instrumental to its success:</p>
+
+                <div class="four-pillars-grid">
+                    <div class="pillar-card">
+                        <h4>Achieving Scale</h4>
+                        <p>The agent network exemplifies Scale through alliances and partnerships. While competitors like Khalti initially focused on a "pure-play digital strategy" for urban youth, eSewa's hybrid digital-plus-physical model allowed it to overcome Nepal's infrastructure challenges.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h4>Expanding Scope</h4>
+                        <p>Extensive partnerships with utilities, schools, and banks demonstrate the Scope theme. Each new service partner made the platform more valuable to every user, generating high switching costs and building a durable competitive moat.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h4>Driving Speed</h4>
+                        <p>Post-COVID, eSewa rapidly evolved into a comprehensive financial ecosystem. Its speed of network formation was remarkable, integrating over 4,500 schools and 50+ banks far quicker than competitors.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h4>Creating Value</h4>
+                        <p>The company's entire existence is rooted in solving a fundamental pain point—dramatically lowering the real-world transaction costs for millions of Nepalis who previously faced absurd barriers to basic payments.</p>
+                    </div>
+                </div>
+            </section>
+
+            <div class="module-divider">
+                <span>◆</span>
+            </div>
+
+            <!-- Part 4: Strategic Options -->
+            <section id="part4-strategy" class="section">
+                <div class="module-header">
+                    <h2>Part 4: Strategic Options and Analysis</h2>
+                    <p>Navigating the Strategic Crossroads</p>
+                </div>
+
+                <h2>5.0 Strategic Options Analysis and Recommendation</h2>
+                <p>Having built a formidable ecosystem defined by its expansive Scope, massive Scale, adaptive Speed, and robust Value Capture, eSewa now stands at a strategic crossroads. The competitive ground is shifting with the merger of its two largest rivals, creating a consolidated challenger with significant market power. The decision CEO Jagdish Khadka makes next will determine whether eSewa can defend its market dominance or will be forced to cede ground in the new landscape.</p>
+
+                <h3>5.1 Three Distinct Strategic Options</h3>
+                <p>Three distinct strategic options lie before eSewa:</p>
+
+                <div class="three-options-grid">
+                    <div class="strategy-option">
+                        <h4><span class="option-number">1</span>Integrate Embedded Banking</h4>
+                        <p>Evolve into a "super app" offering services like savings, investments, and SME credit to build long-term wealth for users.</p>
+                        
+                        <div class="rewards-section">
+                            <h5>Potential Rewards</h5>
+                            <ul>
+                                <li>Long-term market dominance through deep customer lock-in</li>
+                                <li>Annual profits per user are ten times higher than in core payments</li>
+                                <li>Becomes the primary financial institution for millions of Nepalis</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="risks-section">
+                            <h5>Key Risks</h5>
+                            <ul>
+                                <li>High capital expenditure for technology and regulatory compliance</li>
+                                <li>Complex regulatory hurdles for banking services</li>
+                                <li>Low initial conversion rate (only 2-3% of customer base)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="strategy-option">
+                        <h4><span class="option-number">2</span>Strengthen Core Digital Payments</h4>
+                        <p>Deepen penetration in existing markets (rural, youth) and focus on improving current payment services.</p>
+                        
+                        <div class="rewards-section">
+                            <h5>Potential Rewards</h5>
+                            <ul>
+                                <li>Builds on existing strengths with proven model</li>
+                                <li>Potential to grow customer base by 10%</li>
+                                <li>Reduced operational burden and simpler regulatory compliance</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="risks-section">
+                            <h5>Key Risks</h5>
+                            <ul>
+                                <li>Risk of strategic stagnation in a rapidly evolving industry</li>
+                                <li>Payments are becoming commoditized with thinning margins</li>
+                                <li>May not be sufficient to fend off a more aggressive competitor</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="strategy-option">
+                        <h4><span class="option-number">3</span>Expand Internationally</h4>
+                        <p>Replicate the successful Nepal playbook in other emerging markets in Africa or South Asia where cash still dominates.</p>
+                        
+                        <div class="rewards-section">
+                            <h5>Potential Rewards</h5>
+                            <ul>
+                                <li>Diversifies revenue and reduces dependency on Nepalese market</li>
+                                <li>Opportunity for first-mover advantage in high-growth markets</li>
+                                <li>Replicates proven strategies for Scope, Scale, Speed, and Value</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="risks-section">
+                            <h5>Key Risks</h5>
+                            <ul>
+                                <li>Requires new local partnerships and legal approvals</li>
+                                <li>High localization costs and upfront investment</li>
+                                <li>Long runway before profitability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>5.2 Framework Analysis of Options</h3>
+
+                <div class="framework-box">
+                    <h4>Option 1: Integrate Embedded Banking</h4>
+                    <p><strong>Strategic Evaluation:</strong> This is a bold, offensive strategy to fundamentally expand eSewa's Scope and unlock powerful new Sources of Value Creation. By shifting the business model from transactions to long-term wealth management and SME credit, eSewa could become the primary financial institution for millions of Nepalis, creating deep, defensible customer relationships.</p>
+                    
+                    <p><strong>Through the 4S Framework:</strong></p>
+                    <ul>
+                        <li><strong>Scope & Value Capture:</strong> Deepens the ecosystem by moving into core banking. Aims to capture significantly higher profit, with the potential for up to 10x higher profit per user than payments.</li>
+                        <li><strong>Risk:</strong> This move increases complexity and regulatory burden, testing the organization's Speed of adaptation in a new domain.</li>
+                    </ul>
+                </div>
+
+                <div class="framework-box">
+                    <h4>Option 2: Strengthen Core Digital Payments</h4>
+                    <p><strong>Strategic Evaluation:</strong> This is a focused, defensive strategy aimed at reinforcing existing Scale and Scope. The objective is to protect the core business against the newly merged competitor by deepening market penetration in rural and youth segments, thereby defending eSewa's primary domain of leadership.</p>
+                    
+                    <p><strong>Through the 4S Framework:</strong></p>
+                    <ul>
+                        <li><strong>Scale & Speed:</strong> Aims to grow the existing user base by 10% and defend market share by focusing on operational excellence and brand loyalty.</li>
+                        <li><strong>Risk:</strong> While reinforcing Scale, this safer option risks ceding the next frontier of Value Capture to more aggressive competitors and could lead to long-term strategic stagnation.</li>
+                    </ul>
+                </div>
+
+                <div class="framework-box">
+                    <h4>Option 3: Expand Internationally</h4>
+                    <p><strong>Strategic Evaluation:</strong> This is a diversification strategy to achieve new geographic Scale and broaden the company's Scope beyond Nepal. eSewa could replicate its successful playbook in other cash-dominant emerging markets, establishing a first-mover advantage.</p>
+                    
+                    <p><strong>Through the 4S Framework:</strong></p>
+                    <ul>
+                        <li><strong>Entire Framework:</strong> A play to establish new ecosystems by leveraging proven strategies for Scope (partnerships), Scale (agent networks), Speed (adaptation), and Value (first-mover advantage).</li>
+                        <li><strong>Risk:</strong> This is the highest-risk/highest-reward play, demanding a complete organizational commitment and carrying immense execution risk.</li>
+                    </ul>
+                </div>
+
+                <h3>5.3 Expert Recommendation</h3>
+                <p>In weighing these paths, the advice of an external consultant provides a crucial perspective:</p>
+
+                <div class="quote-box">
+                    <blockquote>"Focus is non-negotiable. Tapping local opportunities will solidify eSewa's foundation... strengthening core digital payments is a better bet to focus on at the moment."</blockquote>
+                    <p class="quote-author">— <strong>External Strategy Consultant</strong></p>
+                </div>
+
+                <p>The consultant cautioned that while embedded banking offers a tantalizingly high profit potential, the challenge of converting users to these new services is significant. Likewise, international expansion carries immense execution risk and a long, uncertain path to profitability. Given these factors, strengthening the core is the recommended path forward.</p>
+
+                <h3>5.4 Concluding Recommendation</h3>
+                <p>After a thorough analysis of the strategic options against the current market backdrop, the recommendation is clear. At a time when a newly merged entity is launching a direct assault on eSewa's core market, diverting leadership focus and capital to high-risk, long-horizon ventures would be a strategic blunder.</p>
+
+                <div class="key-points">
+                    <h3>Strategic Recommendation: Strengthen Core Digital Payments</h3>
+                    <ul>
+                        <li><strong>Direct Response to Threat:</strong> This strategy directly confronts the primary threat by defending and expanding market share in the segments now under attack.</li>
+                        <li><strong>Leverages Existing Strengths:</strong> Builds on the proven agent network, brand trust, and operational excellence that have driven success to date.</li>
+                        <li><strong>Tangible Growth:</strong> The consultant estimates this strategy could grow the existing customer base by 10%.</li>
+                        <li><strong>Foundation for Future:</strong> Securing the core allows eSewa to prepare for more ambitious ventures when the market stabilizes.</li>
+                    </ul>
+                </div>
+
+                <p>Securing the core is not merely the safest option; it is the only viable one that allows eSewa to leverage its existing strengths, consolidate its leadership, and build an unassailable foundation from which to launch more ambitious ventures when the market stabilizes. Flawless execution of this focused strategy is essential to win this next phase of the battle for Nepal's digital economy.</p>
+            </section>
+
+            <div class="module-divider">
+                <span>◆</span>
+            </div>
+
+            <!-- Part 5: Conclusion -->
+            <section id="part5-conclusion" class="section">
+                <div class="module-header">
+                    <h2>Part 5: Conclusion and Key Lessons</h2>
+                    <p>Imperatives for Digital Leadership</p>
+                </div>
+
+                <h2>6.0 Conclusion: The Imperative of Strategic Agility</h2>
+                <p>This analysis has demonstrated that eSewa's historic success was the outcome of a masterful, if intuitive, application of the core principles of digital business strategy. By strategically evolving its Scope, Scale, and Sources of Value Creation, the company built an ecosystem that transformed the Nepalese economy.</p>
+
+                <p>Today, however, the landscape has fundamentally changed. In the face of market consolidation and escalating competition, a deliberate, focused, and flawlessly executed digital business strategy is no longer just an advantage—it is a fundamental requirement for survival and continued dominance.</p>
+
+                <h3>6.1 Three Imperatives for Digital Leadership</h3>
+                <p>The central argument of this analysis is clear: sustained competitive advantage in the digital age is no longer a function of discrete products or services. It is achieved through the masterful orchestration of dynamic, value-creating ecosystems. The fusion of the 4S framework with eSewa's real-world success offers a powerful playbook for modern business leaders.</p>
+
+                <div class="four-pillars-grid">
+                    <div class="pillar-card">
+                        <h4>1. Think in Ecosystems, Not Industries</h4>
+                        <p>Leaders must look beyond the confines of their traditional industry to build and nurture value networks of partners, developers, and customers. This is the essence of mastering digital Scope—understanding that competitive advantage lies in the network you orchestrate, not just the products you build, as eSewa did with its 300,000 agents.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h4>2. Build Platforms for Scale and Speed</h4>
+                        <p>Durable advantage is derived from digital platforms architected to enable network effects, facilitate rapid scaling, and provide the agility to adapt. Mastering digital Scale and Speed means creating platforms that connect participants in a virtuous cycle, allowing for exponential growth and strategic pivots as the market evolves.</p>
+                    </div>
+                    <div class="pillar-card">
+                        <h4>3. Architect for Value Capture</h4>
+                        <p>Creating value is necessary but insufficient for success. Leaders must strategically design business models to control key digital points in the ecosystem to ensure long-term profitability. This is the art of Value Capture: building an indispensable platform that allows you to secure a disproportionate share of the value you help create.</p>
+                    </div>
+                </div>
+
+                <h3>6.2 Key Lessons for Students of Digital Business</h3>
+                <p>eSewa's story offers a clear and powerful blueprint for building a successful digital business. By starting with a simple service, it methodically built a dominant digital ecosystem through the strategic use of its agent network and partnerships. For any aspiring student of business or technology, eSewa's journey provides three crucial takeaways:</p>
+
+                <div class="key-points">
+                    <h3>Essential Lessons</h3>
+                    <ul>
+                        <li><strong>Strategy Begins with Pain:</strong> The most successful digital strategies are not technology-led; they are problem-led. eSewa won because it solved a visceral, expensive, and time-consuming pain point for millions of Nepalis.</li>
+                        <li><strong>Bridge the Digital Divide with a Human Touch:</strong> In emerging markets, a purely digital approach is insufficient. eSewa's agent network was a brilliant hybrid strategy that built the trust, access, and education necessary to onboard a cash-first society.</li>
+                        <li><strong>Build Moats, Not Just Apps:</strong> A single feature is easy to copy; a deeply integrated ecosystem is not. By weaving itself into the fabric of daily life—from school fees to utility bills—eSewa built a competitive advantage that is durable and difficult to replicate.</li>
+                    </ul>
+                </div>
+
+                <h3>6.3 The Future of Nepal's Digital Economy</h3>
+                <p>eSewa's story is more than just a case study; it is a live and ongoing battle for the future of Nepal's payment industry. The choice CEO Jagdish Khadka makes next will determine whether eSewa can defend its market dominance or will be forced to cede ground in the new landscape.</p>
+
+                <div class="quote-box">
+                    <blockquote>"We consider cash as our main competitor."</blockquote>
+                    <p class="quote-author">— <strong>Rabi Shakya</strong>, Chief Strategy Officer, eSewa</p>
+                </div>
+
+                <p>As the authors of the original framework observed, "The future of digital business strategy is already here, it is just unevenly distributed!" Mastering this playbook is no longer optional; it is essential for those who intend to lead it. By reinforcing its core business to defend its leadership, eSewa can secure its foundation and prepare for the next era of growth in Nepal's evolving digital economy.</p>
+
+                <h3>6.4 Strategic Outlook</h3>
+                <p>Despite its incredible success in navigating these forces, eSewa stands at a crossroads. The merger of its two largest rivals creates a powerful new challenger, forcing the company to make a critical choice about its future. It must now decide whether to deepen its ecosystem with complex financial services, focus on strengthening its core payment business, or risk expansion into new international markets.</p>
+
+                <p>By reinforcing its core business to defend its leadership, eSewa can secure its foundation and prepare for the next era of growth in Nepal's evolving digital economy. The strategic imperative is clear: flawless execution of a focused strategy is essential to win this next phase of the battle for Nepal's digital economy.</p>
+            </section>
+
+            <div class="module-divider">
+                <span>◆</span>
+            </div>
+
+            <!-- PDF Slides Section -->
+            <section id="pdf-slides" class="section">
+                <h2>Supporting Documentation</h2>
+                <p>The following PDF slides provide visual summaries and detailed breakdowns of key concepts discussed in this learning resource:</p>
+                
+                <div class="pdf-slides-grid">
+                    <div class="pdf-slide-item" onclick="openPDFModal('slide1')">
+                        <div class="slide-thumbnail">
+                            <div class="slide-placeholder">
+                                <span class="slide-number">Strategic Dilemma</span>
+                                <p>eSewa's Strategic Crossroads</p>
+                            </div>
+                            <div class="slide-overlay">
+                                <span class="zoom-icon">🔍</span>
+                            </div>
+                        </div>
+                        <h3>eSewa - Dilemma and Fintech Strategy</h3>
+                        <p>Visual breakdown of the strategic dilemma facing eSewa in 2025.</p>
+                    </div>
+
+                    <div class="pdf-slide-item" onclick="openPDFModal('slide2')">
+                        <div class="slide-thumbnail">
+                            <div class="slide-placeholder">
+                                <span class="slide-number">Digital Strategy</span>
+                                <p>eSewa's Path Forward</p>
+                            </div>
+                            <div class="slide-overlay">
+                                <span class="zoom-icon">🔍</span>
+                            </div>
+                        </div>
+                        <h3>eSewa - Digital Strategy Crossroads</h3>
+                        <p>Detailed framework for navigating the digital strategy decision.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="document-footer">
+                <p><strong>eSewa and Digital Ecosystem: Comprehensive Learning Resource V2</strong></p>
+                <p>A complete compilation of strategic analysis examining digital business strategy through the lens of Nepal's pioneering fintech company.</p>
+                <p><em>Based on multiple perspectives including academic frameworks, strategic analysis, investor presentations, and internal memoranda.</em></p>
+            </footer>
+        </article>
+    </main>
+
+    <!-- PDF Modal -->
+    <div id="pdfModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">PDF Viewer</h3>
+                <span class="close" onclick="closePDFModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="pdf-container" id="pdfContainer">
+                    <div class="pdf-placeholder">
+                        <p>PDF viewer placeholder - Upload your PDF slides to the /pdfs directory</p>
+                        <p><em>Expected files: pdfs/esewa-dilemma-fintech-strategy.pdf and pdfs/esewa-digital-strategy-crossroads.pdf</em></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+/* ==========================================================================
+   ESEWA DIGITAL ECOSYSTEM V2 - COMPREHENSIVE JAVASCRIPT
+   ========================================================================== */
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeNavigation();
+    initializeScrollSpy();
+    initializePDFModal();
+    initializeResponsiveTOC();
+    initializeAnimations();
+    enhanceAccessibility();
+});
+
+function initializeNavigation() {
+    document.querySelectorAll('.toc-list a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                updateActiveLink(this);
+            }
+        });
+    });
+}
+
+function initializeScrollSpy() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.getAttribute('id');
+                const correspondingLink = document.querySelector(`[href="#${sectionId}"]`);
+                if (correspondingLink) updateActiveLink(correspondingLink);
+            }
+        });
+    }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
+    
+    document.querySelectorAll('.section').forEach(section => observer.observe(section));
+}
+
+function updateActiveLink(activeLink) {
+    document.querySelectorAll('.toc-list a').forEach(link => link.classList.remove('active'));
+    activeLink.classList.add('active');
+}
+
+function initializePDFModal() {
+    const modal = document.getElementById('pdfModal');
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) closePDFModal();
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closePDFModal();
+    });
+}
+
+function openPDFModal(slideId) {
+    const modal = document.getElementById('pdfModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const slideNames = {
+        'slide1': 'eSewa - Dilemma and Fintech Strategy',
+        'slide2': 'eSewa - Digital Strategy Crossroads'
+    };
+    
+    modalTitle.textContent = slideNames[slideId] || 'PDF Viewer';
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    loadPDFContent(slideId);
+}
+
+function closePDFModal() {
+    document.getElementById('pdfModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function loadPDFContent(slideId) {
+    const pdfContainer = document.getElementById('pdfContainer');
+    const modalTitle = document.getElementById('modalTitle');
+    const slideTitles = {
+        'slide1': 'eSewa - Dilemma and Fintech Strategy',
+        'slide2': 'eSewa - Digital Strategy Crossroads'
+    };
+    const pdfFiles = {
+        'slide1': 'esewa-dilemma-fintech-strategy',
+        'slide2': 'esewa-digital-strategy-crossroads'
+    };
+    
+    modalTitle.textContent = slideTitles[slideId];
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        pdfContainer.innerHTML = `
+            <div style="padding: 20px; text-align: center;">
+                <h3 style="color: #0F172A; margin-bottom: 20px;">${slideTitles[slideId]}</h3>
+                <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                    <button onclick="downloadPDF('${slideId}')" style="background: #3B82F6; color: white; border: none; padding: 14px 24px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600;">Download PDF</button>
+                    <button onclick="openNativePDF('${slideId}')" style="background: #10B981; color: white; border: none; padding: 14px 24px; border-radius: 8px; cursor: pointer; font-size: 15px; font-weight: 600;">View PDF</button>
+                </div>
+            </div>
+        `;
+    } else {
+        pdfContainer.innerHTML = `
+            <iframe src="pdfs/${pdfFiles[slideId]}.pdf#toolbar=1&navpanes=1&scrollbar=1" 
+                    style="width: 100%; height: 100%; border: none;" title="PDF Viewer">
+                <div class="pdf-placeholder"><p>PDF viewer not supported. Please download the file.</p></div>
+            </iframe>
+        `;
+    }
+}
+
+function downloadPDF(slideId) {
+    const pdfFiles = { 'slide1': 'esewa-dilemma-fintech-strategy', 'slide2': 'esewa-digital-strategy-crossroads' };
+    const link = document.createElement('a');
+    link.href = `pdfs/${pdfFiles[slideId]}.pdf`;
+    link.download = `${pdfFiles[slideId]}.pdf`;
+    link.click();
+}
+
+function openNativePDF(slideId) {
+    const pdfFiles = { 'slide1': 'esewa-dilemma-fintech-strategy', 'slide2': 'esewa-digital-strategy-crossroads' };
+    const link = document.createElement('a');
+    link.href = `pdfs/${pdfFiles[slideId]}.pdf`;
+    link.target = '_blank';
+    link.click();
+}
+
+function initializeResponsiveTOC() {
+    const tocToggle = document.getElementById('tocToggle');
+    const toc = document.getElementById('toc');
+    
+    if (tocToggle && toc) {
+        tocToggle.addEventListener('click', () => toc.classList.toggle('active'));
+    }
+}
+
+function initializeAnimations() {
+    document.querySelectorAll('.section').forEach((section, index) => {
+        section.style.animationDelay = `${index * 0.1}s`;
+    });
+}
+
+function enhanceAccessibility() {
+    document.querySelectorAll('.section').forEach(section => {
+        if (!section.hasAttribute('aria-label')) {
+            const heading = section.querySelector('h2');
+            if (heading) section.setAttribute('aria-label', heading.textContent);
+        }
+    });
+}
+
+window.eSewaResourceV2 = {
+    openPDFModal,
+    closePDFModal,
+    downloadPDF,
+    openNativePDF
+};
+    </script>
+</body>
+</html>
