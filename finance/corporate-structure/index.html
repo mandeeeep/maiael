@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strategic Capital Structure Decisions: The Great Debate</title>
+    <title>Dividend Policy: The Enduring Puzzle</title>
     <style>
         /* 
-        CAPITAL STRUCTURE PRESENTATION - LANDSCAPE OPTIMIZED
-        ====================================================
+        DIVIDEND POLICY PRESENTATION - LANDSCAPE OPTIMIZED
+        ===================================================
         
         This presentation is optimized for landscape PDF export with:
         - Landscape page orientation (11" x 8.5")
@@ -93,7 +93,7 @@
             letter-spacing: -0.01em;
             margin-bottom: 40px;
             color: #2c3e50;
-            border-bottom: 3px solid #3498db;
+            border-bottom: 3px solid #27ae60;
             padding-bottom: 15px;
         }
 
@@ -132,7 +132,7 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            border-left: 4px solid #3498db;
+            border-left: 4px solid #27ae60;
         }
 
         .metric-label {
@@ -180,7 +180,7 @@
         }
 
         .data-table th {
-            background: #34495e;
+            background: #27ae60;
             color: white;
             padding: 15px;
             text-align: left;
@@ -219,7 +219,7 @@
         }
 
         .behavioral-insight {
-            background: #667eea;
+            background: #27ae60;
             color: white;
             padding: 40px;
             border-radius: 12px;
@@ -262,7 +262,7 @@
             border-radius: 12px;
             margin: 30px 0;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border-left: 6px solid #e74c3c;
+            border-left: 6px solid #27ae60;
         }
 
         .case-study.contradictory {
@@ -278,7 +278,7 @@
         }
 
         .case-study.policy {
-            border-left-color: #3498db;
+            border-left-color: #27ae60;
         }
 
         .case-study-title {
@@ -361,7 +361,7 @@
 
         .highlight-box {
             background: #ecf0f1;
-            border-left: 4px solid #3498db;
+            border-left: 4px solid #27ae60;
             padding: 25px;
             margin: 25px 0;
             border-radius: 0 8px 8px 0;
@@ -483,19 +483,31 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            border-left: 6px solid #3498db;
+            border-left: 6px solid #27ae60;
         }
 
-        .theory-card.tradeoff {
+        .theory-card.signaling {
+            border-left-color: #3498db;
+        }
+
+        .theory-card.agency {
             border-left-color: #e74c3c;
         }
 
-        .theory-card.pecking-order {
+        .theory-card.lifecycle {
+            border-left-color: #9b59b6;
+        }
+
+        .theory-card.behavioral {
             border-left-color: #f39c12;
         }
 
-        .theory-card.free-cash-flow {
-            border-left-color: #27ae60;
+        .theory-card.tax {
+            border-left-color: #1abc9c;
+        }
+
+        .theory-card.bird {
+            border-left-color: #e67e22;
         }
 
         .theory-title {
@@ -544,7 +556,7 @@
             top: 50%;
             transform: translateY(-50%);
             font-size: 2rem;
-            color: #3498db;
+            color: #27ae60;
             font-weight: bold;
         }
 
@@ -553,7 +565,7 @@
         }
 
         .step-number {
-            background: #f39c12;
+            background: #27ae60;
             color: white;
             width: 40px;
             height: 40px;
@@ -606,7 +618,7 @@
         }
 
         .bar-fill {
-            background: #3498db;
+            background: #27ae60;
             height: 100%;
             border-radius: 4px;
             display: flex;
@@ -1091,7 +1103,7 @@
         <div class="slide-index-controls">
             <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide - 1)" id="prevSlideBtn" title="Previous slide">‹</button>
             <div class="slide-index-display">
-                <span id="currentSlideNum">1</span> / <span id="totalSlides">29</span>
+                <span id="currentSlideNum">1</span> / <span id="totalSlides">21</span>
             </div>
             <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide + 1)" id="nextSlideBtn" title="Next slide">›</button>
         </div>
@@ -1103,7 +1115,13 @@
     <!-- Slide 1: Title -->
     <div class="slide">
         <div style="text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 80vh;">
-            <h1 class="slide-title" style="font-size: 4rem; margin-bottom: 60px;">Capital Structure</h1>
+            <h1 class="slide-title" style="font-size: 4rem; margin-bottom: 40px;">Dividend Policy</h1>
+            <div style="margin-bottom: 40px;">
+                <p style="font-size: 1.5rem; color: #34495e; font-style: italic; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                    "The harder we look at the dividend picture, the more it seems like a puzzle, with pieces that just don't fit together."
+                </p>
+                <p style="font-size: 1rem; color: #7f8c8d; margin-top: 20px;">— Fischer Black (1976)</p>
+            </div>
             
             <div style="margin: 60px 0;">
                 <p style="font-size: 1.2rem; color: #34495e;">
@@ -1115,44 +1133,42 @@
 
     <!-- Slide 2: Table of Contents -->
     <div class="slide">
-        <h1>Strategic Framework Overview</h1>
+        <h1>Presentation Overview</h1>
         
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
             <div>
-                <h3 style="color: #2c3e50; margin-bottom: 20px;">Foundation</h3>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Foundations</h3>
                 <ul style="list-style: none; padding: 0; line-height: 2.2;">
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">1. Capital Structure Strategy</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">2. Modigliani-Miller Benchmark</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">3. Market Imperfections Framework</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">1. The Dividend Puzzle</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">2. Irrelevance vs. Relevance Debate</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">3. Miller-Modigliani Theorem</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">4. Lintner's Dividend Model</a></li>
                 </ul>
             </div>
             <div>
-                <h3 style="color: #2c3e50; margin-bottom: 20px;">Theories & Analysis</h3>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Empirical Trends</h3>
                 <ul style="list-style: none; padding: 0; line-height: 2.2;">
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">4. Reality Check: Tax Benefits Analysis</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">5. Tradeoff Theory: Balancing Act</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">6. The Pecking Order Theory</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">7. Free Cash Flow: Debt as Discipline</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">5. Declining Role of Dividends</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">6. Rise of Share Repurchases</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">7. Disappearing Dividends Phenomenon</a></li>
                 </ul>
             </div>
             <div>
-                <h3 style="color: #2c3e50; margin-bottom: 20px;"> Synthesis & Application</h3>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Theories & Evidence</h3>
                 <ul style="list-style: none; padding: 0; line-height: 2.2;">
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">8. Comparative Analysis Matrix</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">9. Decision Framework</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">10. Real-World Case Studies</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">11. Nepalese Manufacturing Firms: Capital Structure Policy</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">12. Industry-Specific Applications</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">8. Bird-in-the-Hand Theory</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">9. Signaling Theory</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">10. Agency Cost Theory</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">11. Life-Cycle Theory</a></li>
                 </ul>
             </div>
             <div>
-                <h3 style="color: #2c3e50; margin-bottom: 20px;">Implementation & Future</h3>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Synthesis</h3>
                 <ul style="list-style: none; padding: 0; line-height: 2.2;">
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">13. Metrics & Benchmarks</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">14. Risk Management</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">15. Future Directions (Part 1)</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">16. Future Directions (Part 2)</a></li>
-                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">17. Key Takeaways</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">12. Key Determinants</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">13. Stylized Facts</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">14. Practical Implications</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">15. Conclusion</a></li>
                 </ul>
             </div>
         </div>
@@ -1160,739 +1176,836 @@
 
     <!-- Slide 3: The Central Question -->
     <div class="slide">
-        <h1>Capital Structure Strategy</h1>
+        <h1>The Central Question</h1>
         
         <div style="margin-bottom: 40px;">
             <p style="font-size: 1.3rem; color: #2c3e50; text-align: center; font-style: italic; line-height: 1.8;">
-                "How do corporations decide on the right mix of debt and equity to finance their investments?"
+                Does a firm's dividend policy affect its value?
             </p>
         </div>
 
         <div class="behavioral-insight">
-            <h3>The Strategic Challenge</h3>
-            <p>While we understand financing tactics (tax-efficient security design), our grasp of financing strategy (overall debt level choice) remains limited. This fundamental decision impacts cost of capital, financial flexibility, and competitive advantage.</p>
+            <h3>The Dividend Puzzle</h3>
+            <p>Dividend policy refers to the payout strategy a firm follows in determining the size and pattern of its distributions to shareholders over time. Despite decades of extensive theoretical and empirical research, no single, unified theory has emerged to fully explain corporate payout behavior.</p>
         </div>
 
-        <!-- Stewart C. Myers Research Foundation -->
-        <div class="highlight-box" style="margin: 30px 0; background: #f8f9fa; border-left: 6px solid #34495e;">
-            <h3 style="color: #2c3e50; margin-bottom: 15px;">Stewart C. Myers: The Research Foundation</h3>
-            <p style="color: #34495e; line-height: 1.6; margin-bottom: 15px;">
-                The study of capital structure attempts to explain the mix of securities and financing sources used by corporations to finance real investment. Most of the research on capital structure has focused on the proportions of debt vs. equity observed on the right-hand sides of corporations' balance sheets.
-            </p>
-            
-            <p style="color: #34495e; line-height: 1.6; margin-bottom: 15px;">
-                There is no universal theory of the debt-equity choice, and no reason to expect one. There are several useful conditional theories - <strong style="color: #e74c3c;">Tradeoff Theory</strong>, <strong style="color: #f39c12;">Pecking Order Theory</strong>, and <strong style="color: #27ae60;">Free Cash Flow Theory</strong> - that we'll explore in detail throughout this presentation.
-            </p>
-            
-            <p style="color: #2c3e50; margin: 15px 0 0 0; font-style: italic;">
-                <strong>Key Insight:</strong> Understanding when and why to use each framework is the essence of strategic capital structure decision-making.
-            </p>
+        <!-- Key framework image placeholder -->
+        <div class="chart-container">
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="imgs/dividend-puzzle-framework.png" alt="Dividend Puzzle Framework" style="max-width: 100%; height: auto; border-radius: 8px;" />
+            </div>
         </div>
 
         <div class="highlight-box" style="margin-top: 30px;">
             <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
-                <strong>Strategic Insight:</strong> The capital structure puzzle is not just an academic exercise - it's a strategic decision that can add or destroy significant value for shareholders.
+                <strong>Strategic Insight:</strong> Understanding dividend policy is essential for financial managers as it impacts firm value, investor relations, and capital market perceptions.
             </p>
         </div>
     </div>
 
-    <!-- Slide 4: The Foundation - Modigliani & Miller -->
+    <!-- Slide 4: The Foundational Debate -->
     <div class="slide">
-        <h1>Modigliani-Miller Benchmark</h1>
+        <h1>Foundational Debate: Irrelevance vs. Relevance</h1>
         
         <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
-                The starting point for all capital structure analysis
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center;">
+                Two opposing viewpoints have shaped the dividend discourse for over 60 years
             </p>
         </div>
 
         <div class="comparison-grid">
             <div class="comparison-card" style="border-left: 6px solid #3498db;">
-                <h3 style="color: #3498db;">Proposition 1: Irrelevance</h3>
-                <p style="margin-bottom: 20px; color: #5d6d7e;">In perfect markets, a firm's value is determined by its assets and growth opportunities, not by how it's financed.</p>
+                <h3 style="color: #3498db;">Dividend Irrelevance</h3>
+                <p style="margin-bottom: 20px; color: #5d6d7e;">In perfect markets, firm value is determined by assets and cash flows, not by how cash is distributed.</p>
                 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
                     <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1rem;">The Pizza Analogy</h4>
                     <p style="color: #5d6d7e; line-height: 1.6;">
-                        In a perfect supermarket, the value of a pizza doesn't depend on how it's sliced. Similarly, a company's value comes from its assets, not from how claims on those assets are divided between debt and equity.
+                        Different payout policies are like slicing a fixed pie into different pieces. The total value remains the same regardless of how it is sliced.
                     </p>
                 </div>
             </div>
 
             <div class="comparison-card" style="border-left: 6px solid #27ae60;">
-                <h3 style="color: #3498db;">Proposition 2: Cost of Capital</h3>
-                <p style="margin-bottom: 20px; color: #5d6d7e;">While debt may appear "cheaper," increased leverage raises equity risk, keeping overall cost of capital constant.</p>
+                <h3 style="color: #27ae60;">Dividend Relevance</h3>
+                <p style="margin-bottom: 20px; color: #5d6d7e;">Dividend policy is a critical determinant of firm value, particularly in imperfect real-world markets.</p>
                 
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1rem;">Key Formula</h4>
-                    <p style="color: #5d6d7e; line-height: 1.6; font-family: monospace; text-align: center;">
-                        rE = rA + (rA - rD)D/E
-                    </p>
-                    <p style="color: #5d6d7e; margin-top: 10px; font-size: 0.9rem; text-align: center;">
-                        As debt increases, equity cost rises proportionally
+                    <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1rem;">The DCF Perspective</h4>
+                    <p style="color: #5d6d7e; line-height: 1.6;">
+                        A stock's intrinsic value is derived from the present value of its future dividend stream (Williams, 1938; Gordon, 1959).
                     </p>
                 </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Slide 5: Miller-Modigliani Theorem -->
+    <div class="slide">
+        <h1>Miller-Modigliani Irrelevance Theorem</h1>
+        
+        <div class="theory-card" style="border-left: 6px solid #3498db;">
+            <div class="theory-title" style="color: #3498db;">The Perfect Market Benchmark (1961)</div>
+            <div class="theory-subtitle">Merton Miller and Franco Modigliani</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">In frictionless capital markets, a company's value is determined exclusively by its assets and their underlying cash-generating power, not by how it chooses to distribute those cash flows to shareholders.</p>
                 
+                <h4 style="color: #2c3e50; margin: 20px 0 15px 0;">Key Assumptions (The Perfect World)</h4>
+                <ul style="line-height: 2; padding-left: 20px; color: #5d6d7e;">
+                    <li>No taxes on dividends or capital gains</li>
+                    <li>No transaction costs or issuance costs</li>
+                    <li>No asymmetric information between managers and investors</li>
+                    <li>No agency conflicts between stakeholders</li>
+                    <li>Rational, price-taking investors</li>
+                </ul>
             </div>
         </div>
 
         <div class="highlight-box" style="margin-top: 30px;">
             <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
-                <strong>Strategic Value:</strong> Modigliani-Miller theory's power lies not in describing reality, but in showing what <em>doesn't</em> matter so we can focus on what <em>does</em>. Real-world imperfections - taxes, information gaps, agency costs - make financing decisions strategically important.
+                <strong>Critical Note:</strong> The MM theorem has been subject to significant critique due to its unrealistic assumptions. Critics like DeAngelo and DeAngelo (2006, 2007) have challenged its practical applicability in real-world markets.
             </p>
         </div>
     </div>
 
-    <!-- Slide 5: Market Imperfections Framework -->
+    <!-- Slide 6: Lintner's Dividend Model -->
     <div class="slide">
-        <h1>Market Imperfections: The Three Drivers</h1>
+        <h1>Lintner's Dividend Model</h1>
         
-        <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center;">
-                Each major theory focuses on a specific market friction
-            </p>
-        </div>
-
-        <div class="key-factors">
-            <div class="factor-card" style="border-left: 6px solid #e74c3c;">
-                <div class="factor-title" style="color: #e74c3c;">💰 Taxes</div>
-                <div class="factor-desc">
-                    <strong>The Tradeoff Theory</strong><br>
-                    Interest payments are tax-deductible, creating an "interest tax shield" that increases firm value. However, this benefit must be balanced against rising costs of financial distress.
-                </div>
-            </div>
-            
-            <div class="factor-card" style="border-left: 6px solid #f39c12;">
-                <div class="factor-title" style="color: #f39c12;">📊 Information Asymmetry</div>
-                <div class="factor-desc">
-                    <strong>The Pecking Order Theory</strong><br>
-                    Managers know more than investors about firm value. This creates signaling problems where financing choices communicate private information, influencing market perceptions.
-                </div>
-            </div>
-            
-            <div class="factor-card" style="border-left: 6px solid #27ae60;">
-                <div class="factor-title" style="color: #27ae60;">⚖️ Agency Costs</div>
-                <div class="factor-desc">
-                    <strong>The Free Cash Flow Theory</strong><br>
-                    Conflicts between managers and shareholders can lead to overinvestment. High debt can serve as a disciplinary mechanism to force cash disgorgement and align interests.
-                </div>
-            </div>
-        </div>
-
-        <div class="behavioral-insight" style="margin-top: 40px;">
-            <h3> Framework</h3>
-            <p>These aren't competing theories - they're complementary lenses. The key for s is identifying which market imperfection is most relevant to your firm's specific situation. Your capital structure strategy should address your dominant market friction.</p>
-        </div>
-    </div>
-
-
-
-
-
-
-
-    <!-- Slide 12: Theory 2 - Pecking Order Theory -->
-    
-    <!-- Slide 13: Myers' Reality Check - Why Tax Benefits Aren't That Clean -->
-    <div class="slide">
-        <h1>Reality Check: Why Tax Benefits Aren't That Clean</h1>
-        
-        <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
-                "In real life, the benefit is not that clean" - Stewart Myers
-            </p>
-        </div>
-
-        <!-- The Three Reasons using standard slide patterns -->
         <div class="comparison-grid">
-            <div class="comparison-card" style="border-left-color: #3498db;">
-                <h4 style="color: #2980b9; margin-bottom: 15px;">1. Profitability Reality</h4>
-                <p style="margin-bottom: 15px; color: #5d6d7e;">
-                    <strong>Issue:</strong> Firms aren't always profitable
-                </p>
-                <ul style="color: #5d6d7e; line-height: 1.6; margin: 0; padding-left: 20px;">
-                    <li>Loss years = no tax benefit</li>
-                    <li>Effective rate < 35%</li>
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Key Findings (1956)</h3>
+                <ul style="margin-top: 15px; color: #5d6d7e; line-height: 2;">
+                    <li><strong>Target Payout:</strong> Firms have target dividend payout ratios based on sustainable earnings</li>
+                    <li><strong>Smoothing:</strong> Managers smooth dividends, making gradual adjustments</li>
+                    <li><strong>Resistance:</strong> Strong reluctance to cut dividends due to negative market signals</li>
+                    <li><strong>Focus:</strong> Changes based on permanent, not temporary, shifts in earnings</li>
                 </ul>
             </div>
-
-            <div class="comparison-card" style="border-left-color: #f39c12;">
-                <h4 style="color: #d68910; margin-bottom: 15px;">2. Risk & Uncertainty</h4>
-                <p style="margin-bottom: 15px; color: #5d6d7e;">
-                    <strong>Reality:</strong> Tax shields are risky
-                </p>
-                <ul style="color: #5d6d7e; line-height: 1.6; margin: 0; padding-left: 20px;">
-                    <li>Refinancing risk</li>
-                    <li>Uncertain future value</li>
-                </ul>
-            </div>
-
-            <div class="comparison-card" style="border-left-color: #27ae60;">
-                <h4 style="color: #229954; margin-bottom: 15px;">3. Personal Tax Offset</h4>
-                <p style="margin-bottom: 15px; color: #5d6d7e;">
-                    <strong>Point:</strong> Personal taxes matter
-                </p>
-                <ul style="color: #5d6d7e; line-height: 1.6; margin: 0; padding-left: 20px;">
-                    <li>Interest taxed higher</li>
-                    <li>Equity advantages</li>
+            
+            <div class="comparison-card" style="border-left: 6px solid #3498db;">
+                <h3 style="color: #3498db;">Enduring Impact</h3>
+                <ul style="margin-top: 15px; color: #5d6d7e; line-height: 2;">
+                    <li><strong>Benartzi et al. (1997):</strong> Lintner's model "remains the best description of the dividend setting process available"</li>
+                    <li><strong>Bulan and Hull (2013):</strong> Managers remain as reluctant to cut dividends as Lintner originally described</li>
+                    <li><strong>Survey Evidence:</strong> Financial managers overwhelmingly perceive dividend policy as important</li>
                 </ul>
             </div>
         </div>
-
-        <!-- The Critical Question - Simple Section -->
-        <div style="margin-top: 30px;">
-            <h3 style="color: #2c3e50; margin-bottom: 15px;">The Critical Question</h3>
-            <p style="font-size: 1.2rem; color: #2c3e50; line-height: 1.6; margin-bottom: 15px;">
-                If tax benefits are real, why don't firms borrow like crazy?
-            </p>
-            
-            <p style="color: #34495e; line-height: 1.6; margin-bottom: 15px;">
-                <strong>Myers' Logic:</strong> If no costs existed, there'd be no tax-paying corporations. Yet we observe many firms still paying taxes.
-            </p>
-            <p style="color: #34495e; line-height: 1.6;">
-                This reveals <strong>there must be costs of aggressive borrowing</strong> that offset tax benefits, leading us to <strong>Tradeoff Theory</strong>.
-            </p>
+        
+        <!-- Dividend adjustment process image placeholder -->
+        <div class="chart-container">
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="imgs/lintner-adjustment-process.png" alt="Lintner's Partial Adjustment Model" style="max-width: 100%; height: auto; border-radius: 8px;" />
+            </div>
         </div>
     </div>
 
-    <!-- Slide 14: Tradeoff Theory Visual -->
+    <!-- Slide 7: Empirical Trends - The Declining Role -->
     <div class="slide">
-        <h1>Tradeoff Theory: Balancing Act</h1>
+        <h1>Empirical Trend: The Declining Role of Dividends</h1>
         
         <div style="margin-bottom: 30px;">
             <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
-                Optimal debt level where marginal benefits = marginal costs
-            </p>
-        </div>
-
-        <div class="chart-container">
-            <div style="text-align: center; margin: 30px 0;">
-                <img src="diagrams/tradeoff-theory.png" alt="Tradeoff Theory - Benefits vs Costs" style="max-width: 100%; height: auto; border-radius: 8px;" />
-            </div>
-        </div>
-
-    </div>
-
-    <div class="slide">
-        <h1>The Pecking Order Theory</h1>
-        
-        <div class="theory-card pecking-order" style="border-left: 6px solid #f39c12;">
-            <div class="theory-title" style="color: #f39c12;">Framework: Financing Hierarchy</div>
-            <div class="theory-subtitle">Internal Funds → Debt → Equity (Information-Driven)</div>
-            
-            <div class="theory-content">
-                <!-- Pecking Order Detail Flow Diagram -->
-                <div style="text-align: center; margin: 25px 0;">
-                    <img src="diagrams/pecking-order-detail.png" alt="Pecking Order Detail Flow" style="max-width: 100%; height: auto; border-radius: 8px;" />
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-    <!-- Slide 18: Free Cash Flow Theory Visual -->
-    <div class="slide">
-        <h1>Free Cash Flow: Debt as Discipline</h1>
-        
-        <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
-                High leverage forces cash disgorgement and operational focus
-            </p>
-        </div>
-
-        <div class="chart-container">
-            <div style="text-align: center; margin: 30px 0;">
-                <img src="diagrams/free-cash-flow.png" alt="Free Cash Flow Theory - Debt as Discipline" style="max-width: 100%; height: auto; border-radius: 8px;" />
-            </div>
-        </div>
-
-        <div class="comparison-grid" style="margin-top: 30px;">
-            <div class="case-study">
-                <div class="case-study-title">The Problem</div>
-                <div class="case-study-content">
-                    Mature firms with excess cash may overinvest in value-destroying projects or organizational slack.
-                </div>
-            </div>
-            <div class="case-study policy">
-                <div class="case-study-title">The Solution</div>
-                <div class="case-study-content">
-                    High debt forces managers to focus on core operations and return cash to shareholders.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Slide 13: Theory 3 - Free Cash Flow Theory -->
-    <div class="slide">
-        <h1> Comparison Matrix</h1>
-        
-        <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.1rem; color: #2c3e50; text-align: center;">
-                Three conditional theories for strategic application
+                The composition of U.S. stock returns has transformed dramatically over two centuries
             </p>
         </div>
 
         <table class="data-table">
             <thead>
                 <tr>
-                    <th style="background: #34495e;">Theory</th>
-                    <th style="background: #34495e;">Primary Driver</th>
-                    <th style="background: #34495e;">Best Describes</th>
-                    <th style="background: #34495e;">Key Prediction</th>
-                    <th style="background: #34495e;">Main Limitation</th>
+                    <th>Period</th>
+                    <th>Avg. Dividend Yield (%)</th>
+                    <th>Dividends as % of Total Return</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong style="color: #e74c3c;">Tradeoff Theory</strong></td>
-                    <td>Taxes & Financial Distress</td>
-                    <td>Stable, profitable firms with tangible assets</td>
-                    <td>Optimal target debt ratio</td>
-                    <td>Profitability puzzle (most profitable borrow least)</td>
+                    <td><strong>1801-1870</strong></td>
+                    <td>6.50%</td>
+                    <td style="color: #27ae60; font-weight: bold;">90.0%</td>
                 </tr>
                 <tr style="background: #f8f9fa;">
-                    <td><strong style="color: #f39c12;">Pecking Order Theory</strong></td>
-                    <td>Information Asymmetry</td>
-                    <td>Growth firms with significant information gaps</td>
-                    <td>Financing hierarchy (internal → debt → equity)</td>
-                    <td>Why no "deferred equity" innovations?</td>
+                    <td><strong>1871-1920</strong></td>
+                    <td>5.18%</td>
+                    <td style="color: #27ae60; font-weight: bold;">71.3%</td>
                 </tr>
                 <tr>
-                    <td><strong style="color: #27ae60;">Free Cash Flow Theory</strong></td>
-                    <td>Agency Costs</td>
-                    <td>Mature, cash-rich firms prone to overinvestment</td>
-                    <td>High debt disciplines management</td>
-                    <td>Highly conditional - not broadly applicable</td>
+                    <td><strong>1921-1945</strong></td>
+                    <td>5.49%</td>
+                    <td style="color: #f39c12; font-weight: bold;">44.0%</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong>1946-1982</strong></td>
+                    <td>4.52%</td>
+                    <td style="color: #f39c12; font-weight: bold;">39.8%</td>
+                </tr>
+                <tr>
+                    <td><strong>1983-2012</strong></td>
+                    <td>2.67%</td>
+                    <td style="color: #e74c3c; font-weight: bold;">22.1%</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="behavioral-insight" style="margin-top: 30px;">
-            <h3>Strategic Insight</h3>
-            <p>No theory wins universally. Instead, s should use these as diagnostic tools to identify which market imperfection is most relevant to their firm's situation. The "best" theory is the one that explains your specific financing environment.</p>
+            <h3>Key Observation</h3>
+            <p>Dividends once constituted the vast majority of returns (90%) but have fallen dramatically to just 22.1% in the modern era. This shift underscores a fundamental change in how value is delivered to shareholders.</p>
         </div>
     </div>
 
-
-
-
-
-
-
-    <!-- Slide 19: Decision Framework -->
+    <!-- Slide 8: The Rise of Share Repurchases -->
     <div class="slide">
-        <h1> Decision Framework</h1>
+        <h1>The Rise of Share Repurchases</h1>
         
-        <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
-                Step-by-step approach to capital structure strategy
-            </p>
-        </div>
-
-        <div class="chart-container">
-            <div style="text-align: center; margin: 30px 0;">
-                <img src="diagrams/decision-framework.png" alt=" Decision Framework" style="max-width: 100%; height: auto; border-radius: 8px;" />
-            </div>
-        </div>
-
-
-    </div>
-
-    <!-- Slide 21: Case Study Analysis -->
-    <div class="slide">
-        <h1>Real-World Case Studies</h1>
-        
-        <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.1rem; color: #2c3e50; text-align: center;">
-                Which theory explains these actual corporate decisions?
-            </p>
-        </div>
-
-        <div class="comparison-grid">
-            <div class="case-study expected">
-                <div class="case-study-title">Microsoft (2000s)</div>
-                <div class="case-study-subtitle">Low debt despite high profitability</div>
-                <div class="case-study-content">
-                    <strong>Observation:</strong> Extremely profitable tech giant with low/negative debt ratios<br>
-                    <strong>Best Theory:</strong> Pecking Order - High internal funds eliminate external financing need<br>
-                    <strong>Strategic Insight:</strong> Information asymmetry makes equity costly; abundant cash provides flexibility
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 6px solid #e74c3c;">
+                <div class="factor-title" style="color: #e74c3c;">Historic Crossover (1997)</div>
+                <div class="factor-desc">
+                    For the first time in U.S. history, the total dollar amount spent on share repurchases exceeded total dividend payments.
                 </div>
             </div>
             
-            <div class="case-study policy">
-                <div class="case-study-title">Private Equity LBOs</div>
-                <div class="case-study-subtitle">High leverage as discipline tool</div>
-                <div class="case-study-content">
-                    <strong>Observation:</strong> Massive debt imposed management discipline and forced cash generation<br>
-                    <strong>Best Theory:</strong> Free Cash Flow - Debt forces focus and prevents overinvestment<br>
-                    <strong>Strategic Insight:</strong> High leverage creates governance alignment and discipline
+            <div class="factor-card" style="border-left: 6px solid #f39c12;">
+                <div class="factor-title" style="color: #f39c12;">Dominant Form</div>
+                <div class="factor-desc">
+                    In some recent years, share repurchases have accounted for more than 50% of aggregate corporate payouts in the U.S.
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #27ae60;">
+                <div class="factor-title" style="color: #27ae60;">Flexibility Advantage</div>
+                <div class="factor-desc">
+                    Unlike dividends, share repurchases do not create long-term commitment, giving managers greater financial flexibility.
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Slide 22: Nepalese Case Study -->
-    <div class="slide">
-        <h1>Nepalese Manufacturing Firms: Capital Structure Policy</h1>
-        
-        <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.1rem; color: #2c3e50; text-align: center;">
-                Empirical Evidence from Emerging Market Context
-            </p>
-        </div>
-
-        <div style="margin-bottom: 40px;">
-            <div style="display: grid; grid-template-columns: 1fr; gap: 20px;">
-                <div class="case-study-card">
-                    <div class="case-study-title">Target debt ratio ≈ 59% of total capital employed (mean ≈ 59%)</div>
-                    <div class="case-study-content">
-                        <strong>90% agree:</strong> debt policy affects firm value (WACC/value relevance)<br>
-                        <strong>Profitability ↘ debt</strong> (esp. long‑term) → pecking‑order behavior
-                    </div>
-                </div>
-                
-                <div class="case-study-card">
-                    <div class="case-study-title">Debt pattern & drivers</div>
-                    <div class="case-study-content">
-                        <strong>Small/medium firms</strong> use more debt; large/older firms are less levered<br>
-                        <strong>Most prefer internal funds first;</strong> if external → debt before equity<br>
-                        <strong>Short‑term debt</strong> is used heavily; choice depends on interest rate + borrowing volume
-                    </div>
-                </div>
-                
-                <div class="case-study-card">
-                    <div class="case-study-title">Tax & financing environment</div>
-                    <div class="case-study-content">
-                        <strong>Tax incentives support debt:</strong> if tax rate rises, ~77% would increase leverage<br>
-                        <strong>Main determinants ranked:</strong> flexibility, corporate tax, earnings volatility, transaction costs<br>
-                        <strong>Interest rates</strong> seen as 'high' by most respondents; 'reasonable' ≈ 9%
-                    </div>
-                </div>
+        <!-- Repurchase vs dividends trend image placeholder -->
+        <div class="chart-container">
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="imgs/repurchases-vs-dividends-trend.png" alt="Share Repurchases vs Dividends Trend" style="max-width: 100%; height: auto; border-radius: 8px;" />
             </div>
         </div>
 
         <div class="highlight-box">
-            <strong>Nepali context takeaway (Manufacturing)</strong><br>
-            • Expect a 'pecking order' reality: retained earnings → (short‑term) debt → equity<br>
-            • Because interest rates and cash‑flow volatility are constraints, keep leverage discipline: monitor Debt/Equity, Interest Coverage, and liquidity buffers<br>
-            • Use debt strategically when tax shields matter, but avoid distress risk - especially for firms with unstable earnings or weak collateral
-        </div>
-        
-        <div style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #34495e;">
-            <p style="font-size: 0.9rem; color: #34495e; margin: 0;">
-                <strong>Reference:</strong> Gadtaula, K. P. (2024). Capital Structure Policy of Manufacturing Firms in Nepal. 
-                <em>Journal of Accounting and Finance</em>, 16(2). 
-                <a href="http://www.na-businesspress.com/JAF/GadtaulaKP_Web16_2_.pdf" target="_blank" style="color: #2980b9;">http://www.na-businesspress.com/JAF/GadtaulaKP_Web16_2_.pdf</a>
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Insight:</strong> Farre-Mensa et al. (2014) describe this as "the triumph of buybacks over dividends as the dominant form of corporate payouts."
             </p>
         </div>
     </div>
 
-    <!-- Slide 23: Industry Applications -->
+    <!-- Slide 9: The Disappearing Dividends Phenomenon -->
     <div class="slide">
-        <h1>Industry-Specific Applications</h1>
+        <h1>The "Disappearing Dividends" Phenomenon</h1>
+        
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #e74c3c;">
+                <h3 style="color: #e74c3c;">The Trend</h3>
+                <p style="margin-bottom: 15px; color: #5d6d7e;">Fama and French (2001) documented a sharp decline in dividend-paying firms:</p>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>1984: <strong style="color: #2c3e50;">32%</strong> of firms paid dividends</li>
+                    <li>1999: <strong style="color: #2c3e50;">16%</strong> of firms paid dividends</li>
+                </ul>
+                <p style="margin-top: 15px; color: #5d6d7e;">This is a worldwide phenomenon observed in Canada, Europe, and Japan (Denis and Osobov, 2005; Fatemi and Bildik, 2012).</p>
+            </div>
+            
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">The Concentration</h3>
+                <p style="margin-bottom: 15px; color: #5d6d7e;">Today, dividend payers are increasingly concentrated among large-cap, mature companies:</p>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>2013: <strong style="color: #2c3e50;">84%</strong> of S&P 500 companies paid dividends</li>
+                    <li>Smaller and growth firms increasingly rely on share repurchases</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Unexplained Phenomenon:</strong> No universally accepted explanation exists. Catering theory (Baker and Wurgler, 2004) suggests managers respond to investor fads, while Hoberg and Prabhala (2009) argue idiosyncratic risk is a significant factor.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Major Theories Overview -->
+    <div class="slide">
+        <h1>Why Do Firms Pay Dividends?</h1>
         
         <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.1rem; color: #2c3e50; text-align: center;">
-                Which theory applies across different industries?
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                Multiple theories attempt to explain dividend policy in imperfect markets
+            </p>
+        </div>
+
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 6px solid #3498db;">
+                <div class="factor-title" style="color: #3498db;">Bird-in-the-Hand</div>
+                <div class="factor-desc">
+                    Investors prefer certain dividends today over uncertain future capital gains. Empirical Support: Mixed
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #1abc9c;">
+                <div class="factor-title" style="color: #1abc9c;">Tax Clientele</div>
+                <div class="factor-desc">
+                    Different investor groups prefer different payout policies based on tax treatment. Empirical Support: Minor influence
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #9b59b6;">
+                <div class="factor-title" style="color: #9b59b6;">Signaling</div>
+                <div class="factor-desc">
+                    Dividend changes convey private information about firm prospects. Empirical Support: Contested
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #e74c3c;">
+                <div class="factor-title" style="color: #e74c3c;">Agency Costs</div>
+                <div class="factor-desc">
+                    Dividends reduce free cash flow available for wasteful overinvestment. Empirical Support: Persuasive
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #f39c12;">
+                <div class="factor-title" style="color: #f39c12;">Behavioral</div>
+                <div class="factor-desc">
+                    Investor psychology creates preferences for dividends (self-control, mental accounting). Empirical Support: Mixed
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #e67e22;">
+                <div class="factor-title" style="color: #e67e22;">Life-Cycle</div>
+                <div class="factor-desc">
+                    Payout policy evolves with firm maturity; mature firms should distribute excess cash. Empirical Support: Generally supported
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Bird-in-the-Hand Theory -->
+    <div class="slide">
+        <h1>Bird-in-the-Hand Theory</h1>
+        
+        <div class="theory-card bird">
+            <div class="theory-title">The Certainty Argument</div>
+            <div class="theory-subtitle">Myron Gordon (1962) and John Lintner (1962)</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">Investors prefer the certainty of a dividend payment today ("a bird in the hand") over the uncertainty of future capital gains. A dividend is a "sure thing," whereas future share price appreciation is not guaranteed.</p>
+                
+                <h4 style="color: #2c3e50; margin: 20px 0 15px 0;">The Core Logic</h4>
+                <ul style="line-height: 1.8; padding-left: 20px; color: #5d6d7e;">
+                    <li>Capital gains require reinvestment and depend on future market conditions</li>
+                    <li>Dividends provide immediate, certain cash flow</li>
+                    <li>Higher perceived risk of capital gains → investors require higher discount rate → lower valuation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 30px;">
+            <div class="comparison-card">
+                <h3 style="color: #27ae60;">Supporting Evidence</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>Intuitive appeal to many investors</li>
+                    <li>Strong preference among retirees for dividend income</li>
+                </ul>
+            </div>
+            
+            <div class="comparison-card">
+                <h3 style="color: #e74c3c;">Challenging Evidence</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>Under perfect market assumptions, risk depends on firm's cash flows, not distribution method</li>
+                    <li>Literature reviews find mixed empirical support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Signaling Theory -->
+    <div class="slide">
+        <h1>Signaling Theory (Asymmetric Information)</h1>
+        
+        <div class="theory-card signaling">
+            <div class="theory-title">What a Dividend Announcement Really Says</div>
+            <div class="theory-subtitle">Bhattacharya (1979), Miller and Rock (1985)</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">In the real world, there is an information gap between company managers and investors. Managers have inside knowledge about future prospects that the public does not. A dividend announcement can serve as a powerful signal.</p>
+                
+                <!-- Signaling process image placeholder -->
+                <div style="text-align: center; margin: 25px 0;">
+                    <img src="imgs/signaling-process.png" alt="Dividend Signaling Process" style="max-width: 100%; height: auto; border-radius: 8px;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 30px;">
+            <div class="case-study expected">
+                <div class="case-study-title">Dividend Increase</div>
+                <div class="case-study-content">
+                    Signals <strong>confidence</strong> in stable future earnings. Managers are reluctant to cut, so an increase signals strength.
+                </div>
+            </div>
+            
+            <div class="case-study contradictory">
+                <div class="case-study-title">Dividend Decrease</div>
+                <div class="case-study-content">
+                    Sends a <strong>powerfully negative signal</strong> about future prospects. Often interpreted as a sign of trouble ahead.
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Finding:</strong> Survey evidence consistently shows managers believe their payout policy conveys important information to investors, even though direct market data tests show mixed results.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 13: Agency Cost Theory -->
+    <div class="slide">
+        <h1>Agency Cost Theory</h1>
+        
+        <div class="theory-card agency">
+            <div class="theory-title">Dividends as Discipline</div>
+            <div class="theory-subtitle">Jensen (1986) - Free Cash Flow Hypothesis</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">A potential conflict of interest exists between managers and shareholders. If managers control large piles of excess cash, they may be tempted to waste it on unprofitable projects that expand their own influence rather than create shareholder value.</p>
+                
+                <!-- Agency cost diagram image placeholder -->
+                <div style="text-align: center; margin: 25px 0;">
+                    <img src="imgs/agency-cost-mechanism.png" alt="Agency Cost Mechanism" style="max-width: 100%; height: auto; border-radius: 8px;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight" style="margin-top: 30px;">
+            <h3>The Solution</h3>
+            <p>Committing to regular dividend payments reduces discretionary cash available to managers, imposing financial discipline. This forces managers to be more selective about investments and face capital market scrutiny for external financing.</p>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0;">
+                <strong>Empirical Support:</strong> This is considered the "leading mainstream economic explanation" for why firms commit to dividends, with "persuasive" support from empirical research (Megginson, 1996; Farre-Mensa et al., 2014).
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 14: Firm Life-Cycle Theory -->
+    <div class="slide">
+        <h1>Firm Life-Cycle Theory</h1>
+        
+        <div class="theory-card lifecycle">
+            <div class="theory-title">From Hoarding Cash to Distributing It</div>
+            <div class="theory-subtitle">Mueller (1969), Fama and French (2001)</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">A company's dividend policy naturally reflects its stage of development. Young, high-growth firms have abundant profitable investment opportunities and need all capital they can get. As companies mature, growth slows and excess cash accumulates.</p>
+                
+                <!-- Life Cycle Table -->
+                <table class="data-table" style="margin: 20px 0; font-size: 0.85rem;">
+                    <thead>
+                        <tr>
+                            <th style="background: #9b59b6; width: 15%;">Stage</th>
+                            <th style="background: #9b59b6; width: 25%;">Firm Characteristics</th>
+                            <th style="background: #9b59b6; width: 30%;">Dividend Policy</th>
+                            <th style="background: #9b59b6; width: 30%;">Key Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color: #3498db;">Stage 1</strong><br/>Growth</td>
+                            <td>New ventures, high growth, abundant opportunities</td>
+                            <td style="color: #e74c3c;">No Dividends<br/>0% Payout</td>
+                            <td>Retain all earnings, fund expansion, equity financing</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td><strong style="color: #9b59b6;">Stage 2</strong><br/>Transition</td>
+                            <td>Established firms, moderate growth, increasing cash flow</td>
+                            <td style="color: #f39c12;">Share Repurchases<br/>Low Payout</td>
+                            <td>Begin returning capital, opportunistic buybacks</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color: #27ae60;">Stage 3</strong><br/>Maturity</td>
+                            <td>Mature companies, slow growth, excess cash</td>
+                            <td style="color: #1abc9c;">Regular Dividends<br/>High Payout</td>
+                            <td>Substantial returns, dividend smoothing, stable policy</td>
+                        </tr>
+                        <tr style="background: #f8f9fa;">
+                            <td><strong style="color: #95a5a6;">Stage 4</strong><br/>Decline</td>
+                            <td>Facing competition, market pressure, cash constraints</td>
+                            <td style="color: #e67e22;">Dividend Cuts<br/>Variable</td>
+                            <td>Strategic pivot, reduced returns, adapt or restructure</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 30px;">
+            <div class="comparison-card" style="border-left: 6px solid #3498db;">
+                <h3 style="color: #3498db;">Growth Stage</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>Abundant investment opportunities</li>
+                    <li>Retain all earnings for growth</li>
+                    <li>Zero or low dividends</li>
+                </ul>
+            </div>
+            
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Mature Stage</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>Limited new investment opportunities</li>
+                    <li>Excess cash generation</li>
+                    <li>Begin distributing dividends</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0;">
+                <strong>Empirical Support:</strong> This is one of the most consistently supported theories, with reviews by Bulan and Subramanian (2009) and Baker et al. (2011) noting it is "generally supported" by evidence.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 15: Key Determinants of Dividend Policy -->
+    <div class="slide">
+        <h1>Key Determinants of Dividend Policy</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                Practical factors that shape payout decisions
             </p>
         </div>
 
         <table class="data-table">
             <thead>
                 <tr>
-                    <th style="background: #34495e;">Industry</th>
-                    <th style="background: #34495e;">Typical Characteristics</th>
-                    <th style="background: #34495e;">Applicable Theory</th>
-                    <th style="background: #34495e;">Strategic Rationale</th>
+                    <th>Factor</th>
+                    <th>Effect on Dividends</th>
+                    <th>Explanation</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td><strong>Utilities</strong></td>
-                    <td>Stable cash flows, regulated, asset-intensive</td>
-                    <td style="color: #e74c3c; font-weight: bold;">Tradeoff</td>
-                    <td>High tax shields + low distress costs = optimal high leverage</td>
+                    <td><strong>Earnings Stability</strong></td>
+                    <td style="color: #27ae60;">Positive (+)</td>
+                    <td>Stable earnings enable sustainable dividend payments</td>
                 </tr>
                 <tr style="background: #f8f9fa;">
-                    <td><strong>Technology (Growth)</strong></td>
-                    <td>High growth, information asymmetry, intangible assets</td>
-                    <td style="color: #f39c12; font-weight: bold;">Pecking Order</td>
-                    <td>Maintain flexibility, avoid negative equity signals</td>
+                    <td><strong>Firm Size</strong></td>
+                    <td style="color: #27ae60;">Positive (+)</td>
+                    <td>Larger firms are more likely to pay and maintain dividends</td>
                 </tr>
                 <tr>
-                    <td><strong>Pharmaceuticals</strong></td>
-                    <td>High profitability, R&D intensive, volatile cash flows</td>
-                    <td style="color: #f39c12; font-weight: bold;">Pecking Order</td>
-                    <td>Abundant internal funds, high information asymmetry</td>
+                    <td><strong>Profitability</strong></td>
+                    <td style="color: #27ae60;">Positive (+)</td>
+                    <td>More profitable firms can afford higher dividends</td>
                 </tr>
                 <tr style="background: #f8f9fa;">
-                    <td><strong>Retail (Mature)</strong></td>
-                    <td>Cash-rich, limited growth, real estate intensive</td>
-                    <td style="color: #27ae60; font-weight: bold;">Free Cash Flow</td>
-                    <td>Debt disciplines management, prevents overexpansion</td>
+                    <td><strong>Maturity</strong></td>
+                    <td style="color: #27ae60;">Positive (+)</td>
+                    <td>Mature firms generate excess cash for distribution</td>
                 </tr>
                 <tr>
-                    <td><strong>Manufacturing</strong></td>
-                    <td>Stable, tangible assets, moderate growth</td>
-                    <td style="color: #e74c3c; font-weight: bold;">Tradeoff</td>
-                    <td>Balance tax benefits against operational flexibility</td>
+                    <td><strong>Growth Opportunities</strong></td>
+                    <td style="color: #e74c3c;">Negative (−)</td>
+                    <td>High-growth firms retain cash for investment</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong>Investment Options</strong></td>
+                    <td style="color: #e74c3c;">Negative (−)</td>
+                    <td>More opportunities → lower payout ratios</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Insight:</strong> These determinants have remained remarkably consistent since Lintner's (1956) original research. The stability of past dividends and current/anticipated earnings remain the most important factors.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 16: Stylized Facts -->
+    <div class="slide">
+        <h1>Stylized Facts of Dividend Policy</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                What decades of research have consistently shown
+            </p>
+        </div>
+
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">1. Managed Policy</div>
+                <div class="factor-desc">Firms follow managed, not residual, dividend policies and are committed to smoothing dividends over time.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">2. Earnings Anchor</div>
+                <div class="factor-desc">The most important determinants are stability of past dividends and current/anticipated earnings.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">3. Market Reaction</div>
+                <div class="factor-desc">Markets respond positively to payout increases and negatively to decreases.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">4. Repurchases Paramount</div>
+                <div class="factor-desc">Share repurchases have become a central, often dominant, element of payout strategy.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">5. Firm-Specific</div>
+                <div class="factor-desc">No universal set of factors works for all firms; policy is sensitive to firm characteristics.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">6. No Universal Theory</div>
+                <div class="factor-desc">Universal or "one-size-fits-all" theories are too simplistic for explaining payout behavior.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 17: Practical Implications -->
+    <div class="slide">
+        <h1>Practical Implications for Managers</h1>
+        
+        <div class="behavioral-insight">
+            <h3>Core Principles</h3>
+            <p>Based on decades of research, financial managers should consider these essential principles when formulating dividend policy:</p>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 30px;">
+            <div class="case-study policy">
+                <div class="case-study-title">Commitment is Key</div>
+                <div class="case-study-content">
+                    Firms do not treat dividends as residual afterthoughts. They follow managed policies and are committed to maintaining smooth dividend payments over time.
+                </div>
+            </div>
+            
+            <div class="case-study expected">
+                <div class="case-study-title">Integrate Policies</div>
+                <div class="case-study-content">
+                    Dividend policy should not be considered in isolation. It is fundamentally connected with investment and financing policies as part of a coherent financial strategy.
+                </div>
+            </div>
+        </div>
+
+        <div class="key-factors" style="margin-top: 30px;">
+            <div class="factor-card">
+                <div class="factor-title">Balance Conflicting Forces</div>
+                <div class="factor-desc">Setting appropriate payout policy requires weighing investment needs, earnings stability, investor expectations, and market sentiment.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Firm-Specific View</div>
+                <div class="factor-desc">Dividend policy must be idiosyncratic. What works for a competitor may be wrong for your company due to different market imperfections.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Compensation Effects</div>
+                <div class="factor-desc">Executive stock options create incentives to favor share repurchases over dividends (EPS impact).</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 18: Dividend Theories Comparison -->
+    <div class="slide">
+        <h1>Theories Comparison Summary</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; text-align: center;">
+                Overview of major theories and their empirical support
+            </p>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Theory</th>
+                    <th>Core Idea</th>
+                    <th>Empirical Support</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong style="color: #e67e22;">Bird-in-the-Hand</strong></td>
+                    <td>Investors prefer certain dividends over uncertain capital gains</td>
+                    <td style="color: #f39c12;">Mixed</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong style="color: #1abc9c;">Tax Clientele</strong></td>
+                    <td>Tax differences create investor preferences for payout types</td>
+                    <td style="color: #95a5a6;">Minor influence</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: #9b59b6;">Signaling</strong></td>
+                    <td>Dividend changes signal management's private information</td>
+                    <td style="color: #f39c12;">Contested</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong style="color: #e74c3c;">Agency Costs</strong></td>
+                    <td>Dividends reduce free cash flow and prevent overinvestment</td>
+                    <td style="color: #27ae60;">Persuasive</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: #f39c12;">Behavioral</strong></td>
+                    <td>Psychological factors create dividend preferences</td>
+                    <td style="color: #f39c12;">Mixed</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong style="color: #e67e22;">Life-Cycle</strong></td>
+                    <td>Payout policy evolves with firm maturity</td>
+                    <td style="color: #27ae60;">Generally supported</td>
                 </tr>
             </tbody>
         </table>
 
         <div class="behavioral-insight" style="margin-top: 30px;">
-            <h3>Cross-Industry Insight</h3>
-            <p>Notice that industries with stable, tangible assets tend to follow the Tradeoff Theory (utilities, manufacturing), while high-growth, information-intensive sectors align with the Pecking Order (technology, pharma). Mature, cash-rich industries can benefit from Free Cash Flow discipline (retail).</p>
+            <h3>Key Takeaway</h3>
+            <p>No single theory explains all aspects of dividend policy. The most robust and empirically supported framework is the firm life-cycle theory, which aligns payout policy directly with a firm's operational and strategic reality.</p>
         </div>
     </div>
 
-    <!-- Slide 24:  Metrics & Benchmarks -->
+    <!-- Slide 19: Future Research Directions -->
     <div class="slide">
-        <h1> Metrics & Benchmarks</h1>
+        <h1>Avenues for Future Inquiry</h1>
         
         <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.1rem; color: #2c3e50; text-align: center;">
-                Key indicators to monitor your capital structure strategy
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                Key gaps in the literature representing promising research directions
             </p>
         </div>
 
-        <div class="metric-grid">
-            <div class="metric-card" style="border-left-color: #e74c3c;">
-                <div class="metric-label">Debt-to-Equity Ratio</div>
-                <div class="metric-value">Target Range</div>
-                <div class="metric-change neutral">Industry-specific benchmarks</div>
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Ownership Structure</div>
+                <div class="factor-desc">How do pyramidal holdings and multiple-class shares affect the relationship between taxation and dividend policy?</div>
             </div>
             
-            <div class="metric-card" style="border-left-color: #f39c12;">
-                <div class="metric-label">Interest Coverage</div>
-                <div class="metric-value">EBIT/Interest</div>
-                <div class="metric-change neutral">Minimum 3x for investment grade</div>
+            <div class="factor-card">
+                <div class="factor-title">Signaling Evolution</div>
+                <div class="factor-desc">Given the rise of repurchases, do dividend changes still signal future prospects, or simply indicate a shift in corporate policy?</div>
             </div>
             
-            <div class="metric-card" style="border-left-color: #27ae60;">
-                <div class="metric-label">Tax Shield Value</div>
-                <div class="metric-value">Interest × Tax Rate</div>
-                <div class="metric-change positive">Quantify debt tax benefits</div>
+            <div class="factor-card">
+                <div class="factor-title">Life-Cycle Consistency</div>
+                <div class="factor-desc">How can researchers reconcile that dividend initiation does not signal life-cycle changes, but subsequent dividend changes do?</div>
             </div>
             
-            <div class="metric-card" style="border-left-color: #3498db;">
-                <div class="metric-label">Financial Flexibility</div>
-                <div class="metric-value">Cash + Credit Lines</div>
-                <div class="metric-change neutral">Maintain 6-12 months operating cash</div>
+            <div class="factor-card">
+                <div class="factor-title">Cross-Country Determinants</div>
+                <div class="factor-desc">What specific factors beyond known variables explain differences in global dividend policies?</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Earnings Management</div>
+                <div class="factor-desc">To what extent do firms manage earnings to meet dividend-related objectives versus profitability-related ones?</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Payout Integration</div>
+                <div class="factor-desc">How can payout decisions be better integrated with financing, investment, and risk management?</div>
             </div>
         </div>
-
-
     </div>
 
-    <!-- Slide 25: Risk Management -->
+    <!-- Slide 20: Nepal Case Study - Survey Overview -->
     <div class="slide">
-        <h1>Capital Structure Risk Management</h1>
+        <h1>Managers' Views on Dividend Policy: Nepal Evidence</h1>
         
-        <div style="margin-bottom: 40px;">
-            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
-                Balancing opportunity with financial stability
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1rem; color: #7f8c8d; text-align: center;">
+                Survey of 125 managers from 66 NEPSE-listed firms | Source: NRB Economic Review
             </p>
         </div>
 
         <div class="comparison-grid">
-            <div class="comparison-card" style="border-left: 6px solid #e74c3c;">
-                <h3 style="color: #e74c3c; margin-bottom: 20px;">Risks of Excessive Debt</h3>
-                <div class="stat-row">
-                    <span class="stat-label">Financial distress costs</span>
-                    <span class="stat-value">Legal, operational, opportunity costs</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Reduced flexibility</span>
-                    <span class="stat-value">Limited ability to invest or pivot</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Higher equity risk</span>
-                    <span class="stat-value">Increased volatility and required returns</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Covenant restrictions</span>
-                    <span class="stat-value">Operational constraints from lenders</span>
-                </div>
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Study Design</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li><strong>Method:</strong> Questionnaire survey of corporate managers</li>
+                    <li><strong>Sample:</strong> 125 managers from 66 NEPSE-listed firms (16 banks; 50 non-banks)</li>
+                    <li><strong>Respondents:</strong> Mostly CEOs, DCEOs, CFOs with long management experience</li>
+                    <li><strong>Context:</strong> Nepal's capital market described as "pre-emerging" with disclosure and liquidity constraints</li>
+                </ul>
             </div>
             
-            <div class="comparison-card" style="border-left: 6px solid #f39c12;">
-                <h3 style="color: #f39c12; margin-bottom: 20px;">Risks of Excessive Equity</h3>
-                <div class="stat-row">
-                    <span class="stat-label">Higher cost of capital</span>
-                    <span class="stat-value">Equity typically more expensive than debt</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Dilution of control</span>
-                    <span class="stat-value">Shareholder ownership reduction</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Market signaling</span>
-                    <span class="stat-value">Negative perceptions from investors</span>
-                </div>
-                <div class="stat-row">
-                    <span class="stat-label">Tax inefficiency</span>
-                    <span class="stat-value">Missed interest tax shield benefits</span>
-                </div>
+            <div class="comparison-card" style="border-left: 6px solid #3498db;">
+                <h3 style="color: #3498db;">Key Beliefs (High Consensus)</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li><strong>68.8%</strong> say dividend decisions are "very important"</li>
+                    <li><strong>81.6%</strong> believe enterprises should follow a stable dividend policy</li>
+                    <li><strong>80.8%</strong> believe dividends affect share price (dividend relevance)</li>
+                    <li><strong>57.6%</strong> believe dividends have signaling effect</li>
+                    <li><strong>54.4%</strong> disagree that dividend is treated as a residual decision</li>
+                </ul>
             </div>
         </div>
 
-        <div class="behavioral-insight" style="margin-top: 40px;">
-            <h3>Balanced Approach</h3>
-            <p>The optimal capital structure is not about maximizing or minimizing debt, but about finding the right balance for your specific circumstances. Regular monitoring and adjustment are essential as business conditions and market environments change.</p>
-        </div>
-
-
-    </div>
-
-    <!-- Slide 27: Future Directions & Emerging Trends (Part 1) -->
-    <div class="slide">
-        <h1>Future Directions & Emerging Trends (Part 1)</h1>
-        
-
-
-        <!-- Three Main Trends -->
-        <div style="display: grid; grid-template-columns: 1fr; gap: 20px; margin: 30px 0;">
-            
-            <!-- ESG Revolution -->
-            <div style="background: #e8f5e8; padding: 25px; border-radius: 10px; border-left: 5px solid #27ae60;">
-                <h3 style="color: #27ae60; margin-bottom: 15px; font-size: 1.3rem;">🌱 The ESG Revolution</h3>
-                <p style="color: #34495e; line-height: 1.6; margin-bottom: 15px;">
-                    <strong>What's Changing:</strong> Environmental, Social, and Governance factors are no longer optional considerations - they're becoming central to financing decisions.
-                </p>
-                <ul style="color: #34495e; line-height: 1.6; margin: 0; padding-left: 20px;">
-                    <li><strong>Green bonds</strong> and sustainability-linked loans offer new financing channels</li>
-                    <li><strong>ESG ratings</strong> directly impact borrowing costs and investor demand</li>
-                    <li><strong>Climate risk</strong> assessment becoming standard in capital structure planning</li>
-                </ul>
-            </div>
-
-            <!-- Digital Finance Transformation -->
-            <div style="background: #e3f2fd; padding: 25px; border-radius: 10px; border-left: 5px solid #2196f3;">
-                <h3 style="color: #1976d2; margin-bottom: 15px; font-size: 1.3rem;">💻 Digital Finance Transformation</h3>
-                <p style="color: #34495e; line-height: 1.6; margin-bottom: 15px;">
-                    <strong>Technology Disruption:</strong> Blockchain, DeFi, and tokenization are creating entirely new ways to raise capital and reduce traditional market frictions.
-                </p>
-                <ul style="color: #34495e; line-height: 1.6; margin: 0; padding-left: 20px;">
-                    <li><strong>Tokenization</strong> enables fractional ownership and new investor bases</li>
-                    <li><strong>DeFi platforms</strong> may reduce information asymmetry through transparency</li>
-                    <li><strong>Cryptocurrency markets</strong> creating alternative funding sources</li>
-                </ul>
-            </div>
-
-            <!-- Stakeholder Capitalism -->
-            <div style="background: #fff3e0; padding: 25px; border-radius: 10px; border-left: 5px solid #ff9800;">
-                <h3 style="color: #f57c00; margin-bottom: 15px; font-size: 1.3rem;">🤝 Stakeholder Capitalism Evolution</h3>
-                <p style="color: #34495e; line-height: 1.6; margin-bottom: 15px;">
-                    <strong>Beyond Shareholders:</strong> Capital structure decisions increasingly consider impact on employees, communities, and the environment, not just shareholder returns.
-                </p>
-                <ul style="color: #34495e; line-height: 1.6; margin: 0; padding-left: 20px;">
-                    <li><strong>Social impact bonds</strong> tie financing terms to social outcomes</li>
-                    <li><strong>Community investment</strong> requirements affecting debt capacity</li>
-                    <li><strong>Long-term value creation</strong> replacing short-term profit maximization</li>
-                </ul>
-            </div>
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Insight:</strong> Nepali managers strongly support the dividend relevance hypothesis, believing dividends are important for firm value, market signaling, and shareholder expectations.
+            </p>
         </div>
     </div>
 
-    <!-- Slide 28: Future Directions & Emerging Trends (Part 2) -->
+    <!-- Slide 21: Nepal Case Study - Determinants & Findings -->
     <div class="slide">
-        <h1>Future Directions & Emerging Trends (Part 2)</h1>
+        <h1>Nepal Evidence: Determinants & Specific Findings</h1>
         
         <div style="margin-bottom: 30px;">
-            <p style="font-size: 1.1rem; color: #2c3e50; text-align: center; font-style: italic;">
-                Research frontiers and the path forward
+            <p style="font-size: 1rem; color: #7f8c8d; text-align: center;">
+                Top determinants and Nepal-specific findings | Source: NRB Economic Review
             </p>
         </div>
 
-        <!-- Research Frontiers -->
-        <div style="background: #f3e5f5; padding: 25px; border-radius: 10px; border-left: 5px solid #9c27b0; margin: 30px 0;">
-            <h3 style="color: #7b1fa2; margin-bottom: 15px; font-size: 1.3rem;">🔬 Research Frontiers</h3>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
-                    <h4 style="color: #7b1fa2; margin-bottom: 10px;">Behavioral Finance Insights</h4>
-                    <p style="color: #34495e; line-height: 1.5; font-size: 0.95rem;">
-                        Understanding how cognitive biases and emotional factors influence financing decisions beyond rational economic models.
-                    </p>
-                </div>
-                <div>
-                    <h4 style="color: #7b1fa2; margin-bottom: 10px;">Dynamic Adjustment Models</h4>
-                    <p style="color: #34495e; line-height: 1.5; font-size: 0.95rem;">
-                        Advanced models that better capture how firms continuously adjust capital structures in response to changing conditions.
-                    </p>
-                </div>
-            </div>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Top Determinants (Ranked)</th>
+                    <th>Nepal-Specific Findings</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1.</strong> Growth rate of earnings</td>
+                    <td><strong>Dividend Clientele:</strong> 89.6% say retirees, senior citizens, and institutions prefer dividends over capital gains</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong>2.</strong> Pattern/continuity of past dividends</td>
+                    <td><strong>Preferred Payout:</strong> Stable dividend per share (48%) with "appropriate" target payout ratio of 10-20% (59.2%)</td>
+                </tr>
+                <tr>
+                    <td><strong>3.</strong> Availability of investment opportunities</td>
+                    <td><strong>Financing Preference:</strong> 1st retained earnings; 2nd rights share issue (current tax level)</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong>→</strong> Mirrors classic Lintner-style "dividend smoothing" behavior</td>
+                    <td><strong>Stock Dividends:</strong> Main motive is to increase equity capital base</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="behavioral-insight" style="margin-top: 20px;">
+            <h3>Most Important Disclosure</h3>
+            <p>The #1 observation from the survey: Nepali managers rate "disclose reasons for dividend policy changes to investors" as the highest priority (lowest median = highest importance).</p>
         </div>
 
-        <!-- Forward-Looking Conclusion -->
-        <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px; border-radius: 12px; color: white; text-align: center;">
-            <h3 style="color: white; margin-bottom: 15px; font-size: 1.3rem;">Looking Ahead</h3>
-            <p style="font-size: 1.1rem; line-height: 1.7; margin: 0; opacity: 0.95;">
-                The capital structure theories we've explored remain valuable diagnostic tools, but the context in which they apply is rapidly changing. Tomorrow's optimal financing strategy will likely blend classical insights with ESG considerations, digital innovation, and stakeholder value creation.
-            </p>
-        </div>
-    </div>
-
-    <!-- Slide 29: Key Takeaways -->
-    <div class="slide">
-        <h1> Key Takeaways</h1>
-        
-        <div style="margin-bottom: 40px;">
-            <p style="font-size: 1.3rem; color: #2c3e50; text-align: center; font-style: italic;">
-                Strategic insights for capital structure decision-making
-            </p>
-        </div>
-
-        <div class="behavioral-insight">
-            <h3>Core Insight</h3>
-            <p>No universal capital structure theory exists. Use Tradeoff, Pecking Order, and Free Cash Flow frameworks as diagnostic tools to match your firm's specific situation.</p>
-        </div>
-
-        <div class="key-factors" style="margin-top: 40px;">
-            <div class="factor-card" style="border-left: 6px solid #e74c3c;">
-                <div class="factor-title" style="color: #e74c3c;">Use Tradeoff Theory When:</div>
-                <div class="factor-desc">
-                    • Stable, predictable cash flows<br>
-                    • Tax optimization priority<br>
-                    • Low industry distress costs<br>
-                    • Tangible assets support debt
-                </div>
-            </div>
-            
-            <div class="factor-card" style="border-left: 6px solid #f39c12;">
-                <div class="factor-title" style="color: #f39c12;">Use Pecking Order When:</div>
-                <div class="factor-desc">
-                    • Information asymmetry issues<br>
-                    • Growth flexibility needs<br>
-                    • Market perception critical<br>
-                    • Substantial internal funds
-                </div>
-            </div>
-            
-            <div class="factor-card" style="border-left: 6px solid #27ae60;">
-                <div class="factor-title" style="color: #27ae60;">Use Free Cash Flow When:</div>
-                <div class="factor-desc">
-                    • Mature, cash-rich company<br>
-                    • Management discipline needed<br>
-                    • Limited growth opportunities<br>
-                    • Efficiency-focused value creation
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="highlight-box" style="margin-top: 30px;">
-            <h3 style="color: #2c3e50; margin-bottom: 15px;">Strategic Mandate</h3>
-            <p style="color: #34495e; line-height: 1.6; font-size: 1rem;">
-                Capital structure is a strategic tool affecting cost of capital and competitive position. Use theoretical frameworks as diagnostic tools, grounded in your business context and strategic objectives.
+        <div style="margin-top: 15px; padding: 12px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid #27ae60;">
+            <p style="font-size: 0.85rem; color: #5d6d7e; margin: 0;">
+                <strong>Reference:</strong> NRB Economic Review, "Managers' Views on Dividend Policy of Nepalese Enterprises." 
+                <a href="https://www.nrb.org.np/contents/uploads/2022/12/vol26-1_art5.pdf" target="_blank" style="color: #27ae60;">https://www.nrb.org.np/contents/uploads/2022/12/vol26-1_art5.pdf</a>
             </p>
         </div>
     </div>
-
-
 
     </div>
 
