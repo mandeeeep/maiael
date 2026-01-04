@@ -1,0 +1,2607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dividend Policy: The Enduring Puzzle</title>
+    <style>
+        /* 
+        DIVIDEND POLICY PRESENTATION - LANDSCAPE OPTIMIZED
+        ===================================================
+        
+        This presentation is optimized for landscape PDF export with:
+        - Landscape page orientation (11" x 8.5")
+        - Proper page break handling to avoid content splitting
+        - Compact layouts for landscape viewing
+        - Print-optimized typography and spacing
+        
+        For PDF export: Use landscape orientation and "Fit to page" settings
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Add landscape class to body for PDF export optimization */
+        body.landscape {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #fafafa;
+        }
+
+        /* Always use landscape optimizations */
+        body.landscape {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+        }
+
+        @media screen and (orientation: landscape) {
+            body {
+                max-width: 1400px;
+                margin: 0 auto;
+                background: white;
+            }
+        }
+
+        .slide {
+            min-height: 100vh;
+            padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            page-break-after: always;
+        }
+
+        /* Additional landscape optimizations */
+        @media screen and (max-height: 800px) {
+            .slide {
+                min-height: auto;
+                padding: 40px 30px;
+            }
+            
+            .slide-title {
+                font-size: 3rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        .slide-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .slide-subtitle {
+            font-size: 1.4rem;
+            font-weight: 300;
+            color: #7f8c8d;
+            margin-bottom: 60px;
+            letter-spacing: 0.01em;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 40px;
+            color: #2c3e50;
+            border-bottom: 3px solid #27ae60;
+            padding-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            color: #34495e;
+        }
+
+        h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #5d6d7e;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape-optimized metric grid */
+        @media screen and (orientation: landscape) {
+            .metric-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+                margin: 30px 0;
+            }
+        }
+
+        .metric-card {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid #27ae60;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .metric-change {
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .positive {
+            color: #27ae60;
+        }
+
+        .negative {
+            color: #e74c3c;
+        }
+
+        .neutral {
+            color: #95a5a6;
+        }
+
+        /* Optimize tables for landscape */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .data-table th {
+            background: #27ae60;
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #ecf0f1;
+            font-size: 0.95rem;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        /* Landscape table optimizations */
+        @media screen and (orientation: landscape) {
+            .data-table {
+                font-size: 0.85rem;
+                margin: 20px 0;
+            }
+            
+            .data-table th {
+                padding: 10px;
+                font-size: 0.8rem;
+            }
+            
+            .data-table td {
+                padding: 10px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .behavioral-insight {
+            background: #27ae60;
+            color: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+
+        .behavioral-insight h3 {
+            color: white;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .behavioral-insight p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            opacity: 0.95;
+        }
+
+        /* Landscape behavioral insight optimization */
+        @media screen and (orientation: landscape) {
+            .behavioral-insight {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .behavioral-insight h3 {
+                font-size: 1.4rem;
+                margin-bottom: 15px;
+            }
+            
+            .behavioral-insight p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+        }
+
+        .case-study {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left: 6px solid #27ae60;
+        }
+
+        .case-study.contradictory {
+            border-left-color: #e74c3c;
+        }
+
+        .case-study.expected {
+            border-left-color: #f39c12;
+        }
+
+        .case-study.crisis {
+            border-left-color: #e74c3c;
+        }
+
+        .case-study.policy {
+            border-left-color: #27ae60;
+        }
+
+        .case-study-title {
+            font-size: 1.8rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .case-study-subtitle {
+            font-size: 1.1rem;
+            color: #7f8c8d;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .case-study-content {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: #34495e;
+        }
+
+        /* Landscape case study optimization */
+        @media screen and (orientation: landscape) {
+            .case-study {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            .case-study-subtitle {
+                font-size: 1rem;
+                margin-bottom: 20px;
+            }
+            
+            .case-study-content {
+                font-size: 0.95rem;
+                line-height: 1.6;
+            }
+        }
+
+        .key-factors {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        /* Landscape key factors optimization */
+        @media screen and (orientation: landscape) {
+            .key-factors {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                margin: 20px 0;
+            }
+        }
+
+        .factor-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .factor-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .factor-desc {
+            color: #5d6d7e;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .highlight-box {
+            background: #ecf0f1;
+            border-left: 4px solid #27ae60;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        /* Landscape comparison grid optimization */
+        @media screen and (orientation: landscape) {
+            .comparison-grid {
+                gap: 20px;
+                margin: 25px 0;
+            }
+        }
+
+        .comparison-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .comparison-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .stat-row:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #5d6d7e;
+        }
+
+        .stat-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .slide {
+                padding: 40px 20px;
+            }
+            
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Mobile-specific fullscreen button */
+            .fullscreen-btn {
+                top: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+            
+            .nav-controls {
+                bottom: 20px;
+                right: 20px;
+                gap: 8px;
+            }
+            
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+            
+            .slide-index {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 16px;
+            }
+            
+            /* Mobile fullscreen optimization */
+            body:-webkit-full-screen .slide,
+            body:fullscreen .slide {
+                padding: 20px !important;
+                min-height: 100vh !important;
+            }
+            
+            /* Ensure touch targets are large enough in fullscreen */
+            .fullscreen-btn:active,
+            .nav-btn:active {
+                transform: scale(0.95);
+            }
+        }
+
+        /* Theory-specific styling */
+        .theory-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 6px solid #27ae60;
+        }
+
+        .theory-card.signaling {
+            border-left-color: #3498db;
+        }
+
+        .theory-card.agency {
+            border-left-color: #e74c3c;
+        }
+
+        .theory-card.lifecycle {
+            border-left-color: #9b59b6;
+        }
+
+        .theory-card.behavioral {
+            border-left-color: #f39c12;
+        }
+
+        .theory-card.tax {
+            border-left-color: #1abc9c;
+        }
+
+        .theory-card.bird {
+            border-left-color: #e67e22;
+        }
+
+        .theory-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .theory-subtitle {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .theory-content {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #34495e;
+        }
+
+        /* Process flow styling */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 40px 0;
+            gap: 20px;
+        }
+
+        .process-step {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            background: #27ae60;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 15px;
+        }
+
+        /* Chart containers */
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin: 30px 0;
+        }
+
+        .bar-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .bar-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bar-label {
+            min-width: 280px;
+            font-weight: 600;
+            color: #2c3e50;
+            text-align: right;
+            padding-right: 15px;
+            line-height: 1.3;
+        }
+
+        .bar-container {
+            flex: 1;
+            background: #ecf0f1;
+            border-radius: 4px;
+            height: 30px;
+            position: relative;
+        }
+
+        .bar-fill {
+            background: #27ae60;
+            height: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Slide Index */
+        .slide-index {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            z-index: 1000;
+        }
+
+        .slide-index-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .slide-index-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide-index-display {
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .slide-nav-btn {
+            background: #ecf0f1;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #2c3e50;
+            transition: all 0.2s ease;
+        }
+
+        .slide-nav-btn:hover {
+            background: #bdc3c7;
+            transform: scale(1.05);
+        }
+
+        .slide-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Main Navigation Controls */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .nav-btn:disabled {
+            background: rgba(189, 195, 199, 0.5);
+            color: rgba(255, 255, 255, 0.5);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Fullscreen Button */
+        .fullscreen-btn {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: rgba(52, 73, 94, 0.9);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            z-index: 1001;
+        }
+
+        .fullscreen-btn:hover {
+            background: rgba(52, 73, 94, 1);
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .fullscreen-btn:active {
+            transform: scale(0.95);
+        }
+
+        .fullscreen-btn.fullscreen-active {
+            background: rgba(231, 76, 60, 0.9);
+        }
+
+        .fullscreen-btn.fullscreen-active:hover {
+            background: rgba(231, 76, 60, 1);
+        }
+
+        /* Hide controls in native fullscreen but keep functionality */
+        body:-webkit-full-screen .slide-index,
+        body:-webkit-full-screen .nav-controls,
+        body:fullscreen .slide-index,
+        body:fullscreen .nav-controls {
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        body:-webkit-full-screen .slide-index:hover,
+        body:-webkit-full-screen .nav-controls:hover,
+        body:fullscreen .slide-index:hover,
+        body:fullscreen .nav-controls:hover {
+            opacity: 1;
+        }
+
+        /* Fullscreen slide styling */
+        body:-webkit-full-screen .slide,
+        body:fullscreen .slide {
+            min-height: 100vh;
+            height: 100vh;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Slide container for navigation */
+        .slides-container {
+            position: relative;
+        }
+
+        .slide {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .slide:not(.active) {
+            display: none;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        /* Keyboard shortcut hint */
+        .keyboard-hint {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+
+        .keyboard-hint.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Print optimizations for landscape PDF export */
+        @media print {
+            @page {
+                size: landscape;
+                margin: 0.5in;
+            }
+            
+            .slide-index,
+            .keyboard-hint {
+                display: none !important;
+            }
+            
+            .slide {
+                page-break-after: always;
+                page-break-inside: avoid;
+                min-height: auto;
+                padding: 30px 20px;
+                display: block !important;
+            }
+            
+            .slide:last-child {
+                page-break-after: avoid;
+            }
+            
+            /* Prevent breaking of key elements */
+            .behavioral-insight,
+            .case-study,
+            .comparison-grid,
+            .metric-grid,
+            .key-factors,
+            .process-flow {
+                page-break-inside: avoid;
+            }
+            
+            /* Optimize table printing */
+            .data-table {
+                font-size: 0.85rem;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 8px 10px;
+            }
+            
+            /* Optimize metric cards for print */
+            .metric-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            .metric-value {
+                font-size: 1.8rem;
+            }
+            
+            /* Optimize case studies */
+            .case-study {
+                padding: 25px;
+            }
+            
+            .case-study-title {
+                font-size: 1.5rem;
+            }
+            
+            /* Optimize factor cards */
+            .factor-card {
+                padding: 15px;
+                font-size: 0.9rem;
+            }
+            
+            /* Ensure comparison grid stays together */
+            .comparison-grid {
+                margin: 20px 0;
+            }
+            
+            /* Optimize titles */
+            .slide-title {
+                font-size: 2.5rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Image Zoom Modal */
+        .image-zoom-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            z-index: 10000;
+            flex-direction: column;
+            cursor: default;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            touch-action: none;
+            -webkit-touch-callout: none;
+            overflow: hidden;
+        }
+        
+        .image-zoom-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        /* Control Bar */
+        .zoom-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            touch-action: none;
+            -webkit-touch-callout: none;
+        }
+        
+        .zoom-controls-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .zoom-controls-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .zoom-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            color: #34495e;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            touch-action: none;
+            -webkit-touch-callout: none;
+        }
+        
+        .zoom-btn:hover {
+            background: #f0f0f0;
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        .zoom-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .zoom-level {
+            color: #34495e;
+            font-size: 13px;
+            min-width: 50px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .close-zoom {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            color: #7f8c8d;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            touch-action: none;
+            -webkit-touch-callout: none;
+        }
+        
+        .close-zoom:hover {
+            background: #ecf0f1;
+            color: #e74c3c;
+            border-color: rgba(231, 76, 60, 0.3);
+        }
+        
+        /* Image Container */
+        .zoom-image-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            cursor: grab;
+            position: relative;
+            background: rgba(255, 255, 255, 0.5);
+            touch-action: none;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .zoom-image-container:active {
+            cursor: grabbing;
+        }
+        
+        .zoom-image-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.1s ease-out;
+            box-shadow: none;
+            pointer-events: none;
+        }
+        
+        /* Instructions */
+        .zoom-hint {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(52, 73, 94, 0.5);
+            font-size: 11px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 14px;
+            border-radius: 15px;
+            pointer-events: none;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        
+        /* Cursor indication for zoomable images */
+        .slide img {
+            cursor: zoom-in;
+        }
+    </style>
+</head>
+<body class="landscape">
+    <!-- Keyboard Shortcut Hint -->
+    <div class="keyboard-hint" id="keyboardHint">
+        Use ← → arrow keys or Home/End to navigate • Press ⛶ or F11 for fullscreen • Escape to exit
+    </div>
+
+    <!-- Slide Index Controls -->
+    <div class="slide-index">
+        <div class="slide-index-title">Slide Navigation</div>
+        <div class="slide-index-controls">
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide - 1)" id="prevSlideBtn" title="Previous slide">‹</button>
+            <div class="slide-index-display">
+                <span id="currentSlideNum">1</span> / <span id="totalSlides">20</span>
+            </div>
+            <button class="slide-nav-btn" onclick="navigateToSlide(currentSlide + 1)" id="nextSlideBtn" title="Next slide">›</button>
+        </div>
+    </div>
+
+    <!-- Slides Container -->
+    <div class="slides-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide">
+        <div style="text-align: center; display: flex; flex-direction: column; justify-content: center; min-height: 80vh;">
+            <h1 class="slide-title" style="font-size: 4rem; margin-bottom: 40px;">Dividend Policy</h1>
+            <div style="margin-bottom: 40px;">
+                <p style="font-size: 1.5rem; color: #34495e; font-style: italic; max-width: 800px; margin: 0 auto; line-height: 1.8;">
+                    "The harder we look at the dividend picture, the more it seems like a puzzle, with pieces that just don't fit together."
+                </p>
+                <p style="font-size: 1rem; color: #7f8c8d; margin-top: 20px;">— Fischer Black (1976)</p>
+            </div>
+            
+            <div style="margin: 60px 0;">
+                <p style="font-size: 1.2rem; color: #34495e;">
+                    <strong>Presented by:</strong> Dinesh Koirala, Pooja Neupane and Mandeep Raj Shrestha
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 2: Table of Contents -->
+    <div class="slide">
+        <h1>Presentation Overview</h1>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 40px;">
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Foundations</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">1. The Dividend Puzzle</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">2. Irrelevance vs. Relevance Debate</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">3. Miller-Modigliani Theorem</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">4. Lintner's Dividend Model</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Empirical Trends</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">5. Declining Role of Dividends</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">6. Rise of Share Repurchases</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">7. Disappearing Dividends Phenomenon</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Theories & Evidence</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">8. Bird-in-the-Hand Theory</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">9. Signaling Theory</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">10. Agency Cost Theory</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">11. Life-Cycle Theory</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="color: #2c3e50; margin-bottom: 20px;">Synthesis</h3>
+                <ul style="list-style: none; padding: 0; line-height: 2.2;">
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">12. Key Determinants</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">13. Stylized Facts</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">14. Practical Implications</a></li>
+                    <li><a href="#" style="text-decoration: none; color: #34495e; font-size: 1.1rem;">15. Conclusion</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: The Central Question -->
+    <div class="slide">
+        <h1>The Central Question</h1>
+        
+        <div style="margin-bottom: 40px;">
+            <p style="font-size: 1.3rem; color: #2c3e50; text-align: center; font-style: italic; line-height: 1.8;">
+                Does a firm's dividend policy affect its value?
+            </p>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>The Dividend Puzzle</h3>
+            <p>Dividend policy refers to the payout strategy a firm follows in determining the size and pattern of its distributions to shareholders over time. Despite decades of extensive theoretical and empirical research, no single, unified theory has emerged to fully explain corporate payout behavior.</p>
+        </div>
+
+        <!-- Key framework image placeholder -->
+        <div class="chart-container">
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="imgs/dividend-puzzle-framework.png" alt="Dividend Puzzle Framework" style="max-width: 100%; height: auto; border-radius: 8px;" />
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Strategic Insight:</strong> Understanding dividend policy is essential for financial managers as it impacts firm value, investor relations, and capital market perceptions.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 4: The Foundational Debate -->
+    <div class="slide">
+        <h1>Foundational Debate: Irrelevance vs. Relevance</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center;">
+                Two opposing viewpoints have shaped the dividend discourse for over 60 years
+            </p>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #3498db;">
+                <h3 style="color: #3498db;">Dividend Irrelevance</h3>
+                <p style="margin-bottom: 20px; color: #5d6d7e;">In perfect markets, firm value is determined by assets and cash flows, not by how cash is distributed.</p>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1rem;">The Pizza Analogy</h4>
+                    <p style="color: #5d6d7e; line-height: 1.6;">
+                        Different payout policies are like slicing a fixed pie into different pieces. The total value remains the same regardless of how it is sliced.
+                    </p>
+                </div>
+            </div>
+
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Dividend Relevance</h3>
+                <p style="margin-bottom: 20px; color: #5d6d7e;">Dividend policy is a critical determinant of firm value, particularly in imperfect real-world markets.</p>
+                
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                    <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1rem;">The DCF Perspective</h4>
+                    <p style="color: #5d6d7e; line-height: 1.6;">
+                        A stock's intrinsic value is derived from the present value of its future dividend stream (Williams, 1938; Gordon, 1959).
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Miller-Modigliani Theorem -->
+    <div class="slide">
+        <h1>Miller-Modigliani Irrelevance Theorem</h1>
+        
+        <div class="theory-card" style="border-left: 6px solid #3498db;">
+            <div class="theory-title" style="color: #3498db;">The Perfect Market Benchmark (1961)</div>
+            <div class="theory-subtitle">Merton Miller and Franco Modigliani</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">In frictionless capital markets, a company's value is determined exclusively by its assets and their underlying cash-generating power, not by how it chooses to distribute those cash flows to shareholders.</p>
+                
+                <h4 style="color: #2c3e50; margin: 20px 0 15px 0;">Key Assumptions (The Perfect World)</h4>
+                <ul style="line-height: 2; padding-left: 20px; color: #5d6d7e;">
+                    <li>No taxes on dividends or capital gains</li>
+                    <li>No transaction costs or issuance costs</li>
+                    <li>No asymmetric information between managers and investors</li>
+                    <li>No agency conflicts between stakeholders</li>
+                    <li>Rational, price-taking investors</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Critical Note:</strong> The MM theorem has been subject to significant critique due to its unrealistic assumptions. Critics like DeAngelo and DeAngelo (2006, 2007) have challenged its practical applicability in real-world markets.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 6: Lintner's Dividend Model -->
+    <div class="slide">
+        <h1>Lintner's Dividend Model</h1>
+        
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Key Findings (1956)</h3>
+                <ul style="margin-top: 15px; color: #5d6d7e; line-height: 2;">
+                    <li><strong>Target Payout:</strong> Firms have target dividend payout ratios based on sustainable earnings</li>
+                    <li><strong>Smoothing:</strong> Managers smooth dividends, making gradual adjustments</li>
+                    <li><strong>Resistance:</strong> Strong reluctance to cut dividends due to negative market signals</li>
+                    <li><strong>Focus:</strong> Changes based on permanent, not temporary, shifts in earnings</li>
+                </ul>
+            </div>
+            
+            <div class="comparison-card" style="border-left: 6px solid #3498db;">
+                <h3 style="color: #3498db;">Enduring Impact</h3>
+                <ul style="margin-top: 15px; color: #5d6d7e; line-height: 2;">
+                    <li><strong>Benartzi et al. (1997):</strong> Lintner's model "remains the best description of the dividend setting process available"</li>
+                    <li><strong>Bulan and Hull (2013):</strong> Managers remain as reluctant to cut dividends as Lintner originally described</li>
+                    <li><strong>Survey Evidence:</strong> Financial managers overwhelmingly perceive dividend policy as important</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Dividend adjustment process image placeholder -->
+        <div class="chart-container">
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="imgs/lintner-adjustment-process.png" alt="Lintner's Partial Adjustment Model" style="max-width: 100%; height: auto; border-radius: 8px;" />
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Empirical Trends - The Declining Role -->
+    <div class="slide">
+        <h1>Empirical Trend: The Declining Role of Dividends</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                The composition of U.S. stock returns has transformed dramatically over two centuries
+            </p>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Period</th>
+                    <th>Avg. Dividend Yield (%)</th>
+                    <th>Dividends as % of Total Return</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>1801-1870</strong></td>
+                    <td>6.50%</td>
+                    <td style="color: #27ae60; font-weight: bold;">90.0%</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong>1871-1920</strong></td>
+                    <td>5.18%</td>
+                    <td style="color: #27ae60; font-weight: bold;">71.3%</td>
+                </tr>
+                <tr>
+                    <td><strong>1921-1945</strong></td>
+                    <td>5.49%</td>
+                    <td style="color: #f39c12; font-weight: bold;">44.0%</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong>1946-1982</strong></td>
+                    <td>4.52%</td>
+                    <td style="color: #f39c12; font-weight: bold;">39.8%</td>
+                </tr>
+                <tr>
+                    <td><strong>1983-2012</strong></td>
+                    <td>2.67%</td>
+                    <td style="color: #e74c3c; font-weight: bold;">22.1%</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="behavioral-insight" style="margin-top: 30px;">
+            <h3>Key Observation</h3>
+            <p>Dividends once constituted the vast majority of returns (90%) but have fallen dramatically to just 22.1% in the modern era. This shift underscores a fundamental change in how value is delivered to shareholders.</p>
+        </div>
+    </div>
+
+    <!-- Slide 8: The Rise of Share Repurchases -->
+    <div class="slide">
+        <h1>The Rise of Share Repurchases</h1>
+        
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 6px solid #e74c3c;">
+                <div class="factor-title" style="color: #e74c3c;">Historic Crossover (1997)</div>
+                <div class="factor-desc">
+                    For the first time in U.S. history, the total dollar amount spent on share repurchases exceeded total dividend payments.
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #f39c12;">
+                <div class="factor-title" style="color: #f39c12;">Dominant Form</div>
+                <div class="factor-desc">
+                    In some recent years, share repurchases have accounted for more than 50% of aggregate corporate payouts in the U.S.
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #27ae60;">
+                <div class="factor-title" style="color: #27ae60;">Flexibility Advantage</div>
+                <div class="factor-desc">
+                    Unlike dividends, share repurchases do not create long-term commitment, giving managers greater financial flexibility.
+                </div>
+            </div>
+        </div>
+
+        <!-- Repurchase vs dividends trend image placeholder -->
+        <div class="chart-container">
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="imgs/repurchases-vs-dividends-trend.png" alt="Share Repurchases vs Dividends Trend" style="max-width: 100%; height: auto; border-radius: 8px;" />
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Insight:</strong> Farre-Mensa et al. (2014) describe this as "the triumph of buybacks over dividends as the dominant form of corporate payouts."
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 9: The Disappearing Dividends Phenomenon -->
+    <div class="slide">
+        <h1>The "Disappearing Dividends" Phenomenon</h1>
+        
+        <div class="comparison-grid">
+            <div class="comparison-card" style="border-left: 6px solid #e74c3c;">
+                <h3 style="color: #e74c3c;">The Trend</h3>
+                <p style="margin-bottom: 15px; color: #5d6d7e;">Fama and French (2001) documented a sharp decline in dividend-paying firms:</p>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>1984: <strong style="color: #2c3e50;">32%</strong> of firms paid dividends</li>
+                    <li>1999: <strong style="color: #2c3e50;">16%</strong> of firms paid dividends</li>
+                </ul>
+                <p style="margin-top: 15px; color: #5d6d7e;">This is a worldwide phenomenon observed in Canada, Europe, and Japan (Denis and Osobov, 2005; Fatemi and Bildik, 2012).</p>
+            </div>
+            
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">The Concentration</h3>
+                <p style="margin-bottom: 15px; color: #5d6d7e;">Today, dividend payers are increasingly concentrated among large-cap, mature companies:</p>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>2013: <strong style="color: #2c3e50;">84%</strong> of S&P 500 companies paid dividends</li>
+                    <li>Smaller and growth firms increasingly rely on share repurchases</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Unexplained Phenomenon:</strong> No universally accepted explanation exists. Catering theory (Baker and Wurgler, 2004) suggests managers respond to investor fads, while Hoberg and Prabhala (2009) argue idiosyncratic risk is a significant factor.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 10: Major Theories Overview -->
+    <div class="slide">
+        <h1>Why Do Firms Pay Dividends?</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                Multiple theories attempt to explain dividend policy in imperfect markets
+            </p>
+        </div>
+
+        <div class="key-factors">
+            <div class="factor-card" style="border-left: 6px solid #3498db;">
+                <div class="factor-title" style="color: #3498db;">Bird-in-the-Hand</div>
+                <div class="factor-desc">
+                    Investors prefer certain dividends today over uncertain future capital gains. Empirical Support: Mixed
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #1abc9c;">
+                <div class="factor-title" style="color: #1abc9c;">Tax Clientele</div>
+                <div class="factor-desc">
+                    Different investor groups prefer different payout policies based on tax treatment. Empirical Support: Minor influence
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #9b59b6;">
+                <div class="factor-title" style="color: #9b59b6;">Signaling</div>
+                <div class="factor-desc">
+                    Dividend changes convey private information about firm prospects. Empirical Support: Contested
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #e74c3c;">
+                <div class="factor-title" style="color: #e74c3c;">Agency Costs</div>
+                <div class="factor-desc">
+                    Dividends reduce free cash flow available for wasteful overinvestment. Empirical Support: Persuasive
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #f39c12;">
+                <div class="factor-title" style="color: #f39c12;">Behavioral</div>
+                <div class="factor-desc">
+                    Investor psychology creates preferences for dividends (self-control, mental accounting). Empirical Support: Mixed
+                </div>
+            </div>
+            
+            <div class="factor-card" style="border-left: 6px solid #e67e22;">
+                <div class="factor-title" style="color: #e67e22;">Life-Cycle</div>
+                <div class="factor-desc">
+                    Payout policy evolves with firm maturity; mature firms should distribute excess cash. Empirical Support: Generally supported
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 11: Bird-in-the-Hand Theory -->
+    <div class="slide">
+        <h1>Bird-in-the-Hand Theory</h1>
+        
+        <div class="theory-card bird">
+            <div class="theory-title">The Certainty Argument</div>
+            <div class="theory-subtitle">Myron Gordon (1962) and John Lintner (1962)</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">Investors prefer the certainty of a dividend payment today ("a bird in the hand") over the uncertainty of future capital gains. A dividend is a "sure thing," whereas future share price appreciation is not guaranteed.</p>
+                
+                <h4 style="color: #2c3e50; margin: 20px 0 15px 0;">The Core Logic</h4>
+                <ul style="line-height: 1.8; padding-left: 20px; color: #5d6d7e;">
+                    <li>Capital gains require reinvestment and depend on future market conditions</li>
+                    <li>Dividends provide immediate, certain cash flow</li>
+                    <li>Higher perceived risk of capital gains → investors require higher discount rate → lower valuation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 30px;">
+            <div class="comparison-card">
+                <h3 style="color: #27ae60;">Supporting Evidence</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>Intuitive appeal to many investors</li>
+                    <li>Strong preference among retirees for dividend income</li>
+                </ul>
+            </div>
+            
+            <div class="comparison-card">
+                <h3 style="color: #e74c3c;">Challenging Evidence</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>Under perfect market assumptions, risk depends on firm's cash flows, not distribution method</li>
+                    <li>Literature reviews find mixed empirical support</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 12: Signaling Theory -->
+    <div class="slide">
+        <h1>Signaling Theory (Asymmetric Information)</h1>
+        
+        <div class="theory-card signaling">
+            <div class="theory-title">What a Dividend Announcement Really Says</div>
+            <div class="theory-subtitle">Bhattacharya (1979), Miller and Rock (1985)</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">In the real world, there is an information gap between company managers and investors. Managers have inside knowledge about future prospects that the public does not. A dividend announcement can serve as a powerful signal.</p>
+                
+                <!-- Signaling process image placeholder -->
+                <div style="text-align: center; margin: 25px 0;">
+                    <img src="imgs/signaling-process.png" alt="Dividend Signaling Process" style="max-width: 100%; height: auto; border-radius: 8px;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 30px;">
+            <div class="case-study expected">
+                <div class="case-study-title">Dividend Increase</div>
+                <div class="case-study-content">
+                    Signals <strong>confidence</strong> in stable future earnings. Managers are reluctant to cut, so an increase signals strength.
+                </div>
+            </div>
+            
+            <div class="case-study contradictory">
+                <div class="case-study-title">Dividend Decrease</div>
+                <div class="case-study-content">
+                    Sends a <strong>powerfully negative signal</strong> about future prospects. Often interpreted as a sign of trouble ahead.
+                </div>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Finding:</strong> Survey evidence consistently shows managers believe their payout policy conveys important information to investors, even though direct market data tests show mixed results.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 13: Agency Cost Theory -->
+    <div class="slide">
+        <h1>Agency Cost Theory</h1>
+        
+        <div class="theory-card agency">
+            <div class="theory-title">Dividends as Discipline</div>
+            <div class="theory-subtitle">Jensen (1986) - Free Cash Flow Hypothesis</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">A potential conflict of interest exists between managers and shareholders. If managers control large piles of excess cash, they may be tempted to waste it on unprofitable projects that expand their own influence rather than create shareholder value.</p>
+                
+                <!-- Agency cost diagram image placeholder -->
+                <div style="text-align: center; margin: 25px 0;">
+                    <img src="imgs/agency-cost-mechanism.png" alt="Agency Cost Mechanism" style="max-width: 100%; height: auto; border-radius: 8px;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="behavioral-insight" style="margin-top: 30px;">
+            <h3>The Solution</h3>
+            <p>Committing to regular dividend payments reduces discretionary cash available to managers, imposing financial discipline. This forces managers to be more selective about investments and face capital market scrutiny for external financing.</p>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0;">
+                <strong>Empirical Support:</strong> This is considered the "leading mainstream economic explanation" for why firms commit to dividends, with "persuasive" support from empirical research (Megginson, 1996; Farre-Mensa et al., 2014).
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 14: Firm Life-Cycle Theory -->
+    <div class="slide">
+        <h1>Firm Life-Cycle Theory</h1>
+        
+        <div class="theory-card lifecycle">
+            <div class="theory-title">From Hoarding Cash to Distributing It</div>
+            <div class="theory-subtitle">Mueller (1969), Fama and French (2001)</div>
+            
+            <div class="theory-content">
+                <p style="margin-bottom: 20px;">A company's dividend policy naturally reflects its stage of development. Young, high-growth firms have abundant profitable investment opportunities and need all capital they can get. As companies mature, growth slows and excess cash accumulates.</p>
+                
+                <!-- Life cycle diagram image placeholder -->
+                <div style="text-align: center; margin: 25px 0;">
+                    <img src="imgs/firm-life-cycle-dividend.png" alt="Firm Life-Cycle Dividend Policy" style="max-width: 100%; height: auto; border-radius: 8px;" />
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 30px;">
+            <div class="comparison-card" style="border-left: 6px solid #3498db;">
+                <h3 style="color: #3498db;">Growth Stage</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>Abundant investment opportunities</li>
+                    <li>Retain all earnings for growth</li>
+                    <li>Zero or low dividends</li>
+                </ul>
+            </div>
+            
+            <div class="comparison-card" style="border-left: 6px solid #27ae60;">
+                <h3 style="color: #27ae60;">Mature Stage</h3>
+                <ul style="color: #5d6d7e; line-height: 1.8; padding-left: 20px;">
+                    <li>Limited new investment opportunities</li>
+                    <li>Excess cash generation</li>
+                    <li>Begin distributing dividends</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0;">
+                <strong>Empirical Support:</strong> This is one of the most consistently supported theories, with reviews by Bulan and Subramanian (2009) and Baker et al. (2011) noting it is "generally supported" by evidence.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 15: Key Determinants of Dividend Policy -->
+    <div class="slide">
+        <h1>Key Determinants of Dividend Policy</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                Practical factors that shape payout decisions
+            </p>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Factor</th>
+                    <th>Effect on Dividends</th>
+                    <th>Explanation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Earnings Stability</strong></td>
+                    <td style="color: #27ae60;">Positive (+)</td>
+                    <td>Stable earnings enable sustainable dividend payments</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong>Firm Size</strong></td>
+                    <td style="color: #27ae60;">Positive (+)</td>
+                    <td>Larger firms are more likely to pay and maintain dividends</td>
+                </tr>
+                <tr>
+                    <td><strong>Profitability</strong></td>
+                    <td style="color: #27ae60;">Positive (+)</td>
+                    <td>More profitable firms can afford higher dividends</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong>Maturity</strong></td>
+                    <td style="color: #27ae60;">Positive (+)</td>
+                    <td>Mature firms generate excess cash for distribution</td>
+                </tr>
+                <tr>
+                    <td><strong>Growth Opportunities</strong></td>
+                    <td style="color: #e74c3c;">Negative (−)</td>
+                    <td>High-growth firms retain cash for investment</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong>Investment Options</strong></td>
+                    <td style="color: #e74c3c;">Negative (−)</td>
+                    <td>More opportunities → lower payout ratios</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1rem; color: #2c3e50; margin: 0;">
+                <strong>Key Insight:</strong> These determinants have remained remarkably consistent since Lintner's (1956) original research. The stability of past dividends and current/anticipated earnings remain the most important factors.
+            </p>
+        </div>
+    </div>
+
+    <!-- Slide 16: Stylized Facts -->
+    <div class="slide">
+        <h1>Stylized Facts of Dividend Policy</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                What decades of research have consistently shown
+            </p>
+        </div>
+
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">1. Managed Policy</div>
+                <div class="factor-desc">Firms follow managed, not residual, dividend policies and are committed to smoothing dividends over time.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">2. Earnings Anchor</div>
+                <div class="factor-desc">The most important determinants are stability of past dividends and current/anticipated earnings.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">3. Market Reaction</div>
+                <div class="factor-desc">Markets respond positively to payout increases and negatively to decreases.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">4. Repurchases Paramount</div>
+                <div class="factor-desc">Share repurchases have become a central, often dominant, element of payout strategy.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">5. Firm-Specific</div>
+                <div class="factor-desc">No universal set of factors works for all firms; policy is sensitive to firm characteristics.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">6. No Universal Theory</div>
+                <div class="factor-desc">Universal or "one-size-fits-all" theories are too simplistic for explaining payout behavior.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 17: Practical Implications -->
+    <div class="slide">
+        <h1>Practical Implications for Managers</h1>
+        
+        <div class="behavioral-insight">
+            <h3>Core Principles</h3>
+            <p>Based on decades of research, financial managers should consider these essential principles when formulating dividend policy:</p>
+        </div>
+
+        <div class="comparison-grid" style="margin-top: 30px;">
+            <div class="case-study policy">
+                <div class="case-study-title">Commitment is Key</div>
+                <div class="case-study-content">
+                    Firms do not treat dividends as residual afterthoughts. They follow managed policies and are committed to maintaining smooth dividend payments over time.
+                </div>
+            </div>
+            
+            <div class="case-study expected">
+                <div class="case-study-title">Integrate Policies</div>
+                <div class="case-study-content">
+                    Dividend policy should not be considered in isolation. It is fundamentally connected with investment and financing policies as part of a coherent financial strategy.
+                </div>
+            </div>
+        </div>
+
+        <div class="key-factors" style="margin-top: 30px;">
+            <div class="factor-card">
+                <div class="factor-title">Balance Conflicting Forces</div>
+                <div class="factor-desc">Setting appropriate payout policy requires weighing investment needs, earnings stability, investor expectations, and market sentiment.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Firm-Specific View</div>
+                <div class="factor-desc">Dividend policy must be idiosyncratic. What works for a competitor may be wrong for your company due to different market imperfections.</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Compensation Effects</div>
+                <div class="factor-desc">Executive stock options create incentives to favor share repurchases over dividends (EPS impact).</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 18: Dividend Theories Comparison -->
+    <div class="slide">
+        <h1>Theories Comparison Summary</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; text-align: center;">
+                Overview of major theories and their empirical support
+            </p>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Theory</th>
+                    <th>Core Idea</th>
+                    <th>Empirical Support</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong style="color: #e67e22;">Bird-in-the-Hand</strong></td>
+                    <td>Investors prefer certain dividends over uncertain capital gains</td>
+                    <td style="color: #f39c12;">Mixed</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong style="color: #1abc9c;">Tax Clientele</strong></td>
+                    <td>Tax differences create investor preferences for payout types</td>
+                    <td style="color: #95a5a6;">Minor influence</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: #9b59b6;">Signaling</strong></td>
+                    <td>Dividend changes signal management's private information</td>
+                    <td style="color: #f39c12;">Contested</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong style="color: #e74c3c;">Agency Costs</strong></td>
+                    <td>Dividends reduce free cash flow and prevent overinvestment</td>
+                    <td style="color: #27ae60;">Persuasive</td>
+                </tr>
+                <tr>
+                    <td><strong style="color: #f39c12;">Behavioral</strong></td>
+                    <td>Psychological factors create dividend preferences</td>
+                    <td style="color: #f39c12;">Mixed</td>
+                </tr>
+                <tr style="background: #f8f9fa;">
+                    <td><strong style="color: #e67e22;">Life-Cycle</strong></td>
+                    <td>Payout policy evolves with firm maturity</td>
+                    <td style="color: #27ae60;">Generally supported</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="behavioral-insight" style="margin-top: 30px;">
+            <h3>Key Takeaway</h3>
+            <p>No single theory explains all aspects of dividend policy. The most robust and empirically supported framework is the firm life-cycle theory, which aligns payout policy directly with a firm's operational and strategic reality.</p>
+        </div>
+    </div>
+
+    <!-- Slide 19: Future Research Directions -->
+    <div class="slide">
+        <h1>Avenues for Future Inquiry</h1>
+        
+        <div style="margin-bottom: 30px;">
+            <p style="font-size: 1.2rem; color: #2c3e50; text-align: center; font-style: italic;">
+                Key gaps in the literature representing promising research directions
+            </p>
+        </div>
+
+        <div class="key-factors">
+            <div class="factor-card">
+                <div class="factor-title">Ownership Structure</div>
+                <div class="factor-desc">How do pyramidal holdings and multiple-class shares affect the relationship between taxation and dividend policy?</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Signaling Evolution</div>
+                <div class="factor-desc">Given the rise of repurchases, do dividend changes still signal future prospects, or simply indicate a shift in corporate policy?</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Life-Cycle Consistency</div>
+                <div class="factor-desc">How can researchers reconcile that dividend initiation does not signal life-cycle changes, but subsequent dividend changes do?</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Cross-Country Determinants</div>
+                <div class="factor-desc">What specific factors beyond known variables explain differences in global dividend policies?</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Earnings Management</div>
+                <div class="factor-desc">To what extent do firms manage earnings to meet dividend-related objectives versus profitability-related ones?</div>
+            </div>
+            
+            <div class="factor-card">
+                <div class="factor-title">Payout Integration</div>
+                <div class="factor-desc">How can payout decisions be better integrated with financing, investment, and risk management?</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 20: Conclusion -->
+    <div class="slide">
+        <h1>Conclusion: The Puzzle Persists</h1>
+        
+        <div style="margin-bottom: 40px;">
+            <p style="font-size: 1.3rem; color: #2c3e50; text-align: center; font-style: italic; line-height: 1.8;">
+                After more than half a century of rigorous academic inquiry, the dividend puzzle endures.
+            </p>
+        </div>
+
+        <div class="behavioral-insight">
+            <h3>What We Know for Sure</h3>
+            <p>The research has revealed several powerful insights that provide practical understanding of corporate dividend policy. The most important takeaways consistently observed in the real world are:</p>
+            <ul style="margin-top: 15px; padding-left: 20px; line-height: 2;">
+                <li><strong>Managed and Smooth Policy:</strong> Firms are strongly committed to maintaining and smoothing dividend payments over time</li>
+                <li><strong>Key Determinants:</strong> Stability of past dividends and current/anticipated earnings are the most important factors</li>
+                <li><strong>The Market is Watching:</strong> Stock markets react predictably to dividend news, confirming investors pay close attention to payout signals</li>
+            </ul>
+        </div>
+
+        <!-- Framework summary image placeholder -->
+        <div class="chart-container">
+            <div style="text-align: center; margin: 30px 0;">
+                <img src="imgs/dividend-policy-framework.png" alt="Dividend Policy Decision Framework" style="max-width: 100%; height: auto; border-radius: 8px;" />
+            </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 20px;">
+            <p style="font-size: 1.1rem; color: #2c3e50; margin: 0;">
+                <strong>Final Thought:</strong> The dividend puzzle may not have a single, neat solution, but its pieces are not scattered at random. Understanding the core tensions between irrelevance and relevance, signaling and life-cycle, provides the essential toolkit of a financial analyst.
+            </p>
+        </div>
+    </div>
+
+    </div>
+
+    <!-- Fullscreen Button -->
+    <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fullscreenBtn" title="Toggle Fullscreen (Mobile-Friendly)">⛶</button>
+
+    <!-- Main Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" onclick="previousSlide()" id="prevBtn" title="Previous slide (←)">◀</button>
+        <button class="nav-btn" onclick="nextSlide()" id="nextBtn" title="Next slide (→)">▶</button>
+    </div>
+
+    <!-- Navigation JavaScript -->
+    <script>
+        // Slide navigation functionality
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Initialize
+        function initPresentation() {
+            // Show first slide
+            showSlide(0);
+            
+            // Enhanced keyboard event handling
+            setupKeyboardNavigation();
+            
+            // Show keyboard hint for 3 seconds
+            setTimeout(() => {
+                const hint = document.getElementById('keyboardHint');
+                hint.classList.add('show');
+                setTimeout(() => {
+                    hint.classList.remove('show');
+                }, 3000);
+            }, 1000);
+        }
+
+        // Setup keyboard navigation
+        function setupKeyboardNavigation() {
+            // Single keyboard event handler
+            document.addEventListener('keydown', function(event) {
+                // Skip if user is typing in input fields
+                if (event.target && (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA')) {
+                    return;
+                }
+                
+                // Handle navigation keys
+                event.preventDefault();
+                
+                switch(event.key) {
+                    case 'ArrowLeft':
+                    case 'ArrowUp':
+                        previousSlide();
+                        break;
+                    case 'ArrowRight':
+                    case 'ArrowDown':
+                    case ' ':
+                        nextSlide();
+                        break;
+                    case 'Home':
+                        navigateToSlide(0);
+                        break;
+                    case 'End':
+                        navigateToSlide(totalSlides - 1);
+                        break;
+                    case 'Escape':
+                        // Exit fullscreen if in fullscreen mode, otherwise show hint
+                        if (isFullscreen()) {
+                            event.preventDefault();
+                            exitFullscreen();
+                        } else {
+                            const hint = document.getElementById('keyboardHint');
+                            if (hint) {
+                                hint.classList.toggle('show');
+                            }
+                        }
+                        break;
+                    
+                    case 'F11':
+                        event.preventDefault();
+                        toggleFullscreen();
+                        break;
+                }
+            });
+            
+            // Make sure body can receive focus
+            document.body.tabIndex = 0;
+            
+            // Force focus after page load
+            setTimeout(() => {
+                document.body.focus();
+            }, 100);
+        }
+
+        // Show specific slide
+        function showSlide(slideIndex) {
+            // Hide all slides
+            slides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Show current slide
+            if (slides[slideIndex]) {
+                slides[slideIndex].classList.add('active');
+                currentSlide = slideIndex;
+                
+                // Update displays
+                document.getElementById('currentSlideNum').textContent = slideIndex + 1;
+                document.getElementById('totalSlides').textContent = totalSlides;
+                
+                // Update button states
+                updateButtons();
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            }
+        }
+
+        // Navigate to specific slide
+        function navigateToSlide(slideIndex) {
+            if (slideIndex >= 0 && slideIndex < totalSlides) {
+                showSlide(slideIndex);
+            }
+        }
+
+        // Navigate to next slide
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                navigateToSlide(currentSlide + 1);
+            }
+        }
+
+        // Navigate to previous slide
+        function previousSlide() {
+            if (currentSlide > 0) {
+                navigateToSlide(currentSlide - 1);
+            }
+        }
+
+        // Browser fullscreen API functionality
+        function toggleFullscreen() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            // Check if browser supports fullscreen API
+            if (!supportsFullscreen()) {
+                alert('Fullscreen is not supported in this browser. Please use landscape mode or rotate your device for better viewing.');
+                return;
+            }
+            
+            // Check if already in fullscreen mode using native API
+            if (isFullscreen()) {
+                exitFullscreen();
+            } else {
+                enterFullscreen();
+            }
+        }
+
+        // Check if browser supports fullscreen API
+        function supportsFullscreen() {
+            return !!(
+                document.fullscreenEnabled ||
+                document.webkitFullscreenEnabled ||
+                document.mozFullScreenEnabled ||
+                document.msFullscreenEnabled
+            );
+        }
+
+        // Check if currently in fullscreen mode
+        function isFullscreen() {
+            return !!(
+                document.fullscreenElement || 
+                document.webkitFullscreenElement || 
+                document.mozFullScreenElement || 
+                document.msFullscreenElement
+            );
+        }
+
+        // Enter fullscreen using native browser API
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(err => {
+                    console.log(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else if (elem.webkitRequestFullscreen) { // Safari
+                elem.webkitRequestFullscreen();
+            } else if (elem.mozRequestFullScreen) { // Firefox
+                elem.mozRequestFullScreen();
+            } else if (elem.msRequestFullscreen) { // IE/Edge
+                elem.msRequestFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Exit fullscreen using native browser API
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) { // Safari
+                document.webkitExitFullscreen();
+            } else if (document.mozCancelFullScreen) { // Firefox
+                document.mozCancelFullScreen();
+            } else if (document.msExitFullscreen) { // IE/Edge
+                document.msExitFullscreen();
+            }
+            
+            // Update button state immediately for better UX
+            updateFullscreenButton();
+        }
+
+        // Update fullscreen button appearance and state
+        function updateFullscreenButton() {
+            const fullscreenBtn = document.getElementById('fullscreenBtn');
+            
+            if (isFullscreen()) {
+                fullscreenBtn.classList.add('fullscreen-active');
+                fullscreenBtn.title = 'Exit Fullscreen';
+                
+                // Auto-hide navigation controls after 3 seconds in fullscreen
+                setTimeout(() => {
+                    if (isFullscreen()) {
+                        const slideIndex = document.querySelector('.slide-index');
+                        const navControls = document.querySelector('.nav-controls');
+                        if (slideIndex) slideIndex.style.opacity = '0.3';
+                        if (navControls) navControls.style.opacity = '0.3';
+                    }
+                }, 3000);
+            } else {
+                fullscreenBtn.classList.remove('fullscreen-active');
+                fullscreenBtn.title = 'Enter Fullscreen';
+                
+                // Show navigation controls again when not in fullscreen
+                const slideIndex = document.querySelector('.slide-index');
+                const navControls = document.querySelector('.nav-controls');
+                if (slideIndex) slideIndex.style.opacity = '1';
+                if (navControls) navControls.style.opacity = '1';
+            }
+        }
+
+        // Handle fullscreen change events
+        function setupFullscreenListeners() {
+            document.addEventListener('fullscreenchange', updateFullscreenButton);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenButton);
+            document.addEventListener('mozfullscreenchange', updateFullscreenButton);
+            document.addEventListener('MSFullscreenChange', updateFullscreenButton);
+            
+            // Re-show controls on mouse movement in fullscreen
+            document.addEventListener('mousemove', function() {
+                if (isFullscreen()) {
+                    const slideIndex = document.querySelector('.slide-index');
+                    const navControls = document.querySelector('.nav-controls');
+                    if (slideIndex) slideIndex.style.opacity = '1';
+                    if (navControls) navControls.style.opacity = '1';
+                }
+            });
+        }
+
+        // Update button states
+        function updateButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const prevSlideBtn = document.getElementById('prevSlideBtn');
+            const nextSlideBtn = document.getElementById('nextSlideBtn');
+            
+            // Disable/enable buttons
+            const prevDisabled = currentSlide === 0;
+            const nextDisabled = currentSlide === totalSlides - 1;
+            
+            prevBtn.disabled = prevDisabled;
+            nextBtn.disabled = nextDisabled;
+            prevSlideBtn.disabled = prevDisabled;
+            nextSlideBtn.disabled = nextDisabled;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Make navigation functions globally available
+            window.nextSlide = nextSlide;
+            window.previousSlide = previousSlide;
+            window.navigateToSlide = navigateToSlide;
+            window.toggleFullscreen = toggleFullscreen;
+            window.isFullscreen = isFullscreen;
+            window.supportsFullscreen = supportsFullscreen;
+            window.goToSlide = navigateToSlide;
+            
+            // Setup fullscreen event listeners
+            setupFullscreenListeners();
+            
+            // Initialize presentation
+            initPresentation();
+            
+            // Update initial fullscreen button state
+            setTimeout(updateFullscreenButton, 100);
+        });
+
+        // Enhanced touch support for fullscreen button
+        document.getElementById('fullscreenBtn').addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            toggleFullscreen();
+        });
+
+        // Touch/swipe support for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next slide
+                    nextSlide();
+                } else {
+                    // Swipe right - previous slide
+                    previousSlide();
+                }
+            }
+        }
+
+        // Auto-hide controls after inactivity
+        let controlsTimeout;
+        
+        function resetControlsTimeout() {
+            clearTimeout(controlsTimeout);
+            document.querySelector('.slide-index').style.opacity = '1';
+            
+            controlsTimeout = setTimeout(() => {
+                if (currentSlide !== 0 && currentSlide !== totalSlides - 1) {
+                    document.querySelector('.slide-index').style.opacity = '0.6';
+                }
+            }, 3000);
+        }
+
+        // Show controls on mouse movement
+        document.addEventListener('mousemove', resetControlsTimeout);
+        
+        // Reset timeout on slide change
+        const originalShowSlide = showSlide;
+        showSlide = function(slideIndex) {
+            originalShowSlide(slideIndex);
+            resetControlsTimeout();
+        };
+        
+        // Image Zoom Functionality with Pan and Zoom
+        let zoomLevel = 1;
+        let panX = 0;
+        let panY = 0;
+        let isDragging = false;
+        let startX, startY;
+        
+        function createZoomModal() {
+            const modal = document.createElement('div');
+            modal.className = 'image-zoom-modal';
+            modal.id = 'imageZoomModal';
+            
+            modal.innerHTML = `
+                <div class="zoom-controls">
+                    <div class="zoom-controls-left">
+                        <button class="zoom-btn" id="zoomOut" title="Zoom Out (-)">−</button>
+                        <span class="zoom-level" id="zoomLevel">100%</span>
+                        <button class="zoom-btn" id="zoomIn" title="Zoom In (+)">+</button>
+                        <button class="zoom-btn" id="zoomReset" title="Reset View (R)" style="font-size: 14px;">⟲</button>
+                    </div>
+                    <div class="zoom-controls-right">
+                        <button class="close-zoom" id="closeZoom" title="Close (Esc)">✕</button>
+                    </div>
+                </div>
+                <div class="zoom-image-container" id="zoomContainer">
+                    <img id="zoomImage" src="" alt="Zoomed Image" />
+                </div>
+                <div class="zoom-hint">Scroll to zoom • Drag to pan • +/- keys • Esc to close</div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            const container = document.getElementById('zoomContainer');
+            const zoomImg = document.getElementById('zoomImage');
+            const closeBtn = document.getElementById('closeZoom');
+            const zoomInBtn = document.getElementById('zoomIn');
+            const zoomOutBtn = document.getElementById('zoomOut');
+            const zoomResetBtn = document.getElementById('zoomReset');
+            
+            // Close on button click
+            closeBtn.addEventListener('click', closeZoom);
+            
+            // Close on background click
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    e.stopPropagation();
+                    closeZoom();
+                }
+            });
+            
+            // Stop event propagation for all interactions
+            modal.addEventListener('wheel', function(e) {
+                e.stopPropagation();
+            });
+            
+            modal.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
+            });
+            
+            modal.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+            });
+            
+            // Zoom In
+            zoomInBtn.addEventListener('click', function() {
+                zoomLevel = Math.min(zoomLevel * 1.25, 5);
+                updateZoomImage();
+            });
+            
+            // Zoom Out
+            zoomOutBtn.addEventListener('click', function() {
+                zoomLevel = Math.max(zoomLevel / 1.25, 0.25);
+                updateZoomImage();
+            });
+            
+            // Reset
+            zoomResetBtn.addEventListener('click', function() {
+                zoomLevel = 1;
+                panX = 0;
+                panY = 0;
+                updateZoomImage();
+            });
+            
+            // Mouse wheel zoom
+            container.addEventListener('wheel', function(e) {
+                e.preventDefault();
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                zoomLevel = Math.min(Math.max(zoomLevel * delta, 0.25), 5);
+                updateZoomImage();
+            });
+            
+            // Mouse drag for panning
+            container.addEventListener('mousedown', function(e) {
+                e.stopPropagation();
+                if (zoomLevel > 1) {
+                    isDragging = true;
+                    startX = e.clientX - panX;
+                    startY = e.clientY - panY;
+                    container.style.cursor = 'grabbing';
+                }
+            });
+            
+            container.addEventListener('mousemove', function(e) {
+                e.stopPropagation();
+                if (isDragging && zoomLevel > 1) {
+                    e.preventDefault();
+                    panX = e.clientX - startX;
+                    panY = e.clientY - startY;
+                    updateZoomImage();
+                }
+            });
+            
+            container.addEventListener('mouseup', function(e) {
+                e.stopPropagation();
+                isDragging = false;
+                if (zoomLevel > 1) {
+                    container.style.cursor = 'grab';
+                } else {
+                    container.style.cursor = 'default';
+                }
+            });
+            
+            container.addEventListener('mouseleave', function(e) {
+                e.stopPropagation();
+                isDragging = false;
+                container.style.cursor = 'default';
+            });
+            
+            // Touch support for mobile
+            let touchStartDistance = 0;
+            let touchStartZoom = 1;
+            
+            container.addEventListener('touchstart', function(e) {
+                e.stopPropagation();
+                if (e.touches.length === 2) {
+                    touchStartDistance = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    touchStartZoom = zoomLevel;
+                } else if (e.touches.length === 1 && zoomLevel > 1) {
+                    isDragging = true;
+                    startX = e.touches[0].clientX - panX;
+                    startY = e.touches[0].clientY - panY;
+                }
+            });
+            
+            container.addEventListener('touchmove', function(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                if (e.touches.length === 2) {
+                    const currentDistance = Math.hypot(
+                        e.touches[0].clientX - e.touches[1].clientX,
+                        e.touches[0].clientY - e.touches[1].clientY
+                    );
+                    const scale = currentDistance / touchStartDistance;
+                    zoomLevel = Math.min(Math.max(touchStartZoom * scale, 0.25), 5);
+                    updateZoomImage();
+                } else if (e.touches.length === 1 && isDragging) {
+                    panX = e.touches[0].clientX - startX;
+                    panY = e.touches[0].clientY - startY;
+                    updateZoomImage();
+                }
+            });
+            
+            container.addEventListener('touchend', function(e) {
+                e.stopPropagation();
+                isDragging = false;
+            });
+        }
+        
+        function openZoom(imageSrc) {
+            const modal = document.getElementById('imageZoomModal');
+            const img = document.getElementById('zoomImage');
+            
+            if (modal && img) {
+                // Reset state
+                zoomLevel = 1;
+                panX = 0;
+                panY = 0;
+                
+                img.src = imageSrc;
+                img.style.transform = 'translate(0px, 0px) scale(1)';
+                
+                modal.classList.add('active');
+                
+                // Update zoom level display
+                document.getElementById('zoomLevel').textContent = '100%';
+                
+                // Update cursor for container
+                const container = document.getElementById('zoomContainer');
+                container.style.cursor = 'default';
+                
+                // Prevent body scrolling when modal is open
+                document.body.style.overflow = 'hidden';
+                
+                // Block all touch events from reaching the slide deck
+                document.addEventListener('touchstart', blockTouchEvents, { capture: true, passive: false });
+                document.addEventListener('touchmove', blockTouchEvents, { capture: true, passive: false });
+                document.addEventListener('touchend', blockTouchEvents, { capture: true, passive: false });
+                document.addEventListener('touchcancel', blockTouchEvents, { capture: true, passive: false });
+            }
+        }
+        
+        function blockTouchEvents(e) {
+            // Only block if modal is active
+            const modal = document.getElementById('imageZoomModal');
+            if (modal && modal.classList.contains('active')) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
+        
+        function closeZoom() {
+            const modal = document.getElementById('imageZoomModal');
+            
+            if (modal) {
+                modal.classList.remove('active');
+                
+                // Reset state
+                zoomLevel = 1;
+                panX = 0;
+                panY = 0;
+                
+                // Restore body scrolling
+                document.body.style.overflow = '';
+                
+                // Remove touch event blockers
+                document.removeEventListener('touchstart', blockTouchEvents, { capture: true });
+                document.removeEventListener('touchmove', blockTouchEvents, { capture: true });
+                document.removeEventListener('touchend', blockTouchEvents, { capture: true });
+                document.removeEventListener('touchcancel', blockTouchEvents, { capture: true });
+            }
+        }
+        
+        function updateZoomImage() {
+            const img = document.getElementById('zoomImage');
+            const container = document.getElementById('zoomContainer');
+            const zoomLevelDisplay = document.getElementById('zoomLevel');
+            
+            if (img && container) {
+                // Update transform
+                img.style.transform = `translate(${panX}px, ${panY}px) scale(${zoomLevel})`;
+                
+                // Update zoom level display
+                zoomLevelDisplay.textContent = Math.round(zoomLevel * 100) + '%';
+                
+                // Update cursor based on zoom level
+                if (zoomLevel > 1) {
+                    container.style.cursor = 'grab';
+                } else {
+                    container.style.cursor = 'default';
+                }
+            }
+        }
+        
+        function initImageZoom() {
+            createZoomModal();
+            
+            // Keyboard controls
+            document.addEventListener('keydown', function(e) {
+                const modal = document.getElementById('imageZoomModal');
+                if (!modal || !modal.classList.contains('active')) return;
+                
+                switch(e.key) {
+                    case 'Escape':
+                        closeZoom();
+                        break;
+                    case '+':
+                    case '=':
+                        zoomLevel = Math.min(zoomLevel * 1.25, 5);
+                        updateZoomImage();
+                        break;
+                    case '-':
+                        zoomLevel = Math.max(zoomLevel / 1.25, 0.25);
+                        updateZoomImage();
+                        break;
+                    case 'r':
+                    case 'R':
+                        zoomLevel = 1;
+                        panX = 0;
+                        panY = 0;
+                        updateZoomImage();
+                        break;
+                    case 'ArrowUp':
+                        if (zoomLevel > 1) {
+                            panY += 50;
+                            updateZoomImage();
+                        }
+                        break;
+                    case 'ArrowDown':
+                        if (zoomLevel > 1) {
+                            panY -= 50;
+                            updateZoomImage();
+                        }
+                        break;
+                    case 'ArrowLeft':
+                        if (zoomLevel > 1) {
+                            panX += 50;
+                            updateZoomImage();
+                        }
+                        break;
+                    case 'ArrowRight':
+                        if (zoomLevel > 1) {
+                            panX -= 50;
+                            updateZoomImage();
+                        }
+                        break;
+                }
+            });
+            
+            // Add click handlers to all images in slides
+            const images = document.querySelectorAll('.slide img');
+            images.forEach(img => {
+                img.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    openZoom(this.src);
+                });
+            });
+        }
+        
+        // Initialize image zoom when DOM is ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initImageZoom);
+        } else {
+            initImageZoom();
+        }
+    </script>
+
+</body>
+</html>
