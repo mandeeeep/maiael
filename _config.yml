@@ -3,7 +3,6 @@
 # =========================================================
 
 title: Knowledge Base
-description: KNowledge Base
 
 markdown: kramdown
 highlighter: rouge
