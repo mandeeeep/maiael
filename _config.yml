@@ -1,0 +1,69 @@
+# =========================================================
+# Core site configuration
+# =========================================================
+
+title: Knowledge Base
+description: KNowledge Base
+
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+
+# =========================================================
+# Theme (GitHub Pages compatible)
+# =========================================================
+
+theme: minima
+# remote_theme: pages-themes/cayman@v0.2.0
+# plugins:
+#   - jekyll-remote-theme
+
+# =========================================================
+# Build behavior
+# =========================================================
+
+exclude:
+  - README.md
+  - node_modules
+  - vendor
+  - .github
+
+# =========================================================
+# Defaults (EMPTY — add paths later)
+# =========================================================
+
+defaults: []
+
+# =========================================================
+# Collections (DISABLED by default)
+# Uncomment and name explicitly when needed
+# =========================================================
+
+# collections:
+#   example:
+#     output: true
+#     permalink: /example/:path/
+
+# =========================================================
+# Markdown configuration
+# =========================================================
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  toc_levels: 1..3
+
+# =========================================================
+# Metadata (optional)
+# =========================================================
+
+author:
+  name: ""
+  email: ""
+
+# =========================================================
+# Feature flags (optional)
+# =========================================================
+
+features:
+  global_nav: true
