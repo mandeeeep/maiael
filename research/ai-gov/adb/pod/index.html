@@ -1,1 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podcast Series</title>
+    <style>
+        /* CSS Variables for Easy Customization */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --bg-tertiary: #f1f3f4;
+            --text-primary: #1a1a1a;
+            --text-secondary: #5f6368;
+            --text-muted: #80868b;
+            --accent-color: #1a73e8;
+            --accent-light: #e8f0fe;
+            --border-color: #e0e0e0;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
+        /* Reset & Base Styles */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.75;
+            font-size: 16px;
+            min-height: 100vh;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 40px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 48px 24px 56px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            letter-spacing: -0.03em;
+        }
+
+        header .series-description {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* Main Layout */
+        .main-content {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Playlist Sidebar */
+        .playlist-sidebar {
+            position: sticky;
+            top: 32px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .playlist-sidebar h2 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            padding: 0 8px;
+        }
+
+        .playlist {
+            list-style: none;
+        }
+
+        .playlist-item {
+            padding: 10px 12px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition);
+            margin-bottom: 4px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            border: 2px solid transparent;
+            background: transparent;
+            line-height: 1.4;
+        }
+
+        .playlist-item:hover {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border-color: var(--border-color);
+        }
+
+        .playlist-item.active {
+            background: var(--bg-primary);
+            color: var(--accent-color);
+            border-color: var(--accent-color);
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .playlist-item .episode-number {
+            font-size: 0.75rem;
+            font-weight: 500;
+            opacity: 0.7;
+            margin-right: 4px;
+            display: inline-block;
+            min-width: 18px;
+        }
+
+        /* Loading State */
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+
+        .loading::after {
+            content: "";
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border-color);
+            border-top-color: var(--accent-color);
+            border-radius: 50%;
+            margin-left: 12px;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-error {
+            color: #dc2626;
+            padding: 20px;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: var(--radius-sm);
+            text-align: center;
+        }
+
+        /* Content Area */
+        .content-area {
+            min-width: 0;
+        }
+
+        /* Placeholder Notice */
+        .placeholder-notice {
+            background: linear-gradient(135deg, #fff7ed, #fef3c7);
+            border: 1px solid #fbbf24;
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+
+        .placeholder-notice strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.95rem;
+        }
+
+        /* Sticky Player Container */
+        .sticky-player-container {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--bg-primary);
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Episode Info Bar */
+        .episode-info-bar {
+            margin-bottom: 16px;
+        }
+
+        .episode-header-info h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .episode-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            max-width: 800px;
+        }
+
+        /* Audio Player */
+        .audio-player {
+            background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary));
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+
+        .audio-player audio {
+            width: 100%;
+            height: 40px;
+            border-radius: var(--radius-sm);
+        }
+
+        .audio-player audio::-webkit-media-controls-panel {
+            background-color: var(--bg-primary);
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--bg-primary);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition);
+        }
+
+        .content-section:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .content-section:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Collapsible Section (Transcript Only) */
+        .collapsible-section {
+            margin-bottom: 20px;
+        }
+
+        .collapsible-header {
+            width: 100%;
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: all var(--transition);
+            font-family: inherit;
+            text-align: left;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .collapsible-header:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .collapsible-header .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .collapsible-header .section-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .collapsible-header .icon {
+            transition: transform var(--transition);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .collapsible-section[open] .collapsible-header .icon {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-content {
+            padding: 24px 28px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.85;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            background: var(--bg-primary);
+        }
+
+        /* Always Visible Sections */
+        .always-visible-section {
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            background: var(--bg-primary);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition);
+        }
+
+        .always-visible-section:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .section-header-static {
+            padding: 16px 20px;
+            background: var(--bg-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-header-static .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-header-static .section-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-content {
+            padding: 24px 28px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.85;
+        }
+
+        /* Markdown Content Styling */
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4 {
+            color: var(--text-primary);
+            margin: 24px 0 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .markdown-content h1:first-child,
+        .markdown-content h2:first-child,
+        .markdown-content h3:first-child,
+        .markdown-content h4:first-child {
+            margin-top: 0;
+        }
+
+        .markdown-content p {
+            margin-bottom: 16px;
+        }
+
+        .markdown-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .markdown-content ul,
+        .markdown-content ol {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+
+        .markdown-content li {
+            margin-bottom: 8px;
+        }
+
+        .markdown-content li::marker {
+            color: var(--text-muted);
+        }
+
+        .markdown-content code {
+            background: var(--bg-secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.875em;
+            font-family: "SF Mono", Monaco, "Courier New", monospace;
+            color: var(--accent-color);
+        }
+
+        .markdown-content pre {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: var(--radius-sm);
+            overflow-x: auto;
+            margin: 16px 0;
+            border: 1px solid var(--border-color);
+        }
+
+        .markdown-content pre code {
+            background: transparent;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        .markdown-content blockquote {
+            border-left: 4px solid var(--accent-color);
+            padding-left: 18px;
+            margin: 16px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 1rem;
+            background: var(--bg-secondary);
+            padding: 14px 18px 14px 22px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+
+        .markdown-content hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 24px 0;
+        }
+
+        .markdown-content a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .markdown-content a:hover {
+            text-decoration: underline;
+        }
+
+        .empty-message {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                max-width: 100%;
+                padding: 24px 32px;
+            }
+
+            .main-content {
+                grid-template-columns: 200px 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                padding: 24px;
+            }
+
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .playlist-sidebar {
+                position: static;
+                order: -1;
+            }
+
+            .playlist {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .playlist-item {
+                flex: 1 1 auto;
+                min-width: 140px;
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
+
+            .playlist-item .episode-number {
+                display: inline;
+                margin-right: 4px;
+            }
+
+            header {
+                padding: 40px 20px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+
+            .sticky-player-container {
+                position: static;
+            }
+
+            .section-content,
+            .collapsible-content {
+                padding: 20px 24px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 16px;
+            }
+
+            header {
+                padding: 32px 16px 40px;
+            }
+
+            header h1 {
+                font-size: 1.75rem;
+            }
+
+            header .series-description {
+                font-size: 1rem;
+            }
+
+            .playlist {
+                flex-wrap: wrap;
+            }
+
+            .playlist-item {
+                flex: 1 1 calc(50% - 4px);
+                min-width: 120px;
+                font-size: 0.8rem;
+                padding: 8px 10px;
+            }
+
+            .episode-header-info h2 {
+                font-size: 1.3rem;
+            }
+
+            .section-header-static,
+            .collapsible-header {
+                padding: 14px 16px;
+                font-size: 0.9rem;
+            }
+
+            .section-content,
+            .collapsible-content {
+                padding: 16px 20px;
+                font-size: 0.9rem;
+            }
+
+            .audio-player {
+                padding: 16px 20px;
+                border-radius: var(--radius-md);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Markdown Parser Library (Marked.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <div class="container">
+        <header>
+            <h1>Podcast Series</h1>
+            <p class="series-description">A collection of educational podcast episodes designed to help you learn and grow. Listen at your own pace and access study materials anytime.</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Playlist Sidebar -->
+            <aside class="playlist-sidebar">
+                <h2>Episodes</h2>
+                <ul class="playlist" id="playlist">
+                    <!-- Playlist items will be dynamically generated -->
+                </ul>
+            </aside>
+
+            <!-- Main Content Area -->
+            <section class="content-area">
+                <!-- Placeholder Notice -->
+                <div class="placeholder-notice">
+                    <strong>Getting Started</strong>
+                    This website loads content from external markdown files. Update the `playlistData` array in the JavaScript section with your file paths. Required folder structure:<br>
+                    <code>audio/*.m4a</code> | <code>transcript/*.md</code> | <code>materials/*.md</code> | <code>feedback/*.md</code><br>
+                    <small><em>Note: This website must be hosted on a web server (like GitHub Pages) to load external files. It won't work when opened directly from a local file.</em></small>
+                </div>
+
+                <!-- Dynamic Content Container -->
+                <div id="dynamic-content">
+                    <!-- Content will be dynamically generated -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        /**
+         * PODCAST DATA CONFIGURATION
+         * ==========================
+         * Add new episodes by creating new objects in this array.
+         * Each episode contains:
+         * - id: Unique identifier
+         * - title: Episode title shown in playlist
+         * - description: Brief description of the episode
+         * - audioSrc: Path to the audio file (e.g., "audio/episode-01.m4a")
+         * - transcriptPath: Path to the transcript markdown file (e.g., "transcript/episode-01.md")
+         * - materialPath: Path to the study materials markdown file (e.g., "materials/episode-01.md")
+         * - feedbackPath: Path to the feedback markdown file (e.g., "feedback/episode-01.md")
+         */
+
+        const playlistData = [
+            {
+                id: 1,
+                title: "Introduction to the Series",
+                description: "Welcome to the podcast series! In this introductory episode, we explore the core concepts.",
+                audioSrc: "audio/audio1.wav",
+                transcriptPath: "transcript/transcript1.md",
+                materialPath: "materials/material1.md",
+                feedbackPath: "feedback/feedback1.md"
+            },
+            {
+                id: 2,
+                title: "Deep Dive: Core Concepts",
+                description: "A comprehensive exploration of the fundamental concepts.",
+                audioSrc: "audio/audio2.wav",
+                transcriptPath: "transcript/transcript2.md",
+                materialPath: "materials/material2.md",
+                feedbackPath: "feedback/feedback2.md"
+            },
+            {
+                id: 3,
+                title: "Practical Applications",
+                description: "Learn how to apply the concepts to real-world situations.",
+                audioSrc: "audio/audio3.wav",
+                transcriptPath: "transcript/transcript3.md",
+                materialPath: "materials/material3.md",
+                feedbackPath: "feedback/feedback3.md"
+            },
+                        {
+                id: 3,
+                title: "Practical Applications",
+                description: "Learn how to apply the concepts to real-world situations.",
+                audioSrc: "audio/audio3.wav",
+                transcriptPath: "transcript/transcript3.md",
+                materialPath: "materials/material3.md",
+                feedbackPath: "feedback/feedback3.md"
+            }
+        ];
+
+        // ======================
+        // PLAYER FUNCTIONALITY
+        // ======================
+
+        let currentIndex = 0;
+        let audioPlayer = null;
+        let contentCache = {};
+
+        // Initialize the podcast player
+        function initPlayer() {
+            // Create audio element with sticky container
+            const audioContainer = document.getElementById('dynamic-content');
+            const playerHTML = `
+                <div class="sticky-player-container">
+                    <div class="episode-info-bar">
+                        <div class="episode-header-info">
+                            <h2>Loading...</h2>
+                            <p class="episode-description"></p>
+                        </div>
+                    </div>
+                    <div class="audio-player">
+                        <audio id="main-audio" controls>
+                            <source src="" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+            `;
+            audioContainer.insertAdjacentHTML('afterbegin', playerHTML);
+
+            audioPlayer = document.getElementById('main-audio');
+
+            // Set up audio event listeners
+            audioPlayer.addEventListener('ended', playNext);
+
+            // Generate playlist
+            generatePlaylist();
+
+            // Load first episode
+            loadEpisode(0);
+        }
+
+        // Generate playlist items
+        function generatePlaylist() {
+            const playlist = document.getElementById('playlist');
+
+            playlistData.forEach((episode, index) => {
+                const li = document.createElement('li');
+                li.className = 'playlist-item';
+                if (index === 0) li.classList.add('active');
+                li.innerHTML = `
+                    <span class="episode-number">${index + 1}.</span>
+                    <span class="episode-title">${episode.title}</span>
+                `;
+                li.addEventListener('click', () => loadEpisode(index));
+                playlist.appendChild(li);
+            });
+        }
+
+        // Fetch and parse markdown content
+        async function fetchMarkdownContent(path) {
+            if (!path) {
+                return '<p class="empty-message">No content available.</p>';
+            }
+
+            // Check cache first
+            if (contentCache[path]) {
+                return contentCache[path];
+            }
+
+            // Check if running from file:// protocol (won't work with fetch)
+            if (window.location.protocol === 'file:') {
+                return `
+                    <div class="loading-error">
+                        <strong>Cannot load files from local file system</strong><br><br>
+                        Due to browser security restrictions, markdown files cannot be loaded when opening HTML files directly.<br><br>
+                        <strong>To preview this website:</strong><br>
+                        1. Use a local server: <code>npx serve .</code><br>
+                        2. Or upload to GitHub Pages<br><br>
+                        Once hosted on a web server (like GitHub Pages), all markdown files will load correctly.
+                    </div>
+                `;
+            }
+
+            try {
+                const response = await fetch(path);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const markdown = await response.text();
+                const html = marked.parse(markdown);
+                contentCache[path] = html;
+                return html;
+            } catch (error) {
+                console.error(`Error loading ${path}:`, error);
+                return `<div class="loading-error">Unable to load content from "${path}"<br><small>${error.message}</small></div>`;
+            }
+        }
+
+        // Load and display an episode
+        async function loadEpisode(index) {
+            if (index < 0 || index >= playlistData.length) return;
+
+            const episode = playlistData[index];
+            currentIndex = index;
+
+            // Update playlist active state
+            document.querySelectorAll('.playlist-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+
+            // Update audio source
+            audioPlayer.src = episode.audioSrc;
+            audioPlayer.load();
+
+            // Update episode info
+            document.querySelector('.episode-header-info h2').textContent = episode.title;
+            document.querySelector('.episode-description').textContent = episode.description;
+
+            // Show loading states
+            const stickyContainer = document.querySelector('.sticky-player-container');
+            const dynamicContent = document.getElementById('dynamic-content');
+
+            // Remove old content sections
+            const oldSections = dynamicContent.querySelectorAll('.collapsible-section, .always-visible-section');
+            oldSections.forEach(section => section.remove());
+
+            // Create loading placeholders
+            const contentHTML = `
+                <div class="collapsible-section">
+                    <details id="transcript-section">
+                        <summary class="collapsible-header">
+                            <span class="section-title">
+                                <span class="section-icon">📝</span>
+                                Transcript
+                            </span>
+                            <span class="icon">▼</span>
+                        </summary>
+                        <div class="collapsible-content" id="transcript-content">
+                            <div class="loading">Loading transcript...</div>
+                        </div>
+                    </details>
+                </div>
+
+                <div class="always-visible-section">
+                    <div class="section-header-static">
+                        <span class="section-title">
+                            <span class="section-icon">📚</span>
+                            Study Materials
+                        </span>
+                    </div>
+                    <div class="section-content" id="material-content">
+                        <div class="loading">Loading study materials...</div>
+                    </div>
+                </div>
+
+                <div class="always-visible-section">
+                    <div class="section-header-static">
+                        <span class="section-title">
+                            <span class="section-icon">📋</span>
+                            Feedback & Notes
+                        </span>
+                    </div>
+                    <div class="section-content" id="feedback-content">
+                        <div class="loading">Loading feedback...</div>
+                    </div>
+                </div>
+            `;
+
+            stickyContainer.insertAdjacentHTML('afterend', contentHTML);
+
+            // Fetch all content in parallel
+            const [transcriptHTML, materialHTML, feedbackHTML] = await Promise.all([
+                fetchMarkdownContent(episode.transcriptPath),
+                fetchMarkdownContent(episode.materialPath),
+                fetchMarkdownContent(episode.feedbackPath)
+            ]);
+
+            // Update content areas with fetched markdown
+            document.getElementById('transcript-content').innerHTML = `<div class="markdown-content">${transcriptHTML}</div>`;
+            document.getElementById('material-content').innerHTML = `<div class="markdown-content">${materialHTML}</div>`;
+            document.getElementById('feedback-content').innerHTML = `<div class="markdown-content">${feedbackHTML}</div>`;
+
+            // Re-attach details event listeners
+            const transcriptSection = document.getElementById('transcript-section');
+            if (transcriptSection) {
+                transcriptSection.addEventListener('toggle', function() {
+                    // Optional: Add any toggle logic here
+                });
+            }
+        }
+
+        // Play next episode
+        function playNext() {
+            const nextIndex = (currentIndex + 1) % playlistData.length;
+            loadEpisode(nextIndex);
+            audioPlayer.play();
+        }
+
+        // Start the player when page loads
+        document.addEventListener('DOMContentLoaded', initPlayer);
+    </script>
+</body>
+</html>
