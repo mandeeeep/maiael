@@ -1,0 +1,3212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TerminalOS - Interactive Resume</title>
+    <style>
+        /* ========================================
+           CSS VARIABLES & THEME CONFIGURATION
+           ======================================== */
+        :root {
+            /* Color Palette - Dark Linux Theme */
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --bg-window: rgba(22, 27, 34, 0.95);
+            --bg-overlay: rgba(13, 17, 23, 0.85);
+            
+            /* Text Colors */
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            
+            /* Accent Colors */
+            --accent-green: #3fb950;
+            --accent-blue: #58a6ff;
+            --accent-purple: #a371f7;
+            --accent-orange: #d29922;
+            --accent-red: #f85149;
+            --accent-cyan: #39c5cf;
+            
+            /* Terminal Colors */
+            --terminal-green: #3fb950;
+            --terminal-cursor: #3fb950;
+            
+            /* Border & UI */
+            --border-color: #30363d;
+            --border-focus: #58a6ff;
+            
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+            --shadow-glow: 0 0 20px rgba(63, 185, 80, 0.3);
+            
+            /* Spacing */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
+            
+            /* Border Radius */
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            
+            /* Font */
+            --font-mono: 'Fira Code', 'SF Mono', 'Consolas', 'Monaco', monospace;
+            --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', sans-serif;
+            
+            /* Transitions */
+            --transition-fast: 150ms ease;
+            --transition-normal: 250ms ease;
+            --transition-slow: 400ms ease;
+        }
+
+        /* Cyberpunk Theme Override */
+        [data-theme="cyberpunk"] {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --bg-window: rgba(18, 18, 26, 0.95);
+            --text-primary: #00ff9d;
+            --text-secondary: #00ccff;
+            --accent-green: #00ff9d;
+            --accent-blue: #00ccff;
+            --accent-purple: #ff00ff;
+            --accent-orange: #ff6b00;
+            --terminal-green: #00ff9d;
+            --border-color: #2a2a3a;
+        }
+
+        /* Matrix Theme Override */
+        [data-theme="matrix"] {
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-tertiary: #0d0d0d;
+            --bg-window: rgba(0, 0, 0, 0.95);
+            --text-primary: #00ff00;
+            --text-secondary: #00cc00;
+            --accent-green: #00ff00;
+            --terminal-green: #00ff00;
+            --border-color: #003300;
+        }
+
+        /* ========================================
+           BASE STYLES & RESET
+           ======================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            font-family: var(--font-sans);
+            font-size: 14px;
+            line-height: 1.5;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Selection */
+        ::selection {
+            background: var(--accent-green);
+            color: var(--bg-primary);
+        }
+
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* ========================================
+           CRT SCANLINE EFFECT
+           ======================================== */
+        .crt-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999999;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1) 0px,
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            opacity: 0.3;
+        }
+
+        .crt-flicker {
+            animation: crt-flicker 0.15s infinite;
+        }
+
+        @keyframes crt-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.98; }
+        }
+
+        /* ========================================
+           BOOT SCREEN
+           ======================================== */
+        #boot-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding: 60px 40px;
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
+            z-index: 1000000;
+            overflow: hidden;
+        }
+
+        .boot-line {
+            opacity: 0;
+            animation: boot-typewriter 0.1s forwards;
+            white-space: nowrap;
+        }
+
+        .boot-line.success { color: var(--accent-green); }
+        .boot-line.info { color: var(--accent-blue); }
+        .boot-line.warning { color: var(--accent-orange); }
+        .boot-line.error { color: var(--accent-red); }
+
+        @keyframes boot-typewriter {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .boot-progress {
+            position: absolute;
+            bottom: 60px;
+            left: 40px;
+            right: 40px;
+            height: 4px;
+            background: var(--bg-tertiary);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .boot-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .boot-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 18px;
+            background: var(--terminal-green);
+            animation: boot-blink 0.5s infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        @keyframes boot-blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* ========================================
+           DESKTOP ENVIRONMENT
+           ======================================== */
+        #desktop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 50% 50%, rgba(88, 166, 255, 0.03) 0%, transparent 50%),
+                var(--bg-primary);
+            background-size: 100% 100%;
+            overflow: hidden;
+        }
+
+        /* Desktop Grid Layout for Icons */
+        #desktop-icons {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            z-index: 10;
+        }
+
+        .desktop-icon {
+            width: 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-align: center;
+        }
+
+        .desktop-icon:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .desktop-icon:active {
+            transform: scale(0.95);
+        }
+
+        .desktop-icon.selected {
+            background: rgba(88, 166, 255, 0.15);
+            border: 1px solid var(--border-focus);
+        }
+
+        .desktop-icon .icon {
+            width: 48px;
+            height: 48px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+        }
+
+        .desktop-icon .label {
+            font-size: 11px;
+            color: var(--text-primary);
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+            word-wrap: break-word;
+            max-width: 100%;
+        }
+
+        /* ========================================
+           WINDOW SYSTEM
+           ======================================== */
+        .window {
+            position: absolute;
+            min-width: 320px;
+            min-height: 200px;
+            background: var(--bg-window);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            transition: transform var(--transition-normal), opacity var(--transition-normal), box-shadow var(--transition-fast);
+        }
+
+        .window.maximized {
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            border-radius: 0;
+        }
+
+        .window.minimized {
+            transform: scale(0) translateY(100vh);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .window.active {
+            border-color: var(--border-focus);
+            box-shadow: var(--shadow-lg), var(--shadow-glow), 0 0 0 1px rgba(88, 166, 255, 0.2);
+        }
+
+        .window.focused {
+            z-index: 1000;
+        }
+
+        /* Window Header */
+        .window-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: linear-gradient(180deg, var(--bg-tertiary) 0%, var(--bg-secondary) 100%);
+            border-bottom: 1px solid var(--border-color);
+            cursor: move;
+            user-select: none;
+        }
+
+        .window-title {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .window-title .title-icon {
+            font-size: 16px;
+        }
+
+        .window-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .window-btn {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+
+        .window-btn::after {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 10px;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .window-btn.close { background: #ff5f57; }
+        .window-btn.minimize { background: #ffbd2e; }
+        .window-btn.maximize { background: #28ca41; }
+
+        .window-btn:hover::after {
+            opacity: 1;
+        }
+
+        .window-btn.close::after { content: '×'; color: #5a0000; }
+        .window-btn.minimize::after { content: '−'; color: #5a4500; }
+        .window-btn.maximize::after { content: '□'; color: #005a00; }
+
+        /* Window Content */
+        .window-content {
+            flex: 1;
+            overflow: auto;
+            padding: var(--spacing-md);
+        }
+
+        /* Window Resize Handles */
+        .resize-handle {
+            position: absolute;
+            background: transparent;
+        }
+
+        .resize-handle.n { top: -4px; left: 10px; right: 10px; height: 8px; cursor: n-resize; }
+        .resize-handle.s { bottom: -4px; left: 10px; right: 10px; height: 8px; cursor: s-resize; }
+        .resize-handle.e { right: -4px; top: 10px; bottom: 10px; width: 8px; cursor: e-resize; }
+        .resize-handle.w { left: -4px; top: 10px; bottom: 10px; width: 8px; cursor: w-resize; }
+        .resize-handle.ne { top: -4px; right: -4px; width: 12px; height: 12px; cursor: ne-resize; }
+        .resize-handle.nw { top: -4px; left: -4px; width: 12px; height: 12px; cursor: nw-resize; }
+        .resize-handle.se { bottom: -4px; right: -4px; width: 12px; height: 12px; cursor: se-resize; }
+        .resize-handle.sw { bottom: -4px; left: -4px; width: 12px; height: 12px; cursor: sw-resize; }
+
+        /* ========================================
+           TASKBAR
+           ======================================== */
+        #taskbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 48px;
+            background: var(--bg-overlay);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            padding: 0 var(--spacing-md);
+            z-index: 9999;
+        }
+
+        #start-btn {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        #start-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #start-btn .logo {
+            font-size: 20px;
+        }
+
+        #taskbar-apps {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: 0 var(--spacing-md);
+            overflow-x: auto;
+        }
+
+        .taskbar-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 12px;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+        }
+
+        .taskbar-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .taskbar-item.active {
+            background: rgba(255, 255, 255, 0.15);
+            border-bottom-color: var(--accent-green);
+        }
+
+        .taskbar-item .app-icon {
+            font-size: 14px;
+        }
+
+        #system-tray {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        #clock {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+
+        /* ========================================
+           START MENU
+           ======================================== */
+        #start-menu {
+            position: fixed;
+            bottom: 52px;
+            left: var(--spacing-md);
+            width: 320px;
+            max-height: 400px;
+            background: var(--bg-window);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 10000;
+            animation: slideUp 0.2s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #start-menu.visible {
+            display: flex;
+        }
+
+        .start-menu-header {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .start-menu-search {
+            flex: 1;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-primary);
+            font-size: 13px;
+            outline: none;
+            transition: border-color var(--transition-fast);
+        }
+
+        .start-menu-search:focus {
+            border-color: var(--border-focus);
+        }
+
+        .start-menu-apps {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-sm);
+        }
+
+        .start-menu-section {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .start-menu-section-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            padding: var(--spacing-sm) var(--spacing-md);
+        }
+
+        .start-menu-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .start-menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .start-menu-item .icon {
+            font-size: 20px;
+        }
+
+        .start-menu-item .name {
+            font-size: 13px;
+            color: var(--text-primary);
+        }
+
+        /* ========================================
+           TERMINAL APPLICATION
+           ======================================== */
+        .terminal {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            line-height: 1.5;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .terminal-output {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--spacing-md);
+        }
+
+        .terminal-line {
+            margin-bottom: 2px;
+            word-break: break-all;
+        }
+
+        .terminal-line.input {
+            color: var(--terminal-green);
+        }
+
+        .terminal-line.output {
+            color: var(--text-primary);
+        }
+
+        .terminal-line.error {
+            color: var(--accent-red);
+        }
+
+        .terminal-line.success {
+            color: var(--accent-green);
+        }
+
+        .terminal-line.info {
+            color: var(--accent-blue);
+        }
+
+        .terminal-line.warning {
+            color: var(--accent-orange);
+        }
+
+        .terminal-line.prompt {
+            color: var(--accent-purple);
+        }
+
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+            padding: var(--spacing-sm) var(--spacing-md);
+            background: var(--bg-secondary);
+        }
+
+        .terminal-prompt {
+            color: var(--accent-green);
+            white-space: nowrap;
+            margin-right: var(--spacing-sm);
+        }
+
+        .terminal-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            outline: none;
+            caret-color: var(--terminal-cursor);
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 16px;
+            background: var(--terminal-green);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        /* ========================================
+           GENERIC APP CONTENT STYLES
+           ======================================== */
+        .app-content {
+            padding: var(--spacing-md);
+        }
+
+        .app-content h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        .app-content h2 {
+            font-size: 18px;
+            font-weight: 500;
+            margin: var(--spacing-lg) 0 var(--spacing-sm);
+            color: var(--text-primary);
+        }
+
+        .app-content p {
+            margin-bottom: var(--spacing-md);
+            color: var(--text-secondary);
+        }
+
+        .app-content a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .app-content a:hover {
+            color: var(--accent-cyan);
+        }
+
+        /* Skills Section */
+        .skill-category {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .skill-category h3 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent-purple);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .skill-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+        }
+
+        .skill-tag {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-family: var(--font-mono);
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: var(--spacing-xs) 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        /* Contact Cards */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-md);
+        }
+
+        .contact-card {
+            padding: var(--spacing-md);
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .contact-card:hover {
+            border-color: var(--border-focus);
+            transform: translateY(-2px);
+        }
+
+        .contact-card .icon {
+            font-size: 24px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .contact-card .label {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .contact-card .value {
+            font-size: 13px;
+            color: var(--text-primary);
+            word-break: break-all;
+        }
+
+        /* ========================================
+           NOTIFICATIONS
+           ======================================== */
+        #notifications {
+            position: fixed;
+            top: var(--spacing-md);
+            right: var(--spacing-md);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            z-index: 99999;
+        }
+
+        .notification {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--bg-window);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            min-width: 280px;
+            max-width: 400px;
+            animation: slideInRight 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(100%); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .notification.hiding {
+            animation: slideOutRight 0.3s ease forwards;
+        }
+
+        @keyframes slideOutRight {
+            to { opacity: 0; transform: translateX(100%); }
+        }
+
+        .notification .icon {
+            font-size: 20px;
+        }
+
+        .notification .content {
+            flex: 1;
+        }
+
+        .notification .title {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .notification .message {
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        /* ========================================
+           CONTEXT MENU
+           ======================================== */
+        #context-menu {
+            position: fixed;
+            background: var(--bg-window);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            padding: var(--spacing-xs) 0;
+            min-width: 180px;
+            display: none;
+            z-index: 99999;
+        }
+
+        .context-menu-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            cursor: pointer;
+            transition: background var(--transition-fast);
+            font-size: 13px;
+        }
+
+        .context-menu-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .context-menu-item.disabled {
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .context-menu-divider {
+            height: 1px;
+            background: var(--border-color);
+            margin: var(--spacing-xs) 0;
+        }
+
+        /* ========================================
+           BLUE SCREEN OF DEATH (BSOD)
+           ======================================== */
+        #bsod {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #0078d7;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl);
+            font-family: 'Segoe UI', var(--font-sans);
+            z-index: 9999999;
+        }
+
+        #bsod.visible {
+            display: flex;
+        }
+
+        #bsod .sad-face {
+            font-size: 120px;
+            margin-bottom: var(--spacing-xl);
+        }
+
+        #bsod .message {
+            font-size: 24px;
+            margin-bottom: var(--spacing-md);
+            color: white;
+        }
+
+        #bsod .details {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        #bsod .qr-code {
+            margin-top: var(--spacing-xl);
+            padding: var(--spacing-md);
+            background: white;
+            border-radius: var(--radius-md);
+        }
+
+        /* ========================================
+           CALCULATOR APP
+           ======================================== */
+        .calculator {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background: var(--bg-primary);
+        }
+
+        .calc-display {
+            padding: var(--spacing-lg);
+            text-align: right;
+            background: var(--bg-secondary);
+        }
+
+        .calc-expression {
+            font-size: 14px;
+            color: var(--text-muted);
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .calc-result {
+            font-size: 36px;
+            font-weight: 300;
+            color: var(--text-primary);
+            font-family: var(--font-mono);
+        }
+
+        .calc-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            flex: 1;
+            padding: var(--spacing-sm);
+            background: var(--bg-tertiary);
+        }
+
+        .calc-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-family: var(--font-mono);
+            background: var(--bg-secondary);
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border-radius: var(--radius-sm);
+        }
+
+        .calc-btn:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .calc-btn:active {
+            transform: scale(0.95);
+        }
+
+        .calc-btn.operator {
+            color: var(--accent-orange);
+            font-weight: 500;
+        }
+
+        .calc-btn.function {
+            font-size: 14px;
+            color: var(--accent-blue);
+        }
+
+        .calc-btn.equals {
+            background: var(--accent-green);
+            color: var(--bg-primary);
+        }
+
+        .calc-btn.equals:hover {
+            background: #2ea043;
+        }
+
+        /* ========================================
+           FILE EXPLORER
+           ======================================== */
+        .file-explorer {
+            display: flex;
+            height: 100%;
+        }
+
+        .file-sidebar {
+            width: 200px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: var(--spacing-sm);
+        }
+
+        .file-sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: 13px;
+        }
+
+        .file-sidebar-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .file-sidebar-item.active {
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent-blue);
+        }
+
+        .file-main {
+            flex: 1;
+            padding: var(--spacing-md);
+            overflow: auto;
+        }
+
+        .file-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: var(--spacing-md);
+        }
+
+        .file-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .file-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .file-item .icon {
+            font-size: 40px;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .file-item .name {
+            font-size: 12px;
+            text-align: center;
+            word-break: break-word;
+        }
+
+        /* ========================================
+           SETTINGS APP
+           ======================================== */
+        .settings-app {
+            display: flex;
+            height: 100%;
+        }
+
+        .settings-sidebar {
+            width: 220px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            padding: var(--spacing-md);
+        }
+
+        .settings-nav-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-bottom: 2px;
+        }
+
+        .settings-nav-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .settings-nav-item.active {
+            background: rgba(88, 166, 255, 0.15);
+            color: var(--accent-blue);
+        }
+
+        .settings-content {
+            flex: 1;
+            padding: var(--spacing-lg);
+            overflow-y: auto;
+        }
+
+        .settings-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .settings-section h3 {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        .settings-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md);
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .settings-option .info .label {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .settings-option .info .description {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Toggle Switch */
+        .toggle-switch {
+            width: 48px;
+            height: 26px;
+            background: var(--bg-tertiary);
+            border-radius: 13px;
+            cursor: pointer;
+            position: relative;
+            transition: background var(--transition-fast);
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-green);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform var(--transition-fast);
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(22px);
+        }
+
+        /* Theme Selector */
+        .theme-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .theme-option {
+            padding: var(--spacing-md);
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            text-align: center;
+        }
+
+        .theme-option:hover {
+            border-color: var(--text-muted);
+        }
+
+        .theme-option.active {
+            border-color: var(--accent-blue);
+        }
+
+        .theme-option .preview {
+            height: 60px;
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .theme-option .name {
+            font-size: 12px;
+            color: var(--text-primary);
+        }
+
+        /* ========================================
+           RESPONSIVE DESIGN
+           ======================================== */
+        @media (max-width: 768px) {
+            /* Mobile Desktop */
+            #desktop {
+                overflow-y: auto;
+            }
+
+            #desktop-icons {
+                flex-direction: row;
+                flex-wrap: wrap;
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            .desktop-icon {
+                width: 70px;
+            }
+
+            .desktop-icon .icon {
+                width: 40px;
+                height: 40px;
+                font-size: 28px;
+            }
+
+            .desktop-icon .label {
+                font-size: 10px;
+            }
+
+            /* Mobile Windows - Fullscreen */
+            .window {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 100% !important;
+                height: calc(100% - 52px) !important;
+                border-radius: 0;
+                border: none;
+            }
+
+            .window.maximized,
+            .window.minimized {
+                transform: none;
+            }
+
+            .resize-handle {
+                display: none;
+            }
+
+            /* Mobile Taskbar */
+            #taskbar {
+                height: 52px;
+            }
+
+            #start-btn {
+                padding: var(--spacing-sm);
+            }
+
+            #start-btn .logo {
+                font-size: 24px;
+            }
+
+            #start-btn span:not(.logo) {
+                display: none;
+            }
+
+            #taskbar-apps {
+                padding: 0 var(--spacing-xs);
+            }
+
+            .taskbar-item {
+                padding: var(--spacing-xs) var(--spacing-sm);
+            }
+
+            .taskbar-item .app-icon {
+                font-size: 18px;
+            }
+
+            .taskbar-item .app-name {
+                display: none;
+            }
+
+            /* Mobile Start Menu */
+            #start-menu {
+                left: var(--spacing-sm);
+                right: var(--spacing-sm);
+                width: auto;
+                bottom: 56px;
+            }
+
+            /* Mobile Terminal */
+            .terminal-input {
+                font-size: 16px;
+            }
+
+            /* Mobile Calculator */
+            .calc-display {
+                padding: var(--spacing-md);
+            }
+
+            .calc-result {
+                font-size: 28px;
+            }
+
+            /* Mobile Settings */
+            .settings-app {
+                flex-direction: column;
+            }
+
+            .settings-sidebar {
+                width: 100%;
+                display: flex;
+                overflow-x: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: var(--spacing-sm);
+            }
+
+            .settings-nav-item {
+                white-space: nowrap;
+            }
+
+            /* Mobile Notifications */
+            #notifications {
+                left: var(--spacing-sm);
+                right: var(--spacing-sm);
+            }
+
+            .notification {
+                min-width: auto;
+            }
+
+            /* Hide CRT overlay on mobile for performance */
+            .crt-overlay {
+                display: none;
+            }
+        }
+
+        /* ========================================
+           ACCESSIBILITY
+           ======================================== */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus Styles */
+        :focus-visible {
+            outline: 2px solid var(--accent-blue);
+            outline-offset: 2px;
+        }
+
+        /* Skip Link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--accent-green);
+            color: var(--bg-primary);
+            padding: var(--spacing-sm) var(--spacing-md);
+            z-index: 10000000;
+            transition: top var(--transition-fast);
+        }
+
+        .skip-link:focus {
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#desktop" class="skip-link">Skip to main content</a>
+
+    <!-- CRT Effect Overlay -->
+    <div class="crt-overlay" id="crt-overlay"></div>
+
+    <!-- Boot Screen -->
+    <div id="boot-screen">
+        <div id="boot-content"></div>
+        <div class="boot-progress">
+            <div class="boot-progress-bar" id="boot-progress-bar"></div>
+        </div>
+    </div>
+
+    <!-- Desktop Environment -->
+    <div id="desktop" style="display: none;">
+        <!-- Desktop Icons -->
+        <div id="desktop-icons">
+            <div class="desktop-icon" data-app="about" tabindex="0" role="button" aria-label="About Me">
+                <div class="icon">👤</div>
+                <div class="label">About Me</div>
+            </div>
+            <div class="desktop-icon" data-app="terminal" tabindex="0" role="button" aria-label="Terminal">
+                <div class="icon">💻</div>
+                <div class="label">Terminal</div>
+            </div>
+            <div class="desktop-icon" data-app="skills" tabindex="0" role="button" aria-label="Skills">
+                <div class="icon">⚡</div>
+                <div class="label">Skills</div>
+            </div>
+            <div class="desktop-icon" data-app="projects" tabindex="0" role="button" aria-label="Projects">
+                <div class="icon">📁</div>
+                <div class="label">Projects</div>
+            </div>
+            <div class="desktop-icon" data-app="contact" tabindex="0" role="button" aria-label="Contact">
+                <div class="icon">📧</div>
+                <div class="label">Contact</div>
+            </div>
+            <div class="desktop-icon" data-app="calculator" tabindex="0" role="button" aria-label="Calculator">
+                <div class="icon">🔢</div>
+                <div class="label">Calculator</div>
+            </div>
+            <div class="desktop-icon" data-app="explorer" tabindex="0" role="button" aria-label="File Explorer">
+                <div class="icon">📂</div>
+                <div class="label">Files</div>
+            </div>
+            <div class="desktop-icon" data-app="settings" tabindex="0" role="button" aria-label="Settings">
+                <div class="icon">⚙️</div>
+                <div class="label">Settings</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Taskbar -->
+    <nav id="taskbar" style="display: none;" role="navigation" aria-label="Taskbar">
+        <div id="start-btn" tabindex="0" role="button" aria-label="Start Menu">
+            <span class="logo">🐧</span>
+            <span>TerminalOS</span>
+        </div>
+        <div id="taskbar-apps" role="tablist" aria-label="Running Applications"></div>
+        <div id="system-tray">
+            <span id="sound-indicator" title="Sound On">🔊</span>
+            <span id="clock" aria-label="Current time"></span>
+        </div>
+    </nav>
+
+    <!-- Start Menu -->
+    <div id="start-menu" role="menu" aria-label="Start Menu">
+        <div class="start-menu-header">
+            <input type="text" class="start-menu-search" placeholder="🔍 Search apps..." aria-label="Search applications">
+        </div>
+        <div class="start-menu-apps">
+            <div class="start-menu-section">
+                <div class="start-menu-section-title">Applications</div>
+                <div class="start-menu-item" data-app="about" role="menuitem">
+                    <span class="icon">👤</span>
+                    <span class="name">About Me</span>
+                </div>
+                <div class="start-menu-item" data-app="terminal" role="menuitem">
+                    <span class="icon">💻</span>
+                    <span class="name">Terminal</span>
+                </div>
+                <div class="start-menu-item" data-app="skills" role="menuitem">
+                    <span class="icon">⚡</span>
+                    <span class="name">Skills</span>
+                </div>
+                <div class="start-menu-item" data-app="projects" role="menuitem">
+                    <span class="icon">📁</span>
+                    <span class="name">Projects</span>
+                </div>
+                <div class="start-menu-item" data-app="contact" role="menuitem">
+                    <span class="icon">📧</span>
+                    <span class="name">Contact</span>
+                </div>
+            </div>
+            <div class="start-menu-section">
+                <div class="start-menu-section-title">Utilities</div>
+                <div class="start-menu-item" data-app="calculator" role="menuitem">
+                    <span class="icon">🔢</span>
+                    <span class="name">Calculator</span>
+                </div>
+                <div class="start-menu-item" data-app="explorer" role="menuitem">
+                    <span class="icon">📂</span>
+                    <span class="name">File Explorer</span>
+                </div>
+                <div class="start-menu-item" data-app="settings" role="menuitem">
+                    <span class="icon">⚙️</span>
+                    <span class="name">Settings</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Container -->
+    <div id="notifications" role="region" aria-label="Notifications"></div>
+
+    <!-- Context Menu -->
+    <div id="context-menu" role="menu" aria-label="Context Menu">
+        <div class="context-menu-item" data-action="new-folder" role="menuitem">
+            <span>📁</span> New Folder
+        </div>
+        <div class="context-menu-item" data-action="refresh" role="menuitem">
+            <span>🔄</span> Refresh
+        </div>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item" data-action="terminal" role="menuitem">
+            <span>💻</span> Open Terminal
+        </div>
+        <div class="context-menu-item disabled" role="menuitem">
+            <span>📋</span> Paste
+        </div>
+        <div class="context-menu-divider"></div>
+        <div class="context-menu-item" data-action="settings" role="menuitem">
+            <span>⚙️</span> Display Settings
+        </div>
+    </div>
+
+    <!-- Blue Screen of Death -->
+    <div id="bsod" role="alert">
+        <div class="sad-face">:(</div>
+        <div class="message">Your PC ran into a problem and needs to restart.</div>
+        <div class="details">
+            We're just collecting some error info, and then we'll restart for you.
+            <br><br>
+            <strong>0% complete</strong>
+            <br><br>
+            If you'd like to know more, you can search online later for this error:
+            <br>
+            <code style="background: rgba(0,0,0,0.2); padding: 2px 6px; border-radius: 3px;">KERNEL_PANIC - TerminalOS has crashed</code>
+        </div>
+        <div class="qr-code">
+            <svg width="100" height="100" viewBox="0 0 100 100">
+                <rect fill="white" width="100" height="100"/>
+                <path fill="#0078d7" d="M10,10 h20 v20 h-20 z M40,10 h10 v10 h-10 z M70,10 h20 v20 h-20 z M10,40 h20 v10 h-20 z M40,40 v20 h10 v-10 h10 v20 h-10 v10 h10 v-20 h-10 v-10 h-10 z M70,40 h20 v20 h-20 z M10,70 h20 v20 h-20 z M40,70 h10 v10 h-10 z M70,70 h20 v20 h-20 z"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Window Template -->
+    <template id="window-template">
+        <div class="window" role="dialog" aria-modal="true">
+            <div class="resize-handle n"></div>
+            <div class="resize-handle ne"></div>
+            <div class="resize-handle e"></div>
+            <div class="resize-handle se"></div>
+            <div class="resize-handle s"></div>
+            <div class="resize-handle sw"></div>
+            <div class="resize-handle w"></div>
+            <div class="resize-handle nw"></div>
+            <div class="window-header" role="region" aria-label="Window header">
+                <div class="window-title">
+                    <span class="title-icon"></span>
+                    <span class="title-text"></span>
+                </div>
+                <div class="window-controls">
+                    <button class="window-btn minimize" aria-label="Minimize"></button>
+                    <button class="window-btn maximize" aria-label="Maximize"></button>
+                    <button class="window-btn close" aria-label="Close"></button>
+                </div>
+            </div>
+            <div class="window-content"></div>
+        </div>
+    </template>
+
+    <script>
+        /**
+         * TerminalOS - A Browser-Based Operating System
+         * Pure JavaScript, no frameworks
+         */
+
+        // ========================================
+        // AUDIO SYSTEM (Web Audio API)
+        // ========================================
+        const AudioSystem = {
+            ctx: null,
+            enabled: true,
+
+            init() {
+                try {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                } catch (e) {
+                    console.warn('Web Audio API not supported');
+                    this.enabled = false;
+                }
+            },
+
+            playTone(frequency, duration, type = 'sine', volume = 0.1) {
+                if (!this.enabled || !this.ctx) return;
+
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+
+                osc.type = type;
+                osc.frequency.value = frequency;
+
+                gain.gain.value = volume;
+                gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + duration);
+
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+
+                osc.start();
+                osc.stop(this.ctx.currentTime + duration);
+            },
+
+            playTyping() {
+                this.playTone(800 + Math.random() * 400, 0.03, 'square', 0.03);
+            },
+
+            playBoot() {
+                this.playTone(440, 0.1);
+                setTimeout(() => this.playTone(880, 0.2), 150);
+            },
+
+            playOpen() {
+                this.playTone(523, 0.05);
+                this.playTone(659, 0.05);
+            },
+
+            playClose() {
+                this.playTone(659, 0.05);
+                this.playTone(523, 0.05);
+            },
+
+            playNotification() {
+                this.playTone(800, 0.1);
+                setTimeout(() => this.playTone(1000, 0.15), 100);
+            },
+
+            playError() {
+                this.playTone(150, 0.3, 'sawtooth', 0.1);
+            }
+        };
+
+        // ========================================
+        // FILE SYSTEM (Mock)
+        // ========================================
+        const FileSystem = {
+            currentPath: '/home/visitor',
+            
+            structure: {
+                '/': ['home', 'bin', 'etc', 'var', 'usr'],
+                '/home': ['visitor'],
+                '/home/visitor': ['about.txt', 'skills.md', 'projects', 'contact.sh', 'secret'],
+                '/home/visitor/projects': ['portfolio', 'game-engine', 'terminal-os', 'ai-assistant'],
+                '/home/visitor/secret': ['easter-eggs.txt'],
+                '/bin': ['ls', 'cat', 'cd', 'clear', 'help', 'whoami', 'echo', 'date'],
+                '/etc': ['config', 'hosts'],
+                '/var': ['log', 'www'],
+            },
+
+            files: {
+                '/home/visitor/about.txt': `Hello! I'm a passionate developer who loves creating amazing web experiences. I specialize in building interactive and creative applications that push the boundaries of what's possible in the browser.
+
+With years of experience in full-stack development, I enjoy tackling complex problems and turning ideas into reality. This terminal-based portfolio is just one example of my love for creative coding.
+
+When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or enjoying a good cup of coffee while reading tech blogs.`,
+                
+                '/home/visitor/skills.md': `# Technical Skills
+
+## Programming Languages
+- JavaScript / TypeScript
+- Python
+- HTML5 / CSS3
+- SQL
+- Rust (learning)
+
+## Frontend Development
+- React / Vue / Angular
+- CSS3 (Sass, Tailwind, Styled Components)
+- Animation (CSS, GSAP, Three.js)
+- Responsive Design
+
+## Backend Development
+- Node.js / Express
+- Python / Django
+- PostgreSQL / MongoDB
+- REST APIs / GraphQL
+
+## Tools & Platforms
+- Git / GitHub
+- Docker / Kubernetes
+- AWS / Cloud Services
+- CI/CD Pipelines`,
+
+                '/home/visitor/contact.sh': `# Contact Information
+
+Email: hello@developer.com
+GitHub: github.com/developer
+LinkedIn: linkedin.com/in/developer
+Twitter: @developer
+Website: www.developer.com
+
+Feel free to reach out for:
+- Job opportunities
+- Project collaborations
+- Technical discussions
+- Just to say hi!`,
+
+                '/home/visitor/secret/easter-eggs.txt': `# Easter Eggs Found! 🎉
+
+Congratulations! You've discovered the secret folder!
+
+Try these commands in the terminal:
+- matrix         - Enter the matrix...
+- sudo rm -rf /  - Don't actually do this 😄
+- konami         - Activate cheat mode
+- neofetch       - System information
+- cowsay [text]  - A cow says something
+- fortune        - Get a fortune
+- sl             - Steam locomotive
+- apt get brain  - Install more RAM
+
+Found more? Check the settings app!`,
+
+                '/home/visitor/projects/portfolio': 'My personal portfolio website - You are looking at it!',
+                '/home/visitor/projects/game-engine': 'A 2D game engine built from scratch in JavaScript',
+                '/home/visitor/projects/terminal-os': 'This browser-based operating system!',
+                '/home/visitor/projects/ai-assistant': 'An AI-powered coding assistant tool',
+            },
+
+            getDirectory(path) {
+                return this.structure[path] || [];
+            },
+
+            getFile(path) {
+                return this.files[path] || null;
+            },
+
+            exists(path) {
+                return this.structure[path] !== undefined || this.files[path] !== undefined;
+            },
+
+            resolvePath(path, currentPath) {
+                if (path.startsWith('/')) {
+                    return path;
+                }
+                if (path === '..') {
+                    return currentPath.split('/').slice(0, -1).join('/') || '/';
+                }
+                if (path === '.') {
+                    return currentPath;
+                }
+                return currentPath ? `${currentPath}/${path}` : `/${path}`;
+            }
+        };
+
+        // ========================================
+        // WINDOW MANAGER
+        // ========================================
+        const WindowManager = {
+            windows: [],
+            activeWindow: null,
+            highestZIndex: 100,
+            windowIdCounter: 0,
+
+            create(options) {
+                const id = `window-${++this.windowIdCounter}`;
+                const template = document.getElementById('window-template');
+                const clone = template.content.cloneNode(true);
+                const windowEl = clone.querySelector('.window');
+
+                windowEl.id = id;
+                windowEl.dataset.app = options.app;
+                
+                // Set initial position
+                const pos = this.calculatePosition();
+                windowEl.style.left = pos.left + 'px';
+                windowEl.style.top = pos.top + 'px';
+                windowEl.style.width = (options.width || 600) + 'px';
+                windowEl.style.height = (options.height || 400) + 'px';
+                windowEl.style.zIndex = ++this.highestZIndex;
+
+                // Set title
+                windowEl.querySelector('.title-text').textContent = options.title || 'Window';
+                windowEl.querySelector('.title-icon').textContent = options.icon || '📄';
+
+                // Set content
+                const content = windowEl.querySelector('.window-content');
+                content.innerHTML = options.content || '';
+                content.className = 'window-content ' + (options.contentClass || '');
+
+                // Event listeners
+                this.addWindowEvents(windowEl, id, options.app);
+
+                document.getElementById('desktop').appendChild(windowEl);
+
+                this.windows.push({
+                    id,
+                    app: options.app,
+                    title: options.title,
+                    minimized: false,
+                    maximized: false
+                });
+
+                this.focusWindow(id);
+                this.updateTaskbar();
+
+                AudioSystem.playOpen();
+
+                return id;
+            },
+
+            calculatePosition() {
+                const offset = this.windows.length * 30;
+                return {
+                    left: Math.min(100 + offset, window.innerWidth - 400),
+                    top: Math.min(50 + offset, window.innerHeight - 400)
+                };
+            },
+
+            addWindowEvents(windowEl, id, app) {
+                const header = windowEl.querySelector('.window-header');
+                const closeBtn = windowEl.querySelector('.close');
+                const minimizeBtn = windowEl.querySelector('.minimize');
+                const maximizeBtn = windowEl.querySelector('.maximize');
+
+                // Dragging
+                let isDragging = false;
+                let startX, startY, startLeft, startTop;
+
+                header.addEventListener('mousedown', (e) => {
+                    if (e.target.closest('.window-controls')) return;
+                    if (windowEl.classList.contains('maximized')) return;
+                    
+                    isDragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    startLeft = windowEl.offsetLeft;
+                    startTop = windowEl.offsetTop;
+                    
+                    this.focusWindow(id);
+                    document.body.style.cursor = 'grabbing';
+                });
+
+                document.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    const dx = e.clientX - startX;
+                    const dy = e.clientY - startY;
+                    windowEl.style.left = startLeft + dx + 'px';
+                    windowEl.style.top = startTop + dy + 'px';
+                });
+
+                document.addEventListener('mouseup', () => {
+                    isDragging = false;
+                    document.body.style.cursor = '';
+                });
+
+                // Focus on click
+                windowEl.addEventListener('mousedown', () => {
+                    this.focusWindow(id);
+                });
+
+                // Close
+                closeBtn.addEventListener('click', () => {
+                    this.closeWindow(id);
+                });
+
+                // Minimize
+                minimizeBtn.addEventListener('click', () => {
+                    this.minimizeWindow(id);
+                });
+
+                // Maximize
+                maximizeBtn.addEventListener('click', () => {
+                    this.toggleMaximize(id);
+                });
+
+                // Double click header to maximize
+                header.addEventListener('dblclick', (e) => {
+                    if (e.target.closest('.window-controls')) return;
+                    this.toggleMaximize(id);
+                });
+
+                // Resize handles
+                const handles = windowEl.querySelectorAll('.resize-handle');
+                handles.forEach(handle => {
+                    handle.addEventListener('mousedown', (e) => {
+                        e.preventDefault();
+                        this.initResize(windowEl, handle.className, e);
+                    });
+                });
+            },
+
+            initResize(windowEl, handleClass, startEvent) {
+                const startX = startEvent.clientX;
+                const startY = startEvent.clientY;
+                const startWidth = windowEl.offsetWidth;
+                const startHeight = windowEl.offsetHeight;
+                const startLeft = windowEl.offsetLeft;
+                const startTop = windowEl.offsetTop;
+
+                const onMove = (e) => {
+                    if (handleClass.includes('e')) {
+                        windowEl.style.width = Math.max(320, startWidth + e.clientX - startX) + 'px';
+                    }
+                    if (handleClass.includes('w')) {
+                        const newWidth = Math.max(320, startWidth - (e.clientX - startX));
+                        windowEl.style.width = newWidth + 'px';
+                        windowEl.style.left = (startLeft + startWidth - newWidth) + 'px';
+                    }
+                    if (handleClass.includes('s')) {
+                        windowEl.style.height = Math.max(200, startHeight + e.clientY - startY) + 'px';
+                    }
+                    if (handleClass.includes('n')) {
+                        const newHeight = Math.max(200, startHeight - (e.clientY - startY));
+                        windowEl.style.height = newHeight + 'px';
+                        windowEl.style.top = (startTop + startHeight - newHeight) + 'px';
+                    }
+                };
+
+                const onUp = () => {
+                    document.removeEventListener('mousemove', onMove);
+                    document.removeEventListener('mouseup', onUp);
+                };
+
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('mouseup', onUp);
+            },
+
+            focusWindow(id) {
+                const windowEl = document.getElementById(id);
+                if (!windowEl) return;
+
+                this.windows.forEach(w => {
+                    const el = document.getElementById(w.id);
+                    if (el) {
+                        el.classList.remove('active', 'focused');
+                    }
+                });
+
+                windowEl.classList.add('active', 'focused');
+                windowEl.style.zIndex = ++this.highestZIndex;
+                this.activeWindow = id;
+                this.updateTaskbar();
+            },
+
+            minimizeWindow(id) {
+                const windowEl = document.getElementById(id);
+                const win = this.windows.find(w => w.id === id);
+                if (!windowEl || !win) return;
+
+                windowEl.classList.add('minimized');
+                windowEl.classList.remove('active', 'focused');
+                win.minimized = true;
+                this.activeWindow = null;
+                this.updateTaskbar();
+            },
+
+            maximizeWindow(id) {
+                const windowEl = document.getElementById(id);
+                if (!windowEl) return;
+
+                windowEl.classList.add('maximized');
+                this.focusWindow(id);
+            },
+
+            restoreWindow(id) {
+                const windowEl = document.getElementById(id);
+                const win = this.windows.find(w => w.id === id);
+                if (!windowEl || !win) return;
+
+                windowEl.classList.remove('minimized', 'maximized');
+                win.minimized = false;
+                win.maximized = false;
+                this.focusWindow(id);
+            },
+
+            toggleMaximize(id) {
+                const windowEl = document.getElementById(id);
+                const win = this.windows.find(w => w.id === id);
+                if (!windowEl || !win) return;
+
+                if (win.maximized) {
+                    this.restoreWindow(id);
+                } else {
+                    this.maximizeWindow(id);
+                }
+            },
+
+            closeWindow(id) {
+                const windowEl = document.getElementById(id);
+                if (!windowEl) return;
+
+                AudioSystem.playClose();
+                
+                windowEl.style.transform = 'scale(0.9)';
+                windowEl.style.opacity = '0';
+                
+                setTimeout(() => {
+                    windowEl.remove();
+                    this.windows = this.windows.filter(w => w.id !== id);
+                    this.updateTaskbar();
+                }, 200);
+            },
+
+            updateTaskbar() {
+                const taskbarApps = document.getElementById('taskbar-apps');
+                taskbarApps.innerHTML = '';
+
+                this.windows.forEach(win => {
+                    const item = document.createElement('div');
+                    item.className = 'taskbar-item' + (win.id === this.activeWindow && !win.minimized ? ' active' : '');
+                    item.innerHTML = `<span class="app-icon">${this.getAppIcon(win.app)}</span><span class="app-name">${win.title}</span>`;
+                    item.addEventListener('click', () => {
+                        if (win.minimized || win.id !== this.activeWindow) {
+                            this.restoreWindow(win.id);
+                        } else {
+                            this.minimizeWindow(win.id);
+                        }
+                    });
+                    taskbarApps.appendChild(item);
+                });
+            },
+
+            getAppIcon(app) {
+                const icons = {
+                    about: '👤',
+                    terminal: '💻',
+                    skills: '⚡',
+                    projects: '📁',
+                    contact: '📧',
+                    calculator: '🔢',
+                    explorer: '📂',
+                    settings: '⚙️'
+                };
+                return icons[app] || '📄';
+            },
+
+            getWindowByApp(app) {
+                return this.windows.find(w => w.app === app);
+            }
+        };
+
+        // ========================================
+        // TERMINAL APPLICATION
+        // ========================================
+        const TerminalApp = {
+            history: [],
+            historyIndex: -1,
+            konamiSequence: [],
+            konamiCode: ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'],
+
+            init(id) {
+                this.id = id;
+                this.windowEl = document.getElementById(id);
+                this.output = this.windowEl.querySelector('.terminal-output');
+                this.input = this.windowEl.querySelector('.terminal-input');
+                
+                this.setupInput();
+                this.printWelcome();
+            },
+
+            setupInput() {
+                this.input.addEventListener('keydown', (e) => {
+                    // Typing sound
+                    AudioSystem.playTyping();
+
+                    if (e.key === 'Enter') {
+                        const command = this.input.value;
+                        this.input.value = '';
+                        this.executeCommand(command);
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        if (this.historyIndex < this.history.length - 1) {
+                            this.historyIndex++;
+                            this.input.value = this.history[this.history.length - 1 - this.historyIndex];
+                        }
+                    } else if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        if (this.historyIndex > 0) {
+                            this.historyIndex--;
+                            this.input.value = this.history[this.history.length - 1 - this.historyIndex];
+                        } else if (this.historyIndex === 0) {
+                            this.historyIndex = -1;
+                            this.input.value = '';
+                        }
+                    } else if (e.key === 'Tab') {
+                        e.preventDefault();
+                        this.handleAutocomplete();
+                    }
+
+                    // Konami code detection
+                    this.checkKonami(e.key);
+                });
+            },
+
+            checkKonami(key) {
+                this.konamiSequence.push(key);
+                if (this.konamiSequence.length > this.konamiCode.length) {
+                    this.konamiSequence.shift();
+                }
+
+                if (this.konamiSequence.join(',') === this.konamiCode.join(',')) {
+                    this.activateGodMode();
+                    this.konamiSequence = [];
+                }
+            },
+
+            activateGodMode() {
+                document.body.setAttribute('data-theme', 'matrix');
+                this.printLine('🌟 GOD MODE ACTIVATED 🌟', 'success');
+                this.printLine('Welcome, Administrator!', 'info');
+                NotificationSystem.show('God Mode', 'You now have unlimited power!', 'success');
+                AudioSystem.playNotification();
+            },
+
+            handleAutocomplete() {
+                const input = this.input.value;
+                const parts = input.split(' ');
+                const partial = parts[parts.length - 1];
+
+                const commands = ['ls', 'cd', 'cat', 'clear', 'help', 'whoami', 'echo', 'date', 'pwd', 'mkdir', 'touch', 'rm', 'cp', 'mv', 'neofetch', 'cowsay', 'fortune', 'matrix', 'sudo', 'konami', 'apt'];
+                const matches = commands.filter(cmd => cmd.startsWith(partial));
+
+                if (matches.length === 1) {
+                    parts[parts.length - 1] = matches[0];
+                    this.input.value = parts.join(' ');
+                } else if (matches.length > 1) {
+                    this.printLine(matches.join('  '), 'info');
+                }
+            },
+
+            printWelcome() {
+                this.printLine('Welcome to TerminalOS v1.0.0', 'success');
+                this.printLine('Type "help" for available commands.', 'info');
+                this.printLine('', '');
+            },
+
+            printLine(text, type = 'output') {
+                const line = document.createElement('div');
+                line.className = `terminal-line ${type}`;
+                line.textContent = text;
+                this.output.appendChild(line);
+                this.output.scrollTop = this.output.scrollHeight;
+            },
+
+            printHTML(html) {
+                const line = document.createElement('div');
+                line.className = 'terminal-line output';
+                line.innerHTML = html;
+                this.output.appendChild(line);
+                this.output.scrollTop = this.output.scrollHeight;
+            },
+
+            executeCommand(input) {
+                const trimmed = input.trim();
+                if (!trimmed) return;
+
+                this.printLine(`${FileSystem.currentPath.replace('/home/visitor', '~')} $ ${trimmed}`, 'input');
+                
+                if (trimmed) {
+                    this.history.push(trimmed);
+                    this.historyIndex = -1;
+                }
+
+                const parts = trimmed.split(/\s+/);
+                const cmd = parts[0].toLowerCase();
+                const args = parts.slice(1);
+
+                const commands = {
+                    help: () => this.cmdHelp(),
+                    ls: () => this.cmdLs(args),
+                    cd: () => this.cmdCd(args),
+                    cat: () => this.cmdCat(args),
+                    clear: () => this.cmdClear(),
+                    whoami: () => this.printLine('visitor', 'output'),
+                    pwd: () => this.printLine(FileSystem.currentPath, 'output'),
+                    echo: () => this.printLine(args.join(' '), 'output'),
+                    date: () => this.printLine(new Date().toString(), 'output'),
+                    neofetch: () => this.cmdNeofetch(),
+                    cowsay: () => this.cmdCowsay(args),
+                    fortune: () => this.cmdFortune(),
+                    matrix: () => this.cmdMatrix(),
+                    sudo: () => this.cmdSudo(args),
+                    konami: () => this.cmdKonami(),
+                    apt: () => this.cmdApt(args),
+                    vim: () => this.printLine('vim is too powerful for this terminal', 'warning'),
+                    exit: () => WindowManager.closeWindow(this.id)
+                };
+
+                if (commands[cmd]) {
+                    commands[cmd]();
+                } else if (trimmed.startsWith('ls ') || trimmed.startsWith('cd ') || trimmed.startsWith('cat ')) {
+                    this.printLine(`Command not found: ${cmd}`, 'error');
+                } else {
+                    this.printLine(`${cmd}: command not found`, 'error');
+                }
+            },
+
+            cmdHelp() {
+                this.printLine('Available commands:', 'info');
+                this.printLine('  ls          - List directory contents');
+                this.printLine('  cd [dir]    - Change directory');
+                this.printLine('  cat [file]  - Display file contents');
+                this.printLine('  clear       - Clear terminal');
+                this.printLine('  whoami      - Display current user');
+                this.printLine('  pwd         - Print working directory');
+                this.printLine('  echo [text] - Display text');
+                this.printLine('  date        - Display current date');
+                this.printLine('  neofetch    - Display system info');
+                this.printLine('  cowsay      - Make a cow say something');
+                this.printLine('  fortune     - Get a fortune');
+                this.printLine('  matrix      - Enter the matrix');
+                this.printLine('  apt         - Package manager');
+                this.printLine('  sudo        - Execute as superuser');
+                this.printLine('  konami      - Activate cheat mode');
+                this.printLine('  exit        - Close terminal');
+            },
+
+            cmdLs(args) {
+                const path = args[0] ? FileSystem.resolvePath(args[0], FileSystem.currentPath) : FileSystem.currentPath;
+                const contents = FileSystem.getDirectory(path);
+                
+                if (contents.length === 0) {
+                    this.printLine('(empty)', 'output');
+                    return;
+                }
+
+                const html = contents.map(item => {
+                    const isDir = FileSystem.structure[path + '/' + item] !== undefined;
+                    const color = isDir ? 'color: #58a6ff' : 'color: #e6edf3';
+                    const icon = isDir ? '📁' : '📄';
+                    return `<span style="${color}">${icon} ${item}</span>`;
+                }).join('  ');
+                
+                this.printHTML(html);
+            },
+
+            cmdCd(args) {
+                const path = args[0] ? FileSystem.resolvePath(args[0], FileSystem.currentPath) : '/home/visitor';
+                
+                if (FileSystem.exists(path)) {
+                    FileSystem.currentPath = path;
+                    this.printLine('', 'output');
+                } else {
+                    this.printLine(`cd: ${args[0]}: No such file or directory`, 'error');
+                }
+            },
+
+            cmdCat(args) {
+                if (!args[0]) {
+                    this.printLine('cat: missing operand', 'error');
+                    return;
+                }
+
+                const path = FileSystem.resolvePath(args[0], FileSystem.currentPath);
+                const content = FileSystem.getFile(path);
+
+                if (content !== null) {
+                    content.split('\n').forEach(line => this.printLine(line, 'output'));
+                } else {
+                    this.printLine(`cat: ${args[0]}: No such file or directory`, 'error');
+                }
+            },
+
+            cmdClear() {
+                this.output.innerHTML = '';
+            },
+
+            cmdNeofetch() {
+                const ascii = `
+        .--.        ${navigator.userAgent.split(')')[0].split('(')[1] || 'Unknown'}
+       |o_o |       -----------------
+       |:_/ |       OS: TerminalOS 1.0.0
+      //   \\ \\      Host: Browser Engine
+     (|     | )     Kernel: JavaScript ES2024
+    /'\\_   _/\`\\    Uptime: ${Math.floor((Date.now() % 86400000) / 60000)} mins
+    \\___)=(___/    Shell: TerminalOS CLI v1.0.0`;
+                
+                this.printHTML(`<pre style="color: #58a6ff; font-size: 12px;">${ascii}</pre>`);
+            },
+
+            cmdCowsay(args) {
+                const message = args.length > 0 ? args.join(' ') : 'Moo!';
+                const line = '_'.repeat(message.length + 2);
+                this.printHTML(`
+<pre style="color: #e6edf3;">
+ ${line}
+< ${message} >
+ ${'-'.repeat(message.length + 2)}
+        \\   ^__^
+         \\  (oo)\\_______
+            (__)\\       )\\/\\
+                ||----w |
+                ||     ||
+</pre>`);
+            },
+
+            cmdFortune() {
+                const fortunes = [
+                    "You will have a great day coding today!",
+                    "A bug is just an unexpected feature.",
+                    "Your code will compile on the first try.",
+                    "Stack Overflow will have the answer you need.",
+                    "Your creative energy will lead to innovation.",
+                    "Remember: there's always one more bug to fix.",
+                    "Your next project will be amazing!",
+                    "Code is poetry written for machines.",
+                    "The best error message is the one that never shows up.",
+                    "You are building something great!"
+                ];
+                this.printLine(fortunes[Math.floor(Math.random() * fortunes.length)], 'success');
+            },
+
+            cmdMatrix() {
+                document.body.setAttribute('data-theme', 'matrix');
+                this.printLine('🌿 Wake up, Neo...', 'success');
+                NotificationSystem.show('Matrix Mode', 'Follow the white rabbit', 'success');
+            },
+
+            cmdSudo(args) {
+                if (args[0] === 'rm' && args[1] === '-rf' && args[2] === '/') {
+                    this.triggerBSOD();
+                } else if (args[0] === 'apt' && args[1] === 'get' && args[2] === 'brain') {
+                    this.printLine('E: Unable to locate package brain. Maybe you already have it?', 'error');
+                } else {
+                    this.printLine('root@terminalos:~# ' + args.join(' '), 'prompt');
+                    this.printLine('Command executed successfully', 'success');
+                }
+            },
+
+            cmdKonami() {
+                this.activateGodMode();
+            },
+
+            cmdApt(args) {
+                if (args[0] === 'get' && args[1] === 'update') {
+                    this.printLine('Reading package lists... Done', 'success');
+                    this.printLine('Building dependency tree... Done', 'success');
+                    this.printLine('Calculating upgrade... Done', 'success');
+                } else if (args[0] === 'search' && args[1]) {
+                    this.printLine(`Searching for ${args[1]}...`, 'info');
+                    this.printLine(`Package: ${args[1]}`);
+                    this.printLine('  Description: The best package ever', 'output');
+                } else {
+                    this.printLine('Usage: apt [update | search <package>]', 'error');
+                }
+            },
+
+            triggerBSOD() {
+                this.printLine('Oh no!', 'error');
+                document.getElementById('bsod').classList.add('visible');
+                AudioSystem.playError();
+            }
+        };
+
+        // ========================================
+        // NOTIFICATION SYSTEM
+        // ========================================
+        const NotificationSystem = {
+            container: null,
+
+            init() {
+                this.container = document.getElementById('notifications');
+            },
+
+            show(title, message, type = 'info') {
+                const icons = {
+                    success: '✅',
+                    error: '❌',
+                    warning: '⚠️',
+                    info: 'ℹ️'
+                };
+
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.innerHTML = `
+                    <span class="icon">${icons[type] || icons.info}</span>
+                    <div class="content">
+                        <div class="title">${title}</div>
+                        <div class="message">${message}</div>
+                    </div>
+                `;
+
+                this.container.appendChild(notification);
+                AudioSystem.playNotification();
+
+                setTimeout(() => {
+                    notification.classList.add('hiding');
+                    setTimeout(() => notification.remove(), 300);
+                }, 4000);
+            }
+        };
+
+        // ========================================
+        // APPLICATION GENERATORS
+        // ========================================
+        const Apps = {
+            about() {
+                return `
+                    <div class="app-content">
+                        <h1>👤 About Me</h1>
+                        <p>Hello! I'm a passionate developer who loves creating amazing web experiences. I specialize in building interactive and creative applications that push the boundaries of what's possible in the browser.</p>
+                        <p>With years of experience in full-stack development, I enjoy tackling complex problems and turning ideas into reality. This terminal-based portfolio is just one example of my love for creative coding.</p>
+                        <p>When I'm not coding, you'll find me exploring new technologies, contributing to open-source projects, or enjoying a good cup of coffee while reading tech blogs.</p>
+                        <div style="margin-top: 20px; padding: 15px; background: var(--bg-tertiary); border-radius: 8px;">
+                            <strong style="color: var(--accent-green);">💡 Fun Fact:</strong>
+                            <span style="color: var(--text-secondary);"> I built this entire operating system in pure HTML, CSS, and JavaScript with no frameworks!</span>
+                        </div>
+                    </div>
+                `;
+            },
+
+            skills() {
+                return `
+                    <div class="app-content">
+                        <h1>⚡ Skills</h1>
+                        
+                        <div class="skill-category">
+                            <h3>Frontend Development</h3>
+                            <div class="skill-list">
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">TypeScript</span>
+                                <span class="skill-tag">React</span>
+                                <span class="skill-tag">Vue.js</span>
+                                <span class="skill-tag">HTML5</span>
+                                <span class="skill-tag">CSS3</span>
+                                <span class="skill-tag">Tailwind</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3>Backend Development</h3>
+                            <div class="skill-list">
+                                <span class="skill-tag">Node.js</span>
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Express</span>
+                                <span class="skill-tag">PostgreSQL</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">GraphQL</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h3>Tools & Platforms</h3>
+                            <div class="skill-list">
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">AWS</span>
+                                <span class="skill-tag">Linux</span>
+                                <span class="skill-tag">CI/CD</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 24px;">
+                            <h3 style="color: var(--accent-purple); margin-bottom: 12px;">Proficiency</h3>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                    <span>JavaScript</span><span>95%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 95%"></div></div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                    <span>React</span><span>90%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 90%"></div></div>
+                            </div>
+                            <div>
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                    <span>Node.js</span><span>88%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" style="width: 88%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            projects() {
+                return `
+                    <div class="app-content">
+                        <h1>📁 Projects</h1>
+                        <p style="color: var(--text-secondary); margin-bottom: 20px;">Click on a project to learn more, or open Terminal and type "cd /home/visitor/projects"</p>
+                        
+                        <div class="contact-grid">
+                            <div class="contact-card" onclick="Apps.openProject('portfolio')">
+                                <div class="icon">🌐</div>
+                                <div class="label">Type</div>
+                                <div class="value">Portfolio Website</div>
+                            </div>
+                            <div class="contact-card" onclick="Apps.openProject('game-engine')">
+                                <div class="icon">🎮</div>
+                                <div class="label">Type</div>
+                                <div class="value">Game Engine</div>
+                            </div>
+                            <div class="contact-card" onclick="Apps.openProject('terminal-os')">
+                                <div class="icon">💻</div>
+                                <div class="label">Type</div>
+                                <div class="value">OS Simulation</div>
+                            </div>
+                            <div class="contact-card" onclick="Apps.openProject('ai-assistant')">
+                                <div class="icon">🤖</div>
+                                <div class="label">Type</div>
+                                <div class="value">AI Tool</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            contact() {
+                return `
+                    <div class="app-content">
+                        <h1>📧 Contact</h1>
+                        <p>I'd love to hear from you! Feel free to reach out through any of these channels:</p>
+                        
+                        <div class="contact-grid">
+                            <a href="mailto:hello@developer.com" class="contact-card" style="text-decoration: none;">
+                                <div class="icon">📧</div>
+                                <div class="label">Email</div>
+                                <div class="value">hello@developer.com</div>
+                            </a>
+                            <a href="https://github.com" target="_blank" class="contact-card" style="text-decoration: none;">
+                                <div class="icon">🐙</div>
+                                <div class="label">GitHub</div>
+                                <div class="value">github.com/developer</div>
+                            </a>
+                            <a href="https://linkedin.com" target="_blank" class="contact-card" style="text-decoration: none;">
+                                <div class="icon">💼</div>
+                                <div class="label">LinkedIn</div>
+                                <div class="value">linkedin.com/in/developer</div>
+                            </a>
+                            <a href="https://twitter.com" target="_blank" class="contact-card" style="text-decoration: none;">
+                                <div class="icon">🐦</div>
+                                <div class="label">Twitter</div>
+                                <div class="value">@developer</div>
+                            </a>
+                        </div>
+
+                        <div style="margin-top: 24px; padding: 16px; background: var(--bg-tertiary); border-radius: 8px;">
+                            <h3 style="color: var(--accent-green); margin-bottom: 8px;">📍 Open to opportunities!</h3>
+                            <p style="color: var(--text-secondary); margin: 0;">Currently available for freelance projects and full-time positions. Let's build something amazing together!</p>
+                        </div>
+                    </div>
+                `;
+            },
+
+            terminal() {
+                return `
+                    <div class="terminal">
+                        <div class="terminal-output" id="terminal-output"></div>
+                        <div class="terminal-input-line">
+                            <span class="terminal-prompt">visitor@resume:~$</span>
+                            <input type="text" class="terminal-input" id="terminal-input" autofocus>
+                        </div>
+                    </div>
+                `;
+            },
+
+            calculator() {
+                return `
+                    <div class="calculator">
+                        <div class="calc-display">
+                            <div class="calc-expression" id="calc-expression"></div>
+                            <div class="calc-result" id="calc-result">0</div>
+                        </div>
+                        <div class="calc-buttons">
+                            <button class="calc-btn function" data-action="clear">AC</button>
+                            <button class="calc-btn function" data-action="sign">±</button>
+                            <button class="calc-btn function" data-action="percent">%</button>
+                            <button class="calc-btn operator" data-action="divide">÷</button>
+                            
+                            <button class="calc-btn" data-value="7">7</button>
+                            <button class="calc-btn" data-value="8">8</button>
+                            <button class="calc-btn" data-value="9">9</button>
+                            <button class="calc-btn operator" data-action="multiply">×</button>
+                            
+                            <button class="calc-btn" data-value="4">4</button>
+                            <button class="calc-btn" data-value="5">5</button>
+                            <button class="calc-btn" data-value="6">6</button>
+                            <button class="calc-btn operator" data-action="subtract">−</button>
+                            
+                            <button class="calc-btn" data-value="1">1</button>
+                            <button class="calc-btn" data-value="2">2</button>
+                            <button class="calc-btn" data-value="3">3</button>
+                            <button class="calc-btn operator" data-action="add">+</button>
+                            
+                            <button class="calc-btn" data-value="0" style="grid-column: span 2;">0</button>
+                            <button class="calc-btn" data-value=".">.</button>
+                            <button class="calc-btn equals" data-action="equals">=</button>
+                        </div>
+                    </div>
+                `;
+            },
+
+            explorer() {
+                return `
+                    <div class="file-explorer">
+                        <div class="file-sidebar">
+                            <div class="file-sidebar-item active">
+                                <span>🏠</span> Home
+                            </div>
+                            <div class="file-sidebar-item">
+                                <span>🗑️</span> Trash
+                            </div>
+                            <div class="file-sidebar-item">
+                                <span>⬇️</span> Downloads
+                            </div>
+                            <div class="file-sidebar-item">
+                                <span>📄</span> Documents
+                            </div>
+                            <div class="file-sidebar-item">
+                                <span>🖼️</span> Pictures
+                            </div>
+                        </div>
+                        <div class="file-main">
+                            <div class="file-grid">
+                                <div class="file-item" ondblclick="Apps.openFile('about.txt')">
+                                    <div class="icon">📄</div>
+                                    <div class="name">about.txt</div>
+                                </div>
+                                <div class="file-item" ondblclick="Apps.openFile('skills.md')">
+                                    <div class="icon">📝</div>
+                                    <div class="name">skills.md</div>
+                                </div>
+                                <div class="file-item" ondblclick="Apps.openFile('contact.sh')">
+                                    <div class="icon">📜</div>
+                                    <div class="name">contact.sh</div>
+                                </div>
+                                <div class="file-item">
+                                    <div class="icon">📁</div>
+                                    <div class="name">projects</div>
+                                </div>
+                                <div class="file-item">
+                                    <div class="icon">🔒</div>
+                                    <div class="name">secret</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            settings() {
+                return `
+                    <div class="settings-app">
+                        <div class="settings-sidebar">
+                            <div class="settings-nav-item active">
+                                <span>🎨</span> Appearance
+                            </div>
+                            <div class="settings-nav-item">
+                                <span>🔊</span> Sound
+                            </div>
+                            <div class="settings-nav-item">
+                                <span>🔔</span> Notifications
+                            </div>
+                            <div class="settings-nav-item">
+                                <span>⌨️</span> Keyboard
+                            </div>
+                            <div class="settings-nav-item">
+                                <span>🖥️</span> Display
+                            </div>
+                            <div class="settings-nav-item">
+                                <span>ℹ️</span> About
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-section">
+                                <h3>Theme</h3>
+                                <div class="theme-options">
+                                    <div class="theme-option active" data-theme="default" onclick="Apps.setTheme('default', this)">
+                                        <div class="preview" style="background: linear-gradient(135deg, #0d1117, #161b22);">🌙</div>
+                                        <div class="name">Default Dark</div>
+                                    </div>
+                                    <div class="theme-option" data-theme="cyberpunk" onclick="Apps.setTheme('cyberpunk', this)">
+                                        <div class="preview" style="background: linear-gradient(135deg, #0a0a0f, #12121a);">🌈</div>
+                                        <div class="name">Cyberpunk</div>
+                                    </div>
+                                    <div class="theme-option" data-theme="matrix" onclick="Apps.setTheme('matrix', this)">
+                                        <div class="preview" style="background: #000000; color: #00ff00;">💊</div>
+                                        <div class="name">Matrix</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-section">
+                                <h3>System</h3>
+                                <div class="settings-option">
+                                    <div class="info">
+                                        <div class="label">Sound Effects</div>
+                                        <div class="description">Play sounds for interactions</div>
+                                    </div>
+                                    <div class="toggle-switch active" onclick="Apps.toggleSound(this)"></div>
+                                </div>
+                                <div class="settings-option">
+                                    <div class="info">
+                                        <div class="label">CRT Effect</div>
+                                        <div class="description">Vintage monitor scanlines</div>
+                                    </div>
+                                    <div class="toggle-switch active" onclick="Apps.toggleCRT(this)"></div>
+                                </div>
+                                <div class="settings-option">
+                                    <div class="info">
+                                        <div class="label">Animations</div>
+                                        <div class="description">Window open/close animations</div>
+                                    </div>
+                                    <div class="toggle-switch active" onclick="Apps.toggleAnimations(this)"></div>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-section">
+                                <h3>Keyboard Shortcuts</h3>
+                                <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-secondary);">
+                                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                                        <span>Open Terminal</span><span>Ctrl + Alt + T</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                                        <span>Close Window</span><span>Escape</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border-color);">
+                                        <span>Konami Code</span><span>↑↑↓↓←→←→BA</span>
+                                    </div>
+                                    <div style="display: flex; justify-content: space-between; padding: 8px 0;">
+                                        <span>Refresh Desktop</span><span>F5</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            },
+
+            setTheme(theme, element) {
+                document.querySelectorAll('.theme-option').forEach(el => el.classList.remove('active'));
+                element.classList.add('active');
+                
+                if (theme === 'default') {
+                    document.body.removeAttribute('data-theme');
+                } else {
+                    document.body.setAttribute('data-theme', theme);
+                }
+                
+                NotificationSystem.show('Theme Changed', `Switched to ${theme} theme`, 'success');
+            },
+
+            toggleSound(element) {
+                element.classList.toggle('active');
+                AudioSystem.enabled = element.classList.contains('active');
+                NotificationSystem.show('Sound', AudioSystem.enabled ? 'Sound enabled' : 'Sound disabled', 'info');
+            },
+
+            toggleCRT(element) {
+                element.classList.toggle('active');
+                document.getElementById('crt-overlay').style.display = element.classList.contains('active') ? 'block' : 'none';
+            },
+
+            toggleAnimations(element) {
+                element.classList.toggle('active');
+                const reduced = !element.classList.contains('active');
+                document.body.classList.toggle('reduced-motion', reduced);
+            },
+
+            openFile(filename) {
+                const content = FileSystem.getFile('/home/visitor/' + filename);
+                if (content) {
+                    WindowManager.create({
+                        app: 'text-viewer',
+                        title: filename,
+                        icon: '📄',
+                        width: 500,
+                        height: 400,
+                        content: `<div class="app-content" style="white-space: pre-wrap; font-family: var(--font-mono); font-size: 13px;">${content}</div>`
+                    });
+                }
+            },
+
+            openProject(project) {
+                WindowManager.create({
+                    app: 'project-info',
+                    title: project,
+                    icon: '📁',
+                    width: 600,
+                    height: 500,
+                    content: `<div class="app-content">
+                        <h1>${project}</h1>
+                        <p>Project details coming soon...</p>
+                    </div>`
+                });
+            }
+        };
+
+        // ========================================
+        // CALCULATOR LOGIC
+        // ========================================
+        const CalculatorApp = {
+            init() {
+                this.currentValue = '0';
+                this.previousValue = null;
+                this.operator = null;
+                this.shouldResetDisplay = false;
+                
+                this.resultEl = document.getElementById('calc-result');
+                this.expressionEl = document.getElementById('calc-expression');
+                
+                this.setupButtons();
+            },
+
+            setupButtons() {
+                const buttons = document.querySelectorAll('.calc-btn');
+                buttons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const value = btn.dataset.value;
+                        const action = btn.dataset.action;
+                        
+                        if (value !== undefined) {
+                            this.handleNumber(value);
+                        } else if (action) {
+                            this.handleAction(action);
+                        }
+                    });
+                });
+            },
+
+            handleNumber(value) {
+                if (this.shouldResetDisplay) {
+                    this.currentValue = value;
+                    this.shouldResetDisplay = false;
+                } else {
+                    this.currentValue = this.currentValue === '0' ? value : this.currentValue + value;
+                }
+                this.updateDisplay();
+            },
+
+            handleAction(action) {
+                switch (action) {
+                    case 'clear':
+                        this.currentValue = '0';
+                        this.previousValue = null;
+                        this.operator = null;
+                        this.expressionEl.textContent = '';
+                        break;
+                    case 'sign':
+                        this.currentValue = String(-parseFloat(this.currentValue));
+                        break;
+                    case 'percent':
+                        this.currentValue = String(parseFloat(this.currentValue) / 100);
+                        break;
+                    case 'add':
+                    case 'subtract':
+                    case 'multiply':
+                    case 'divide':
+                        this.handleOperator(action);
+                        break;
+                    case 'equals':
+                        this.calculate();
+                        break;
+                }
+                this.updateDisplay();
+            },
+
+            handleOperator(op) {
+                if (this.operator && !this.shouldResetDisplay) {
+                    this.calculate();
+                }
+                this.previousValue = this.currentValue;
+                this.operator = op;
+                this.shouldResetDisplay = true;
+                
+                const opSymbols = { add: '+', subtract: '−', multiply: '×', divide: '÷' };
+                this.expressionEl.textContent = `${this.previousValue} ${opSymbols[op]}`;
+            },
+
+            calculate() {
+                if (!this.operator || this.previousValue === null) return;
+                
+                const prev = parseFloat(this.previousValue);
+                const current = parseFloat(this.currentValue);
+                let result;
+                
+                switch (this.operator) {
+                    case 'add': result = prev + current; break;
+                    case 'subtract': result = prev - current; break;
+                    case 'multiply': result = prev * current; break;
+                    case 'divide': result = prev / current; break;
+                }
+                
+                this.currentValue = String(result);
+                this.previousValue = null;
+                this.operator = null;
+                this.expressionEl.textContent = '';
+                this.shouldResetDisplay = true;
+            },
+
+            updateDisplay() {
+                this.resultEl.textContent = this.currentValue;
+            }
+        };
+
+        // ========================================
+        // BOOT SEQUENCE
+        // ========================================
+        const BootSequence = {
+            bootLines: [
+                { text: 'TerminalOS BIOS v1.0.0', type: 'info' },
+                { text: 'Copyright (C) 2024 TerminalOS Inc.', type: 'info' },
+                { text: '', type: '' },
+                { text: 'Memory Test: 65536K OK', type: 'success' },
+                { text: 'Detecting hardware...', type: 'info' },
+                { text: '  - CPU: JavaScript V8 Engine', type: 'info' },
+                { text: '  - GPU: WebGL Renderer', type: 'info' },
+                { text: '  - RAM: Allocating 64MB of DOM', type: 'info' },
+                { text: '  - Storage: LocalStorage mounted', type: 'info' },
+                { text: '', type: '' },
+                { text: 'Loading kernel modules...', type: 'info' },
+                { text: '  [OK] window-manager.ko', type: 'success' },
+                { text: '  [OK] terminal-core.ko', type: 'success' },
+                { text: '  [OK] audio-system.ko', type: 'success' },
+                { text: '  [OK] file-system.ko', type: 'success' },
+                { text: '', type: '' },
+                { text: 'Initializing system services...', type: 'info' },
+                { text: '  [OK] Desktop Environment', type: 'success' },
+                { text: '  [OK] Taskbar Service', type: 'success' },
+                { text: '  [OK] Notification Daemon', type: 'success' },
+                { text: '  [OK] Window Manager', type: 'success' },
+                { text: '', type: '' },
+                { text: 'Starting graphical interface...', type: 'info' },
+                { text: 'TerminalOS 1.0.0 "Fantastic"', type: 'success' },
+                { text: '', type: '' },
+                { text: 'Welcome to TerminalOS!', type: 'success' },
+                { text: 'Your interactive portfolio awaits...', type: 'info' },
+            ],
+
+            async run() {
+                AudioSystem.init();
+                AudioSystem.playBoot();
+
+                const bootContent = document.getElementById('boot-content');
+                const progressBar = document.getElementById('boot-progress-bar');
+                const totalLines = this.bootLines.length;
+
+                for (let i = 0; i < totalLines; i++) {
+                    const line = this.bootLines[i];
+                    const lineEl = document.createElement('div');
+                    lineEl.className = `boot-line ${line.type}`;
+                    lineEl.textContent = line.text;
+                    bootContent.appendChild(lineEl);
+
+                    // Trigger reflow for animation
+                    void lineEl.offsetWidth;
+                    lineEl.style.animationDelay = '0s';
+                    
+                    // Random delay for realistic feel
+                    await new Promise(resolve => setTimeout(resolve, 50 + Math.random() * 100));
+
+                    // Update progress
+                    const progress = ((i + 1) / totalLines) * 100;
+                    progressBar.style.width = progress + '%';
+                }
+
+                // Final pause before boot complete
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Hide boot screen, show desktop
+                document.getElementById('boot-screen').style.opacity = '0';
+                document.getElementById('boot-screen').style.transition = 'opacity 0.5s ease';
+                
+                await new Promise(resolve => setTimeout(resolve, 500));
+                document.getElementById('boot-screen').style.display = 'none';
+                
+                document.getElementById('desktop').style.display = 'block';
+                document.getElementById('taskbar').style.display = 'flex';
+
+                // Show welcome notification
+                setTimeout(() => {
+                    NotificationSystem.show('Welcome!', 'TerminalOS is ready. Click the penguin to get started! 🐧', 'success');
+                }, 500);
+            }
+        };
+
+        // ========================================
+        // EVENT HANDLERS & INITIALIZATION
+        // ========================================
+        document.addEventListener('DOMContentLoaded', () => {
+            NotificationSystem.init();
+
+            // Start boot sequence
+            BootSequence.run();
+
+            // Desktop icon clicks
+            document.querySelectorAll('.desktop-icon').forEach(icon => {
+                icon.addEventListener('dblclick', () => {
+                    const app = icon.dataset.app;
+                    Apps.openApp(app);
+                });
+                icon.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        const app = icon.dataset.app;
+                        Apps.openApp(app);
+                    }
+                });
+            });
+
+            // Start menu
+            const startBtn = document.getElementById('start-btn');
+            const startMenu = document.getElementById('start-menu');
+
+            startBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                startMenu.classList.toggle('visible');
+            });
+
+            document.addEventListener('click', () => {
+                startMenu.classList.remove('visible');
+            });
+
+            startMenu.addEventListener('click', (e) => {
+                const item = e.target.closest('.start-menu-item');
+                if (item) {
+                    const app = item.dataset.app;
+                    Apps.openApp(app);
+                    startMenu.classList.remove('visible');
+                }
+            });
+
+            // Context menu
+            const contextMenu = document.getElementById('context-menu');
+
+            document.getElementById('desktop').addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                contextMenu.style.display = 'block';
+                contextMenu.style.left = e.clientX + 'px';
+                contextMenu.style.top = e.clientY + 'px';
+            });
+
+            document.addEventListener('click', () => {
+                contextMenu.style.display = 'none';
+            });
+
+            contextMenu.querySelectorAll('.context-menu-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const action = item.dataset.action;
+                    if (action === 'terminal') {
+                        Apps.openApp('terminal');
+                    } else if (action === 'settings') {
+                        Apps.openApp('settings');
+                    } else if (action === 'refresh') {
+                        location.reload();
+                    }
+                });
+            });
+
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                // Ctrl+Alt+T for terminal
+                if (e.ctrlKey && e.altKey && e.key === 't') {
+                    e.preventDefault();
+                    Apps.openApp('terminal');
+                }
+                // Escape to close start menu
+                if (e.key === 'Escape') {
+                    startMenu.classList.remove('visible');
+                }
+                // F5 to refresh
+                if (e.key === 'F5') {
+                    location.reload();
+                }
+            });
+
+            // Clock
+            const clock = document.getElementById('clock');
+            setInterval(() => {
+                const now = new Date();
+                clock.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }, 1000);
+            clock.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        });
+
+        // ========================================
+        // APP OPENER
+        // ========================================
+        Apps.openApp = function(app) {
+            // Check if app already open
+            const existingWindow = WindowManager.getWindowByApp(app);
+            if (existingWindow) {
+                if (existingWindow.minimized) {
+                    WindowManager.restoreWindow(existingWindow.id);
+                } else {
+                    WindowManager.focusWindow(existingWindow.id);
+                }
+                return;
+            }
+
+            let id;
+            switch (app) {
+                case 'about':
+                    id = WindowManager.create({ app, title: 'About Me', icon: '👤', width: 550, height: 500, content: Apps.about() });
+                    break;
+                case 'skills':
+                    id = WindowManager.create({ app, title: 'Skills', icon: '⚡', width: 600, height: 550, content: Apps.skills() });
+                    break;
+                case 'projects':
+                    id = WindowManager.create({ app, title: 'Projects', icon: '📁', width: 650, height: 500, content: Apps.projects() });
+                    break;
+                case 'contact':
+                    id = WindowManager.create({ app, title: 'Contact', icon: '📧', width: 550, height: 500, content: Apps.contact() });
+                    break;
+                case 'terminal':
+                    id = WindowManager.create({ app, title: 'Terminal', icon: '💻', width: 700, height: 450, content: Apps.terminal() });
+                    setTimeout(() => TerminalApp.init(id), 100);
+                    break;
+                case 'calculator':
+                    id = WindowManager.create({ app, title: 'Calculator', icon: '🔢', width: 320, height: 480, content: Apps.calculator() });
+                    setTimeout(() => CalculatorApp.init(), 100);
+                    break;
+                case 'explorer':
+                    id = WindowManager.create({ app, title: 'File Explorer', icon: '📂', width: 700, height: 500, content: Apps.explorer() });
+                    break;
+                case 'settings':
+                    id = WindowManager.create({ app, title: 'Settings', icon: '⚙️', width: 700, height: 550, content: Apps.settings() });
+                    break;
+            }
+        };
+
+        // Trigger BSOD recovery
+        window.bsodRecovery = function() {
+            document.getElementById('bsod').classList.remove('visible');
+            AudioSystem.ctx?.close();
+        };
+
+        if (document.getElementById('bsod')) {
+            document.getElementById('bsod').addEventListener('click', window.bsodRecovery);
+        }
+    </script>
+</body>
+</html>
