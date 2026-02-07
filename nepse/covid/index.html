@@ -1,0 +1,1184 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Analyzing the Impact of Macroeconomic Variables and COVID-19 on Stock Market Movements in Nepal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/tengbao/vanta/dist/vanta.waves.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['Crimson Text', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'earth-50': '#faf8f5',
+                        'earth-100': '#f4f0e8',
+                        'earth-200': '#e8ddd1',
+                        'earth-300': '#d9c8b2',
+                        'earth-400': '#c7b094',
+                        'earth-500': '#b39678',
+                        'earth-600': '#9d7d5f',
+                        'earth-700': '#85664a',
+                        'earth-800': '#6b523c',
+                        'earth-900': '#574432',
+                        'navy-50': '#f0f4f8',
+                        'navy-100': '#d9e2ec',
+                        'navy-200': '#bcccdc',
+                        'navy-300': '#9fb3c8',
+                        'navy-400': '#829ab1',
+                        'navy-500': '#627d98',
+                        'navy-600': '#486581',
+                        'navy-700': '#334e68',
+                        'navy-800': '#243b53',
+                        'navy-900': '#102a43'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            overflow-x: hidden;
+        }
+        .vanta-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .content-overlay {
+            position: relative;
+            z-index: 10;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+            height: 60vh;
+        }
+        .hero-title {
+            grid-column: 1 / -1;
+            grid-row: 1;
+        }
+        .hero-main {
+            grid-column: 1;
+            grid-row: 2;
+        }
+        .hero-side {
+            grid-column: 2;
+            grid-row: 2;
+        }
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 50;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid #e5e7eb;
+            padding: 2rem 1.5rem;
+        }
+        .main-content {
+            margin-left: 280px;
+            min-height: 100vh;
+        }
+        .toc-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: #627d98;
+            text-decoration: none;
+            font-size: 0.875rem;
+            border-left: 2px solid transparent;
+            padding-left: 1rem;
+            transition: all 0.2s ease;
+        }
+        .toc-link:hover, .toc-link.active {
+            color: #334e68;
+            border-left-color: #334e68;
+            background: rgba(51, 78, 104, 0.05);
+        }
+        .toc-link.level-2 {
+            padding-left: 1.5rem;
+            font-size: 0.8rem;
+        }
+        .toc-link.level-3 {
+            padding-left: 2rem;
+            font-size: 0.75rem;
+        }
+        .citation {
+            color: #334e68;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .citation:hover {
+            color: #486581;
+            text-decoration: underline;
+        }
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            .toc-fixed.mobile-open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto;
+                height: auto;
+            }
+            .hero-main, .hero-side {
+                grid-column: 1;
+            }
+            .hero-main {
+                grid-row: 2;
+            }
+            .hero-side {
+                grid-row: 3;
+            }
+            .toc-fixed {
+                width: 100%;
+            }
+        }
+    </style>
+  <base target="_blank">
+</head>
+
+  <body class="font-sans text-gray-900 bg-earth-50">
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+      <div class="mb-8">
+        <h2 class="font-serif text-lg font-semibold text-navy-800 mb-4">Contents</h2>
+        <div class="space-y-1">
+          <a href="#executive-summary" class="toc-link">Executive Summary</a>
+          <a href="#literature-review" class="toc-link">Literature Review</a>
+          <a href="#macroeconomic-variables" class="toc-link level-2">Macroeconomic Variables</a>
+          <a href="#covid-impact" class="toc-link level-2">COVID-19 Impact</a>
+          <a href="#behavioral-biases" class="toc-link level-2">Behavioral Biases</a>
+          <a href="#nepal-analysis" class="toc-link">Nepal Economic Analysis</a>
+          <a href="#macro-indicators" class="toc-link level-2">Macroeconomic Indicators</a>
+          <a href="#trade-disruptions" class="toc-link level-2">Trade Disruptions</a>
+          <a href="#nepse-performance" class="toc-link level-2">NEPSE Performance</a>
+          <a href="#behavioral-analysis" class="toc-link">Behavioral Analysis</a>
+          <a href="#herding-behavior" class="toc-link level-2">Herding Behavior</a>
+          <a href="#overconfidence" class="toc-link level-2">Overconfidence</a>
+          <a href="#loss-aversion" class="toc-link level-2">Loss Aversion</a>
+          <a href="#recommendations" class="toc-link">Recommendations</a>
+          <a href="#regulatory-reforms" class="toc-link level-2">Regulatory Reforms</a>
+          <a href="#policy-coordination" class="toc-link level-2">Policy Coordination</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Mobile TOC Toggle -->
+    <button class="lg:hidden fixed top-4 left-4 z-50 bg-navy-800 text-white p-2 rounded-lg" onclick="toggleTOC()">
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Hero Section -->
+      <section class="relative min-h-screen bg-gradient-to-br from-navy-900 via-navy-800 to-earth-800 overflow-hidden">
+        <div id="vanta-bg"></div>
+        <div class="content-overlay">
+          <div class="container mx-auto px-6 py-16">
+            <div class="hero-grid max-w-7xl mx-auto">
+              <!-- Title -->
+              <div class="hero-title text-center mb-12">
+                <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+                  <em>Analyzing the Impact of</em>
+                  <br/>
+                  <span class="text-earth-200">Macroeconomic Variables</span>
+                  <br/>
+                  <em>and COVID-19 on Stock Market</em>
+                  <br/>
+                  <span class="text-earth-300">Movements in Nepal</span>
+                </h1>
+                <p class="text-xl text-earth-100 max-w-3xl mx-auto leading-relaxed">
+                  A comprehensive examination of behavioral biases, regulatory responses, and market dynamics during unprecedented volatility
+                </p>
+              </div>
+
+              <!-- Main Content -->
+              <div class="hero-main bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20">
+                <img src="https://kimi-web-img.moonshot.cn/img/placeholder-0620/图片19.png" alt="Abstract representation of stock market volatility during COVID-19 pandemic" class="w-full h-48 object-cover rounded-lg mb-6 opacity-80" size="medium" aspect="wide" query="nepal stock market covid volatility abstract" referrerpolicy="no-referrer" data-modified="1"/>
+                <div class="text-white space-y-4">
+                  <h3 class="font-serif text-2xl font-semibold text-earth-200">Market Resilience Amid Crisis</h3>
+                  <p class="text-earth-100 leading-relaxed">
+                    The NEPSE index experienced unprecedented volatility, crashing over 30% in March 2020 before surging to record highs above 3,000 points by late 2021—driven by monetary easing, retail investor influx, and behavioral biases including herding, overconfidence, and loss aversion.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Side Panel -->
+              <div class="hero-side space-y-6">
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                  <h4 class="font-serif text-lg font-semibold text-earth-200 mb-3">Key Findings</h4>
+                  <ul class="text-earth-100 space-y-2 text-sm">
+                    <li class="flex items-start"><i class="fas fa-chart-line text-earth-300 mr-2 mt-1"></i>Interest rates showed robust negative relationship with NEPSE</li>
+                    <li class="flex items-start"><i class="fas fa-users text-earth-300 mr-2 mt-1"></i>Retail investors grew from 1.7M to 6.9M accounts</li>
+                    <li class="flex items-start"><i class="fas fa-brain text-earth-300 mr-2 mt-1"></i>Overconfidence bias most significant behavioral factor</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+                  <h4 class="font-serif text-lg font-semibold text-earth-200 mb-3">Research Scope</h4>
+                  <div class="text-earth-100 text-sm space-y-2">
+                    <div class="flex justify-between">
+                      <span>Period:</span>
+                      <span class="font-medium">2020-2025</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Sources:</span>
+                      <span class="font-medium">3+ Academic</span>
+                    </div>
+                    <div class="flex justify-between">
+                      <span>Methodology:</span>
+                      <span class="font-medium">ARDL, VECM</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Executive Summary -->
+      <section id="executive-summary" class="py-16 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+          <h2 class="font-serif text-4xl font-bold text-navy-800 mb-8">Executive Summary</h2>
+
+          <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-gray-700 leading-relaxed mb-8 font-medium">
+              The COVID-19 pandemic triggered unprecedented volatility in Nepal&#39;s stock market, revealing the profound influence of macroeconomic variables and behavioral biases on market movements. This analysis examines the complex interplay between fundamental economic factors and investor psychology during one of the most turbulent periods in Nepalese financial history.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+              <div class="bg-navy-50 p-6 rounded-xl">
+                <h3 class="font-serif text-xl font-semibold text-navy-800 mb-4">Market Dynamics</h3>
+                <ul class="space-y-3 text-gray-700">
+                  <li class="flex items-start">
+                    <i class="fas fa-arrow-down text-red-500 mr-3 mt-1"></i>
+                    <span><strong>Initial Crash:</strong> NEPSE index declined over 30% in March 2020</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-arrow-up text-green-500 mr-3 mt-1"></i>
+                    <span><strong>Record Recovery:</strong> Surged to 3,000+ points by late 2021</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-water text-blue-500 mr-3 mt-1"></i>
+                    <span><strong>Monetary Easing:</strong> Policy rate cut from 5.0% to 3.0%</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="bg-earth-50 p-6 rounded-xl">
+                <h3 class="font-serif text-xl font-semibold text-earth-800 mb-4">Behavioral Factors</h3>
+                <ul class="space-y-3 text-gray-700">
+                  <li class="flex items-start">
+                    <i class="fas fa-users text-earth-600 mr-3 mt-1"></i>
+                    <span><strong>Herding Behavior:</strong> 68% of new investors relied on social sources</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-chart-line text-earth-600 mr-3 mt-1"></i>
+                    <span><strong>Overconfidence:</strong> β = 0.421 influence on investment decisions</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-balance-scale text-earth-600 mr-3 mt-1"></i>
+                    <span><strong>Loss Aversion:</strong> Strong reluctance to realize losses</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-navy-800 to-earth-700 text-white p-8 rounded-xl mb-8">
+              <h3 class="font-serif text-2xl font-semibold mb-4">Key Recommendations</h3>
+              <div class="grid md:grid-cols-3 gap-6">
+                <div>
+                  <h4 class="font-semibold text-earth-200 mb-2">Regulatory Reforms</h4>
+                  <p class="text-sm text-earth-100">Enhanced circuit breakers, investor education, and market surveillance</p>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-earth-200 mb-2">Central Bank Policy</h4>
+                  <p class="text-sm text-earth-100">Counter-cyclical liquidity provisions and macroprudential measures</p>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-earth-200 mb-2">Market Development</h4>
+                  <p class="text-sm text-earth-100">Institutional investor base and derivatives market introduction</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Literature Review -->
+      <section id="literature-review" class="py-16 bg-earth-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+          <h2 class="font-serif text-4xl font-bold text-navy-800 mb-12">Literature Review (2020–2025)</h2>
+
+          <div id="macroeconomic-variables" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">Macroeconomic Variables and Stock Market Indices</h3>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+              <h4 class="font-serif text-xl font-semibold text-earth-800 mb-4">Interest Rate Effects on NEPSE</h4>
+              <p class="text-gray-700 leading-relaxed mb-6">
+                Empirical research has established a <strong>robust negative relationship between interest rates and equity returns</strong> in Nepal&#39;s stock market. Studies employing Autoregressive Distributed Lag (ARDL) models confirm that higher lending rates exert substantial downward pressure on stock prices through multiple transmission channels <a href="https://www.indianjournaloffinance.co.in/index.php/ijrcm/article/download/174623/117333/419256" class="citation">[397, 427]</a>.
+              </p>
+
+              <div class="bg-navy-50 p-6 rounded-lg">
+                <h5 class="font-semibold text-navy-800 mb-3">Key Empirical Findings:</h5>
+                <ul class="space-y-2 text-gray-700">
+                  <li class="flex items-start">
+                    <i class="fas fa-calculator text-navy-600 mr-2 mt-1"></i>
+                    <span>Error correction term: <strong>-0.993882 (p = 0.000)</strong> indicating rapid adjustment</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-percentage text-navy-600 mr-2 mt-1"></i>
+                    <span>Policy rate cut from <strong>5.0% to 3.0%</strong> during COVID-19</span>
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-chart-bar text-navy-600 mr-2 mt-1"></i>
+                    <span>Long-run coefficient: <strong>-195.27</strong> for WALR impact</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <h4 class="font-serif text-lg font-semibold text-earth-800 mb-4">Money Supply and Market Performance</h4>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                  Broad money supply (M2) shows <strong>bidirectional Granger causality</strong> with NEPSE index, indicating complex feedback loops between monetary conditions and market performance <a href="https://www.indianjournaloffinance.co.in/index.php/ijrcm/article/view/174623" class="citation">[304]</a>.
+                </p>
+                <div class="bg-earth-50 p-4 rounded-lg">
+                  <div class="text-2xl font-bold text-earth-700">18.5%</div>
+                  <div class="text-sm text-gray-600">M2 Growth in FY 2019/20</div>
+                </div>
+              </div>
+
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <h4 class="font-serif text-lg font-semibold text-earth-800 mb-4">Exchange Rate Dynamics</h4>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                  Significant <strong>short-run Granger causality</strong> from exchange rate changes to stock prices, operating through valuation effects and confidence channels <a href="https://ideas.repec.org/a/cbu/jrnlec/y2018v6p5-14.html" class="citation">[354]</a>.
+                </p>
+                <div class="bg-earth-50 p-4 rounded-lg">
+                  <div class="text-2xl font-bold text-earth-700">NPR 1.60</div>
+                  <div class="text-sm text-gray-600">Fixed to INR 1.00</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="covid-impact" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">COVID-19 Impact on Market Volatility</h3>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+              <h4 class="font-serif text-xl font-semibold text-earth-800 mb-6">Initial Market Crash (March 2020)</h4>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-red-600 mb-2">30%+</div>
+                  <div class="text-sm text-gray-600">NEPSE Index Decline</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-gray-700 mb-2">50</div>
+                  <div class="text-sm text-gray-600">Days Market Closure</div>
+                </div>
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-orange-600 mb-2">6.0%</div>
+                  <div class="text-sm text-gray-600">Single Day Drop (March 10)</div>
+                </div>
+              </div>
+
+              <p class="text-gray-700 leading-relaxed">
+                The WHO pandemic declaration triggered synchronized global declines, with Nepal&#39;s nationwide lockdown on March 24 creating immediate market stress. The market closure for approximately 50 days prevented continuous price discovery, amplifying volatility when trading resumed <a href="https://internationalpubls.com/index.php/cana/article/download/4256/2348/7429" class="citation">[522, 278]</a>.
+              </p>
+            </div>
+
+            <div class="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-8">
+              <h4 class="font-serif text-xl font-semibold text-earth-800 mb-4">Recovery and Bull Run</h4>
+              <p class="text-gray-700 leading-relaxed mb-4">
+                The recovery trajectory defied conventional expectations, with NEPSE reaching all-time highs exceeding <strong>3,000 points by July 2021</strong>—a nearly threefold gain from pandemic lows <a href="https://nepaleconomicforum.org/are-retail-investors-ignoring-risk-in-nepals-bull-market/" class="citation">[497, 409]</a>.
+              </p>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h5 class="font-semibold text-green-800 mb-2">Recovery Drivers:</h5>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Aggressive monetary policy accommodation</li>
+                    <li>• Fiscal stimulus measures</li>
+                    <li>• Structural shift in savings behavior</li>
+                    <li>• Retail investor surge</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5 class="font-semibold text-blue-800 mb-2">Market Characteristics:</h5>
+                  <ul class="text-sm text-gray-700 space-y-1">
+                    <li>• Daily turnover surged 620% to Rs. 5.91 billion</li>
+                    <li>• Market cap increased 123.73% to Rs. 4,010.96 billion</li>
+                    <li>• P/E ratios exceeded 40x market-wide</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="behavioral-biases" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">Behavioral Biases During Economic Uncertainty</h3>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <h4 class="font-serif text-lg font-semibold text-earth-800 mb-4">Herding Behavior</h4>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                  Retail investors exhibited <strong>strong herding tendencies</strong>, with 68% relying on friends, family, or social media for investment advice <a href="https://nepaleconomicforum.org/are-retail-investors-ignoring-risk-in-nepals-bull-market/" class="citation">[502]</a>.
+                </p>
+                <div class="bg-amber-50 p-4 rounded-lg">
+                  <div class="text-2xl font-bold text-amber-700">Asymmetric Pattern</div>
+                  <div class="text-sm text-gray-600">Stronger in bullish phases than bearish conditions</div>
+                </div>
+              </div>
+
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <h4 class="font-serif text-lg font-semibold text-earth-800 mb-4">Overconfidence Bias</h4>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                  Research confirms <strong>overconfidence as the most significant behavioral influence</strong> with β = 0.421 impact on investment decisions <a href="https://discovery.researcher.life/topic/nepal-stock-exchange/2149070?page=1&amp;topic_name=Nepal%20Stock%20Exchange" class="citation">[334]</a>.
+                </p>
+                <div class="bg-red-50 p-4 rounded-lg">
+                  <div class="text-2xl font-bold text-red-700">r = 0.700</div>
+                  <div class="text-sm text-gray-600">Correlation with investment decisions</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Nepal Analysis -->
+      <section id="nepal-analysis" class="py-16 bg-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+          <h2 class="font-serif text-4xl font-bold text-navy-800 mb-12">Analysis of Nepal&#39;s Economic Context</h2>
+
+          <div id="macro-indicators" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">Macroeconomic Indicators During COVID-19 (2020–2022)</h3>
+
+            <div class="bg-gradient-to-br from-navy-50 to-earth-50 rounded-xl p-8 mb-8">
+              <h4 class="font-serif text-xl font-semibold text-navy-800 mb-6">GDP Growth Trajectory</h4>
+
+              <div class="grid md:grid-cols-4 gap-4 mb-6">
+                <div class="bg-white p-4 rounded-lg text-center">
+                  <div class="text-2xl font-bold text-green-600 mb-1">7.0%</div>
+                  <div class="text-sm text-gray-600">2018/19</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg text-center">
+                  <div class="text-2xl font-bold text-red-600 mb-1">-2.1%</div>
+                  <div class="text-sm text-gray-600">2019/20</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg text-center">
+                  <div class="text-2xl font-bold text-blue-600 mb-1">4.2%</div>
+                  <div class="text-sm text-gray-600">2020/21</div>
+                </div>
+                <div class="bg-white p-4 rounded-lg text-center">
+                  <div class="text-2xl font-bold text-green-600 mb-1">5.8%</div>
+                  <div class="text-sm text-gray-600">2021/22</div>
+                </div>
+              </div>
+
+              <p class="text-gray-700 leading-relaxed">
+                Nepal&#39;s economy experienced a dramatic reversal during the initial pandemic period, with real GDP contracting by approximately <strong>2.1% in FY 2019/20</strong>—the first negative growth episode in recent memory. The recovery proved more favorable than projected, rebounding to <strong>4.2% in FY 2020/21 and 5.8% in FY 2021/22</strong>
+                <a href="https://www.onlinekhabar.com/2020/04/851302/%E0%A4%86%E0%A4%B0%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%95-%E0%A4%B0-%E0%A4%B5%E0%A4%BF%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A5%80%E0%A4%AF-%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A5%87%E0%A4%A4%E0%A5%8D%E0%A4%B0" class="citation">[493]</a>
+                <a href="https://documents1.worldbank.org/curated/en/099439009302442870/pdf/IDU1bade747310f41144991a576183a9a3eb57d4.pdf" class="citation">[155]</a>.
+              </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <h4 class="font-serif text-lg font-semibold text-earth-800 mb-4">Inflation and Interest Rates</h4>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                  The Nepal Rastra Bank implemented aggressive monetary easing, reducing the policy rate from <strong>5.0% to 3.0%</strong> and creating negative real interest rates for extended periods <a href="https://www.onlinekhabar.com/2020/04/851302/%E0%A4%86%E0%A4%B0%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%95-%E0%A4%B0-%E0%A4%B5%E0%A4%BF%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A5%80%E0%A4%AF-%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A5%87%E0%A4%A4%E0%A5%8D%E0%A4%B0" class="citation">[493]</a>.
+                </p>
+                <div class="space-y-2">
+                  <div class="flex justify-between text-sm">
+                    <span>Inflation FY20:</span>
+                    <span class="font-medium">6.2%</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Inflation FY21:</span>
+                    <span class="font-medium">3.6%</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Deposit Rate:</span>
+                    <span class="font-medium">6.17%</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white rounded-xl p-6 shadow-lg">
+                <h4 class="font-serif text-lg font-semibold text-earth-800 mb-4">Foreign Exchange Reserves</h4>
+                <p class="text-gray-700 text-sm leading-relaxed mb-4">
+                  Reserve adequacy fluctuated dramatically, from <strong>14.1 months import coverage</strong> in October 2020 to approximately <strong>7-8 months</strong> by mid-2022 <a href="https://www.sharesansar.com/newsdetail/during-this-pandemic-did-nepals-economy-perform-as-expected-by-the-monetary-policy-2020-12-04" class="citation">[129]</a>
+                  <a href="https://documents1.worldbank.org/curated/en/099509510142293911/txt/IDU0ccf1fc540d49604f840bed8028507a611b30.txt" class="citation">[299]</a>.
+                </p>
+                <div class="space-y-2">
+                  <div class="flex justify-between text-sm">
+                    <span>Peak Reserves:</span>
+                    <span class="font-medium">$12.6B</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Mid-2022:</span>
+                    <span class="font-medium">$9.6B</span>
+                  </div>
+                  <div class="flex justify-between text-sm">
+                    <span>Import Coverage:</span>
+                    <span class="font-medium">7-8 months</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="trade-disruptions" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">Trade and External Sector Disruptions</h3>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+              <h4 class="font-serif text-xl font-semibold text-earth-800 mb-6">Import Dynamics and Trade Deficit</h4>
+
+              <p class="text-gray-700 leading-relaxed mb-6">
+                Nepal&#39;s import bill exhibited extraordinary volatility during the pandemic period, reflecting complex interactions between demand fluctuations, supply chain disruptions, and policy responses. The trade deficit consistently exceeded <strong>25-35% of GDP</strong>, reaching approximately <strong>38% at peak</strong> in FY 2021/22 <a href="https://documents1.worldbank.org/curated/en/099509510142293911/txt/IDU0ccf1fc540d49604f840bed8028507a611b30.txt" class="citation">[299]</a>.
+              </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+                <h5 class="font-serif text-lg font-semibold text-red-800 mb-4">Tourism Collapse</h5>
+                <div class="space-y-3">
+                  <div>
+                    <div class="text-2xl font-bold text-red-700">1.2M → 230K</div>
+                    <div class="text-sm text-gray-600">Tourist Arrivals (2019-2020)</div>
+                  </div>
+                  <p class="text-sm text-gray-700">
+                    Near-complete revenue elimination with cascading effects through aviation, hospitality, and retail sectors <a href="https://www.onlinekhabar.com/2020/04/851302/%E0%A4%86%E0%A4%B0%E0%A5%8D%E0%A4%A5%E0%A4%BF%E0%A4%95-%E0%A4%B0-%E0%A4%B5%E0%A4%BF%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A5%80%E0%A4%AF-%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A5%87%E0%A4%A4%E0%A5%8D%E0%A4%B0" class="citation">[493]</a>.
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                <h5 class="font-serif text-lg font-semibold text-blue-800 mb-4">Remittance Resilience</h5>
+                <div class="space-y-3">
+                  <div>
+                    <div class="text-2xl font-bold text-blue-700">25-30%</div>
+                    <div class="text-sm text-gray-600">of GDP Contribution</div>
+                  </div>
+                  <p class="text-sm text-gray-700">
+                    Despite initial decline of <strong>3.0%</strong>, remittances proved more resilient than feared, supporting consumption and investment flows <a href="https://www.sharesansar.com/newsdetail/nepals-macro-economic-indicators-and-impact-of-covid-19-in-the-last-eleven-months" class="citation">[338]</a>.
+                  </p>
+                </div>
+              </div>
+
+              <div class="bg-amber-50 rounded-xl p-6 border border-amber-200">
+                <h5 class="font-serif text-lg font-semibold text-amber-800 mb-4">Banking Sector Stress</h5>
+                <div class="space-y-3">
+                  <div>
+                    <div class="text-2xl font-bold text-amber-700">61%</div>
+                    <div class="text-sm text-gray-600">Businesses Shut Down</div>
+                  </div>
+                  <p class="text-sm text-gray-700">
+                    NPL ratios increased from <strong>1.3% to 1.84%</strong>, with commercial bank profits declining <strong>16.7%</strong> in FY 2019/20 <a href="https://www.nrb.org.np/contents/uploads/2023/06/2021-Financial-Stability-Challenges-and-Opportunities-in-the-post-COVID-context.pdf" class="citation">[249]</a>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="nepse-performance" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">NEPSE Index Performance and Event Linkages</h3>
+
+            <div class="bg-gradient-to-br from-white to-gray-50 rounded-xl p-8 shadow-lg">
+              <h4 class="font-serif text-xl font-semibold text-navy-800 mb-6">Market Phases Timeline</h4>
+
+              <div class="space-y-6">
+                <div class="flex items-start space-x-4">
+                  <div class="flex-shrink-0 w-4 h-4 bg-red-500 rounded-full mt-1"></div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-2">
+                      <h5 class="font-semibold text-gray-800">Pre-Pandemic Baseline (Early 2020)</h5>
+                      <span class="text-sm text-gray-500">~1,500 points</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Limited retail participation (~500K accounts), institutional dominance, banking sector concentration</p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                  <div class="flex-shrink-0 w-4 h-4 bg-red-600 rounded-full mt-1"></div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-2">
+                      <h5 class="font-semibold text-gray-800">Crash Phase (March-April 2020)</h5>
+                      <span class="text-sm text-red-600 font-medium">&lt;1,100 points</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">30%+ decline in ~4 weeks, multiple circuit breaker triggers, 50-day market closure <a href="https://internationalpubls.com/index.php/cana/article/download/4256/2348/7429" class="citation">[522, 278]</a>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                  <div class="flex-shrink-0 w-4 h-4 bg-green-500 rounded-full mt-1"></div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-2">
+                      <h5 class="font-semibold text-gray-800">Recovery and Bull Run (Late 2020-2021)</h5>
+                      <span class="text-sm text-green-600 font-medium">3,198 points</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">191% gain in 16 months, P/E ratios exceeding 40x, retail investor surge 1.7M→6.9M accounts <a href="https://nepaleconomicforum.org/are-retail-investors-ignoring-risk-in-nepals-bull-market/" class="citation">[497, 467]</a>
+                    </p>
+                  </div>
+                </div>
+
+                <div class="flex items-start space-x-4">
+                  <div class="flex-shrink-0 w-4 h-4 bg-orange-500 rounded-full mt-1"></div>
+                  <div class="flex-1">
+                    <div class="flex items-center justify-between mb-2">
+                      <h5 class="font-semibold text-gray-800">Correction and Volatility (2022-2023)</h5>
+                      <span class="text-sm text-orange-600 font-medium">Volatility +40%</span>
+                    </div>
+                    <p class="text-gray-600 text-sm">Monetary tightening trigger, leverage forced liquidation, behavioral scarring effects</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Behavioral Analysis -->
+      <section id="behavioral-analysis" class="py-16 bg-earth-50">
+        <div class="container mx-auto px-6 max-w-6xl">
+          <h2 class="font-serif text-4xl font-bold text-navy-800 mb-12">Behavioral Biases and Investor Behavior</h2>
+
+          <div id="herding-behavior" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">Herding Behavior During COVID-19</h3>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="font-serif text-xl font-semibold text-earth-800 mb-4">Theoretical Foundation</h4>
+                  <p class="text-gray-700 leading-relaxed mb-4">
+                    Herding behavior refers to the tendency of investors to <strong>mimic the actions of others rather than rely on private information</strong>. In retail-dominated markets like Nepal, informational cascades predominate as individual investors lack resources for independent fundamental analysis <a href="https://www.mdpi.com/2227-9091/9/9/168" class="citation">[496]</a>
+                    <a href="https://necs.org.np/wp-content/uploads/2023/06/04_Herding-to-Market-Consensus-An-Empirical-Investigation-of-its-Presence-in-Nepal-Stock-Exchange-2.pdf" class="citation">[427]</a>.
+                  </p>
+
+                  <div class="bg-blue-50 p-4 rounded-lg">
+                    <h5 class="font-semibold text-blue-800 mb-2">Mechanisms:</h5>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                      <li>• Informational cascades</li>
+                      <li>• Reputational herding</li>
+                      <li>• Social influence effects</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="font-serif text-xl font-semibold text-earth-800 mb-4">Market Impact</h4>
+                  <p class="text-gray-700 leading-relaxed mb-4">
+                    Herding behavior created <strong>asymmetric patterns</strong> in Nepal&#39;s market, with stronger effects during bullish phases than bearish conditions <a href="https://necs.org.np/wp-content/uploads/2023/06/04_Herding-to-Market-Consensus-An-Empirical-Investigation-of-its-Presence-in-Nepal-Stock-Exchange-2.pdf" class="citation">[381]</a>.
+                  </p>
+
+                  <div class="bg-amber-50 p-4 rounded-lg">
+                    <h5 class="font-semibold text-amber-800 mb-2">Consequences:</h5>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                      <li>• Price distortion and overshooting</li>
+                      <li>• Volatility amplification</li>
+                      <li>• Reduced market efficiency</li>
+                      <li>• Systematic wealth transfers</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl p-8">
+              <h4 class="font-serif text-xl font-semibold text-navy-800 mb-6">Phase-Specific Manifestations</h4>
+
+              <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-lg">
+                  <h5 class="font-semibold text-red-700 mb-3">Crash Phase</h5>
+                  <p class="text-sm text-gray-700 mb-3">
+                    Panic selling coordination with catalyst investors triggering cascading responses <a href="https://www.bhu.ac.in/Images/files/BMReview-Vol_8-P58-62.pdf" class="citation">[516]</a>.
+                  </p>
+                  <div class="text-xs text-gray-600">
+                    <strong>Mechanism:</strong> Social media amplification, brokerage observation of synchronized client actions
+                  </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg">
+                  <h5 class="font-semibold text-green-700 mb-3">Bull Run Phase</h5>
+                  <p class="text-sm text-gray-700 mb-3">
+                    FOMO effects driving retail investor surge &#34;without any apparent fundamental reason&#34; <a href="https://nepaleconomicforum.org/are-retail-investors-ignoring-risk-in-nepals-bull-market/" class="citation">[502]</a>.
+                  </p>
+                  <div class="text-xs text-gray-600">
+                    <strong>Mechanism:</strong> Social validation, fear of exclusion, observation of early entrants&#39; gains
+                  </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg">
+                  <h5 class="font-semibold text-orange-700 mb-3">Correction Phase</h5>
+                  <p class="text-sm text-gray-700 mb-3">
+                    Coordinated exit as momentum shifts induced herding in selling direction.
+                  </p>
+                  <div class="text-xs text-gray-600">
+                    <strong>Mechanism:</strong> Risk of buying at peaks and panic-selling at losses
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="overconfidence" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">Overconfidence Bias</h3>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+              <h4 class="font-serif text-xl font-semibold text-earth-800 mb-6">Empirical Evidence from Nepal</h4>
+
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <p class="text-gray-700 leading-relaxed mb-6">
+                    Research by <strong>Adhikari et al. (2025)</strong> provides direct empirical confirmation: overconfidence bias had the <strong>strongest influence on investment decisions (β = 0.421)</strong>, with correlation to investment decisions (r = 0.700) highest among all behavioral factors <a href="https://discovery.researcher.life/topic/nepal-stock-exchange/2149070?page=1&amp;topic_name=Nepal%20Stock%20Exchange" class="citation">[334]</a>.
+                  </p>
+
+                  <div class="bg-green-50 p-4 rounded-lg">
+                    <h5 class="font-semibold text-green-800 mb-2">Key Findings:</h5>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                      <li>• Model explained <strong>59.1%</strong> of variance</li>
+                      <li>• <strong>Negative association</strong> with performance</li>
+                      <li>• Strongest predictor among behavioral factors</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="bg-red-50 p-6 rounded-lg">
+                    <h5 class="font-semibold text-red-800 mb-4">Self-Attribution Mechanism</h5>
+                    <p class="text-sm text-gray-700 mb-3">
+                      Successful early trades attributed to personal ability, while subsequent losses blamed on external factors—preserving overconfidence despite negative feedback.
+                    </p>
+                    <div class="text-xs text-gray-600">
+                      <strong>Result:</strong> Asymmetric learning and bias reinforcement
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                <h5 class="font-serif text-lg font-semibold text-blue-800 mb-4">Account Growth</h5>
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-blue-700 mb-2">742K → 6.2M</div>
+                  <div class="text-sm text-gray-600">Mero Share Users</div>
+                  <div class="text-xs text-gray-600 mt-2">FY 2019/20 to 2024/25</div>
+                </div>
+                <p class="text-xs text-gray-700 mt-3">
+                  Entry based on perceived opportunity rather than experience <a href="https://nepaleconomicforum.org/are-retail-investors-ignoring-risk-in-nepals-bull-market/" class="citation">[467]</a>.
+                </p>
+              </div>
+
+              <div class="bg-amber-50 rounded-xl p-6 border border-amber-200">
+                <h5 class="font-serif text-lg font-semibold text-amber-800 mb-4">Trading Frequency</h5>
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-amber-700 mb-2">869%</div>
+                  <div class="text-sm text-gray-600">Turnover Increase</div>
+                  <div class="text-xs text-gray-600 mt-2">Rs. 150B → Rs. 1,454B</div>
+                </div>
+                <p class="text-xs text-gray-700 mt-3">
+                  Excessive activity beyond fundamental rebalancing needs <a href="https://www.nrb.org.np/contents/uploads/2022/05/FSR-2020-21-final.pdf" class="citation">[367]</a>.
+                </p>
+              </div>
+
+              <div class="bg-red-50 rounded-xl p-6 border border-red-200">
+                <h5 class="font-serif text-lg font-semibold text-red-800 mb-4">Valuation Disregard</h5>
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-red-700 mb-2">100x+</div>
+                  <div class="text-sm text-gray-600">P/E Ratios</div>
+                  <div class="text-xs text-gray-600 mt-2">Hydropower Sector</div>
+                </div>
+                <p class="text-xs text-gray-700 mt-3">
+                  Belief in ability to identify future winners despite fundamentals <a href="https://nepaleconomicforum.org/are-retail-investors-ignoring-risk-in-nepals-bull-market/" class="citation">[502]</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div id="loss-aversion" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">Loss Aversion and Anchoring</h3>
+
+            <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="font-serif text-xl font-semibold text-earth-800 mb-4">Loss Aversion Foundation</h4>
+                  <p class="text-gray-700 leading-relaxed mb-4">
+                    Loss aversion—the asymmetric valuation of gains and losses with losses weighted approximately <strong>twice as heavily as equivalent gains</strong>—was profoundly activated during Nepal&#39;s COVID-19 market turmoil <a href="https://www.bhu.ac.in/Images/files/BMReview-Vol_8-P58-62.pdf" class="citation">[503]</a>.
+                  </p>
+
+                  <div class="bg-purple-50 p-4 rounded-lg">
+                    <h5 class="font-semibold text-purple-800 mb-2">Survey Evidence:</h5>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                      <li>• Mean agreement: <strong>4.64/7</strong> on loss aversion scale</li>
+                      <li>• Strong agreement: <strong>5.14/7</strong> for asymmetric valuation</li>
+                      <li>• Regret aversion: <strong>&#34;feel pain of mental regret higher than joy&#34;</strong></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div>
+                  <h4 class="font-serif text-xl font-semibold text-earth-800 mb-4">Anchoring Bias</h4>
+                  <p class="text-gray-700 leading-relaxed mb-4">
+                    Anchoring bias—insufficient adjustment from initial reference points—complemented loss aversion by creating <strong>sticky price expectations</strong> and limit order clustering at psychological levels <a href="https://www.businessperspectives.org/images/pdf/applications/publishing/templates/article/assets/21821/IMFI_2025_01_Chaudhary.pdf" class="citation">[528]</a>.
+                  </p>
+
+                  <div class="bg-orange-50 p-4 rounded-lg">
+                    <h5 class="font-semibold text-orange-800 mb-2">Common Anchors:</h5>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                      <li>• Pre-pandemic index levels (~1,500 points)</li>
+                      <li>• Personal purchase prices</li>
+                      <li>• Recent high water marks (3,198 peak)</li>
+                      <li>• Round numbers (1,000; 2,000; 3,000)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-gray-50 to-blue-50 rounded-xl p-8">
+              <h4 class="font-serif text-xl font-semibold text-navy-800 mb-6">Market Impact Across Phases</h4>
+
+              <div class="space-y-6">
+                <div class="bg-white p-6 rounded-lg">
+                  <h5 class="font-semibold text-red-700 mb-3">Crash Phase Impact</h5>
+                  <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <h6 class="font-medium text-gray-800 mb-2">Loss Aversion:</h6>
+                      <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Initial reluctance to realize losses</li>
+                        <li>• &#34;Frozen portfolio&#34; phenomenon</li>
+                        <li>• Reduced market liquidity</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h6 class="font-medium text-gray-800 mb-2">Anchoring:</h6>
+                      <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Resistance to selling &#34;below normal&#34;</li>
+                        <li>• Expectation of return to ~1,500</li>
+                        <li>• Psychological threshold effects</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg">
+                  <h5 class="font-semibold text-green-700 mb-3">Recovery Phase Impact</h5>
+                  <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <h6 class="font-medium text-gray-800 mb-2">Loss Aversion:</h6>
+                      <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Disposition effect in gains</li>
+                        <li>• Premature profit-taking</li>
+                        <li>• Regret aversion barrier</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h6 class="font-medium text-gray-800 mb-2">Anchoring:</h6>
+                      <ul class="text-sm text-gray-600 space-y-1">
+                        <li>• Peak level expectations (3,198)</li>
+                        <li>• Insufficient fundamental adjustment</li>
+                        <li>• Momentum exploitation</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Recommendations -->
+      <section id="recommendations" class="py-16 bg-white">
+        <div class="container mx-auto px-6 max-w-6xl">
+          <h2 class="font-serif text-4xl font-bold text-navy-800 mb-12">Summary and Recommendations</h2>
+
+          <div id="regulatory-reforms" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">Regulatory and Policy Reforms</h3>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+              <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8">
+                <h4 class="font-serif text-xl font-semibold text-blue-800 mb-6">Circuit Breaker Enhancement</h4>
+
+                <div class="space-y-4">
+                  <div class="bg-white p-4 rounded-lg">
+                    <h5 class="font-semibold text-gray-800 mb-2">Current Practice</h5>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• Single threshold triggers (4%, 6%)</li>
+                      <li>• Fixed historical calibration</li>
+                      <li>• Limited communication</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-blue-100 p-4 rounded-lg">
+                    <h5 class="font-semibold text-blue-800 mb-2">Recommended Reform</h5>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                      <li>• <strong>Tiered thresholds with graduated halts</strong></li>
+                      <li>• <strong>Dynamic adjustment based on volatility</strong></li>
+                      <li>• <strong>Explicit communication protocols</strong></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <p class="text-sm text-gray-700 mt-4">
+                  The 2025 market suspension experience should be formalized in explicit regulatory frameworks specifying conditions, duration, and reopening procedures <a href="https://nepallaws.com/nepals-capital-market-in-crisis-how-political-turmoil-led-to-trading-suspensions/" class="citation">[537]</a>.
+                </p>
+              </div>
+
+              <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8">
+                <h4 class="font-serif text-xl font-semibold text-green-800 mb-6">Investor Education Mandates</h4>
+
+                <div class="space-y-4">
+                  <div class="bg-white p-4 rounded-lg">
+                    <h5 class="font-semibold text-gray-800 mb-2">Behavioral Risk Framework</h5>
+                    <ul class="text-sm text-gray-600 space-y-1">
+                      <li>• Mandatory behavioral diagnostic assessment</li>
+                      <li>• Standardized risk disclosure</li>
+                      <li>• Periodic re-assessment triggers</li>
+                    </ul>
+                  </div>
+
+                  <div class="bg-green-100 p-4 rounded-lg">
+                    <h5 class="font-semibold text-green-800 mb-2">Financial Literacy Programs</h5>
+                    <ul class="text-sm text-gray-700 space-y-1">
+                      <li>• <strong>Brokerage firm education requirements</strong></li>
+                      <li>• <strong>Social media investment community guidance</strong></li>
+                      <li>• <strong>Practical debiasing techniques</strong></li>
+                    </ul>
+                  </div>
+                </div>
+
+                <p class="text-sm text-gray-700 mt-4">
+                  The 68% reliance on informal social sources indicates critical gap in professional guidance access <a href="https://nepaleconomicforum.org/are-retail-investors-ignoring-risk-in-nepals-bull-market/" class="citation">[502]</a>.
+                </p>
+              </div>
+            </div>
+
+            <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-8">
+              <h4 class="font-serif text-xl font-semibold text-purple-800 mb-6">Central Bank Policy Coordination</h4>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg">
+                  <h5 class="font-semibold text-purple-800 mb-3">Counter-Cyclical Liquidity</h5>
+                  <ul class="text-sm text-gray-700 space-y-2">
+                    <li>• <strong>Market stabilization fund establishment</strong></li>
+                    <li>• Dynamic intervention criteria</li>
+                    <li>• Broad market index product purchases</li>
+                    <li>• Communication enhancement protocols</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg">
+                  <h5 class="font-semibold text-pink-800 mb-3">Macroprudential Measures</h5>
+                  <ul class="text-sm text-gray-700 space-y-2">
+                    <li>• <strong>Dynamic capital buffers</strong></li>
+                    <li>• Behavioral scenario stress testing</li>
+                    <li>• Concentration limits</li>
+                    <li>• Leverage regulation with dynamic LTVs</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="policy-coordination" class="mb-16">
+            <h3 class="font-serif text-3xl font-semibold text-navy-700 mb-8">Government Policy Coordination</h3>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-xl p-6 border border-amber-200">
+                <h4 class="font-serif text-lg font-semibold text-amber-800 mb-4">Fiscal Policy Communication</h4>
+                <ul class="text-sm text-gray-700 space-y-2">
+                  <li>• <strong>Transparency standards</strong></li>
+                  <li>• Inter-agency coordination protocols</li>
+                  <li>• Real-time policy disclosure</li>
+                  <li>• Forward guidance frameworks</li>
+                </ul>
+              </div>
+
+              <div class="bg-gradient-to-br from-teal-50 to-cyan-50 rounded-xl p-6 border border-teal-200">
+                <h4 class="font-serif text-lg font-semibold text-teal-800 mb-4">Capital Market Development</h4>
+                <ul class="text-sm text-gray-700 space-y-2">
+                  <li>• <strong>Derivatives market introduction</strong></li>
+                  <li>• Institutional investor base deepening</li>
+                  <li>• International index inclusion</li>
+                  <li>• Corporate governance enhancement</li>
+                </ul>
+              </div>
+
+              <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-6 border border-indigo-200">
+                <h4 class="font-serif text-lg font-semibold text-indigo-800 mb-4">Market Participant Tools</h4>
+                <ul class="text-sm text-gray-700 space-y-2">
+                  <li>• <strong>Behavioral diagnostic profiling</strong></li>
+                  <li>• Trading friction mechanisms</li>
+                  <li>• Nudge communications</li>
+                  <li>• Interface design optimization</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-gradient-to-r from-navy-800 to-earth-700 text-white rounded-xl p-8">
+            <h3 class="font-serif text-2xl font-semibold mb-6 text-earth-200">Strategic Implementation Framework</h3>
+
+            <div class="grid md:grid-cols-3 gap-6">
+              <div>
+                <h4 class="font-semibold text-earth-200 mb-3">Immediate Priorities</h4>
+                <ul class="text-sm text-earth-100 space-y-1">
+                  <li>• Circuit breaker reform implementation</li>
+                  <li>• Enhanced investor education mandates</li>
+                  <li>• Market surveillance capability building</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-earth-200 mb-3">Medium-term Goals</h4>
+                <ul class="text-sm text-earth-100 space-y-1">
+                  <li>• Derivatives market regulatory framework</li>
+                  <li>• Institutional investor base development</li>
+                  <li>• Behavioral risk management integration</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-earth-200 mb-3">Long-term Vision</h4>
+                <ul class="text-sm text-earth-100 space-y-1">
+                  <li>• Comprehensive behavioral finance integration</li>
+                  <li>• Resilient market infrastructure</li>
+                  <li>• Enhanced investor protection mechanisms</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+        // Vanta.js Background
+        VANTA.WAVES({
+            el: "#vanta-bg",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x102a43,
+            shininess: 30.00,
+            waveHeight: 15.00,
+            waveSpeed: 0.75,
+            zoom: 0.75
+        });
+
+        // Table of Contents Navigation
+        function updateTOC() {
+            const sections = document.querySelectorAll('section[id], div[id]');
+            const tocLinks = document.querySelectorAll('.toc-link');
+            
+            let currentSection = '';
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    currentSection = section.id;
+                }
+            });
+            
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSection}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Mobile TOC Toggle
+        function toggleTOC() {
+            const toc = document.getElementById('toc');
+            toc.classList.toggle('mobile-open');
+        }
+
+        // Smooth scrolling for TOC links
+        document.addEventListener('DOMContentLoaded', function() {
+            const tocLinks = document.querySelectorAll('.toc-link');
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    if (targetElement) {
+                        const offset = window.innerWidth <= 1024 ? 0 : 280;
+                        const targetPosition = targetElement.offsetTop - 20;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                    // Close mobile TOC after clicking
+                    if (window.innerWidth <= 1024) {
+                        document.getElementById('toc').classList.remove('mobile-open');
+                    }
+                });
+            });
+            
+            // Update TOC on scroll
+            window.addEventListener('scroll', updateTOC);
+            updateTOC(); // Initial call
+        });
+
+        // Citation click handlers
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('citation')) {
+                // Add visual feedback for citations
+                e.target.style.backgroundColor = 'rgba(51, 78, 104, 0.1)';
+                setTimeout(() => {
+                    e.target.style.backgroundColor = '';
+                }, 200);
+            }
+        });
+
+        // Close mobile TOC when clicking outside
+        document.addEventListener('click', function(e) {
+            const toc = document.getElementById('toc');
+            const toggleBtn = document.querySelector('button[onclick="toggleTOC()"]');
+            
+            if (window.innerWidth <= 1024 && 
+                !toc.contains(e.target) && 
+                !toggleBtn.contains(e.target)) {
+                toc.classList.remove('mobile-open');
+            }
+        });
+    </script>
+  
+
+</body></html>
